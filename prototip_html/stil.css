@@ -1,0 +1,35 @@
+.basic
+{
+    color: white;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.header
+{
+    background-color: #574AE2;
+    color: white;
+    font-size: larger;
+    font-weight: bold;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.basic:hover
+{
+    color: white;
+    font-size: larger;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.footer
+{
+    font-size: 13px;
+    left: 0px;
+    bottom: 0px;
+    position: fixed;
+    background-color: #574AE2;
+    color: white;
+    width: 110%;
+    padding: 0px;
+}
