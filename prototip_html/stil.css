@@ -3,6 +3,7 @@ body
 {
     background-image: url("slike/pozadina.png");
     background-size: 2000px;
+    background-repeat:round;
 }
 
 
@@ -61,5 +62,22 @@ h1
 {
     padding-bottom: 20px;
 }
+
+.items
+{
+    padding: 2.5%;
+    font-family: 'Syne Mono', monospace;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.runes
+{
+    padding: 2.5%;
+    font-family: 'Syne Mono', monospace;
+    font-size: larger;
+    font-weight: bold;
+}
+
 
 
