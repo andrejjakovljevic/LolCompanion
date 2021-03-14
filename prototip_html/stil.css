@@ -3,7 +3,7 @@ body
 {
     background-image: url("slike/pozadina.png");
     background-size: 2000px;
-    background-repeat:round;
+    background-repeat:unset;
 }
 
 
@@ -21,6 +21,7 @@ a:hover
 h1
 {
     font-size: 100px;
+    font-family: 'Oswald', sans-serif;
 }
 .basic
 {
@@ -79,5 +80,14 @@ h1
     font-weight: bold;
 }
 
+.item img 
+{
+    width: 100%;
+}
+
+.runes img
+{
+    width: 100%;
+}
 
 
