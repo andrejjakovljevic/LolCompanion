@@ -3,7 +3,7 @@ body
 {
     background-image: url("slike/pozadina.png");
     background-size: 2000px;
-    background-repeat:unset;
+    background-repeat:round;
 }
 
 
@@ -80,16 +80,12 @@ h1
     font-weight: bold;
 }
 
-.item img 
+.champions
 {
-    width: 100%;
+    font-family: 'Syne Mono', monospace;
+    font-size: larger;
+    font-weight: bolder;
 }
-
-.runes img
-{
-    width: 100%;
-}
-
 
 p
 {
