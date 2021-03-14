@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <html>
     <head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -6,25 +7,8 @@
     </head>
     <body> 
         <div class="container-fluid">
-            <div class="row header">
-                <div class="col-lg-3">
-                    <img src="slike/lolporo.png" style="width: 20%;">
-                    <a href="index.html" class="basic">LoLCompanion</a>
-                </div>
-                <div class="col-lg-6 header">
-                    &nbsp;
-                </div>
-                <div class="col-lg-1 align-self-center text-center">
-                    <a href="*" class="basic">Champions</a>  
-                </div>
-                <div class="col-lg-1">
-                    &nbsp;
-                </div>
-                <div class="col-lg-1 align-self-center">
-                    <a href="login.html" class="basic">Login</a>
-                </div>
-            </div>
-            <div class="row" style="height: 88%;">
+            <?php include 'header.php'; ?>
+            <div class="row">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12 text-center">

@@ -7,32 +7,34 @@
     </head>
     <body>
         <div class="container-fluid">
-            <?php include 'header.php' ?>
+            <?php include 'header.php'; ?>
             <div class="row">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12 text-center">
                             <img src="slike/lolporo.png" style="width: 35%;">
                         </div>
-                    </div>
+                    </div> 
                     <div class="row">
                         <div class="col-lg-12 text-center">
-                            <h1>Login</h1>
+                            <h1>Change password</h1>
                             <hr>
-                            <form action="loginForm.php" method="post" class="form">
-                                <input type="text" id="username" name="username" size="30" placeholder="Enter Username">
+                            <form class="form">
+                                <input type="password" size="30" placeholder="Enter Current Passowrd">
                                 <br> <br>
-                                <input type="password" id="password" name="password" size="30" placeholder="Enter Password">
+                                <input type="password" size="30" placeholder="Enter New Passowrd">
                                 <br> <br>
-                                <input type="submit" value="Log In"></a> <a href="signup.php"> ...or Signup</a>
+                                <input type="password" size="30" placeholder="Confirm New Password"> 
+                                <br> <br>
+                                <a href="index_loggedin.html"><input type="submit" value="Confirm"></a>
                             </form>
                         </div>
-                    </div>
+                    </div> 
                 </div>
-            </div>
-            <div class="row footer">
-                <div class="col-lg-12">
-                    &nbsp; by NoodleSoft
+                <div class="row footer">
+                    <div class="col-lg-12">
+                        &nbsp; by NoodleSoft
+                    </div>
                 </div>
             </div>
         </div>
