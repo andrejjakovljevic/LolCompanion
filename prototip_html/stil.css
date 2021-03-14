@@ -17,6 +17,10 @@ a:hover
     text-decoration: none;
 }
 
+h1
+{
+    font-size: 100px;
+}
 .basic
 {
     color: white;
