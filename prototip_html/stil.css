@@ -1,3 +1,22 @@
+
+body 
+{
+    background-image: url("slike/pozadina.png");
+    background-size: 2000px;
+}
+
+
+a{
+
+    color: yellow;
+}
+
+a:hover
+{
+    color: yellow;
+    text-decoration: none;
+}
+
 .basic
 {
     color: white;
@@ -38,3 +57,5 @@
 {
     padding-bottom: 20px;
 }
+
+
