@@ -1,9 +1,9 @@
 
-body 
-{
-    background-image: url("slike/pozadina.png");
-    background-size: 2000px;
-    background-repeat:round;
+body {
+  background-image: url("slike/pozadina.png");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 
@@ -85,11 +85,26 @@ h1
     font-family: 'Syne Mono', monospace;
     font-size: larger;
     font-weight: bolder;
+    height: 10%;
 }
 
 p
 {
     font-size: 30px;
 }
+
+.naslov
+{
+    font-family: 'Syne Mono', monospace;
+    text-align: center;
+    padding: 3%;
+    font-size: 600%;
+}
+
+.slike img
+{
+    width: 90%;
+}
+
 
 
