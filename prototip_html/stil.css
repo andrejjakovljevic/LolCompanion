@@ -93,6 +93,17 @@ p
     font-size: 30px;
 }
 
+.fensi
+{
+    font-family: 'Syne Mono', monospace;
+    font-size: 200%;
+}
+
+.minislika img
+{
+    width: 30%;
+}
+
 .naslov
 {
     font-family: 'Syne Mono', monospace;
