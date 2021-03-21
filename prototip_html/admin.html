@@ -3,8 +3,6 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link rel="stylesheet" href="stil.css">
         <link href="https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap" rel="stylesheet">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <title>LolCompanion</title>
     </head>
     <body>
@@ -21,21 +19,21 @@
                     <a href="statistics.html" class="basic">Statistics</a>
                 </div>
                 <div class="col-lg-1 align-self-center">
-                    <a href="live_game.html" class="basic">Live game</a> 
+                    <a href="live_game.html" class="basic">Live game</a>
                 </div>
                 <div class="col-lg-1 align-self-center">
-                    <a href="challenges.html" class="basic">Challenges</a>  
+                    <a href="challenges.html" class="basic">Challenges</a>
                 </div>
-                <div class="col-lg-1 align-self-center">
-                    <a href="champions.html" class="basic">Champions</a>  
+                <div class="col-lg-1 align-self-center text-center">
+                    <a href="champions.html" class="basic">Champions</a>
                 </div>
-                
+
                 <div class="col-lg-1 align-self-center" >
                     <div class="btn-group">
                         <button type="button" style="background-color: #FF7070; border-color: #FF7070;" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Gindra</button>
                         <ul class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
                             <li><a class="dropdown-item" href="dummy_profile.html">Profile</a></li>
-                            <li><a class="dropdown-item" href="changePassword.html">Change<br>password</a></li>
+                            <li><a class="dropdown-item" href="changePassword.html">Change password</a></li>
                             <li><a class="dropdown-item" href="challenges_mod.html">All challenges</a></li>
                             <li><a class="dropdown-item" href="admin.html">Admin Panel</a></li>
                             <li><a class="dropdown-item" href="login.html">LogOut</a></li>
@@ -48,57 +46,60 @@
                 </div>
 
             </div>
-            
-            <div class = "row">
-                <div class = "col-lg-12 text-center naslov" style="padding: 0; font-weight: normal;">
-                    All Challenges
+            <div class="row">
+                <div class="container">
+                    <div class="row">
+                        <div class = "col-lg-12 text-center naslov" style="padding: 0; font-weight: normal;">
+                            Admin Panel
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label>Remove Account:</label>
+                        </div>
+                        <div class="col-lg-3">
+                            <input type="text" size="25">
+                        </div>
+                        <div class="col-lg-1">
+                            <input type="Submit" value="Remove">
+                        </div>
+                        <div class="col-lg-6">
+                            <label>API Key:</label>
+                            <input type="text" size="40" placeholder="RGAPI-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx">
+                            <input type="Submit" value="Submit">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <label>Add Moderator:</label>
+                        </div>
+                        <div class="col-lg-3">
+                            <input type="text" size="25">
+                        </div>
+                        <div class="col-lg-1">
+                            <input type="Submit" value="Add">
+                        </div>
+                        <div class="col-lg-2">
+                            <label>Remove Moderator:</label>
+                        </div>
+                        <div class="col-lg-3">
+                            <input type="text" size="25">
+                        </div>
+                        <div class="col-lg-1">
+                            <input type="Submit" value="Remove">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row" style="margin-top: 100px;">
+                        <div class="col-lg-12 align-self-center">
+                            <a href=""><button class="center" style="width: auto; background-color: red;"><span style="font-weight: bold; font-size: 3em;">
+                                Update Statistics
+                            </span></button></a>
+                        </div>
+                    </div>
                 </div>
-                
-                <br>
-                
             </div>
-            <div class = "row">
-                <div class="col-lg-12">
-                    <a href="add_challenge.html"><button class="center" style="width: 200px"><span style="font-weight: bold;">New Challenge</span></button></a>
-                    <img src="slike/Line.png" class="center" height="20px">
-                </div>
-            </div>
-            <div class="container" style="background-color: rgba(100, 149, 237, 0.5); padding-bottom: 10px; border: 1pt solid darkred;">
-                <div class = "row">
-                    <div class = "col-lg-9 col-md-6 col-xs-12" >
-                        The First Quest
-                        <br>
-                        <img src="slike/dummyQuestPic.jpg" style="height: 60px;float: left; padding-right: 10px; padding-top: 2px;">
-                        <span>The first quest is a very good quest. Play Xin top.</span> 
-                    </div>
-                    <div class="col-lg-2 col-md-5 col-xs-10" style="overflow-y: auto;">
-                        Champion: Xin Zhao<br>
-                        Role: Top<br>
-                        Kills: 1<br>
-                    </div>
-                    <div class="col-lg-1 col-md-1 col-xs-2">
-                        <a href=""><img src="slike/trash.png" style="height: 50px; margin-top: 15px"></img></a>
-                    </div>
-                </div>
-                <hr style="margin: 5px;">
-                <div class = "row">
-                    <div class = "col-lg-9 col-md-6 col-xs-12" >
-                        The Second Quest
-                        <br>
-                        <img src="slike/dummyQuestPic.jpg" style="height: 60px;float: left; padding-right: 10px; padding-top: 2px;">
-                        <span>Valhala awaits you brave warrior.</span> 
-                    </div>
-                    <div class="col-lg-2 col-md-5 col-xs-10" style="overflow-y: auto;">
-                        Champion: Olaf<br>
-                        Role: Jungle<br>
-                        Kills: 100<br>
-                    </div>
-                    <div class="col-lg-1 col-md-1 col-xs-2">
-                        <a href=""><img src="slike/trash.png" style="height: 50px; margin-top: 15px"></img></a>
-                    </div>
-                </div>
-            </div>
-            
             <div class="row footer">
                 <div class="col-lg-12">
                     &nbsp; by NoodleSoft
@@ -115,6 +116,6 @@
         crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
         integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-        crossorigin="anonymous"></script> 
+        crossorigin="anonymous"></script>
     </body>
 </html>
