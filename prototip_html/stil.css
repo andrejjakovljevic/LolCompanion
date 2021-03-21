@@ -37,6 +37,8 @@ h1
     font-size: larger;
     font-weight: bold;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 100%;
+    margin: 0px;
 }
 
 .basic:hover
@@ -85,7 +87,7 @@ h1
     font-family: 'Syne Mono', monospace;
     font-size: larger;
     font-weight: bolder;
-    height: 10%;
+    height: 80px;
 }
 
 p
@@ -115,6 +117,11 @@ p
 .slike img
 {
     width: 90%;
+}
+
+.slike
+{
+    font-family: 'Syne Mono', monospace;
 }
 
 hr{
