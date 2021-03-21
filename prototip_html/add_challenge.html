@@ -1,0 +1,147 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="stil.css">
+        <link href="https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap" rel="stylesheet">
+        <title>LolCompanion</title>
+    </head>
+    <body>
+        <div class="container-fluid">
+            <div class="row header" style="font-size: 16px;">
+                <div class="col-lg-3">
+                    <img src="slike/lolporo.png" style="width: 20%;">
+                    <a href="index_loggedin.html" class="basic">LoLCompanion</a>
+                </div>
+                <div class="col-lg-3">
+                    &nbsp;
+                </div>
+                <div class="col-lg-1 align-self-center">
+                    <a href="*" class="basic">Statistics</a>
+                </div>
+                <div class="col-lg-1 align-self-center">
+                    <a href="live_game.html" class="basic">Live game</a> 
+                </div>
+                <div class="col-lg-1 align-self-center">
+                    <a href="challenges.html" class="basic">Challenges</a>  
+                </div>
+                <div class="col-lg-1 align-self-center text-center">
+                    <a href="champions.html" class="basic">Champions</a>  
+                </div>
+                
+                <div class="col-lg-1 align-self-center text-right"  style="padding-top: 1%;">
+                    <figure><img src="slike/summonerIcon.png"> </figure>
+                </div>
+                
+                <div class="col-lg-1 align-self-center" >
+                    <div class="btn-group">
+                        <button type="button" style="background-color: #FF7070; border-color: #FF7070;" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Gindra</button>
+                        <ul class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
+                            <li><a class="dropdown-item" href="dummy_profile.html">Profile</a></li>
+                            <li><a class="dropdown-item" href="changePassword.html">Change password</a></li>
+                            <li><a class="dropdown-item" href="login.html">LogOut</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <form action="" method="POST">
+                <div class="row" style="height: 88%;">
+                    <div class="container">
+                        <div class="row">
+                            <div class = "col-lg-12 text-center naslov" style="padding: 0;">
+                                New Challenge
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-2">
+                                    <label>Name:</label>
+                            </div>
+                            <div class="col-lg-4">
+                                <input type="text" size="30">
+                            </div>
+                            <div class="col-lg-3">
+                                <label>Champion:</label>
+                                <select name="Select a champion" id="champion">
+                                    <option value="Any">Any</option>
+                                    <option value="Xin Zhao">Xin Zhao</option>
+                                    <option value="Aatrox">Aatrox</option>
+                                    <option value="Olaf">Olaf</option>
+                                    <option value="Gangplank">Gangplank</option>
+                                    <option value="Jayce">Jayce</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-3">
+                                <label>Role:</label>
+                                <select name="Select a role" id="role">
+                                    <option value="Any">Any</option>
+                                    <option value="Top">Top</option>
+                                    <option value="Jungle">Jungle</option>
+                                    <option value="Mid">Mid</option>
+                                    <option value="ADC">ADC</option>
+                                    <option value="Support">Support</option>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <label style="vertical-align: top;"> Description: </label>
+                            </div>
+                            <div class="col-lg-4">
+                                <textarea cols=31>
+                                </textarea>
+                            </div>
+                            <form action="">
+                                <div class="col-lg-3">
+                                    <label>Option: </label>
+                                    <select name="Option" id="option">
+                                        <option value="Gold">Gold</option>
+                                        <option value="Gold per minute">Gold per minute</option>
+                                        <option value="Cs">Cs</option>
+                                        <option value="Cs per minute">Cs per minute</option>
+                                        <option value="First turret">First turret</option>
+                                        <option value="First blood">First blood</option>
+                                        <option value="Multikill">Multikill</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-2">
+                                    <label>Value:</label>
+                                    <input type="text" size = 5>
+                                </div>
+                                <div class="col-lg-1">
+                                    <input type="submit" name="Add" value="Add">
+                                </div>
+                            </form>
+                        </div>
+                        <br> 
+                        <div class="row">
+                            <div class="col-lg-2">
+                                <label style="vertical-align: top;">
+                                    Image url:
+                                </label>
+                            </div>
+                            <div class="col-lg-4">
+                                <input type="text" size="30">
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+            </form>
+            <div class="row footer">
+                <div class="col-lg-12">
+                    &nbsp; by NoodleSoft
+                </div>
+            </div>
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script> 
+    </body>
+</html>
