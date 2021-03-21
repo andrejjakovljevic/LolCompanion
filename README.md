@@ -6,5 +6,5 @@ TODO:
 - ~~misije~~
 - ~~dodavanje misija~~
 - ~~live game~~
+- ~~responsive~~
 - admin nesto
-- mod nest
