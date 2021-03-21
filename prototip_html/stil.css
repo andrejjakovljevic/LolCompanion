@@ -132,3 +132,9 @@ hr{
     margin-right: auto;
     width: 75%;
 }
+
+.font
+{
+    font-family: 'Syne Mono', monospace;
+    font-weight: bold;
+}
