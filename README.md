@@ -2,7 +2,7 @@
 
 TODO:
 
-- ~~porobar u profile~~ -> u challenges dodat ipak
+- ~~porobar u profile~~ -> u misije dodat ipak
 - ~~misije~~
 - ~~dodavanje misija~~
 - ~~live game~~
