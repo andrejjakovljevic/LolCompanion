@@ -9,7 +9,7 @@ body {
 
 a{
 
-    color: yellow;
+    color: black;
 }
 
 a:hover
@@ -137,4 +137,8 @@ hr{
 {
     font-family: 'Syne Mono', monospace;
     font-weight: bold;
+}
+
+td{
+    line-height: 50px;
 }
