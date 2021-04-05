@@ -7,4 +7,4 @@ TODO:
 - ~~dodavanje misija~~
 - ~~live game~~
 - ~~responsive~~
-- ~~admin nesto~~
+- ~~admin panel~~
