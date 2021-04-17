@@ -20,7 +20,7 @@ class Guest extends BaseController
         $user=$korisnikModel->find($this->request->getVar('username'));
         if($user==null)
             return $this->index('Korisnik ne postoji');
-        if($user->password!=$this->request->getVar('94dac85bf941127fe3a8cfd55d749f2e816c6188fd7ed0e78713362ab9d53cd8'))
+        if($user->password!=$this->request->getVar('password'))
             return $this->index('Pogresna lozinka');
         
         $this->session->set('user', $user);
