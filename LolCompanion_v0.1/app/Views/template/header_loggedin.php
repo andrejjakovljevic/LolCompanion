@@ -5,7 +5,6 @@
         <link rel="stylesheet" href="stil.css">
         <link href="https://fonts.googleapis.com/css2?family=Syne+Mono&display=swap" rel="stylesheet">
         <title>LolCompanion</title>
-        <link rel="shortcut icon" type="image/png" href="slike/lolporo.png">
     </head>
     <body>
         <div class="container-fluid font">
