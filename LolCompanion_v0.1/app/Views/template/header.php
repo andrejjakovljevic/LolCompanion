@@ -10,7 +10,6 @@
     <body>
         <div class="container-fluid font">
             <div class="row header">
-                    <div class="container-fluid font">
                 <div class="col-lg-3">
                     <img src="slike/lolporo.png" style="width: 20%;">
                     <a href="index.html" class="basic">LoLCompanion</a>
