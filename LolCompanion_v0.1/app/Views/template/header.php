@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
     <head>
         <!--Autor: Dragan Milovancevic 18/0153-->
