@@ -13,5 +13,5 @@ class KorisnikModel extends Model
 
     protected $returnType     = 'object';
 
-    protected $allowedFields = ['sumonnerName', 'password', 'email','role'];
+    protected $allowedFields = ['summonerName', 'password', 'email','role'];
 }

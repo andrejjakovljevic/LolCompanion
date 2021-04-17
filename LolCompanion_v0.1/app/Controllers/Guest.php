@@ -16,7 +16,7 @@ class Guest extends BaseController
 	{
 		echo view('template/header.php');
 		echo view('pages/login.php', ['poruka' => $poruka]);
-        echo view('template/footer.php');
+		echo view('template/footer.php');
 	}
 	
     public function loginSubmit(){
