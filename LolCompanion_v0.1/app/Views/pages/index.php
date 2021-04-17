@@ -12,7 +12,7 @@
                             </div>
                             <hr>
                             <form class="form" action="jayce.html">
-                                <input type="image" src="slike/glass.png" width="1.8%">
+                                <input type="image" src="../slike/glass.png" width="1.8%">
                                 <input type="text" size="30" placeholder="Input champion name"> 
                             </form>
                         </div>
