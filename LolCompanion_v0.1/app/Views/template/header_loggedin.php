@@ -41,7 +41,7 @@
                             <?php if ($role == 0)
                                 echo  '<li><a class="dropdown-item" href="admin.html">Admin Panel</a></li>'
                             ?>
-                            <li><a class="dropdown-item" href="login.html">LogOut</a></li>
+                            <li><a class="dropdown-item" href="<?= site_url("LoggedUser/logout") ?>" >LogOut</a></li>
                         </ul>
                     </div>
                 </div>
