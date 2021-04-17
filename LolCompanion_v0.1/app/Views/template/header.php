@@ -12,7 +12,7 @@
             <div class="row header">
                 <div class="col-lg-3">
                     <img src="../slike/lolporo.png" style="width: 20%;">
-                    <a href="index.html" class="basic">LoLCompanion</a>
+                    <a href="<?= site_url("Guest") ?>" class="basic">LoLCompanion</a>
                 </div>
                 <div class="col-lg-6 header">
                     &nbsp;
@@ -24,6 +24,6 @@
                     &nbsp;
                 </div>
                 <div class="col-lg-1 align-self-center">
-                    <a href="login.html" class="basic">Login</a>
+                    <a href="<?= site_url("Guest/Login") ?>" class="basic">Login</a>
                 </div>
             </div>

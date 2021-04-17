@@ -19,7 +19,7 @@
                                 <br> <br>
                                 <input type="password" id="password" name="password" size="30" placeholder="Enter Password">
                                 <br> <br>
-                                <input type="submit" value="Log In"><a href="signup.html"> ...or Signup</a>
+                                <input type="submit" value="Log In"><a href="<?= site_url("Guest/SignUp") ?>"> ...or Signup</a>
                             </form>
                         </div>
                     </div>
