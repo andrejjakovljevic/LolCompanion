@@ -6,6 +6,10 @@ class LoggedUser extends BaseController
 {
 	public function index()
 	{
-		return view('welcome_message');
+            $data = [];
+            $data['Controller']='LoggedUser';
+            $data['role']='ADMIN';
+            echo view('template/header_loggedin.php',$data);
+            echo view('template/footer.php');
 	}
 }
