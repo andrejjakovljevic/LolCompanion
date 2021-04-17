@@ -22,7 +22,6 @@ class Guest extends BaseController
             return $this->index('Korisnik ne postoji');
         if($user->password!=$this->request->getVar('password'))
             return $this->index('Pogresna lozinka');
-        
         $this->session->set('user', $user);
         return redirect()->to(site_url('LoggedUser'));
     }

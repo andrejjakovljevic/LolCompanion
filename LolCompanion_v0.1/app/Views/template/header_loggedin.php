@@ -29,25 +29,20 @@
                 <div class="col-lg-1 align-self-center">
                     <a href="champions.html" class="basic">Champions</a>  
                 </div>
-                
-                <div class="col-lg-1 align-self-center" >
+                <div class="col-lg-2 align-self-center" >
                     <div class="btn-group">
-                        <button type="button" style="background-color: #FF7070; border-color: #FF7070;" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Gindra</button>
+                        <button type="button" style="background-color: #FF7070; border-color: #FF7070;" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><?php echo "$username" ?></button>
                         <ul class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
                             <li><a class="dropdown-item" href="dummy_profile.html">Profile</a></li>
                             <li><a class="dropdown-item" href="changePassword.html">Change<br>password</a></li>
-                            <?php if ($role == "MOD" || $role== "ADMIN") 
+                            <?php if ($role == 0 || $role == 1)
                                 echo '<li><a class="dropdown-item" href="challenges_mod.html">All challenges</a></li>'
                             ?>
-                            <?php if ($role == "ADMIN")
+                            <?php if ($role == 0)
                                 echo  '<li><a class="dropdown-item" href="admin.html">Admin Panel</a></li>'
                             ?>
                             <li><a class="dropdown-item" href="login.html">LogOut</a></li>
                         </ul>
                     </div>
-                </div>
-
-                <div class="col-lg-1 align-self-center text-left"  style="padding-top: 1%;">
-                    <figure><img src="slike/summonerIcon.png"> </figure>
                 </div>
             </div>
