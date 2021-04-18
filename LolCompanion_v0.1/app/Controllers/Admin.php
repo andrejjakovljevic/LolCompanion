@@ -5,6 +5,7 @@ namespace App\Controllers;
 require_once __DIR__  . "../../../vendor/autoload.php";
 
 use App\Models\KorisnikModel;
+use App\Models\GlobalModel;
 use RiotAPI\LeagueAPI\LeagueAPI;
 use RiotAPI\Base\Definitions\Region;
 
@@ -24,5 +25,11 @@ class Admin extends LoggedUser {
         if(!$this->validate(['api' => 'required'])){
             return $this->index('Field must not be empty');
         }
+        $model = new GlobalModel();
+        $model->save([
+            'name' => 'api',
+            'value' => $this->request->getVar('api')
+        ]);
+        return $this->index('API key successfully changed');
     }
 }
