@@ -5,7 +5,6 @@ namespace App\Controllers;
 require_once __DIR__  . "../../../vendor/autoload.php";
 
 
-
 use App\Models\KorisnikModel;
 use App\Models\GlobalModel;
 use App\Models\ChampionModel;
@@ -122,5 +121,26 @@ class Admin extends LoggedUser {
             $model->save($user);
             return $this->index("User " . $user->summonerName . " is no longer a Moderator");
         }
+    }
+    
+    public function WexScrape(){
+        $httpClient = new \GuzzleHttp\Client();
+
+        $response = $httpClient->get('https://u.gg/lol/tier-list');
+
+        $htmlString = (string) $response->getBody();
+
+        // HTML is often wonky, this suppresses a lot of warnings
+        libxml_use_internal_errors(true);
+
+        $doc = new DOMDocument();
+        $doc->loadHTML($htmlString);
+
+        $xpath = new DOMXPath($doc);
+        
+        $links = $xpath->evaluate('//strong[@class="champion-name"]');
+        
+        var_dump(links);
+        return $this->index("skrejpuj me");
     }
 }
