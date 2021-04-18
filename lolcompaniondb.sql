@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 17, 2021 at 01:48 PM
+-- Generation Time: Apr 18, 2021 at 12:07 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -61,6 +61,19 @@ CREATE TABLE IF NOT EXISTS `champions` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `global`
+--
+
+DROP TABLE IF EXISTS `global`;
+CREATE TABLE IF NOT EXISTS `global` (
+  `name` varchar(30) NOT NULL,
+  `value` varchar(100) NOT NULL,
+  PRIMARY KEY (`name`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `items`
 --
 
@@ -92,8 +105,9 @@ CREATE TABLE IF NOT EXISTS `korisnik` (
 --
 
 INSERT INTO `korisnik` (`summonerName`, `password`, `email`, `role`) VALUES
-('GINDRA', '94dac85bf941127fe3a8cfd55d749f2e816c6188fd7ed0e78713362ab9d53cd8', 'gindra@gindra.ac.bg.rs', 0),
-('Sensei God', '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918', 'andrej@andrej.ec.bf.rs', 0);
+('GINDRA', '123', 'gindra@gindra.ac.bg.rs', 0),
+('Sensei God', '123', 'andrej@andrej.ec.bf.rs', 0),
+('wdaw', '123', 'a@a.a', 2);
 
 -- --------------------------------------------------------
 
