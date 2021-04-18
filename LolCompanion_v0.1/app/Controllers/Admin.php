@@ -59,7 +59,7 @@ class Admin extends LoggedUser {
                 'name' => $champ["name"]
             ]);
         }
-        //$dom = HtmlDomParser::str_get_html("https://www.op.gg/champion/aphelios/statistics/jungle");
+        // return $this->index('Successfully updated');
     }
     
     public function RemoveAccount(){

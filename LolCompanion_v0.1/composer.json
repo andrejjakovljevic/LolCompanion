@@ -7,14 +7,9 @@
 	"require": {
 		"php": "^7.3||^8.0",
 		"codeigniter4/framework": "^4",
-<<<<<<< Updated upstream
 		"dolejska-daniel/riot-api-league": "^1",
 		"dolejska-daniel/riot-api-datadragon": "1",
 		"voku/simple_html_dom": "^4.7"
-=======
-		"dolejska-daniel/riot-api-league": "1",
-		"dolejska-daniel/riot-api-datadragon": "1"
->>>>>>> Stashed changes
 	},
 	"require-dev": {
 		"fakerphp/faker": "^1.9",
