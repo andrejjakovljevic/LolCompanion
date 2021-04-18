@@ -45,7 +45,7 @@ class LoggedUser extends BaseController
         }   
         $user->password = $this->request->getVar('newpass1');
         $korisnikModel->update($user->summonerName, $user);
-        return this->index();
+        return $this->index();
     }
 
     public function logout() {
