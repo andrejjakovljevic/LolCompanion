@@ -11,9 +11,20 @@
                                 LolCompanion
                             </div>
                             <hr>
-                            <form class="form" action="jayce.html">
+                            <form class="form" action="
+                                  <?php
+                                    if (!isset($_SESSION['user']))
+                                    {
+                                        echo site_url('Guest/searchChampion');
+                                    }
+                                    else
+                                    {
+                                        echo site_url('LoggedUser/searchChampion');
+                                    }
+                                  ?>
+                                  ">
                                 <input type="image" src="../slike/glass.png" width="1.8%">
-                                <input type="text" size="30" placeholder="Input champion name"> 
+                                <input type="text" size="30" placeholder="Input champion name" name="champName"> 
                             </form>
                         </div>
                     </div> 

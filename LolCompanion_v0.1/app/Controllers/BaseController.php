@@ -11,6 +11,7 @@ use Psr\Log\LoggerInterface;
 
 use App\Models\KorisnikModel;
 use App\Models\GlobalModel;
+use App\Models\ChampionModel;
 use RiotAPI\LeagueAPI\LeagueAPI;
 use RiotAPI\Base\Definitions\Region;
 use RiotAPI\DataDragonAPI\DataDragonAPI;
@@ -109,4 +110,44 @@ class BaseController extends Controller
 
         echo view('template/footer');
 	}
+        
+        public function searchChampion()
+        {
+            $ses = session();
+            $championName = $this->request->getVar('champName');
+            $model = new ChampionModel();
+            $res = $model->like('name',"%$championName%");
+            $res = $res->findAll();
+            $ses = session();
+            if (count($res)==0)
+            {
+                if ($ses->get('user'))
+                {
+                    return redirect()->to(site_url('Guest/'));
+                }
+                else
+                {
+                     return redirect()->to(site_url('LoggedUser/'));
+                }
+            }
+            $min=70; $c=$res[0];
+            foreach ($res as $champ)
+            {
+                $ime = $champ->name;
+                if ($min>strlen($ime))
+                {
+                    $c=$champ;
+                    $min=strlen($ime);
+                }
+            }
+            //var_dump($c);
+            if (!$ses->get('user'))
+            {
+                return redirect()->to(site_url("Guest/Champion/{$c->id}"));
+            }
+            else
+            {
+                return redirect()->to(site_url("LoggedUser/Champion/{$c->id}"));
+            }
+        }
 }
