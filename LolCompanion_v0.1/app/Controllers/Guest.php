@@ -9,7 +9,7 @@ class Guest extends BaseController
 	{
 		echo view('template/header.php');
 		echo view('pages/index.php', ['poruka' => $poruka]);
-        echo view('template/footer.php');
+                echo view('template/footer.php');
 	}
 
 	public function login($poruka='')
@@ -34,10 +34,10 @@ class Guest extends BaseController
     }
 
 	public function signUp($poruka = '') {
-		echo view('template/header.php');
-		echo view('pages/signup.php', ['poruka' => $poruka]);
-        echo view('template/footer.php');
-	}
+            echo view('template/header.php');
+            echo view('pages/signup.php', ['poruka' => $poruka]);
+            echo view('template/footer.php');
+        }
 	
 	public function signUpSubmit() {
         if(!$this->validate(['username'=>'required', 'password1'=>'required', 'email'=>'required', 'password2'=>'required'])){

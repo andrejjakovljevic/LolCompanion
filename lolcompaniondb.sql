@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 18, 2021 at 12:07 PM
+-- Generation Time: Apr 18, 2021 at 01:46 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -52,10 +52,9 @@ CREATE TABLE IF NOT EXISTS `builds` (
 
 DROP TABLE IF EXISTS `champions`;
 CREATE TABLE IF NOT EXISTS `champions` (
-  `idchampions` int(11) NOT NULL,
-  `picture` blob NOT NULL,
+  `id` int(11) NOT NULL,
   `name` varchar(45) NOT NULL,
-  PRIMARY KEY (`idchampions`)
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -71,6 +70,13 @@ CREATE TABLE IF NOT EXISTS `global` (
   PRIMARY KEY (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `global`
+--
+
+INSERT INTO `global` (`name`, `value`) VALUES
+('api', 'RGAPI-24b0644f-6f97-483d-99d0-ed2e9322be96');
+
 -- --------------------------------------------------------
 
 --
@@ -79,10 +85,9 @@ CREATE TABLE IF NOT EXISTS `global` (
 
 DROP TABLE IF EXISTS `items`;
 CREATE TABLE IF NOT EXISTS `items` (
-  `iditems` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `name` varchar(45) NOT NULL,
-  `picture` blob NOT NULL,
-  PRIMARY KEY (`iditems`)
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
