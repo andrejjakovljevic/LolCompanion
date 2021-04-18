@@ -41,7 +41,6 @@ class Admin extends LoggedUser {
         ]);
         return $this->index('API key successfully changed');
     }
-<<<<<<< Updated upstream
 
     public function updateStatistics() {
 		DataDragonAPI::initByCDN();
@@ -65,7 +64,7 @@ class Admin extends LoggedUser {
             ]);
         }
         //$dom = HtmlDomParser::str_get_html($str);
-=======
+    }
     
     public function RemoveAccount(){
         if(!$this->validate(['summonerName' => 'required'])){
@@ -124,6 +123,5 @@ class Admin extends LoggedUser {
             $model->save($user);
             return $this->index("User " . $user->summonerName . " is no longer a Moderator");
         }
->>>>>>> Stashed changes
     }
 }
