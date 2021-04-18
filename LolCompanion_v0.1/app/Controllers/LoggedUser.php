@@ -62,7 +62,26 @@ class LoggedUser extends BaseController
 	{
 		return parent::champion($id, "LoggedUser");
 	}
-
+        
+        public function Challenges(){
+            echo view('template/header_loggedin', [
+				'role' => $this->session->get('user')->role,
+				'username' => $this->session->get('user')->summonerName
+			]);
+            echo view('pages/challenges', ['role' => $this->session->get('user')->role]);
+            $this->GetPoros();
+            //echo view('template/footer');
+        }
+        
+        public function GetPoros(){
+            $model = new UserQuestModel();
+            $res = $model->like('name',$championName, "after");
+//            $res = $model->where('active', 1)
+//                   ->findAll();
+            $res = $model->findAll();
+            var_dump($res);
+            echo 'eeeeeeeeeeeee';
+        }
     /*
 	public function champion($id, $role = "") {
 
