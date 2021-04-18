@@ -116,8 +116,9 @@ class BaseController extends Controller
             $ses = session();
             $championName = $this->request->getVar('champName');
             $model = new ChampionModel();
-            $res = $model->like('name',"%$championName%");
+            $res = $model->like('name',$championName, "after");
             $res = $res->findAll();
+            #var_dump($res);
             $ses = session();
             if (count($res)==0)
             {

@@ -24,7 +24,7 @@
                     <a href="live_game.html" class="basic">Live game</a> 
                 </div>
                 <div class="col-lg-1 align-self-center">
-                    <a href="challenges.html" class="basic">Challenges</a>  
+                    <a href="<?= site_url("LoggedUser/Challenges")?>" class="basic">Challenges</a>  
                 </div>
                 <div class="col-lg-1 align-self-center">
                     <a href="<?= site_url("LoggedUser/Champions")?>" class="basic">Champions</a>  
