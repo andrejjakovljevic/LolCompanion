@@ -2,10 +2,18 @@
 
 namespace App\Controllers;
 
+require_once __DIR__  . "../../../vendor/autoload.php";
+
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
+
+use App\Models\KorisnikModel;
+use App\Models\GlobalModel;
+use RiotAPI\LeagueAPI\LeagueAPI;
+use RiotAPI\Base\Definitions\Region;
+use RiotAPI\DataDragonAPI\DataDragonAPI;
 
 /**
  * Class BaseController
@@ -70,8 +78,35 @@ class BaseController extends Controller
 				'username' => $this->session->get('user')->summonerName
 			]);
 		}
-		echo $id;
-		echo $role;
+
+		DataDragonAPI::initByCDN();
+		$model = new GlobalModel();
+		$api = $model->find('api');
+        $api = new LeagueAPI([
+            LeagueAPI::SET_KEY    => $api->value,
+            LeagueAPI::SET_REGION => Region::EUROPE_EAST,
+			LeagueAPI::SET_DATADRAGON_INIT   => true,
+        ]);
+
+        $champion = $api->getStaticChampion($id);
+		// echo var_dump($champion);
+
+		$data = [
+			'name' => $champion->name,
+			'icon' => DataDragonAPI::getChampionIconO($champion),
+		];
+
+		echo view('pages/champion', $data);
+
+		/*
+        $summoner = $api->getSummonerByName("Gindra");
+        $matchlist = $api->getMatchlistByAccount($summoner->accountId);
+        foreach ($matchlist as $match) {
+            var_dump($match);
+            echo "\n";
+        }
+		*/
+
         echo view('template/footer');
 	}
 }
