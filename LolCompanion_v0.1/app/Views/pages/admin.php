@@ -6,50 +6,37 @@
                         </div>
                     </div>
                     <div class="row">
+                        <div class="col-lg-6">
                         <form action="<?= site_url("Admin/RemoveAccount") ?> " method="post">
-                        <div class="col-lg-2">
                             <label>Remove Account:</label>
-                        </div>
-                        <div class="col-lg-3">
                             <input type="text" size="25" name="summonerName">
-                        </div>
-                        <div class="col-lg-1">
                             <input type="Submit" value="Remove">
                         </div>
                         </form>
+                        <div class="col-lg-6" style="padding-right: 0;">
                         <form action="<?= site_url("Admin/UpdateAPI") ?>" method="post">
-                            <div class="col-lg-6" style="padding-right: 0;">
                                 <label>API Key:</label>
                                 <input type="text" size="40" name = "api" placeholder="RGAPI-xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx">
                                 <input type="Submit" value="Submit">
-                            </div>
-                        </form>
+                         </form>   
+                        </div>
                     </div>
                     <br>
                     <div class="row">
+                        <div class="col-lg-6">
                         <form action="<?= site_url("Admin/AddModerator") ?> " method="post">
-                        <div class="col-lg-2">
                             <label>Add Moderator:</label>
-                        </div>
-                        <div class="col-lg-3">
                             <input type="text" size="25" name="summonerName">
-                        </div>
-                        <div class="col-lg-1">
                             <input type="Submit" value="Add">
-                        </div>
                         </form>
-                        
+                        </div>
+                        <div class="col-lg-6">
                         <form action="<?= site_url("Admin/RemoveModerator") ?> " method="post">
-                        <div class="col-lg-2">
                             <label>Remove Moderator:</label>
-                        </div>
-                        <div class="col-lg-3">
                             <input type="text" size="25" name="summonerName">
-                        </div>
-                        <div class="col-lg-1">
                             <input type="Submit" value="Remove">
+                        </form>
                         </div>
-                        </form>    
                     </div>
                     <br>
 
