@@ -66,7 +66,7 @@ class BaseController extends Controller
 			]);
 		}
 		echo view('pages/champions', ['role' => $role]);
-        echo view('template/footer');
+                echo view('template/footer');
 	}
 
 	public function champion($id, $role){
