@@ -65,10 +65,12 @@ class Guest extends BaseController
         return redirect()->to(site_url('Guest/login'));
     }
 
-	public function champions()
+	public function champions($role = "")
 	{
-		echo view('template/header.php');
-		echo view('pages/champions.php', ['role' => "Guest"]);
-        echo view('template/footer.php');
+		return parent::champions("Guest");
+	}
+
+	public function champion($role = "") {
+		return parent::champion("Guest");
 	}
 }

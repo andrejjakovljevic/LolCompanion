@@ -52,4 +52,13 @@ class LoggedUser extends BaseController
         $this->session->remove('user');
         return redirect()->to(site_url('Guest'));
     }
+
+	public function champions($role = "")
+	{
+		return parent::champions("LoggedUser");
+	}
+
+	public function champion($role = "") {
+		return parent::champion("LoggedUser");
+	}
 }

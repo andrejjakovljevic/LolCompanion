@@ -2,7 +2,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12 text-center">
-                            <img src="../slike/lolporo.png" style="width: 35%;">
+                            <img src="<?= base_url('slike/lolporo.png') ?>" style="width: 35%;">
                         </div>
                     </div> 
                     <div class="row">

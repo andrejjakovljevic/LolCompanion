@@ -47,4 +47,22 @@ class BaseController extends Controller
 		// E.g.: $this->session = \Config\Services::session();
                 $this->session = session();
 	}
+
+	public function champions($role) {
+		if ($role == "Guest")
+			echo view('template/header.php');
+		else
+			echo view('template/header_loggedin.php');
+		echo view('pages/champions.php', ['role' => $role]);
+        echo view('template/footer.php');
+	}
+
+	public function champion($role){
+		if ($role == "Guest")
+			echo view('template/header.php');
+		else
+			echo view('template/header_loggedin.php');
+		//echo $this->input->get('id');
+        echo view('template/footer.php');
+	}
 }
