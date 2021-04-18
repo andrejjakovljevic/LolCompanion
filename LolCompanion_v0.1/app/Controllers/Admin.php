@@ -40,7 +40,6 @@ class Admin extends LoggedUser {
         ]);
         return $this->index('API key successfully changed');
     }
-<<<<<<< Updated upstream
 
     public function updateStatistics() {
 		DataDragonAPI::initByCDN();
@@ -59,9 +58,9 @@ class Admin extends LoggedUser {
                 'name' => $champ["name"]
             ]);
         }
+    }
 
         //$dom = HtmlDomParser::str_get_html($str);
-=======
     
     public function RemoveAccount(){
         if(!$this->validate(['summonerName' => 'required'])){
@@ -73,8 +72,11 @@ class Admin extends LoggedUser {
         if($user == null){
             return $this->index('Account does not exist');
         }
+        else if($user->role == 0){
+            return $this->index('User is an Admin');
+        }
         $model->delete($this->request->getVar('summonerName'));
-        return $this->index('Account removed');
+        return $this->index('User'. $user->summonerName. 'removed');
     }
     
     public function AddModerator(){
@@ -120,6 +122,5 @@ class Admin extends LoggedUser {
             $model->save($user);
             return $this->index("User " . $user->summonerName . " is no longer a Moderator");
         }
->>>>>>> Stashed changes
     }
 }
