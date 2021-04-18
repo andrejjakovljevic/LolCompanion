@@ -25,6 +25,10 @@ class Admin extends LoggedUser {
         if(!$this->validate(['api' => 'required'])){
             return $this->index('Field must not be empty');
         }
+        if (!preg_match("/^RGAPI-[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/", $this->request->getVar('api')))
+        {
+            return $this->index('API key is not valid');
+        }
         $model = new GlobalModel();
         $model->save([
             'name' => 'api',
