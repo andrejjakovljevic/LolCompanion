@@ -9,7 +9,8 @@
 		"codeigniter4/framework": "^4",
 		"dolejska-daniel/riot-api-league": "^1",
 		"dolejska-daniel/riot-api-datadragon": "1",
-		"voku/simple_html_dom": "^4.7"
+		"voku/simple_html_dom": "^4.7",
+		"guzzlehttp/guzzle": "^7.3"
 	},
 	"require-dev": {
 		"fakerphp/faker": "^1.9",
