@@ -58,7 +58,11 @@ class Admin extends LoggedUser {
                 'id' => $champ["key"],
                 'name' => $champ["name"]
             ]);
-        }
+            }
+            // Create DOM from URL or file
+            $html = HtmlDomParser::file_get_html('https://u.gg/lol/tier-list');
+            $nesto = $html->findMulti('.rt-tr-group');
+            var_dump($nesto); 
         // return $this->index('Successfully updated');
     }
     
