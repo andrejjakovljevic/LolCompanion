@@ -4,11 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-<<<<<<< Updated upstream
     "content-hash": "4dc484a88fa8a6614a7c8afa0d247810",
-=======
-    "content-hash": "d550fbac0c1a06bf8bb32501091c4d8c",
->>>>>>> Stashed changes
     "packages": [
         {
             "name": "codeigniter4/framework",
