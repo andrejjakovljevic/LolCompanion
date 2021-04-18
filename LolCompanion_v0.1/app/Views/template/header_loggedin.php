@@ -27,7 +27,7 @@
                     <a href="challenges.html" class="basic">Challenges</a>  
                 </div>
                 <div class="col-lg-1 align-self-center">
-                    <a href="champions.html" class="basic">Champions</a>  
+                    <a href="<?= site_url("LoggedUser/Champions")?>" class="basic">Champions</a>  
                 </div>
                 <div class="col-lg-2 align-self-center" >
                     <div class="btn-group">
@@ -39,7 +39,7 @@
                                 echo '<li><a class="dropdown-item" href="challenges_mod.html">All challenges</a></li>'
                             ?>
                             <?php if ($role == 0)
-                                echo  '<li><a class="dropdown-item" href="admin.html">Admin Panel</a></li>'
+                                echo  '<li><a class="dropdown-item" href="' . site_url("Admin") . '">Admin Panel</a></li>'
                             ?>
                             <li><a class="dropdown-item" href="<?= site_url("LoggedUser/logout") ?>" >LogOut</a></li>
                         </ul>

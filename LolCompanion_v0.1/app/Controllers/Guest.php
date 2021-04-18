@@ -70,7 +70,7 @@ class Guest extends BaseController
 		return parent::champions("Guest");
 	}
 
-	public function champion($role = "") {
-		return parent::champion("Guest");
+	public function champion($id, $role = "") {
+		return parent::champion($id, "Guest");
 	}
 }

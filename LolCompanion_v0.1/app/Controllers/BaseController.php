@@ -50,19 +50,28 @@ class BaseController extends Controller
 
 	public function champions($role) {
 		if ($role == "Guest")
-			echo view('template/header.php');
-		else
-			echo view('template/header_loggedin.php');
-		echo view('pages/champions.php', ['role' => $role]);
-        echo view('template/footer.php');
+			echo view('template/header');
+		else {
+			echo view('template/header_loggedin', [
+				'role' => $this->session->get('user')->role,
+				'username' => $this->session->get('user')->summonerName
+			]);
+		}
+		echo view('pages/champions', ['role' => $role]);
+        echo view('template/footer');
 	}
 
-	public function champion($role){
+	public function champion($id, $role){
 		if ($role == "Guest")
 			echo view('template/header.php');
-		else
-			echo view('template/header_loggedin.php');
-		//echo $this->input->get('id');
-        echo view('template/footer.php');
+		else {
+			echo view('template/header_loggedin', [
+				'role' => $this->session->get('user')->role,
+				'username' => $this->session->get('user')->summonerName
+			]);
+		}
+		echo $id;
+		echo $role;
+        echo view('template/footer');
 	}
 }

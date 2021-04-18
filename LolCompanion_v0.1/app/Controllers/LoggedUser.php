@@ -1,8 +1,8 @@
 <?php
 
 namespace App\Controllers;
-use App\Models\KorisnikModel;
 
+use App\Models\KorisnikModel;
 
 class LoggedUser extends BaseController
 {
@@ -58,7 +58,26 @@ class LoggedUser extends BaseController
 		return parent::champions("LoggedUser");
 	}
 
-	public function champion($role = "") {
-		return parent::champion("LoggedUser");
+	public function champion($id, $role = "")
+	{
+		return parent::champion($id, "LoggedUser");
 	}
+
+    /*
+	public function champion($id, $role = "") {
+
+        $api = new LeagueAPI([
+            LeagueAPI::SET_KEY    => 'RGAPI-24b0644f-6f97-483d-99d0-ed2e9322be96',
+            LeagueAPI::SET_REGION => Region::EUROPE_EAST,
+        ]);
+
+        $api->
+        $summoner = $api->getSummonerByName("Gindra");
+        $matchlist = $api->getMatchlistByAccount($summoner->accountId);
+        foreach ($matchlist as $match) {
+            var_dump($match);
+            echo "\n";
+        }
+	}
+    */
 }

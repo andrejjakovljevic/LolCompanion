@@ -7,7 +7,7 @@
 	"require": {
 		"php": "^7.3||^8.0",
 		"codeigniter4/framework": "^4",
-		"dolejska-daniel/riot-api-league": "1",
+		"dolejska-daniel/riot-api-league": "^1",
 		"dolejska-daniel/riot-api-datadragon": "1"
 	},
 	"require-dev": {

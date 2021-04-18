@@ -1,4 +1,9 @@
-                        <div class="row text-center slike">
+                <div class="row">
+                    <div class="col-lg-12 col-xs-12 naslov">
+                        Champions
+                    </div>
+                </div>
+                <div class="row text-center slike">
                     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
                             <a href="<?= site_url("$role/Champion/266")?>"><img src=" <?= base_url('iconsChampions/imageAatrox.png')?>"></a>
                             <br>
