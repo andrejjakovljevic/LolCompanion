@@ -12,6 +12,8 @@ use RiotAPI\LeagueAPI\LeagueAPI;
 use RiotAPI\Base\Definitions\Region;
 use voku\helper\HtmlDomParser;
 use RiotAPI\DataDragonAPI\DataDragonAPI;
+use JonnyW\PhantomJs\Client;
+
 
 
 class Admin extends LoggedUser {
@@ -52,16 +54,28 @@ class Admin extends LoggedUser {
         ]);
 
         $model = new ChampionModel();
+        $roles = ['top', 'jungle', 'middle', 'adc', 'support'];
+        $br = 0;
         foreach(DataDragonAPI::getStaticChampions()["data"] as $champ) {
+            if ($br++>10)
+                break;
             $model->save([
                 'id' => $champ["key"],
                 'name' => $champ["name"]
             ]);
+            foreach($roles as $role) {
+                $newchamp = str_replace([' ', "'"], "", $champ["name"]);
+                if ($champ["name"] == "Nunu&Willump") {
+                    $newchamp = "nunu";
+                }
+                $html = HtmlDomParser::file_get_html("https://www.leagueofgraphs.com/champions/builds/" . strtolower($newchamp) . '/' . $role);
+                $tmp = $html->findMultiOrFalse('.pie-chart');
+                if (!$tmp) continue;
+                $wt = (double) $tmp[1]->textContent;
+                $pt = (double) $tmp[0]->textContent;
+                echo $champ["name"] . $role . $wt . " " . $pt . "<br>";
             }
-            // Create DOM from URL or file
-            $html = HtmlDomParser::file_get_html('https://u.gg/lol/tier-list');
-            $nesto = $html->findMulti('.rt-tr-group');
-            var_dump($nesto); 
+        }
         // return $this->index('Successfully updated');
     }
     
