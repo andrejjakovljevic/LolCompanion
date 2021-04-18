@@ -4,7 +4,7 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class GlobalModel extends Model
+class ChampionModel extends Model
 {
     protected $table      = 'champions';
     protected $primaryKey = 'id';
