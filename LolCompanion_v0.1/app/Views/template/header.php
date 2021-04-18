@@ -18,7 +18,7 @@
                     &nbsp;
                 </div>
                 <div class="col-lg-1 align-self-center">
-                    <a href="champions.html" class="basic">Champions</a>  
+                    <a href="<?= site_url("Guest/Champions") ?>" class="basic">Champions</a>  
                 </div>
                 <div class="col-lg-1">
                     &nbsp;

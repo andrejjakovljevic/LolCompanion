@@ -64,4 +64,11 @@ class Guest extends BaseController
         $korisnikModel->insert($user);
         return redirect()->to(site_url('Guest/login'));
     }
+
+	public function champions()
+	{
+		echo view('template/header.php');
+		echo view('pages/champions.php', ['role' => "Guest"]);
+        echo view('template/footer.php');
+	}
 }
