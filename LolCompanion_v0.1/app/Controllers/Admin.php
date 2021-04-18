@@ -8,6 +8,7 @@ require_once __DIR__  . "../../../vendor/autoload.php";
 
 use App\Models\KorisnikModel;
 use App\Models\GlobalModel;
+use App\Models\ChampionModel;
 use RiotAPI\LeagueAPI\LeagueAPI;
 use RiotAPI\Base\Definitions\Region;
 use voku\helper\HtmlDomParser;
@@ -51,9 +52,9 @@ class Admin extends LoggedUser {
 			LeagueAPI::SET_DATADRAGON_INIT   => true,
         ]);
 
-        $model = new ChampionsModel();
+        $model = new ChampionModel();
         foreach(DataDragonAPI::getStaticChampions()["data"] as $champ) {
-            model.save($champ['key'], [
+            $model->save([
                 'id' => $champ["key"],
                 'name' => $champ["name"]
             ]);
