@@ -8,7 +8,6 @@ require_once __DIR__  . "../../../vendor/autoload.php";
 
 use App\Models\KorisnikModel;
 use App\Models\GlobalModel;
-use App\Models\ChampionModel;
 use RiotAPI\LeagueAPI\LeagueAPI;
 use RiotAPI\Base\Definitions\Region;
 use voku\helper\HtmlDomParser;
@@ -52,14 +51,10 @@ class Admin extends LoggedUser {
 			LeagueAPI::SET_DATADRAGON_INIT   => true,
         ]);
 
-        $model = new ChampionModel();
-        //var_dump(DataDragonAPI::getStaticChampions()["data"]["Aatrox"]["name"]);
+        $model = new ChampionsModel();
         foreach(DataDragonAPI::getStaticChampions()["data"] as $champ) {
-            var_dump($champ["key"]);
-            var_dump($champ["name"]);
-
-            $model->save([
-                'id' => (int) $champ["key"],
+            model.save($champ['key'], [
+                'id' => $champ["key"],
                 'name' => $champ["name"]
             ]);
         }
@@ -76,8 +71,11 @@ class Admin extends LoggedUser {
         if($user == null){
             return $this->index('Account does not exist');
         }
+        else if($user->role == 0){
+            return $this->index('User is an Admin');
+        }
         $model->delete($this->request->getVar('summonerName'));
-        return $this->index('Account removed');
+        return $this->index('User'. $user->summonerName. 'removed');
     }
     
     public function AddModerator(){
