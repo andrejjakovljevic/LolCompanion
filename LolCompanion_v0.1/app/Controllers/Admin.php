@@ -41,6 +41,7 @@ class Admin extends LoggedUser {
         ]);
         return $this->index('API key successfully changed');
     }
+<<<<<<< Updated upstream
 
     public function updateStatistics() {
 		DataDragonAPI::initByCDN();
@@ -64,5 +65,65 @@ class Admin extends LoggedUser {
             ]);
         }
         //$dom = HtmlDomParser::str_get_html($str);
+=======
+    
+    public function RemoveAccount(){
+        if(!$this->validate(['summonerName' => 'required'])){
+            return $this->index('Field must not be empty');
+        }
+        
+        $model = new KorisnikModel();
+        $user = $model->find($this->request->getVar('summonerName'));
+        if($user == null){
+            return $this->index('Account does not exist');
+        }
+        $model->delete($this->request->getVar('summonerName'));
+        return $this->index('Account removed');
+    }
+    
+    public function AddModerator(){
+        if(!$this->validate(['summonerName' => 'required'])){
+            return $this->index('Field must not be empty');
+        }
+        
+        $model = new KorisnikModel();
+        $user = $model->find($this->request->getVar('summonerName'));
+        if($user == null){
+            return $this->index('Account does not exist');
+        }
+        
+        if($user->role == 0 || $user->role == 1){
+            return $this->index('User is already a Moderator');
+        }
+        else{
+            $user->role = 1;
+            $model->save($user);
+            return $this->index("User " . $user->summonerName . " promoted to Moderator");
+        }
+    }
+    
+    public function RemoveModerator(){
+        if(!$this->validate(['summonerName' => 'required'])){
+            return $this->index('Field must not be empty');
+        }
+        
+        $model = new KorisnikModel();
+        $user = $model->find($this->request->getVar('summonerName'));
+        if($user == null){
+            return $this->index('Account does not exist');
+        }
+        
+        if($user->role != 0 && $user->role != 1){
+            return $this->index('User is not a Moderator');
+        }
+        else if($user->role == 0){
+            return $this->index('User is an Admin');
+        }
+        else{
+            $user->role = 2;
+            $model->save($user);
+            return $this->index("User " . $user->summonerName . " is no longer a Moderator");
+        }
+>>>>>>> Stashed changes
     }
 }
