@@ -73,7 +73,7 @@ class Admin extends LoggedUser {
                 if (!$tmp) continue;
                 $wt = (double) $tmp[1]->textContent;
                 $pt = (double) $tmp[0]->textContent;
-                echo $champ["name"] . $role . $wt . " " . $pt . "<br>";
+                // echo $champ["name"] . $role . $wt . " " . $pt . "<br>";
             }
         }
         // return $this->index('Successfully updated');

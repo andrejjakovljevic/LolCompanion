@@ -15,6 +15,7 @@ use App\Models\ChampionModel;
 use RiotAPI\LeagueAPI\LeagueAPI;
 use RiotAPI\Base\Definitions\Region;
 use RiotAPI\DataDragonAPI\DataDragonAPI;
+use voku\helper\HtmlDomParser;
 
 /**
  * Class BaseController
@@ -67,7 +68,15 @@ class BaseController extends Controller
 			]);
 		}
 		echo view('pages/champions', ['role' => $role]);
-                echo view('template/footer');
+		echo view('template/footer');
+	}
+
+	public function champName($name) {
+		$newchamp = str_replace([' ', "'"], "", $name);
+		if ($name == "Nunu&Willump") {
+			$newchamp = "nunu";
+		}
+		return strtolower($newchamp);
 	}
 
 	public function champion($id, $role){
@@ -97,6 +106,15 @@ class BaseController extends Controller
 			'icon' => DataDragonAPI::getChampionIconO($champion),
 		];
 
+		$html = HtmlDomParser::file_get_html("https://www.u.gg/lol/champions/" . $this->champName($champion->name) . '/build');
+        $tmp = $html->findMultiOrFalse('.champion-profile-page');
+
+		$data = [
+			'name' => $champion->name,
+			'icon' => DataDragonAPI::getChampionIconO($champion),
+			'info' => $tmp
+		];
+		
 		echo view('pages/champion', $data);
 
 		/*
