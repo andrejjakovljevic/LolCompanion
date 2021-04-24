@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 18, 2021 at 04:56 PM
+-- Generation Time: Apr 24, 2021 at 09:52 AM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -321,18 +321,18 @@ INSERT INTO `quest` (`questId`, `description`, `title`) VALUES
 
 DROP TABLE IF EXISTS `userquest`;
 CREATE TABLE IF NOT EXISTS `userquest` (
-  `userId` int(11) NOT NULL,
+  `summonerName` varchar(40) NOT NULL,
   `questId` int(11) NOT NULL,
   `completed` tinyint(1) NOT NULL,
-  PRIMARY KEY (`questId`,`userId`)
+  PRIMARY KEY (`questId`,`summonerName`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `userquest`
 --
 
-INSERT INTO `userquest` (`userId`, `questId`, `completed`) VALUES
-(0, 0, 0);
+INSERT INTO `userquest` (`summonerName`, `questId`, `completed`) VALUES
+('0', 0, 0);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
