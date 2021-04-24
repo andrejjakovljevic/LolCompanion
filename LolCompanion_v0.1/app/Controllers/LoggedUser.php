@@ -214,7 +214,7 @@ class LoggedUser extends BaseController
         echo view('pages/profile', $this->getMatchHistory($summonerName));
         echo view('template/footer');
     }
-    
+
         public function LiveGame()
         {
     
