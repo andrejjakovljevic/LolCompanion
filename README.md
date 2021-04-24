@@ -12,11 +12,11 @@ html prototip:
 - ~~match history~~
 
 php i baza:
-- ~~baza~~
+- ~~baza osnovno~~
 - ~~login/logout~~
 - ~~signUp~~
-- riot api lib ili rucno
-- api key u bazu
+- ~~api key u bazu~~
+- ~~admin panel funkcije sa bazom~~
 - misije u bazu
 - poslednji mec u bazu
 - datadragon podaci u bazu ili uvek da se dovlaci?
