@@ -5,6 +5,7 @@ namespace App\Controllers;
 use App\Models\KorisnikModel;
 use App\Models\UserQuestModel;
 use App\Models\QuestModel;
+use App\Models\QuestAttributeModel;
 
 class LoggedUser extends BaseController
 {
@@ -74,7 +75,7 @@ class LoggedUser extends BaseController
             echo view('template/footer');
         }
         
-        public function getChallenges(){
+        private function getChallenges(){
             $uQModel = new UserQuestModel();
             $qModel = new QuestModel();
             $uQ = $uQModel->where('summonerName', $this->session->get('user')->summonerName)->findAll();
@@ -87,17 +88,25 @@ class LoggedUser extends BaseController
                 'poroTotal' => $poroTotal,
                 'quests' => []
             ];
+            
             foreach ($uQ as $userQuest) {
                 $quest = $qModel->find($userQuest->questId);
                 $dataQuest = [
                     'title' => $quest->title,
                     'description' => $quest->description,
                     'image' => $quest->image,
-                    'completed' => $userQuest->completed
+                    'completed' => $userQuest->completed,
+                    'attributes' => $this->getAttributes($quest->questId)
                 ];
                 array_push($data['quests'], $dataQuest);
             }
             return $data;
+        }
+        
+        private function getAttributes($idQ){
+            $qAttrModel = new QuestAttributeModel();
+            $attributes = $qAttrModel->where('questId', $idQ)->findAll();
+            return $attributes;
         }
     /*
 	public function champion($id, $role = "") {
