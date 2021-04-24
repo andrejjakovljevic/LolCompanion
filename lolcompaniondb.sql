@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 24, 2021 at 09:59 AM
+-- Generation Time: Apr 24, 2021 at 10:36 AM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -303,7 +303,7 @@ CREATE TABLE IF NOT EXISTS `quest` (
   `questId` int(11) NOT NULL,
   `description` text NOT NULL,
   `title` varchar(50) NOT NULL,
-  `image` blob NOT NULL,
+  `image` varchar(300) NOT NULL,
   PRIMARY KEY (`questId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
