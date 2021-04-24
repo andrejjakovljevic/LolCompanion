@@ -20,17 +20,17 @@
             <div class="row text-center">
                 <div class="col-lg-4">
                     <h3>Xin Zhao</h3>
-                    <img src="slike/XinZhao_0.jpg" style="width: 90%;"><br>
+                    <img src="../slike/XinZhao_0.jpg" style="width: 90%;"><br>
                     50% in 18 games
                 </div>
                 <div class="col-lg-4">
                     <h3>Jinx</h3>
-                    <img src="slike/Jinx_0.jpg" style="width: 90%;"><br>
+                    <img src="../slike/Jinx_0.jpg" style="width: 90%;"><br>
                     33% in 15 games
                 </div>
                 <div class="col-lg-4">
                     <h3>Jayce</h3>
-                    <img src="slike/Jayce_0.jpg" style="width: 90%;"><br>
+                    <img src="../slike/Jayce_0.jpg" style="width: 90%;"><br>
                     40% in 12 games
                 </div>
             </div>
