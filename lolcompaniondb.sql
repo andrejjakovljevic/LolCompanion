@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 24, 2021 at 09:52 AM
+-- Generation Time: Apr 24, 2021 at 09:59 AM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -303,6 +303,7 @@ CREATE TABLE IF NOT EXISTS `quest` (
   `questId` int(11) NOT NULL,
   `description` text NOT NULL,
   `title` varchar(50) NOT NULL,
+  `image` blob NOT NULL,
   PRIMARY KEY (`questId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
@@ -310,8 +311,8 @@ CREATE TABLE IF NOT EXISTS `quest` (
 -- Dumping data for table `quest`
 --
 
-INSERT INTO `quest` (`questId`, `description`, `title`) VALUES
-(0, 'The first quest is a very good quest. Play Xin top.', 'The First Questic');
+INSERT INTO `quest` (`questId`, `description`, `title`, `image`) VALUES
+(0, 'The first quest is a very good quest. Play Xin top.', 'The First Questic', '');
 
 -- --------------------------------------------------------
 
@@ -332,7 +333,7 @@ CREATE TABLE IF NOT EXISTS `userquest` (
 --
 
 INSERT INTO `userquest` (`summonerName`, `questId`, `completed`) VALUES
-('0', 0, 0);
+('GINDRA', 0, 0);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
