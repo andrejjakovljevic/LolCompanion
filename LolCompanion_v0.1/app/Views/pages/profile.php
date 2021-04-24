@@ -45,7 +45,7 @@
             foreach($matches as $match)
             {
                 echo '
-                <div class="row" ' . ($match['stats']->win == 1 ? '' : 'style = "background-color: rgba(237, 149, 100, 0.5)"') . '>
+                <div class="row" ' . ($match['stats']->win == 1 ? '' : 'style = "background-color: rgba(237, 100, 100, 0.5)"') . '>
                     <div class = "col-lg-2 col-md-6 col-xs-12">
                         <div style="margin-top: 20px;">
                             ' . $match['info']->gameType . '<br>' . $match['info']->gameMode . '<br>
