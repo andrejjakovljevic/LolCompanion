@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 24, 2021 at 10:37 AM
+-- Generation Time: Apr 24, 2021 at 12:00 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -313,6 +313,30 @@ CREATE TABLE IF NOT EXISTS `quest` (
 
 INSERT INTO `quest` (`questId`, `description`, `title`, `image`) VALUES
 (0, 'The first quest is a very good quest. Play Xin top.', 'The First Questic', '../slike/dummyQuestPic.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `questattributes`
+--
+
+DROP TABLE IF EXISTS `questattributes`;
+CREATE TABLE IF NOT EXISTS `questattributes` (
+  `attributeId` int(11) NOT NULL,
+  `questId` int(11) NOT NULL,
+  `attributeKey` varchar(50) NOT NULL,
+  `attributeValue` varchar(50) NOT NULL,
+  PRIMARY KEY (`attributeId`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `questattributes`
+--
+
+INSERT INTO `questattributes` (`attributeId`, `questId`, `attributeKey`, `attributeValue`) VALUES
+(0, 0, 'champion', 'Xin Zhao'),
+(1, 0, 'role', 'Top'),
+(2, 0, 'kills', '5');
 
 -- --------------------------------------------------------
 
