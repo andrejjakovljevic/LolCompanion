@@ -7,6 +7,7 @@ use App\Models\UserQuestModel;
 use App\Models\QuestModel;
 use RiotAPI\LeagueAPI\LeagueAPI;
 use RiotAPI\Base\Definitions\Region;
+use App\Models\QuestAttributeModel;
 
 class LoggedUser extends BaseController
 {
@@ -76,7 +77,7 @@ class LoggedUser extends BaseController
             echo view('template/footer');
         }
         
-        public function getChallenges(){
+        private function getChallenges(){
             $uQModel = new UserQuestModel();
             $qModel = new QuestModel();
             $uQ = $uQModel->where('summonerName', $this->session->get('user')->summonerName)->findAll();
@@ -89,13 +90,15 @@ class LoggedUser extends BaseController
                 'poroTotal' => $poroTotal,
                 'quests' => []
             ];
+            
             foreach ($uQ as $userQuest) {
                 $quest = $qModel->find($userQuest->questId);
                 $dataQuest = [
                     'title' => $quest->title,
                     'description' => $quest->description,
                     'image' => $quest->image,
-                    'completed' => $userQuest->completed
+                    'completed' => $userQuest->completed,
+                    'attributes' => $this->getAttributes($quest->questId)
                 ];
                 array_push($data['quests'], $dataQuest);
             }
@@ -118,8 +121,14 @@ class LoggedUser extends BaseController
         return $result;
     }
 
-	private function getMatchHistory($summonerName) {
+        private function getAttributes($idQ) {
+            $qAttrModel = new QuestAttributeModel();
+            $attributes = $qAttrModel->where('questId', $idQ)->findAll();
+            return $attributes;
+        }
+    
 
+	private function getMatchHistory($summonerName) {
         $api = new LeagueAPI([
             LeagueAPI::SET_KEY    => 'RGAPI-752c2347-c8ee-4453-bbb8-cb25336bfd1d',
             LeagueAPI::SET_REGION => Region::EUROPE_EAST,

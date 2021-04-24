@@ -99,7 +99,7 @@
 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
 		<a href="<?= site_url("$role/Champion/31")?>"><img src=" <?= base_url('iconsChampions/imageCho\'Gath.png')?>"></a>
 		<br>
-		Cho\'Gath<br><br>&nbsp;
+		Cho'Gath<br><br>&nbsp;
 	</div>
 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
 		<a href="<?= site_url("$role/Champion/42")?>"><img src=" <?= base_url('iconsChampions/imageCorki.png')?>"></a>
@@ -255,7 +255,7 @@
 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
 		<a href="<?= site_url("$role/Champion/145")?>"><img src=" <?= base_url('iconsChampions/imageKai\'Sa.png')?>"></a>
 		<br>
-		Kai\'Sa<br><br>&nbsp;
+		Kai'Sa<br><br>&nbsp;
 	</div>
 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
 		<a href="<?= site_url("$role/Champion/429")?>"><img src=" <?= base_url('iconsChampions/imageKalista.png')?>"></a>
@@ -300,7 +300,7 @@
 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
 		<a href="<?= site_url("$role/Champion/121")?>"><img src=" <?= base_url('iconsChampions/imageKha\'Zix.png')?>"></a>
 		<br>
-		Kha\'Zix<br><br>&nbsp;
+		Kha'Zix<br><br>&nbsp;
 	</div>
 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
 		<a href="<?= site_url("$role/Champion/203")?>"><img src=" <?= base_url('iconsChampions/imageKindred.png')?>"></a>
@@ -317,7 +317,7 @@
 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
 		<a href="<?= site_url("$role/Champion/96")?>"><img src=" <?= base_url('iconsChampions/imageKog\'Maw.png')?>"></a>
 		<br>
-		Kog\'Maw<br><br>&nbsp;
+		Kog'Maw<br><br>&nbsp;
 	</div>
 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
 		<a href="<?= site_url("$role/Champion/7")?>"><img src=" <?= base_url('iconsChampions/imageLeBlanc.png')?>"></a>
@@ -486,7 +486,7 @@
 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
 		<a href="<?= site_url("$role/Champion/421")?>"><img src=" <?= base_url('iconsChampions/imageRek\'Sai.png')?>"></a>
 		<br>
-		Rek\'Sai<br><br>&nbsp;
+		Rek'Sai<br><br>&nbsp;
 	</div>
 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
 		<a href="<?= site_url("$role/Champion/526")?>"><img src=" <?= base_url('iconsChampions/imageRell.png')?>"></a>
@@ -694,7 +694,7 @@
 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
 		<a href="<?= site_url("$role/Champion/161")?>"><img src=" <?= base_url('iconsChampions/imageVel\'Koz.png')?>"></a>
 		<br>
-		Vel\'Koz<br><br>&nbsp;
+		Vel'Koz<br><br>&nbsp;
 	</div>
 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
 		<a href="<?= site_url("$role/Champion/254")?>"><img src=" <?= base_url('iconsChampions/imageVi.png')?>"></a>
@@ -799,3 +799,5 @@
 		Zyra<br><br>&nbsp;
 	</div>
 </div>
+
+

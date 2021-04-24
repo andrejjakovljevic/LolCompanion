@@ -22,6 +22,11 @@
             </div>
             <div class="container" style="background-color: rgba(100, 149, 237, 0.5); padding-bottom: 10px; border: 1pt solid darkred;">
             <?php foreach($quests as $quest) {
+                $attrStr = " ";
+                foreach($quest['attributes'] as $attr){
+                    $attrStr = $attrStr . '' . $attr->attributeKey;
+                    $attrStr = $attrStr. ': '. $attr->attributeValue ."<br>";
+                }
                 echo '
                 <div class = "row" style="padding-bottom: 5px; ' . ($quest['completed'] == 1 ? 'background-color: #aaaaff; color: #666666; ' : '') . '">
                     <div class = "col-lg-9 col-md-6 col-xs-12" >
@@ -31,15 +36,15 @@
                         <span>' . $quest['description'] . '</span> 
                     </div>
                     <div class="col-lg-3 col-md-6 col-xs-12" style="overflow-y: auto;">
-                        Champion: Xin Zhao<br>
-                        Role: Top<br>
-                        Kills: 6<br>
+                    '.
+                        $attrStr
+                    .'
                     </div>
                 </div>
                 <hr style="margin-bottom: 5px; margin-top: 0;">';
             }
             ?>
-                <div class = "row">
+<!--                <div class = "row">
                     <div class = "col-lg-9 col-md-6 col-xs-12" >
                         The Second Quest
                         <br>
@@ -51,6 +56,6 @@
                         Role: Jungle<br>
                         Kills: 100<br>
                     </div>
-                </div>
+                </div>-->
             </div>
             
