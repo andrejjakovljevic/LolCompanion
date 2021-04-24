@@ -8,6 +8,7 @@ use App\Models\QuestModel;
 use RiotAPI\LeagueAPI\LeagueAPI;
 use RiotAPI\Base\Definitions\Region;
 use App\Models\QuestAttributeModel;
+use RiotAPI\DataDragonAPI\DataDragonAPI;
 
 class LoggedUser extends BaseController
 {
@@ -129,6 +130,7 @@ class LoggedUser extends BaseController
     
 
 	private function getMatchHistory($summonerName) {
+            DataDragonAPI::initByCDN();
         $api = new LeagueAPI([
             LeagueAPI::SET_KEY    => 'RGAPI-752c2347-c8ee-4453-bbb8-cb25336bfd1d',
             LeagueAPI::SET_REGION => Region::EUROPE_EAST,
@@ -141,6 +143,8 @@ class LoggedUser extends BaseController
         $gameType = NULL;
         $gameMode = NULL;
         $ago = "";
+        $summ1 = "";
+        $summ2 = "";
 
         foreach ($matchlist as $match) {
             $url = "https://europe.api.riotgames.com/lol/match/v5/matches/EUN1_" . $match->gameId . "?api_key=RGAPI-752c2347-c8ee-4453-bbb8-cb25336bfd1d";
@@ -162,6 +166,20 @@ class LoggedUser extends BaseController
 
                 if ($matchO->info->participants[$i]->summonerName == $summonerName) {
                     $stats = $matchO->info->participants[$i];
+                    $summ1 = $api->getStaticSummonerSpell($stats->summoner1Id)->image->full;
+                    $summ2 = $api->getStaticSummonerSpell($stats->summoner2Id)->image->full;
+                    if ($stats->item0 == 0) $stats->item0 = "../slike/empty.png";
+                    else $stats->item0 = DataDragonAPI::getItemIconUrl($stats->item0);
+                    if ($stats->item1 == 0) $stats->item1 = "../slike/empty.png";
+                    else $stats->item1 = DataDragonAPI::getItemIconUrl($stats->item1);
+                    if ($stats->item2 == 0) $stats->item2 = "../slike/empty.png";
+                    else $stats->item2 = DataDragonAPI::getItemIconUrl($stats->item2);
+                    if ($stats->item3 == 0) $stats->item3 = "../slike/empty.png";
+                    else $stats->item3 = DataDragonAPI::getItemIconUrl($stats->item3);
+                    if ($stats->item4 == 0) $stats->item4 = "../slike/empty.png";
+                    else $stats->item4 = DataDragonAPI::getItemIconUrl($stats->item4);
+                    if ($stats->item5 == 0) $stats->item5 = "../slike/empty.png";
+                    else $stats->item5 = DataDragonAPI::getItemIconUrl($stats->item5);
                 }
             }
             if (++$count == 10)
@@ -170,7 +188,9 @@ class LoggedUser extends BaseController
                 'players' => $players,
                 'stats' => $stats,
                 'info' => $matchO->info,
-                'ago' => $ago_str
+                'ago' => $ago_str,
+                'summ1' => $summ1,
+                'summ2' => $summ2
             ]);
         }
         return ['matches' => $data];

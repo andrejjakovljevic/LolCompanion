@@ -57,14 +57,14 @@
                     </div>
                     <div class = "col-lg-1 col-md-6 col-xs-12" >
                         <img src="../iconsChampions/image' . $match['stats']->championName . '.png" style="height: 60px; padding: 2px; margin-top:20px">
-                        <img src="slike/Teleport.webp" style="height: 25px; padding: 2px; margin-right: 0px;">
-                        <img src="slike/Flash.webp" style="height: 25px; padding: 2px;">
+                        <img src="../iconsSummonerSpells/' . $match['summ1'] . '" style="height: 25px; padding: 2px; margin-right: 0px;">
+                        <img src="../iconsSummonerSpells/' . $match['summ2'] . '" style="height: 25px; padding: 2px;">
                     </div>
                     <div class = "col-lg-2 text-center">
                         <div style="margin-top: 20px;">
                             '. $match['stats']->kills . '/' . $match['stats']->deaths . '/' . $match['stats']->assists . '<br>
                             Level ' . $match['stats']->champLevel . ' <br>
-                            ' . $match['stats']->totalMinionsKilled + $match['stats']->neutralMinionsKilled . ' cs (' .
+                            ' . ($match['stats']->totalMinionsKilled + $match['stats']->neutralMinionsKilled) . ' cs (' .
                             number_format(($match['stats']->totalMinionsKilled + $match['stats']->neutralMinionsKilled) / $match['info']->gameDuration * 1000 * 60, 2) . ' cs/m)
                             <br>
                             ' . date("i", $match['info']->gameDuration / 1000) . ' min
@@ -72,17 +72,17 @@
                     </div>
                     <div class = "col-lg-2">
                         <div style="margin: 6px; margin-top:20px">
-                            <img src="slike/Guinsoo\'s_Rageblade_item_HD.webp" style="height: 30px;">
-                            <img src="slike/Guinsoo\'s_Rageblade_item_HD.webp" style="height: 30px;">
-                            <img src="slike/Guinsoo\'s_Rageblade_item_HD.webp" style="height: 30px;">
+                            <img src="' . $match['stats']->item0 . '" style="height: 30px;">
+                            <img src="' . $match['stats']->item1 . '" style="height: 30px;">
+                            <img src="' . $match['stats']->item2 . '" style="height: 30px;">
                         </div>
                         <div style="margin: 6px;">
-                            <img src="slike/Guinsoo\'s_Rageblade_item_HD.webp" style="height: 30px;">
-                            <img src="slike/Guinsoo\'s_Rageblade_item_HD.webp" style="height: 30px;">
-                            <img src="slike/Guinsoo\'s_Rageblade_item_HD.webp" style="height: 30px;">
+                            <img src="' . $match['stats']->item3 . '" style="height: 30px;">
+                            <img src="' . $match['stats']->item4 . '" style="height: 30px;">
+                            <img src="' . $match['stats']->item5 . '" style="height: 30px;">
                         </div>
                     </div>
-                    <div class = "col-lg-2">
+                    <div class = "col-lg-2" style="font-size:15px;">
                         <div>
                             <div style="margin: 1px;">
                                 <img src="../iconsChampions/image' . $match['players'][0]['champion'] . '.png" style="height: 15px;">
@@ -102,7 +102,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class = "col-lg-2">
+                    <div class = "col-lg-2" style="font-size:15px;">
                         <div>
                             <div style="margin: 1px;">
                                 <img src="../iconsChampions/image' . $match['players'][5]['champion'] . '.png" style="height: 15px;">
