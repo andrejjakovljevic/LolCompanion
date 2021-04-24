@@ -4,6 +4,7 @@
                     </div>
                 </div>
                 <div class="row text-center slike">
+				<div class="row text-center slike">
 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
 		<a href="<?= site_url("$role/Champion/266")?>"><img src=" <?= base_url('iconsChampions/imageAatrox.png')?>"></a>
 		<br>
@@ -50,7 +51,7 @@
 		Ashe<br><br>&nbsp;
 	</div>
 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-		<a href="<?= site_url("$role/Champion/136")?>"><img src=" <?= base_url('iconsChampions/imageAurelion Sol.png')?>"></a>
+		<a href="<?= site_url("$role/Champion/136")?>"><img src=" <?= base_url('iconsChampions/imageAurelionSol.png')?>"></a>
 		<br>
 		Aurelion Sol<br>&nbsp;
 	</div>
@@ -97,7 +98,7 @@
 		Cassiopeia<br><br>&nbsp;
 	</div>
 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-		<a href="<?= site_url("$role/Champion/31")?>"><img src=" <?= base_url('iconsChampions/imageCho\'Gath.png')?>"></a>
+		<a href="<?= site_url("$role/Champion/31")?>"><img src=" <?= base_url('iconsChampions/imageChoGath.png')?>"></a>
 		<br>
 		Cho'Gath<br><br>&nbsp;
 	</div>
@@ -117,7 +118,7 @@
 		Diana<br><br>&nbsp;
 	</div>
 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-		<a href="<?= site_url("$role/Champion/36")?>"><img src=" <?= base_url('iconsChampions/imageDr. Mundo.png')?>"></a>
+		<a href="<?= site_url("$role/Champion/36")?>"><img src=" <?= base_url('iconsChampions/imageDr.Mundo.png')?>"></a>
 		<br>
 		Dr. Mundo<br>&nbsp;
 	</div>
@@ -226,7 +227,7 @@
 		Janna<br><br>&nbsp;
 	</div>
 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-		<a href="<?= site_url("$role/Champion/59")?>"><img src=" <?= base_url('iconsChampions/imageJarvan IV.png')?>"></a>
+		<a href="<?= site_url("$role/Champion/59")?>"><img src=" <?= base_url('iconsChampions/imageJarvanIV.png')?>"></a>
 		<br>
 		Jarvan IV<br>&nbsp;
 	</div>
@@ -253,7 +254,7 @@
 </div>
 <div class="row text-center slike">
 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-		<a href="<?= site_url("$role/Champion/145")?>"><img src=" <?= base_url('iconsChampions/imageKai\'Sa.png')?>"></a>
+		<a href="<?= site_url("$role/Champion/145")?>"><img src=" <?= base_url('iconsChampions/imageKaiSa.png')?>"></a>
 		<br>
 		Kai'Sa<br><br>&nbsp;
 	</div>
@@ -298,7 +299,7 @@
 		Kennen<br><br>&nbsp;
 	</div>
 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-		<a href="<?= site_url("$role/Champion/121")?>"><img src=" <?= base_url('iconsChampions/imageKha\'Zix.png')?>"></a>
+		<a href="<?= site_url("$role/Champion/121")?>"><img src=" <?= base_url('iconsChampions/imageKhaZix.png')?>"></a>
 		<br>
 		Kha'Zix<br><br>&nbsp;
 	</div>
@@ -315,7 +316,7 @@
 </div>
 <div class="row text-center slike">
 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-		<a href="<?= site_url("$role/Champion/96")?>"><img src=" <?= base_url('iconsChampions/imageKog\'Maw.png')?>"></a>
+		<a href="<?= site_url("$role/Champion/96")?>"><img src=" <?= base_url('iconsChampions/imageKogMaw.png')?>"></a>
 		<br>
 		Kog'Maw<br><br>&nbsp;
 	</div>
@@ -325,7 +326,7 @@
 		LeBlanc<br><br>&nbsp;
 	</div>
 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-		<a href="<?= site_url("$role/Champion/64")?>"><img src=" <?= base_url('iconsChampions/imageLee Sin.png')?>"></a>
+		<a href="<?= site_url("$role/Champion/64")?>"><img src=" <?= base_url('iconsChampions/imageLeeSin.png')?>"></a>
 		<br>
 		Lee Sin<br>&nbsp;
 	</div>
@@ -377,12 +378,12 @@
 </div>
 <div class="row text-center slike">
 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-		<a href="<?= site_url("$role/Champion/11")?>"><img src=" <?= base_url('iconsChampions/imageMaster Yi.png')?>"></a>
+		<a href="<?= site_url("$role/Champion/11")?>"><img src=" <?= base_url('iconsChampions/imageMasterYi.png')?>"></a>
 		<br>
 		Master Yi<br>&nbsp;
 	</div>
 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-		<a href="<?= site_url("$role/Champion/21")?>"><img src=" <?= base_url('iconsChampions/imageMiss Fortune.png')?>"></a>
+		<a href="<?= site_url("$role/Champion/21")?>"><img src=" <?= base_url('iconsChampions/imageMissFortune.png')?>"></a>
 		<br>
 		Miss Fortune<br>&nbsp;
 	</div>
@@ -427,7 +428,7 @@
 		Nocturne<br><br>&nbsp;
 	</div>
 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-		<a href="<?= site_url("$role/Champion/20")?>"><img src=" <?= base_url('iconsChampions/imageNunu & Willump.png')?>"></a>
+		<a href="<?= site_url("$role/Champion/20")?>"><img src=" <?= base_url('iconsChampions/imageNunu&Willump.png')?>"></a>
 		<br>
 		Nunu & Willump
 	</div>
@@ -484,7 +485,7 @@
 		Rammus<br><br>&nbsp;
 	</div>
 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-		<a href="<?= site_url("$role/Champion/421")?>"><img src=" <?= base_url('iconsChampions/imageRek\'Sai.png')?>"></a>
+		<a href="<?= site_url("$role/Champion/421")?>"><img src=" <?= base_url('iconsChampions/imageRekSai.png')?>"></a>
 		<br>
 		Rek'Sai<br><br>&nbsp;
 	</div>
@@ -608,7 +609,7 @@
 		Syndra<br><br>&nbsp;
 	</div>
 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-		<a href="<?= site_url("$role/Champion/223")?>"><img src=" <?= base_url('iconsChampions/imageTahm Kench.png')?>"></a>
+		<a href="<?= site_url("$role/Champion/223")?>"><img src=" <?= base_url('iconsChampions/imageTahmKench.png')?>"></a>
 		<br>
 		Tahm Kench<br>&nbsp;
 	</div>
@@ -655,7 +656,7 @@
 		Tryndamere<br><br>&nbsp;
 	</div>
 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-		<a href="<?= site_url("$role/Champion/4")?>"><img src=" <?= base_url('iconsChampions/imageTwisted Fate.png')?>"></a>
+		<a href="<?= site_url("$role/Champion/4")?>"><img src=" <?= base_url('iconsChampions/imageTwistedFate.png')?>"></a>
 		<br>
 		Twisted Fate<br>&nbsp;
 	</div>
@@ -692,7 +693,7 @@
 		Veigar<br><br>&nbsp;
 	</div>
 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-		<a href="<?= site_url("$role/Champion/161")?>"><img src=" <?= base_url('iconsChampions/imageVel\'Koz.png')?>"></a>
+		<a href="<?= site_url("$role/Champion/161")?>"><img src=" <?= base_url('iconsChampions/imageVelKoz.png')?>"></a>
 		<br>
 		Vel'Koz<br><br>&nbsp;
 	</div>
@@ -742,7 +743,7 @@
 		Xerath<br><br>&nbsp;
 	</div>
 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-		<a href="<?= site_url("$role/Champion/5")?>"><img src=" <?= base_url('iconsChampions/imageXin Zhao.png')?>"></a>
+		<a href="<?= site_url("$role/Champion/5")?>"><img src=" <?= base_url('iconsChampions/imageXinZhao.png')?>"></a>
 		<br>
 		Xin Zhao<br>&nbsp;
 	</div>
@@ -799,5 +800,6 @@
 		Zyra<br><br>&nbsp;
 	</div>
 </div>
+
 
 
