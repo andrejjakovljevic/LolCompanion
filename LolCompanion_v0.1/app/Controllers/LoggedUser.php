@@ -138,14 +138,22 @@ class LoggedUser extends BaseController
         $matchlist = $api->getMatchlistByAccount($summoner->accountId);
         $data = [];
         $count = 0;
+        $gameType = NULL;
+        $gameMode = NULL;
+        $ago = "";
+
         foreach ($matchlist as $match) {
             $url = "https://europe.api.riotgames.com/lol/match/v5/matches/EUN1_" . $match->gameId . "?api_key=RGAPI-752c2347-c8ee-4453-bbb8-cb25336bfd1d";
             $matchO = json_decode($this->getHtml($url));
+            $ago = (time() - ($matchO->info->gameDuration + $matchO->info->gameStartTimestamp) / 1000) / 60;
+            if ($ago < 60)
+                $ago_str = number_format($ago, 0) . " min";
+            else if ($ago < 60 * 24)
+                $ago_str = number_format($ago / 60, 0) . " h";
+            else $ago_str = number_format($ago / 60 / 24, 0) . " d";
             $players = [];
-            $items = [];
-            $champion = "";
-            $summ1 = "";
-            $summ2 = "";
+            // var_dump($matchO);
+            // break;
             for ($i = 0; $i < 10; ++$i) {
                 array_push($players, [
                     'summonerName' => $matchO->info->participants[$i]->summonerName,
@@ -153,32 +161,16 @@ class LoggedUser extends BaseController
                 ]);
 
                 if ($matchO->info->participants[$i]->summonerName == $summonerName) {
-                    $ja = $matchO->info->participants[$i];
-                    $items = [
-                    'item0' => $ja->item0,
-                    'item1' => $ja->item1,
-                    'item2' => $ja->item2,
-                    'item3' => $ja->item3,
-                    'item4' => $ja->item4,
-                    'item5' => $ja->item5,
-                    'item6' => $ja->item6,
-                    ];
-                    $champion = $ja->championName;
-                    $summ1 = $ja->summoner1Id;
-                    $summ2 = $ja->summoner2Id;
+                    $stats = $matchO->info->participants[$i];
                 }
-                // var_dump($players);
-                // var_dump($matchO);
-                // echo "\n";
             }
             if (++$count == 10)
                 break;
             array_push($data, [
                 'players' => $players,
-                'items' => $items,
-                'champion' => $champion,
-                'summ1' => $summ1,
-                'summ2' => $summ2
+                'stats' => $stats,
+                'info' => $matchO->info,
+                'ago' => $ago_str
             ]);
         }
         return ['matches' => $data];

@@ -45,26 +45,29 @@
             foreach($matches as $match)
             {
                 echo '
-                <div class="row">
-                    <div class = "col-lg-1"></div>
-                    <div class = "col-lg-1 col-md-6 col-xs-12">
+                <div class="row" ' . ($match['stats']->win == 1 ? '' : 'style = "background-color: rgba(237, 149, 100, 0.5)"') . '>
+                    <div class = "col-lg-2 col-md-6 col-xs-12">
                         <div style="margin-top: 20px;">
-                            Clash <br>
-                            <span style="font-size: 10px;">10 days ago</span>
-                            <br>
-                            Victory <br>
+                            ' . $match['info']->gameType . '<br>' . $match['info']->gameMode . '<br>
+                            <span style=""> '. $match['ago'] . ' ago</span>
+                            <br>' .
+                            ($match['stats']->win == 1 ? 'Victory' : 'Defeat') .
+                            '<br>
                         </div>
                     </div>
                     <div class = "col-lg-1 col-md-6 col-xs-12" >
-                        <img src="../iconsChampions/image' . $match['champion'] . '.png" style="height: 60px; padding: 2px; margin-top:20px">
+                        <img src="../iconsChampions/image' . $match['stats']->championName . '.png" style="height: 60px; padding: 2px; margin-top:20px">
                         <img src="slike/Teleport.webp" style="height: 25px; padding: 2px; margin-right: 0px;">
                         <img src="slike/Flash.webp" style="height: 25px; padding: 2px;">
                     </div>
                     <div class = "col-lg-2 text-center">
                         <div style="margin-top: 20px;">
-                            5/1/15 <br>
-                            Level 18 <br>
-                            7 cs/m
+                            '. $match['stats']->kills . '/' . $match['stats']->deaths . '/' . $match['stats']->assists . '<br>
+                            Level ' . $match['stats']->champLevel . ' <br>
+                            ' . $match['stats']->totalMinionsKilled + $match['stats']->neutralMinionsKilled . ' cs (' .
+                            number_format(($match['stats']->totalMinionsKilled + $match['stats']->neutralMinionsKilled) / $match['info']->gameDuration * 1000 * 60, 2) . ' cs/m)
+                            <br>
+                            ' . date("i", $match['info']->gameDuration / 1000) . ' min
                         </div>
                     </div>
                     <div class = "col-lg-2">
@@ -119,7 +122,7 @@
                             </div>
                         </div>
                     </div>
-                </div> <hr>';
+                </div> <hr style="margin:0px;">';
             }
             ?>
             </div>
