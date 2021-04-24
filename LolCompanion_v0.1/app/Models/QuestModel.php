@@ -13,5 +13,5 @@ class QuestModel extends Model
 
     protected $returnType     = 'object';
 
-    protected $allowedFields = ['questId', 'description', 'title'];
+    protected $allowedFields = ['questId', 'description', 'title', 'image'];
 }

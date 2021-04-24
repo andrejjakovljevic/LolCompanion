@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\KorisnikModel;
+use App\Models\UserQuestModel;
+use App\Models\QuestModel;
 
 class LoggedUser extends BaseController
 {
@@ -63,24 +65,39 @@ class LoggedUser extends BaseController
 		return parent::champion($id, "LoggedUser");
 	}
         
-        public function Challenges(){
+        public function challenges(){
             echo view('template/header_loggedin', [
 				'role' => $this->session->get('user')->role,
 				'username' => $this->session->get('user')->summonerName
 			]);
-            echo view('pages/challenges', ['role' => $this->session->get('user')->role]);
-            $this->GetPoros();
-            //echo view('template/footer');
+            echo view('pages/challenges', $this->getChallenges());
+            echo view('template/footer');
         }
         
-        public function GetPoros(){
-            $model = new UserQuestModel();
-            $res = $model->like('name',$championName, "after");
-//            $res = $model->where('active', 1)
-//                   ->findAll();
-            $res = $model->findAll();
-            var_dump($res);
-            echo 'eeeeeeeeeeeee';
+        public function getChallenges(){
+            $uQModel = new UserQuestModel();
+            $qModel = new QuestModel();
+            $uQ = $uQModel->where('summonerName', $this->session->get('user')->summonerName)->findAll();
+            $poroUser = count($uQModel->where('summonerName', $this->session->get('user')->summonerName)->where('completed', 1)->findAll());
+            $poroTotal = count($qModel->findAll());
+
+
+            $data = [
+                'poroUser' => $poroUser,
+                'poroTotal' => $poroTotal,
+                'quests' => []
+            ];
+            foreach ($uQ as $userQuest) {
+                $quest = $qModel->find($userQuest->questId);
+                $dataQuest = [
+                    'title' => $quest->title,
+                    'description' => $quest->description,
+                    'image' => $quest->image,
+                    'completed' => $userQuest->completed
+                ];
+                array_push($data['quests'], $dataQuest);
+            }
+            return $data;
         }
     /*
 	public function champion($id, $role = "") {

@@ -13,5 +13,5 @@ class UserQuestModel extends Model
 
     protected $returnType     = 'object';
 
-    protected $allowedFields = ['questId', 'userId', 'completed'];
+    protected $allowedFields = ['questId', 'summonerName', 'completed'];
 }
