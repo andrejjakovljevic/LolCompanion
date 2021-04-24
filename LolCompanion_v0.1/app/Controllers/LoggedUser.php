@@ -18,7 +18,7 @@ class LoggedUser extends BaseController
         $data['role'] = $this->session->get('user')->role;
         $data['username'] = $this->session->get('user')->summonerName;
         echo view('template/header_loggedin',$data);
-        echo view('pages/index');
+        echo view('pages/index');   
         echo view('template/footer');
 	}
 
@@ -184,6 +184,7 @@ class LoggedUser extends BaseController
         return ['matches' => $data];
 	}
 
+
     public function profile() {
         echo view('template/header_loggedin', [
             'role' => $this->session->get('user')->role,
@@ -192,5 +193,24 @@ class LoggedUser extends BaseController
         echo view('pages/profile', $this->getMatchHistory($this->session->get('user')->summonerName));
         echo view('template/footer');
     }
+
+        
+        public function LiveGame()
+        {
+    
+             $api = new LeagueAPI([
+                LeagueAPI::SET_KEY    => 'RGAPI-752c2347-c8ee-4453-bbb8-cb25336bfd1d',
+                LeagueAPI::SET_REGION => Region::EUROPE_EAST,
+            ]);
+             
+            var_dump( $api->getSummonerByName($this->session->get('user')->summonerName));
+    
+             echo view('template/header_loggedin', [
+				'role' => $this->session->get('user')->role,
+				'username' => $this->session->get('user')->summonerName
+			]);
+            echo view('pages/live_game', $this->getChallenges());
+            echo view('template/footer');
+        }
 
 }

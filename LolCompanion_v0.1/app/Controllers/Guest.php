@@ -29,7 +29,11 @@ class Guest extends BaseController
             return $this->login('User doesn\'t exist');
         if($user->password!=$this->request->getVar('password'))
             return $this->login('Wrong password');
+        
+        
         $this->session->set('user', $user);
+        
+        
         return redirect()->to(site_url('LoggedUser'));
     }
 
