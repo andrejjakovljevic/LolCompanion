@@ -23,7 +23,7 @@
             <div class="container" style="background-color: rgba(100, 149, 237, 0.5); padding-bottom: 10px; border: 1pt solid darkred;">
             <?php foreach($quests as $quest) {
                 echo '
-                <div class = "row" style="color: #666666; padding-bottom: 5px; ' . ($quest['completed'] == 1 ? 'background-color: #aaaaff; ' : '') . '">
+                <div class = "row" style="padding-bottom: 5px; ' . ($quest['completed'] == 1 ? 'background-color: #aaaaff; color: #666666; ' : '') . '">
                     <div class = "col-lg-9 col-md-6 col-xs-12" >
                         ' . $quest['title'] . '
                         <br>
