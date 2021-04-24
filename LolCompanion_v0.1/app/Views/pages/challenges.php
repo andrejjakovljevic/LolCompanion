@@ -12,7 +12,7 @@
                 </div>
                 <div class = "col-lg-8 text-center naslov" style="padding-top: 0;padding-bottom: 25;">
                     <div class="progress" style="height: 100%;">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $poroUser?>" aria-valuemin="0" aria-valuemax="<?php echo $poroTotal?>" style="width:<?php echo 1.0 * $poroUser / $poroTotal?>">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $poroUser?>" aria-valuemin="0" aria-valuemax="<?php echo $poroTotal?>" style="width:<?php echo 1.0 * $poroUser / ($poroTotal == 0 ? 1 : $poroTotal) ?>">
                           <span style="color:black; font-size: 150%;"><?php echo $poroUser . '/' . $poroTotal . ' Poros' ?></span>
                         </div>
                     </div>
