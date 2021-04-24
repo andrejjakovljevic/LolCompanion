@@ -36,7 +36,7 @@
                             <li><a class="dropdown-item" href="<?= site_url("LoggedUser/profile") ?> "dummy_profile.html">Profile</a></li>
                             <li><a class="dropdown-item" href="<?= site_url("LoggedUser/changePassword") ?>">Change<br>password</a></li>
                             <?php if ($role == 0 || $role == 1)
-                                echo '<li><a class="dropdown-item" href="challenges_mod.html">All challenges</a></li>'
+                                echo '<li><a class="dropdown-item" href="' . site_url("Moderator/allChallenges") . '">All challenges</a></li>'
                             ?>
                             <?php if ($role == 0)
                                 echo  '<li><a class="dropdown-item" href="' . site_url("Admin") . '">Admin Panel</a></li>'
