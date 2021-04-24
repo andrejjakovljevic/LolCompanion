@@ -35,7 +35,10 @@
                     
                     <div class="col-lg-1 col-md-1 col-xs-2">
                         <div>
-                            <a href=""><img src="../slike/trash.png" style="height: 50px; margin-top: 10px"></img></a>
+                        <form method="post" action='. site_url("Moderator/deleteQuest") . '>
+                            <input type="hidden" id="questId" name="questId" value=" '. $quest['id'] .'">
+                            <input type="image" src="../slike/trash.png" style="height: 50px; margin-top: 10px" alt="delete"></input>
+                        </form>
                         </div>
                     </div>
                     

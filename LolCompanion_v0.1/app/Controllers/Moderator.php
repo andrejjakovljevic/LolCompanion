@@ -15,7 +15,7 @@ use RiotAPI\DataDragonAPI\DataDragonAPI;
 use JonnyW\PhantomJs\Client;
 use App\Models\QuestModel;
 use App\Models\QuestAttributeModel;
-
+use App\Models\UserQuestModel;
 
 class Moderator extends LoggedUser {
 
@@ -47,6 +47,7 @@ class Moderator extends LoggedUser {
 
         foreach ($Quests as $quest) {
             $dataQuest = [
+                'id' => $quest->questId,
                 'title' => $quest->title,
                 'description' => $quest->description,
                 'image' => $quest->image,
@@ -77,8 +78,22 @@ class Moderator extends LoggedUser {
             return $this->addQuest('One or more empty fields');
         }
         
-        return $this->addQuest("Res: " . $_POST['title'] . $_POST['description']. $_POST['imgurl']);
+        return $this->addQuest("Res: " . $_POST['title'] . $_POST['description']. $_POST['imgurl']. $_POST['champion']. $_POST['role']);
              
+    }
+    
+    public function deleteQuest(){
+        var_dump($_POST['questId']);
+        $qModel = new QuestModel();
+        
+        
+        $uqModel = new UserQuestModel();
+        $uqModel->where('questId', $_POST['questId'])->delete();
+        $attrModel = new QuestAttributeModel();
+        $attrModel->where('questId', $_POST['questId'])->delete();
+        
+        $qModel->delete($_POST['questId']);
+        return redirect()->to(site_url('Moderator/allChallenges'));
     }
 }
 
