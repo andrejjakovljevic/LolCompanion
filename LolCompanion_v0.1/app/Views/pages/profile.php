@@ -86,19 +86,19 @@
                         <div>
                             <div style="margin: 1px;">
                                 <img src="'. base_url('/iconsChampions/image' . $match['players'][0]['champion'] . '.png') . '"' . ' style="height: 15px;">
-                                ' . $match['players'][0]['summonerName'] . '
+                                <a href=' . site_url('LoggedUser/summoner/' . $match['players'][0]['summonerName']) . '>' . $match['players'][0]['summonerName'] . '</a>
                                 <br>
                                 <img src="'. base_url('/iconsChampions/image' . $match['players'][1]['champion'] . '.png') . '"' . ' style="height: 15px;">
-                                ' . $match['players'][1]['summonerName'] . '
+                                <a href=' . site_url('LoggedUser/summoner/' . $match['players'][1]['summonerName']) . '>' . $match['players'][1]['summonerName'] . '</a>
                                 <br>
                                 <img src="'. base_url('/iconsChampions/image' . $match['players'][2]['champion'] . '.png') . '"' . ' style="height: 15px;">
-                                ' . $match['players'][2]['summonerName'] . '
+                                <a href=' . site_url('LoggedUser/summoner/' . $match['players'][2]['summonerName']) . '>' . $match['players'][2]['summonerName'] . '</a>
                                 <br>
                                 <img src="'. base_url('/iconsChampions/image' . $match['players'][3]['champion'] . '.png') . '"' . ' style="height: 15px;">
-                                ' . $match['players'][3]['summonerName'] . '
+                                <a href=' . site_url('LoggedUser/summoner/' . $match['players'][3]['summonerName']) . '>' . $match['players'][3]['summonerName'] . '</a>
                                 <br>
                                 <img src="'. base_url('/iconsChampions/image' . $match['players'][4]['champion'] . '.png') . '"' . ' style="height: 15px;">
-                                ' . $match['players'][4]['summonerName'] . '
+                                <a href=' . site_url('LoggedUser/summoner/' . $match['players'][4]['summonerName']) . '>' . $match['players'][4]['summonerName'] . '</a>
                             </div>
                         </div>
                     </div>
@@ -106,19 +106,19 @@
                         <div>
                             <div style="margin: 1px;">
                                 <img src="'. base_url('/iconsChampions/image' . $match['players'][5]['champion'] . '.png') . '"' . ' style="height: 15px;">
-                                ' . $match['players'][5]['summonerName'] . '
+                                <a href=' . site_url('LoggedUser/summoner/' . $match['players'][5]['summonerName']) . '>' . $match['players'][5]['summonerName'] . '</a>
                                 <br>
                                 <img src="'. base_url('/iconsChampions/image' . $match['players'][6]['champion'] . '.png') . '"' . ' style="height: 15px;">
-                                ' . $match['players'][6]['summonerName'] . '
+                                <a href=' . site_url('LoggedUser/summoner/' . $match['players'][6]['summonerName']) . '>' . $match['players'][6]['summonerName'] . '</a>
                                 <br>
                                 <img src="'. base_url('/iconsChampions/image' . $match['players'][7]['champion'] . '.png') . '"' . ' style="height: 15px;">
-                                ' . $match['players'][7]['summonerName'] . '
+                                <a href=' . site_url('LoggedUser/summoner/' . $match['players'][7]['summonerName']) . '>' . $match['players'][7]['summonerName'] . '</a>
                                 <br>
                                 <img src="'. base_url('/iconsChampions/image' . $match['players'][8]['champion'] . '.png') . '"' . ' style="height: 15px;">
-                                ' . $match['players'][8]['summonerName'] . '
+                                <a href=' . site_url('LoggedUser/summoner/' . $match['players'][8]['summonerName']) . '>' . $match['players'][8]['summonerName'] . '</a>
                                 <br>
                                 <img src="'. base_url('/iconsChampions/image' . $match['players'][9]['champion'] . '.png') . '"' . ' style="height: 15px;">
-                                ' . $match['players'][9]['summonerName'] . '
+                                <a href=' . site_url('LoggedUser/summoner/' . $match['players'][9]['summonerName']) . '>' . $match['players'][9]['summonerName'] . '</a>
                             </div>
                         </div>
                     </div>
