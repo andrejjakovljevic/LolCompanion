@@ -37,7 +37,7 @@
             <div class="row naslov text-center">
                 <div class="col-lg-12">
                     Match History
-                    <img src="slike/Line.png" class="center" height="20px">
+                    <img src="../slike/Line.png" class="center" height="20px">
                 </div>
             </div>
             <div class="container" style="background-color: rgba(100, 149, 237, 0.5); margin-bottom: 30px; border: 1pt solid darkred;">
