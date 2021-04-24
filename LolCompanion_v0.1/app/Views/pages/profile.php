@@ -20,24 +20,24 @@
             <div class="row text-center">
                 <div class="col-lg-4">
                     <h3>Xin Zhao</h3>
-                    <img src="../slike/XinZhao_0.jpg" style="width: 90%;"><br>
+                    <img src="<?= base_url('/slike/XinZhao_0.jpg')?>" style="width: 90%;"><br>
                     50% in 18 games
                 </div>
                 <div class="col-lg-4">
                     <h3>Jinx</h3>
-                    <img src="../slike/Jinx_0.jpg" style="width: 90%;"><br>
+                    <img src="<?= base_url('/slike/Jinx_0.jpg')?>" style="width: 90%;"><br>
                     33% in 15 games
                 </div>
                 <div class="col-lg-4">
                     <h3>Jayce</h3>
-                    <img src="../slike/Jayce_0.jpg" style="width: 90%;"><br>
+                    <img src="<?= base_url('/slike/Jayce_0.jpg')?>" style="width: 90%;"><br>
                     40% in 12 games
                 </div>
             </div>
             <div class="row naslov text-center">
                 <div class="col-lg-12">
                     Match History
-                    <img src="../slike/Line.png" class="center" height="20px">
+                    <img src="<?= base_url('/slike/Line.png')?>" class="center" height="20px">
                 </div>
             </div>
             <div class="container" style="background-color: rgba(100, 149, 237, 0.5); margin-bottom: 30px; border: 1pt solid darkred;">
@@ -56,9 +56,9 @@
                         </div>
                     </div>
                     <div class = "col-lg-1 col-md-6 col-xs-12" >
-                        <img src="../iconsChampions/image' . $match['stats']->championName . '.png" style="height: 60px; padding: 2px; margin-top:20px">
-                        <img src="../iconsSummonerSpells/' . $match['summ1'] . '" style="height: 25px; padding: 2px; margin-right: 0px;">
-                        <img src="../iconsSummonerSpells/' . $match['summ2'] . '" style="height: 25px; padding: 2px;">
+                        <img src="'. base_url('/iconsChampions/image' . $match['stats']->championName . '.png') . '"' . ' style="height: 60px; padding: 2px; margin-top:20px">
+                        <img src="' .base_url('/iconsSummonerSpells/' . $match['summ1']) . '" style="height: 25px; padding: 2px; margin-right: 0px;">
+                        <img src="' .base_url('/iconsSummonerSpells/' . $match['summ2']) . '" style="height: 25px; padding: 2px;">
                     </div>
                     <div class = "col-lg-2 text-center">
                         <div style="margin-top: 20px;">
@@ -85,19 +85,19 @@
                     <div class = "col-lg-2" style="font-size:15px;">
                         <div>
                             <div style="margin: 1px;">
-                                <img src="../iconsChampions/image' . $match['players'][0]['champion'] . '.png" style="height: 15px;">
+                                <img src="'. base_url('/iconsChampions/image' . $match['players'][0]['champion'] . '.png') . '"' . ' style="height: 15px;">
                                 ' . $match['players'][0]['summonerName'] . '
                                 <br>
-                                <img src="../iconsChampions/image' . $match['players'][1]['champion'] . '.png" style="height: 15px;">
+                                <img src="'. base_url('/iconsChampions/image' . $match['players'][1]['champion'] . '.png') . '"' . ' style="height: 15px;">
                                 ' . $match['players'][1]['summonerName'] . '
                                 <br>
-                                <img src="../iconsChampions/image' . $match['players'][2]['champion'] . '.png" style="height: 15px;">
+                                <img src="'. base_url('/iconsChampions/image' . $match['players'][2]['champion'] . '.png') . '"' . ' style="height: 15px;">
                                 ' . $match['players'][2]['summonerName'] . '
                                 <br>
-                                <img src="../iconsChampions/image' . $match['players'][3]['champion'] . '.png" style="height: 15px;">
+                                <img src="'. base_url('/iconsChampions/image' . $match['players'][3]['champion'] . '.png') . '"' . ' style="height: 15px;">
                                 ' . $match['players'][3]['summonerName'] . '
                                 <br>
-                                <img src="../iconsChampions/image' . $match['players'][4]['champion'] . '.png" style="height: 15px;">
+                                <img src="'. base_url('/iconsChampions/image' . $match['players'][4]['champion'] . '.png') . '"' . ' style="height: 15px;">
                                 ' . $match['players'][4]['summonerName'] . '
                             </div>
                         </div>
@@ -105,19 +105,19 @@
                     <div class = "col-lg-2" style="font-size:15px;">
                         <div>
                             <div style="margin: 1px;">
-                                <img src="../iconsChampions/image' . $match['players'][5]['champion'] . '.png" style="height: 15px;">
+                                <img src="'. base_url('/iconsChampions/image' . $match['players'][5]['champion'] . '.png') . '"' . ' style="height: 15px;">
                                 ' . $match['players'][5]['summonerName'] . '
                                 <br>
-                                <img src="../iconsChampions/image' . $match['players'][6]['champion'] . '.png" style="height: 15px;">
+                                <img src="'. base_url('/iconsChampions/image' . $match['players'][6]['champion'] . '.png') . '"' . ' style="height: 15px;">
                                 ' . $match['players'][6]['summonerName'] . '
                                 <br>
-                                <img src="../iconsChampions/image' . $match['players'][7]['champion'] . '.png" style="height: 15px;">
+                                <img src="'. base_url('/iconsChampions/image' . $match['players'][7]['champion'] . '.png') . '"' . ' style="height: 15px;">
                                 ' . $match['players'][7]['summonerName'] . '
                                 <br>
-                                <img src="../iconsChampions/image' . $match['players'][8]['champion'] . '.png" style="height: 15px;">
+                                <img src="'. base_url('/iconsChampions/image' . $match['players'][8]['champion'] . '.png') . '"' . ' style="height: 15px;">
                                 ' . $match['players'][8]['summonerName'] . '
                                 <br>
-                                <img src="../iconsChampions/image' . $match['players'][9]['champion'] . '.png" style="height: 15px;">
+                                <img src="'. base_url('/iconsChampions/image' . $match['players'][9]['champion'] . '.png') . '"' . ' style="height: 15px;">
                                 ' . $match['players'][9]['summonerName'] . '
                             </div>
                         </div>

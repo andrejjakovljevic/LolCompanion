@@ -168,17 +168,17 @@ class LoggedUser extends BaseController
                     $stats = $matchO->info->participants[$i];
                     $summ1 = $api->getStaticSummonerSpell($stats->summoner1Id)->image->full;
                     $summ2 = $api->getStaticSummonerSpell($stats->summoner2Id)->image->full;
-                    if ($stats->item0 == 0) $stats->item0 = "../slike/empty.png";
+                    if ($stats->item0 == 0) $stats->item0 = base_url("/slike/empty.png");
                     else $stats->item0 = DataDragonAPI::getItemIconUrl($stats->item0);
-                    if ($stats->item1 == 0) $stats->item1 = "../slike/empty.png";
+                    if ($stats->item1 == 0) $stats->item1 = base_url("/slike/empty.png");
                     else $stats->item1 = DataDragonAPI::getItemIconUrl($stats->item1);
-                    if ($stats->item2 == 0) $stats->item2 = "../slike/empty.png";
+                    if ($stats->item2 == 0) $stats->item2 = base_url("/slike/empty.png");
                     else $stats->item2 = DataDragonAPI::getItemIconUrl($stats->item2);
-                    if ($stats->item3 == 0) $stats->item3 = "../slike/empty.png";
+                    if ($stats->item3 == 0) $stats->item3 = base_url("/slike/empty.png");
                     else $stats->item3 = DataDragonAPI::getItemIconUrl($stats->item3);
-                    if ($stats->item4 == 0) $stats->item4 = "../slike/empty.png";
+                    if ($stats->item4 == 0) $stats->item4 = base_url("/slike/empty.png");
                     else $stats->item4 = DataDragonAPI::getItemIconUrl($stats->item4);
-                    if ($stats->item5 == 0) $stats->item5 = "../slike/empty.png";
+                    if ($stats->item5 == 0) $stats->item5 = base_url("/slike/empty.png");
                     else $stats->item5 = DataDragonAPI::getItemIconUrl($stats->item5);
                 }
             }
@@ -206,6 +206,14 @@ class LoggedUser extends BaseController
         echo view('template/footer');
     }
 
+    public function summoner($summonerName) {
+        echo view('template/header_loggedin', [
+            'role' => $this->session->get('user')->role,
+            'username' => $this->session->get('user')->summonerName
+        ]);
+        echo view('pages/profile', $this->getMatchHistory($summonerName));
+        echo view('template/footer');
+    }
         
         public function LiveGame()
         {
