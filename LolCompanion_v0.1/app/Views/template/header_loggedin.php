@@ -33,7 +33,7 @@
                     <div class="btn-group">
                         <button type="button" style="background-color: #FF7070; border-color: #FF7070;" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><?php echo "$username" ?></button>
                         <ul class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
-                            <li><a class="dropdown-item" href="dummy_profile.html">Profile</a></li>
+                            <li><a class="dropdown-item" href="<?= site_url("LoggedUser/profile") ?> "dummy_profile.html">Profile</a></li>
                             <li><a class="dropdown-item" href="<?= site_url("LoggedUser/changePassword") ?>">Change<br>password</a></li>
                             <?php if ($role == 0 || $role == 1)
                                 echo '<li><a class="dropdown-item" href="' . site_url("Moderator/allChallenges") . '">All challenges</a></li>'
