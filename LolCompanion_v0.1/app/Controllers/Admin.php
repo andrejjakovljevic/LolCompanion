@@ -16,7 +16,7 @@ use JonnyW\PhantomJs\Client;
 
 
 
-class Admin extends LoggedUser {
+class Admin extends Moderator {
 
     public function index($msg = "") {
         echo view('template/header_loggedin', [
@@ -141,24 +141,4 @@ class Admin extends LoggedUser {
         }
     }
     
-    public function WexScrape(){
-        $httpClient = new \GuzzleHttp\Client();
-
-        $response = $httpClient->get('https://u.gg/lol/tier-list');
-
-        $htmlString = (string) $response->getBody();
-
-        // HTML is often wonky, this suppresses a lot of warnings
-        libxml_use_internal_errors(true);
-
-        $doc = new DOMDocument();
-        $doc->loadHTML($htmlString);
-
-        $xpath = new DOMXPath($doc);
-        
-        $links = $xpath->evaluate('//strong[@class="champion-name"]');
-        
-        var_dump(links);
-        return $this->index("skrejpuj me");
-    }
 }
