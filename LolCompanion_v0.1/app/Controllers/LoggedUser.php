@@ -75,7 +75,7 @@ class LoggedUser extends BaseController
             echo view('template/footer');
         }
         
-        private function getChallenges(){
+       private function getChallenges(){
             $uQModel = new UserQuestModel();
             $qModel = new QuestModel();
             $uQ = $uQModel->where('summonerName', $this->session->get('user')->summonerName)->findAll();
@@ -103,7 +103,7 @@ class LoggedUser extends BaseController
             return $data;
         }
         
-        private function getAttributes($idQ){
+        protected function getAttributes($idQ){
             $qAttrModel = new QuestAttributeModel();
             $attributes = $qAttrModel->where('questId', $idQ)->findAll();
             return $attributes;
