@@ -215,22 +215,22 @@ class LoggedUser extends BaseController
         echo view('template/footer');
     }
 
-        public function LiveGame()
-        {
-    
-             $api = new LeagueAPI([
-                LeagueAPI::SET_KEY    => 'RGAPI-752c2347-c8ee-4453-bbb8-cb25336bfd1d',
-                LeagueAPI::SET_REGION => Region::EUROPE_EAST,
-            ]);
-             
-            var_dump( $api->getSummonerByName($this->session->get('user')->summonerName));
-    
-             echo view('template/header_loggedin', [
-				'role' => $this->session->get('user')->role,
-				'username' => $this->session->get('user')->summonerName
-			]);
-            echo view('pages/live_game', $this->getChallenges());
-            echo view('template/footer');
-        }
+    public function liveGame()
+    {
+
+            $api = new LeagueAPI([
+            LeagueAPI::SET_KEY    => 'RGAPI-752c2347-c8ee-4453-bbb8-cb25336bfd1d',
+            LeagueAPI::SET_REGION => Region::EUROPE_EAST,
+        ]);
+            
+        var_dump( $api->getSummonerByName($this->session->get('user')->summonerName));
+
+            echo view('template/header_loggedin', [
+            'role' => $this->session->get('user')->role,
+            'username' => $this->session->get('user')->summonerName
+        ]);
+        echo view('pages/live_game', $this->getChallenges());
+        echo view('template/footer');
+    }
 
 }

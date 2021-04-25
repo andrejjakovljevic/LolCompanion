@@ -1,14 +1,14 @@
             <div class="row" style="padding: 1%;">
-                <div class="col-lg-12 text-center naslov" style="padding: 0px;">
+                <div class="col-12 text-center naslov" style="padding: 0px;">
                     Gindra <br>
                     <span style="color:goldenrod; font-size: 30px">GOLD IV</span> 
                 </div>
             </div>
             <div class = "row">
-                <div class="col-lg-2">
+                <div class="col-2">
 
                 </div>
-                <div class = "col-lg-8 text-center naslov" style="padding-top: 0;padding-bottom: 25;">
+                <div class = "col-8 text-center naslov" style="padding-top: 0;padding-bottom: 25;">
                     <div class="progress" style="height: 100%;">
                         <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">
                           <span style="color:black; font-size: 150%;">70/100 Poros</span>
@@ -18,24 +18,24 @@
                 </div>
             </div>
             <div class="row text-center">
-                <div class="col-lg-4">
+                <div class="col-4">
                     <h3>Xin Zhao</h3>
                     <img src="<?= base_url('/slike/XinZhao_0.jpg')?>" style="width: 90%;"><br>
                     50% in 18 games
                 </div>
-                <div class="col-lg-4">
+                <div class="col-4">
                     <h3>Jinx</h3>
                     <img src="<?= base_url('/slike/Jinx_0.jpg')?>" style="width: 90%;"><br>
                     33% in 15 games
                 </div>
-                <div class="col-lg-4">
+                <div class="col-4">
                     <h3>Jayce</h3>
                     <img src="<?= base_url('/slike/Jayce_0.jpg')?>" style="width: 90%;"><br>
                     40% in 12 games
                 </div>
             </div>
             <div class="row naslov text-center">
-                <div class="col-lg-12">
+                <div class="col-12">
                     Match History
                     <img src="<?= base_url('/slike/Line.png')?>" class="center" height="20px">
                 </div>
@@ -46,7 +46,7 @@
             {
                 echo '
                 <div class="row" ' . ($match['stats']->win == 1 ? '' : 'style = "background-color: rgba(237, 100, 100, 0.5)"') . '>
-                    <div class = "col-lg-2 col-md-6 col-xs-12">
+                    <div class = "col-lg-2 col-xs-3 text-center">
                         <div style="margin-top: 20px;">
                             ' . $match['info']->gameType . '<br>' . $match['info']->gameMode . '<br>
                             <span style=""> '. $match['ago'] . ' ago</span>
@@ -55,12 +55,12 @@
                             '<br>
                         </div>
                     </div>
-                    <div class = "col-lg-1 col-md-6 col-xs-12" >
+                    <div class = "col-lg-1 col-xs-2 text-center" >
                         <img src="'. base_url('/iconsChampions/image' . $match['stats']->championName . '.png') . '"' . ' style="height: 60px; padding: 2px; margin-top:20px">
                         <img src="' .base_url('/iconsSummonerSpells/' . $match['summ1']) . '" style="height: 25px; padding: 2px; margin-right: 0px;">
                         <img src="' .base_url('/iconsSummonerSpells/' . $match['summ2']) . '" style="height: 25px; padding: 2px;">
                     </div>
-                    <div class = "col-lg-2 text-center">
+                    <div class = "col-lg-2 col-xs-4 text-center">
                         <div style="margin-top: 20px;">
                             '. $match['stats']->kills . '/' . $match['stats']->deaths . '/' . $match['stats']->assists . '<br>
                             Level ' . $match['stats']->champLevel . ' <br>
@@ -70,7 +70,7 @@
                             ' . date("i", $match['info']->gameDuration / 1000) . ' min
                         </div>
                     </div>
-                    <div class = "col-lg-2">
+                    <div class = "col-lg-2 col-xs-4 text-center">
                         <div style="margin: 6px; margin-top:20px">
                             <img src="' . $match['stats']->item0 . '" style="height: 30px;">
                             <img src="' . $match['stats']->item1 . '" style="height: 30px;">
@@ -82,7 +82,7 @@
                             <img src="' . $match['stats']->item5 . '" style="height: 30px;">
                         </div>
                     </div>
-                    <div class = "col-lg-2" style="font-size:15px;">
+                    <div class = "col-lg-2 col-xs-5" style="font-size:15px;">
                         <div>
                             <div style="margin: 1px;">
                                 <img src="'. base_url('/iconsChampions/image' . $match['players'][0]['champion'] . '.png') . '"' . ' style="height: 15px;">
@@ -102,9 +102,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class = "col-lg-2" style="font-size:15px;">
+                    <div class = "col-lg-2 col-xs-5" style="font-size:15px">
                         <div>
-                            <div style="margin: 1px;">
+                            <div style="margin: 1px; float: right">
                                 <img src="'. base_url('/iconsChampions/image' . $match['players'][5]['champion'] . '.png') . '"' . ' style="height: 15px;">
                                 <a href=' . site_url('LoggedUser/summoner/' . $match['players'][5]['summonerName']) . '>' . $match['players'][5]['summonerName'] . '</a>
                                 <br>
