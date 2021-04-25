@@ -15,9 +15,10 @@ php i baza:
 - ~~baza osnovno~~
 - ~~login/logout~~
 - ~~signUp~~
-- ~~api key u bazu~~
 - ~~admin panel funkcije sa bazom~~
-- misije u bazu
-- poslednji mec u bazu
-- datadragon podaci u bazu ili uvek da se dovlaci?
-- sve ostale stranice sa podacima iz baze
+- ~~misije u bazu~~
+- ~~poslednji mec u bazu~~
+- ~~datadragon podaci u bazu ili uvek da se dovlaci~~ pola pola
+- sve ostale stranice sa podacima iz baze:
+    ~~live game~~
+    ~~match history~~

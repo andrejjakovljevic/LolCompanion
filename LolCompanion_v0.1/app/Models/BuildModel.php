@@ -13,5 +13,5 @@ class BuildModel extends Model
 
     protected $returnType     = 'object';
 
-    protected $allowedFields = ['id', 'name'];
+    protected $allowedFields = ['id', 'iditem1', 'iditem2', 'iditem3', 'idchamp'];
 }
