@@ -204,7 +204,7 @@ class LoggedUser extends BaseController
                 $matchO->info->gameMode = "ARAM";
             else if ($matchO->info->queueId == 700)
                 $matchO->info->gameMode = "CLASH";
-            else if ($matchO->queueId == 1020)
+            else if ($matchO->info->queueId == 1020)
                 $matchO->info->gameMode = "ONE FOR ALL";
             array_push($data, [
                 'players' => $players,
