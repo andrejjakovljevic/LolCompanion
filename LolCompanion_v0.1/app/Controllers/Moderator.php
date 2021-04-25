@@ -78,7 +78,44 @@ class Moderator extends LoggedUser {
             return $this->addQuest('One or more empty fields');
         }
         
-        return $this->addQuest("Res: " . $_POST['title'] . $_POST['description']. $_POST['imgurl']. $_POST['champion']. $_POST['role']);
+        $options =  json_decode($_POST['hiddenOptions']);
+        
+        
+        
+        $qModel = new QuestModel();
+        $qattrModel = new QuestAttributeModel();
+        $uQModel = new UserQuestModel();
+        
+        $quest = [
+            'description' => $_POST['description'],
+            'title' => $_POST['title'],
+            'image' => $_POST['imgurl']
+        ];
+        
+        $qModel->insert($quest);
+        $lastid = $qModel->getInsertID();
+        
+        $users = (new KorisnikModel())->findAll();
+        foreach($users as $user){
+            $userQ = [
+                'summonerName' => $user->summonerName,
+                'questId' => $lastid,
+                'completed' => 0
+            ];
+            $uQModel->insert($userQ);
+        }
+        
+        
+        foreach ($options as $option){
+            $attribute = [
+                'questId' => $lastid,
+                'attributeKey' => $option->key,
+                'attributeValue' => $option->val
+            ];
+            $qattrModel->insert($attribute);
+        }
+        
+        return $this->addQuest("Res: " . $_POST['title'] . $_POST['description']. $_POST['imgurl']. $_POST['champion']. $_POST['role'] . $_POST['hiddenOptions']);
              
     }
     

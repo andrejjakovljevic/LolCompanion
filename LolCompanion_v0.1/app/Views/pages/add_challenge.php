@@ -1,3 +1,4 @@
+<?php echo '<script src="'. base_url() . '/Scripts/challenge_adding.js"></script>'; ?>
 <form action="<?= site_url("Moderator/addQuestSubmit") ?>" method="POST">
     <div class="row">
         <div class="container">
@@ -44,10 +45,9 @@
                 <div class="col-lg-4">
                     <textarea cols="30" style="resize: none" rows="3" name="description"></textarea>
                 </div>
-                <form id="addOptionForm" action="<?= site_url("Moderator/addQuestAttribute")?>">
-                    <div class="col-lg-3">
+                    <div class="col-lg-3" id="divOptionKey">
                         <label>Option: </label>
-                        <select name="option" id="option">
+                        <select name="optionKey[]">
                             <option value="Prerequisite Id">Prerequisite Id</option>
                             <option value="Kills">Kills</option>
                             <option value="Gold">Gold</option>
@@ -58,15 +58,15 @@
                             <option value="First blood">First blood</option>
                             <option value="Multikill">Multikill</option>
                         </select>
+                        
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-2" id="divOptionVal">
                         <label>Value:</label>
-                        <input type="text" size = 5>
+                            <input type="text" size = 5 name="optionVal[]">
                     </div>
                     <div class="col-lg-1">
-                        <input type="submit" name="Add" value="Add option" form="addOptionForm">
+                       <?php echo '<input type="button" name="addOption" value="Add option" onclick="test()">' ; ?>
                     </div>
-                </form>
             </div>
             <br>
             <div class="row">
@@ -86,6 +86,7 @@
             </div>
         </div>
     </div>
+    <input type="hidden" id="hiddenOptions" name="hiddenOptions">
 </form>
 <div style="color:red; text-align: center;">
                         <?php echo "$msg"?>

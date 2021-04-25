@@ -9,7 +9,7 @@ class UserQuestModel extends Model
     protected $table      = 'userquest';
     protected $primaryKey = '(questId,userId)';
 
-    // protected $useAutoIncrement = false;  ?
+    protected $useAutoIncrement = true; 
 
     protected $returnType     = 'object';
 

@@ -9,7 +9,7 @@ class QuestModel extends Model
     protected $table      = 'quest';
     protected $primaryKey = 'questId';
 
-    // protected $useAutoIncrement = false;  ?
+    protected $useAutoIncrement = true; 
 
     protected $returnType     = 'object';
 
