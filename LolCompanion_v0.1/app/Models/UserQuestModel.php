@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class UserQuestModel extends Model
 {
     protected $table      = 'userquest';
-    protected $primaryKey = '(questId,userId)';
+    protected $primaryKey = '(questId,summonerName)';
 
     protected $useAutoIncrement = true; 
 
