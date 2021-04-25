@@ -1,5 +1,5 @@
-<div class = "row">
-                <div class = "col-lg-12 text-center naslov" style="padding: 0; font-weight: normal;">
+                <div class = "row">
+                    <div class = "col-lg-12 text-center naslov" style="padding: 0; font-weight: normal;">
                     Challenges
                 </div>
                 
@@ -20,7 +20,7 @@
                 </div>
                 <img src="<?= base_url('slike/Line.png') ?>" class="center" height="20px">
             </div>
-            <div class="container" style="background-color: rgba(100, 149, 237, 0.5); padding-bottom: 10px; border: 1pt solid darkred;">
+            <div class="container" style="background-color: rgba(100, 149, 237, 0.5); margin-bottom: 10px; border: 1pt solid darkred;">
             <?php foreach($quests as $quest) {
                 $attrStr = " ";
                 foreach($quest['attributes'] as $attr){
@@ -35,7 +35,7 @@
                         <img src="' . $quest['image'] . '" style="height: 60px;float: left; padding-right: 10px; padding-top: 2px;">
                         <span>' . $quest['description'] . '</span> 
                     </div>
-                    <div class="col-lg-3 col-md-6 col-xs-12" style="overflow-y: auto;">
+                    <div class="col-lg-3 col-md-6 col-xs-12" style="height: 100px; overflow-y: auto;">
                     '.
                         $attrStr
                     .'
