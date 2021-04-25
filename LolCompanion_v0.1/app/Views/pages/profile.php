@@ -45,8 +45,8 @@
             foreach($matches as $match)
             {
                 echo '
-                <div class="row" ' . ($match['stats']->win == 1 ? '' : 'style = "background-color: rgba(237, 100, 100, 0.5)"') . '>
-                    <div class = "col-lg-2 col-sm-3 col-3 text-center">
+                <div class="row" style = "background-color: ' . ($match['stats']->win == 1 ? 'rgba(100, 149, 237, 0.5)' : 'rgba(237, 100, 100, 0.5)"') . ';">
+                    <div class = "col-lg-2 col-sm-3 col-xs-3 text-center">
                         <div style="margin-top: 20px;">
                             ' . $match['info']->gameMode . '<br>
                             <span style=""> '. $match['ago'] . ' ago</span>
@@ -55,12 +55,12 @@
                             '<br>
                         </div>
                     </div>
-                    <div class = "col-lg-1 col-sm-2 col-2 text-center" >
+                    <div class = "col-lg-1 col-sm-2 col-xs-2 text-center" >
                         <img src="'. base_url('/iconsChampions/image' . $match['stats']->championName . '.png') . '"' . ' style="height: 60px; padding: 2px; margin-top:20px">
                         <img src="' .base_url('/iconsSummonerSpells/' . $match['summ1']) . '" style="height: 25px; padding: 2px; margin-right: 0px;">
                         <img src="' .base_url('/iconsSummonerSpells/' . $match['summ2']) . '" style="height: 25px; padding: 2px;">
                     </div>
-                    <div class = "col-lg-2 col-sm-3 col-3 text-center">
+                    <div class = "col-lg-2 col-sm-3 col-xs-3 text-center">
                         <div style="margin-top: 20px;">
                             '. $match['stats']->kills . '/' . $match['stats']->deaths . '/' . $match['stats']->assists . '<br>
                             Level ' . $match['stats']->champLevel . ' <br>
@@ -70,7 +70,7 @@
                             ' . date("i", $match['info']->gameDuration / 1000) . ' min
                         </div>
                     </div>
-                    <div class = "col-lg-2 col-sm-4 col-4 text-center">
+                    <div class = "col-lg-2 col-sm-4 col-xs-4 text-center">
                         <div style="margin: 6px; margin-top:20px">
                             <img src="' . $match['stats']->item0 . '" style="height: 30px;">
                             <img src="' . $match['stats']->item1 . '" style="height: 30px;">
@@ -82,7 +82,7 @@
                             <img src="' . $match['stats']->item5 . '" style="height: 30px;">
                         </div>
                     </div>
-                    <div class = "col-lg-2 col-sm-6 col-6" style="font-size:14px;">
+                    <div class = "col-lg-2 col-sm-4 col-xs-4" style="font-size:14px;">
                         <div>
                             <div style="margin: 1px;">
                                 <img src="'. base_url('/iconsChampions/image' . $match['players'][0]['champion'] . '.png') . '"' . ' style="height: 15px;">
@@ -102,7 +102,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class = "col-lg-2 col-sm-6 col-6" style="font-size:14px">
+                    <div class = "col-lg-2 col-sm-4 col-xs-4" style="font-size:14px">
                         <div>
                             <div class = "sm-right" style="margin: 1px;">
                                 <img src="'. base_url('/iconsChampions/image' . $match['players'][5]['champion'] . '.png') . '"' . ' style="height: 15px;">
@@ -122,7 +122,8 @@
                             </div>
                         </div>
                     </div>
-                </div> <hr style="margin:0px;">';
+                </div>
+                <hr style="margin:0px; width: 100%;">';
             }
             ?>
             </div>

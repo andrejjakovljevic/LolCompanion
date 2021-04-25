@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 25, 2021 at 03:05 PM
+-- Generation Time: Apr 25, 2021 at 04:12 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -258,6 +258,7 @@ CREATE TABLE IF NOT EXISTS `korisnik` (
   `password` varchar(100) NOT NULL,
   `email` varchar(50) NOT NULL,
   `lastGamePlayed` int(11) DEFAULT NULL,
+  `role` int(11) NOT NULL,
   PRIMARY KEY (`summonerName`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -265,10 +266,10 @@ CREATE TABLE IF NOT EXISTS `korisnik` (
 -- Dumping data for table `korisnik`
 --
 
-INSERT INTO `korisnik` (`summonerName`, `password`, `email`, `lastGamePlayed`) VALUES
-('GINDRA', '123', 'gindra@gindra.ac.bg.rs', NULL),
-('Sensei God', '123', 'andrej@andrej.ec.bf.rs', NULL),
-('wdaw', '123', 'a@a.a', NULL);
+INSERT INTO `korisnik` (`summonerName`, `password`, `email`, `lastGamePlayed`, `role`) VALUES
+('GINDRA', '123', 'gindra@gindra.ac.bg.rs', NULL, 0),
+('Sensei God', '123', 'andrej@andrej.ec.bf.rs', NULL, 0),
+('wdaw', '123', 'a@a.a', NULL, 2);
 
 -- --------------------------------------------------------
 
