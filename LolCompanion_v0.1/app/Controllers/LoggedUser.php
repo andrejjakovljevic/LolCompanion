@@ -232,13 +232,8 @@ class LoggedUser extends BaseController
         echo view('template/header_loggedin', [
             'role' => $this->session->get('user')->role,
             'username' => $this->session->get('user')->summonerName
-<<<<<<< Updated upstream
         ]);
         echo view('pages/profile', $this->getMatchHistoryV5($summonerName));
-=======
-        ]); 
-        echo view('pages/profile', $this->getMatchHistory($summonerName));
->>>>>>> Stashed changes
         echo view('template/footer');
     }
 
