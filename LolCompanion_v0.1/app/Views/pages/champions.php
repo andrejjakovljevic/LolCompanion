@@ -28,7 +28,7 @@
 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
 		<a href="<?= site_url("$role/Champion/32")?>"><img src=" <?= base_url('iconsChampions/imageAmumu.png')?>"></a>
 		<br>
-		Amumu<br><br>&nbsp;
+	Amumu<br><br>&nbsp;
 	</div>
 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
 		<a href="<?= site_url("$role/Champion/34")?>"><img src=" <?= base_url('iconsChampions/imageAnivia.png')?>"></a>
@@ -98,7 +98,7 @@
 		Cassiopeia<br><br>&nbsp;
 	</div>
 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-		<a href="<?= site_url("$role/Champion/31")?>"><img src=" <?= base_url('iconsChampions/imageChoGath.png')?>"></a>
+		<a href="<?= site_url("$role/Champion/31")?>"><img src=" <?= base_url('iconsChampions/imageChogath.png')?>"></a>
 		<br>
 		Cho'Gath<br><br>&nbsp;
 	</div>
@@ -254,7 +254,7 @@
 </div>
 <div class="row text-center slike">
 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-		<a href="<?= site_url("$role/Champion/145")?>"><img src=" <?= base_url('iconsChampions/imageKaiSa.png')?>"></a>
+		<a href="<?= site_url("$role/Champion/145")?>"><img src=" <?= base_url('iconsChampions/imageKaisa.png')?>"></a>
 		<br>
 		Kai'Sa<br><br>&nbsp;
 	</div>
@@ -299,7 +299,7 @@
 		Kennen<br><br>&nbsp;
 	</div>
 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-		<a href="<?= site_url("$role/Champion/121")?>"><img src=" <?= base_url('iconsChampions/imageKhaZix.png')?>"></a>
+		<a href="<?= site_url("$role/Champion/121")?>"><img src=" <?= base_url('iconsChampions/imageKhazix.png')?>"></a>
 		<br>
 		Kha'Zix<br><br>&nbsp;
 	</div>
@@ -316,7 +316,7 @@
 </div>
 <div class="row text-center slike">
 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-		<a href="<?= site_url("$role/Champion/96")?>"><img src=" <?= base_url('iconsChampions/imageKogMaw.png')?>"></a>
+		<a href="<?= site_url("$role/Champion/96")?>"><img src=" <?= base_url('iconsChampions/imageKogmaw.png')?>"></a>
 		<br>
 		Kog'Maw<br><br>&nbsp;
 	</div>
@@ -693,7 +693,7 @@
 		Veigar<br><br>&nbsp;
 	</div>
 	<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-		<a href="<?= site_url("$role/Champion/161")?>"><img src=" <?= base_url('iconsChampions/imageVelKoz.png')?>"></a>
+		<a href="<?= site_url("$role/Champion/161")?>"><img src=" <?= base_url('iconsChampions/imageVelkoz.png')?>"></a>
 		<br>
 		Vel'Koz<br><br>&nbsp;
 	</div>

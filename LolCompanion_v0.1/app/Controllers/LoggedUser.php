@@ -192,6 +192,20 @@ class LoggedUser extends BaseController
             if ($summ1 == 15)
                 continue;
             if (!property_exists($matchO, 'info')) continue;
+            if ($matchO->info->queueId == 400)
+                $matchO->info->gameMode = "DRAFT";
+            else if ($matchO->info->queueId == 420)
+                $matchO->info->gameMode = "RANKED";
+            else if ($matchO->info->queueId == 430)
+                $matchO->info->gameMode = "BLIND";
+            else if ($matchO->info->queueId == 440)
+                $matchO->info->gameMode = "FLEX";
+            else if ($matchO->info->queueId == 450)
+                $matchO->info->gameMode = "ARAM";
+            else if ($matchO->info->queueId == 700)
+                $matchO->info->gameMode = "CLASH";
+            else if ($matchO->queueId == 1020)
+                $matchO->info->gameMode = "ONE FOR ALL";
             array_push($data, [
                 'players' => $players,
                 'stats' => $stats,
@@ -210,7 +224,7 @@ class LoggedUser extends BaseController
             'role' => $this->session->get('user')->role,
             'username' => $this->session->get('user')->summonerName
         ]);
-        echo view('pages/profile', $this->getMatchHistory($this->session->get('user')->summonerName));
+        echo view('pages/profile', $this->getMatchHistoryV5($this->session->get('user')->summonerName));
         echo view('template/footer');
     }
 
