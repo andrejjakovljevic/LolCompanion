@@ -101,6 +101,23 @@ class LoggedUser extends BaseController
                     'completed' => $userQuest->completed,
                     'attributes' => $this->getAttributes($quest->questId)
                 ];
+                //var_dump($dataQuest['attributes']);
+                $preReq = false;
+                foreach($dataQuest['attributes'] as $atr){
+                    if($atr->attributeKey == 'Prerequisite Id'){
+                        $questRequired = $atr->attributeValue;
+                        $preReq = $atr->questId;
+                    }   
+                }
+                // quest has a prerequisite quest
+                if($preReq != false){ 
+                    // get the prerequisite quest and check if its completed by this user
+                    $preReQuest = $uQModel->where('questId', $preReq)->where('summonerName', $this->session->get('user')->summonerName)->find();
+                    if($preReQuest[0]->completed == 0) continue; 
+                }
+                
+                 
+                $dataQuest['attributes'];
                 array_push($data['quests'], $dataQuest);
             }
             return $data;
