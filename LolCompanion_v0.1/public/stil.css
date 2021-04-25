@@ -145,3 +145,9 @@ hr{
 td{
     line-height: 50px;
 }
+
+@media (max-width: 992px) {
+  .sm-right {
+    float: right;
+  }
+}

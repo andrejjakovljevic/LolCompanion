@@ -132,7 +132,7 @@ class LoggedUser extends BaseController
 	private function getMatchHistory($summonerName) {
             DataDragonAPI::initByCDN();
         $api = new LeagueAPI([
-            LeagueAPI::SET_KEY    => 'RGAPI-752c2347-c8ee-4453-bbb8-cb25336bfd1d',
+            LeagueAPI::SET_KEY    => 'RGAPI-1721c44e-ea77-4425-9a3a-55d598c0a3a3',
             LeagueAPI::SET_REGION => Region::EUROPE_EAST,
         ]);
 
@@ -147,7 +147,7 @@ class LoggedUser extends BaseController
         $summ2 = "";
 
         foreach ($matchlist as $match) {
-            $url = "https://europe.api.riotgames.com/lol/match/v5/matches/EUN1_" . $match->gameId . "?api_key=RGAPI-752c2347-c8ee-4453-bbb8-cb25336bfd1d";
+            $url = "https://europe.api.riotgames.com/lol/match/v5/matches/EUN1_" . $match->gameId . "?api_key=RGAPI-1721c44e-ea77-4425-9a3a-55d598c0a3a3";
             $matchO = json_decode($this->getHtml($url));
             $ago = (time() - ($matchO->info->gameDuration + $matchO->info->gameStartTimestamp) / 1000) / 60;
             if ($ago < 60)
@@ -219,7 +219,7 @@ class LoggedUser extends BaseController
     {
 
             $api = new LeagueAPI([
-            LeagueAPI::SET_KEY    => 'RGAPI-752c2347-c8ee-4453-bbb8-cb25336bfd1d',
+            LeagueAPI::SET_KEY    => 'RGAPI-1721c44e-ea77-4425-9a3a-55d598c0a3a3',
             LeagueAPI::SET_REGION => Region::EUROPE_EAST,
         ]);
             
