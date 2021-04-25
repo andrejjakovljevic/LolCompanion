@@ -223,22 +223,14 @@ class LoggedUser extends BaseController
         echo view('template/footer');
     }
 
-    public function liveGame()
+    public function getLiveGame($userName)
     {
-
-            $api = new LeagueAPI([
-            LeagueAPI::SET_KEY    => 'RGAPI-15966e6c-4e1d-4880-827e-dffbacbe3836',
-            LeagueAPI::SET_REGION => Region::EUROPE_EAST,
-        ]);
-            
-        var_dump( $api->getSummonerByName($this->session->get('user')->summonerName));
-
-            echo view('template/header_loggedin', [
-            'role' => $this->session->get('user')->role,
-            'username' => $this->session->get('user')->summonerName
-        ]);
-        echo view('pages/live_game', $this->getChallenges());
-        echo view('template/footer');
+        $url = "https://eun1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" . $userName . "?api_key=RGAPI-1721c44e-ea77-4425-9a3a-55d598c0a3a3";
+        $user = json_decode($this->getHtml($url));
+        $userId = $user->id;
+        $matchUrl = "https://eun1.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/" . $userId . "?api_key=RGAPI-1721c44e-ea77-4425-9a3a-55d598c0a3a3";
+        $match = json_decode($this->getHtml($matchUrl));
+        var_dump($match);
     }
 
 	private function getMatchHistory($summonerName) {

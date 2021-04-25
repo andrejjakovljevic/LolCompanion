@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 24, 2021 at 01:00 PM
+-- Generation Time: Apr 25, 2021 at 03:05 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -38,11 +38,17 @@ CREATE TABLE IF NOT EXISTS `builds` (
   `winrate` double NOT NULL,
   `pickrate` double NOT NULL,
   `lane` varchar(45) NOT NULL,
+  `perk0` int(11) DEFAULT NULL,
+  `perk1` int(11) DEFAULT NULL,
+  `perk2` int(11) DEFAULT NULL,
+  `perk3` int(11) DEFAULT NULL,
+  `perk4` int(11) DEFAULT NULL,
+  `perk5` int(11) DEFAULT NULL,
+  `attrperk0` int(11) DEFAULT NULL,
+  `attrperk1` int(11) DEFAULT NULL,
+  `attrperk2` int(11) DEFAULT NULL,
   `id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `iditems_idx` (`iditem1`),
-  KEY `fk2_iditems_idx` (`iditem2`),
-  KEY `fk3_iditems_idx` (`iditem3`),
   KEY `fk_idchamps_idx` (`idhchamp`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -243,19 +249,6 @@ INSERT INTO `global` (`name`, `value`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `items`
---
-
-DROP TABLE IF EXISTS `items`;
-CREATE TABLE IF NOT EXISTS `items` (
-  `id` int(11) NOT NULL,
-  `name` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `korisnik`
 --
 
@@ -264,7 +257,7 @@ CREATE TABLE IF NOT EXISTS `korisnik` (
   `summonerName` varchar(40) NOT NULL,
   `password` varchar(100) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `role` int(11) NOT NULL,
+  `lastGamePlayed` int(11) DEFAULT NULL,
   PRIMARY KEY (`summonerName`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -272,10 +265,10 @@ CREATE TABLE IF NOT EXISTS `korisnik` (
 -- Dumping data for table `korisnik`
 --
 
-INSERT INTO `korisnik` (`summonerName`, `password`, `email`, `role`) VALUES
-('GINDRA', '123', 'gindra@gindra.ac.bg.rs', 0),
-('Sensei God', '123', 'andrej@andrej.ec.bf.rs', 0),
-('wdaw', '123', 'a@a.a', 2);
+INSERT INTO `korisnik` (`summonerName`, `password`, `email`, `lastGamePlayed`) VALUES
+('GINDRA', '123', 'gindra@gindra.ac.bg.rs', NULL),
+('Sensei God', '123', 'andrej@andrej.ec.bf.rs', NULL),
+('wdaw', '123', 'a@a.a', NULL);
 
 -- --------------------------------------------------------
 
@@ -289,7 +282,6 @@ CREATE TABLE IF NOT EXISTS `plays` (
   `idchamp` int(11) NOT NULL,
   `winrate` double NOT NULL,
   `games_played` int(11) NOT NULL,
-  `role` int(11) DEFAULT NULL,
   KEY `fk_korisnik_idx` (`summonername`),
   KEY `fk_champion_idx` (`idchamp`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -302,19 +294,19 @@ CREATE TABLE IF NOT EXISTS `plays` (
 
 DROP TABLE IF EXISTS `quest`;
 CREATE TABLE IF NOT EXISTS `quest` (
-  `questId` int(11) NOT NULL,
+  `questId` int(11) NOT NULL AUTO_INCREMENT,
   `description` text NOT NULL,
   `title` varchar(50) NOT NULL,
   `image` varchar(300) NOT NULL,
   PRIMARY KEY (`questId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `quest`
 --
 
 INSERT INTO `quest` (`questId`, `description`, `title`, `image`) VALUES
-(0, 'The first quest is a very good quest. Play Xin top.', 'The First Questic', '../slike/dummyQuestPic.jpg');
+(1, 'The first quest is a very good quest. Play Xin top.', 'The First Questic', '../slike/dummyQuestPic.jpg');
 
 -- --------------------------------------------------------
 
@@ -324,22 +316,13 @@ INSERT INTO `quest` (`questId`, `description`, `title`, `image`) VALUES
 
 DROP TABLE IF EXISTS `questattributes`;
 CREATE TABLE IF NOT EXISTS `questattributes` (
-  `attributeId` int(11) NOT NULL,
+  `attributeId` int(11) NOT NULL AUTO_INCREMENT,
   `questId` int(11) NOT NULL,
   `attributeKey` varchar(50) NOT NULL,
   `attributeValue` varchar(50) NOT NULL,
   PRIMARY KEY (`attributeId`),
   KEY `fk_quest_idx` (`questId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `questattributes`
---
-
-INSERT INTO `questattributes` (`attributeId`, `questId`, `attributeKey`, `attributeValue`) VALUES
-(0, 0, 'champion', 'Xin Zhao'),
-(1, 0, 'role', 'Top'),
-(2, 0, 'kills', '5');
 
 -- --------------------------------------------------------
 
@@ -354,15 +337,8 @@ CREATE TABLE IF NOT EXISTS `userquest` (
   `completed` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`summonerName`,`questId`),
   KEY `fk_summoner_idx` (`summonerName`),
-  KEY `fk_quest_idx` (`questId`)
+  KEY `fk_questquest_idx` (`questId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `userquest`
---
-
-INSERT INTO `userquest` (`summonerName`, `questId`, `completed`) VALUES
-('GINDRA', 0, 0);
 
 --
 -- Constraints for dumped tables
@@ -372,30 +348,27 @@ INSERT INTO `userquest` (`summonerName`, `questId`, `completed`) VALUES
 -- Constraints for table `builds`
 --
 ALTER TABLE `builds`
-  ADD CONSTRAINT `fk_champion` FOREIGN KEY (`idhchamp`) REFERENCES `champions` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_item1` FOREIGN KEY (`iditem1`) REFERENCES `items` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_item2` FOREIGN KEY (`iditem2`) REFERENCES `items` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_item3` FOREIGN KEY (`iditem3`) REFERENCES `items` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_champion` FOREIGN KEY (`idhchamp`) REFERENCES `champions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `plays`
 --
 ALTER TABLE `plays`
-  ADD CONSTRAINT `fk_champ` FOREIGN KEY (`idchamp`) REFERENCES `champions` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_summoner` FOREIGN KEY (`summonername`) REFERENCES `korisnik` (`summonerName`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_champ` FOREIGN KEY (`idchamp`) REFERENCES `champions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_summoner` FOREIGN KEY (`summonername`) REFERENCES `korisnik` (`summonerName`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `questattributes`
 --
 ALTER TABLE `questattributes`
-  ADD CONSTRAINT `fk_quest` FOREIGN KEY (`questId`) REFERENCES `quest` (`questId`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_quest` FOREIGN KEY (`questId`) REFERENCES `quest` (`questId`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `userquest`
 --
 ALTER TABLE `userquest`
-  ADD CONSTRAINT `fk_questquest` FOREIGN KEY (`questId`) REFERENCES `quest` (`questId`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_sumquest` FOREIGN KEY (`summonerName`) REFERENCES `korisnik` (`summonerName`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_quest_quest` FOREIGN KEY (`questId`) REFERENCES `quest` (`questId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_sumquest` FOREIGN KEY (`summonerName`) REFERENCES `korisnik` (`summonerName`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
