@@ -232,19 +232,96 @@ class LoggedUser extends BaseController
         echo view('template/header_loggedin', [
             'role' => $this->session->get('user')->role,
             'username' => $this->session->get('user')->summonerName
+<<<<<<< Updated upstream
         ]);
         echo view('pages/profile', $this->getMatchHistoryV5($summonerName));
+=======
+        ]); 
+        echo view('pages/profile', $this->getMatchHistory($summonerName));
+>>>>>>> Stashed changes
         echo view('template/footer');
     }
 
-    public function getLiveGame($userName)
+    public function LiveGame($userName)
     {
-        $url = "https://eun1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" . $userName . "?api_key=RGAPI-1721c44e-ea77-4425-9a3a-55d598c0a3a3";
+        $apiKey="RGAPI-1721c44e-ea77-4425-9a3a-55d598c0a3a3";
+        
+        $url = "https://eun1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" . $userName . "?api_key=". $apiKey;
         $user = json_decode($this->getHtml($url));
+        //var_dump($user);
         $userId = $user->id;
-        $matchUrl = "https://eun1.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/" . $userId . "?api_key=RGAPI-1721c44e-ea77-4425-9a3a-55d598c0a3a3";
+        $matchUrl = "https://eun1.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/" . $userId . "?api_key=". $apiKey;
+        //var_dump($this->getHtml($matchUrl));
         $match = json_decode($this->getHtml($matchUrl));
-        var_dump($match);
+        //var_dump($match->participants[0]->summonerName);
+        //var_dump($match);
+        
+        $leagueUrl="https://eun1.api.riotgames.com/lol/league/v4/entries/by-summoner/" . $userId . "?api_key=". $apiKey;
+        $league = json_decode($this->getHtml($leagueUrl));
+        
+        //var_dump($leagueUrl);
+        //var_dump($league->tier);
+        //echo $match->participants[0]->summonerName;
+        /*$players=[
+                'summoner11' => ['name'=> $match->participants[0]->summonerName ],
+                'summoner12' => ['name'=>'nest'],
+            
+                ];*/
+        
+        $dArray=[];
+        $champArray=[];
+        for ($i=0; $i<10; $i++)
+        {
+            $lUrl="https://eun1.api.riotgames.com/lol/league/v4/entries/by-summoner/" . $match->participants[$i]->summonerId . "?api_key=". $apiKey;
+            $l=json_decode($this->getHtml($lUrl));
+            //var_dump($l[0]->tier." ".$l[0]->rank);
+            
+            //var_dump($lUrl);
+            array_push($dArray, $l[0]->tier." ".$l[0]->rank);
+            
+            
+            $champId=$match->participants[$i]->championId;
+            
+            DataDragonAPI::initByCDN();
+            $api = new LeagueAPI([
+            LeagueAPI::SET_KEY    => 'RGAPI-1721c44e-ea77-4425-9a3a-55d598c0a3a3',
+            LeagueAPI::SET_REGION => Region::EUROPE_EAST,
+            ]);
+            
+            $champion = $api->getStaticChampion($champId)->name;
+            array_push($champArray, $champion);
+            
+            var_dump($champion);
+            
+            
+            echo "\n";
+        }
+        //echo dArray;
+        //var_dump($dArray);
+        $players=[
+                'summoner11' => ['name' => $match->participants[0]->summonerName,  'div'=> $dArray[0],  'champ'=>$champArray[0]],
+                'summoner12' => ['name' => $match->participants[1]->summonerName,  'div'=> $dArray[1],  'champ'=>$champArray[1]],
+                'summoner13' => ['name' => $match->participants[2]->summonerName,  'div'=> $dArray[2],  'champ'=>$champArray[2]],
+                'summoner14' => ['name' => $match->participants[3]->summonerName,  'div'=> $dArray[3],  'champ'=>$champArray[3]],
+                'summoner15' => ['name' => $match->participants[4]->summonerName,  'div'=> $dArray[4],  'champ'=>$champArray[4]],
+                'summoner21' => ['name' => $match->participants[5]->summonerName,  'div'=> $dArray[5],  'champ'=>$champArray[5]],
+                'summoner22' => ['name' => $match->participants[6]->summonerName,  'div'=> $dArray[6],  'champ'=>$champArray[6]],
+                'summoner23' => ['name' => $match->participants[7]->summonerName,  'div'=> $dArray[7],  'champ'=>$champArray[7]],
+                'summoner24' => ['name' => $match->participants[8]->summonerName,  'div'=> $dArray[8],  'champ'=>$champArray[8]],
+                'summoner25' => ['name' => $match->participants[9]->summonerName,  'div'=> $dArray[9],  'champ'=>$champArray[9]],
+                ];
+        
+        echo view('template/header_loggedin', [
+            'role' => $this->session->get('user')->role,
+            'username' => $this->session->get('user')->summonerName
+        ]);
+        
+        
+        //array_push($niz1, [ 'name' =>  ] )
+        //echo view('pages/live_game', );
+        //echo view('pages/profile', $this->getMatchHistory($summonerName));
+        echo view('pages/live_game', ['names'=>$players]);
+        echo view('template/footer');
     }
 
 	private function getMatchHistory($summonerName) {
