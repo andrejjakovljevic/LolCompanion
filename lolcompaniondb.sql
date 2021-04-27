@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Apr 25, 2021 at 04:12 PM
+-- Generation Time: Apr 27, 2021 at 12:14 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -338,7 +338,7 @@ CREATE TABLE IF NOT EXISTS `userquest` (
   `completed` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`summonerName`,`questId`),
   KEY `fk_summoner_idx` (`summonerName`),
-  KEY `fk_questquest_idx` (`questId`)
+  KEY `fk_quest_quest_idx` (`questId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -369,7 +369,7 @@ ALTER TABLE `questattributes`
 --
 ALTER TABLE `userquest`
   ADD CONSTRAINT `fk_quest_quest` FOREIGN KEY (`questId`) REFERENCES `quest` (`questId`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_sumquest` FOREIGN KEY (`summonerName`) REFERENCES `korisnik` (`summonerName`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_summoner_quest` FOREIGN KEY (`summonerName`) REFERENCES `korisnik` (`summonerName`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
