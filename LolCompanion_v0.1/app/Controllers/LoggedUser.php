@@ -148,14 +148,17 @@ class LoggedUser extends BaseController
 
 	private function getMatchHistoryV5($summonerName) {
             DataDragonAPI::initByCDN();
+
+        $key = "RGAPI-15966e6c-4e1d-4880-827e-dffbacbe3836";
+
         $api = new LeagueAPI([
-            LeagueAPI::SET_KEY    => 'RGAPI-1721c44e-ea77-4425-9a3a-55d598c0a3a3',
+            LeagueAPI::SET_KEY    => $key,
             LeagueAPI::SET_REGION => Region::EUROPE_EAST,
         ]);
 
 
         $summoner = $api->getSummonerByName($summonerName);
-        $url = "https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/" . $summoner->puuid . "/ids?start=0&count=20&api_key=RGAPI-1721c44e-ea77-4425-9a3a-55d598c0a3a3";
+        $url = "https://europe.api.riotgames.com/lol/match/v5/matches/by-puuid/" . $summoner->puuid . "/ids?start=0&count=20&api_key=" . $key;
         $matchlist = json_decode($this->getHtml($url));
         $data = [];
         $count = 0;
@@ -166,7 +169,7 @@ class LoggedUser extends BaseController
         $summ2 = "";
 
         foreach ($matchlist as $match) {
-            $url = "https://europe.api.riotgames.com/lol/match/v5/matches/" . $match . "?api_key=RGAPI-1721c44e-ea77-4425-9a3a-55d598c0a3a3";
+            $url = "https://europe.api.riotgames.com/lol/match/v5/matches/" . $match . "?api_key=" . $key;
             $matchO = json_decode($this->getHtml($url));
             if (!property_exists($matchO, 'info')) continue;
             $ago = (time() - ($matchO->info->gameDuration + $matchO->info->gameStartTimestamp) / 1000) / 60;
@@ -235,14 +238,48 @@ class LoggedUser extends BaseController
         return ['matches' => $data];
 	}
 
+    private function divToColor($div) {
+        if ($div == 'IRON')
+            return '#606060';
+        else if ($div == 'BRONZE')
+            return '#a06020';
+        else if ($div == 'SILVER')
+            return '#a0a0a0';
+        else if ($div == 'GOLD')
+            return '#ffff00';
+        else if ($div == 'PLATINUM')
+            return '#808080';
+        else if ($div == 'DIAMOND')
+            return '#5050d0';
+        return '#000000';
+    }
 
     public function profile() {
+        $summonerName = $this->session->get('user')->summonerName;
         echo view('template/header_loggedin', [
             'role' => $this->session->get('user')->role,
-            'username' => $this->session->get('user')->summonerName
+            'username' => $summonerName
         ]);
-        echo view('pages/profile', $this->getMatchHistoryV5($this->session->get('user')->summonerName));
+        echo view('pages/profile', [
+            'matches' => $this->getMatchHistory($summonerName),
+            'name' => $summonerName,
+            'division' => $this->getDivision($summonerName)
+        ]);
         echo view('template/footer');
+    }
+
+    private function getDivision($summonerName) {
+        $api = new LeagueAPI([
+            LeagueAPI::SET_KEY    => 'RGAPI-15966e6c-4e1d-4880-827e-dffbacbe3836',
+            LeagueAPI::SET_REGION => Region::EUROPE_EAST,
+        ]);
+        $summoner = $api->getSummonerByName($summonerName);
+        $divs = $api->getLeagueEntriesForSummoner($summoner->id);
+        foreach ($divs as $div) {
+            if ($div->queueType == 'RANKED_SOLO_5x5')
+                return '<span style="color: '. $this->divToColor($div->tier) . '; font-size: 30px">' . $div->tier . ' ' . $div->rank . '</span>';
+        }
+        return '<span style="color: #000000; font-size: 30px"> UNRANKED </span>';
     }
 
     public function summoner($summonerName) {
@@ -250,7 +287,11 @@ class LoggedUser extends BaseController
             'role' => $this->session->get('user')->role,
             'username' => $this->session->get('user')->summonerName
         ]);
-        echo view('pages/profile', $this->getMatchHistoryV5($summonerName));
+        echo view('pages/summoner', [
+            'matches' => $this->getMatchHistory($summonerName),
+            'name' => $summonerName,
+            'division' => $this->getDivision($summonerName),
+        ]);
         echo view('template/footer');
     }
 
@@ -339,7 +380,7 @@ class LoggedUser extends BaseController
 	private function getMatchHistory($summonerName) {
             DataDragonAPI::initByCDN();
         $api = new LeagueAPI([
-            LeagueAPI::SET_KEY    => 'RGAPI-1721c44e-ea77-4425-9a3a-55d598c0a3a3',
+            LeagueAPI::SET_KEY    => 'RGAPI-15966e6c-4e1d-4880-827e-dffbacbe3836',
             LeagueAPI::SET_REGION => Region::EUROPE_EAST,
         ]);
 
@@ -355,9 +396,7 @@ class LoggedUser extends BaseController
 
         $count = 0;
         foreach ($matchlist as $match) {
-            if ($count % 20 == 19)
-                sleep(1);
-            if (++$count > 90)
+            if (++$count == 10)
                 break;
             $matchO = $api->getMatch($match->gameId);
             $ago = (time() - ($matchO->gameDuration + $matchO->gameCreation) / 1000) / 60;
@@ -423,6 +462,7 @@ class LoggedUser extends BaseController
                 'info' => $info
             ]);
         }
-        return ['matches' => $data];
+        return $data;
 	}
+
 }

@@ -4,36 +4,6 @@
                     <?php echo $division ?>
                 </div>
             </div>
-            <div class = "row">
-                <div class="col-2">
-
-                </div>
-                <div class = "col-8 text-center naslov" style="padding-top: 0;padding-bottom: 25;">
-                    <div class="progress" style="height: 100%;">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">
-                          <span style="color:black; font-size: 150%;">70/100 Poros</span>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-            <div class="row text-center">
-                <div class="col-4">
-                    <h3>Xin Zhao</h3>
-                    <img src="<?= base_url('/slike/XinZhao_0.jpg')?>" style="width: 90%;"><br>
-                    50% in 18 games
-                </div>
-                <div class="col-4">
-                    <h3>Jinx</h3>
-                    <img src="<?= base_url('/slike/Jinx_0.jpg')?>" style="width: 90%;"><br>
-                    33% in 15 games
-                </div>
-                <div class="col-4">
-                    <h3>Jayce</h3>
-                    <img src="<?= base_url('/slike/Jayce_0.jpg')?>" style="width: 90%;"><br>
-                    40% in 12 games
-                </div>
-            </div>
             <div class="row naslov text-center">
                 <div class="col-12">
                     Match History
