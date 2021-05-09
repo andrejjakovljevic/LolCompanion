@@ -256,6 +256,7 @@ class LoggedUser extends BaseController
 
     public function profile() {
         $summonerName = $this->session->get('user')->summonerName;
+        $this->getMostPlayed($summonerName);
         echo view('template/header_loggedin', [
             'role' => $this->session->get('user')->role,
             'username' => $summonerName
@@ -464,5 +465,34 @@ class LoggedUser extends BaseController
         }
         return $data;
 	}
+
+    private function getMostPlayed($summonerName) {
+        $api = new LeagueAPI([
+            LeagueAPI::SET_KEY    => 'RGAPI-15966e6c-4e1d-4880-827e-dffbacbe3836',
+            LeagueAPI::SET_REGION => Region::EUROPE_EAST,
+        ]);
+
+        $summoner = $api->getSummonerByName($summonerName);
+        $matchlist = $api->getMatchListByAccount($summoner->accountId)->matches;
+        $count = [];
+        $last = $matchlist[99]->timestamp;
+        /* TODO: use dd api for max id */
+        for ($i = 0; $i < 1000; ++$i)
+            array_push($count, 0);
+        foreach($matchlist as $match) {
+            if($match->queue == 420)
+                ++$count[(int) $match->champion];
+        }
+        $champ = [];
+        $games = [];
+        for ($i = 0; $i < 3; ++$i) {
+            array_push($champ, array_search(max($count),$count));
+            if ($count[$champ[$i]] == 0)
+                return [];
+            array_push($games, $count[$champ[$i]]);
+            $count[$champ[$i]] = 0;
+        }
+        var_dump($last);
+    }
 
 }
