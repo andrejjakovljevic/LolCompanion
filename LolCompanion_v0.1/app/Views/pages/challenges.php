@@ -12,7 +12,7 @@
                 </div>
                 <div class = "col-lg-8 text-center naslov" style="padding-top: 0;padding-bottom: 25;">
                     <div class="progress" style="height: 100%;">
-                        <div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $poroUser?>" aria-valuemin="0" aria-valuemax="<?php echo $poroTotal?>" style="width:<?php echo 1.0 * $poroUser / ($poroTotal == 0 ? 1 : $poroTotal) ?>">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="<?php echo $poroUser?>" aria-valuemin="0" aria-valuemax="<?php echo $poroTotal?>" style="width:<?php echo 100.0 * $poroUser / ($poroTotal == 0 ? 1 : $poroTotal) ?>%">
                           <span style="color:black; font-size: 150%;"><?php echo $poroUser . '/' . $poroTotal . ' Poros' ?></span>
                         </div>
                     </div>
@@ -22,7 +22,7 @@
             </div>
             <div class="container" style="background-color: rgba(100, 149, 237, 0.5); marging-bottom: 10px; border: 1pt solid darkred;">
             <?php foreach($quests as $quest) {
-                $attrStr = " ";
+                $attrStr = "id: " . $quest['id'] . '<br>';
                 foreach($quest['attributes'] as $attr){
                     $attrStr = $attrStr . '' . $attr->attributeKey;
                     $attrStr = $attrStr. ': '. $attr->attributeValue ."<br>";

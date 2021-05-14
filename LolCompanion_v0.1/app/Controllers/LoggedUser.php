@@ -95,6 +95,7 @@ class LoggedUser extends BaseController
             foreach ($uQ as $userQuest) {
                 $quest = $qModel->find($userQuest->questId);
                 $dataQuest = [
+                    'id' => $userQuest->questId,
                     'title' => $quest->title,
                     'description' => $quest->description,
                     'image' => $quest->image,
@@ -103,21 +104,24 @@ class LoggedUser extends BaseController
                 ];
                 //var_dump($dataQuest['attributes']);
                 $preReq = false;
+                $questRequired = null;
                 foreach($dataQuest['attributes'] as $atr){
                     if($atr->attributeKey == 'Prerequisite Id'){
                         $questRequired = $atr->attributeValue;
                         $preReq = $atr->questId;
+                        break;
                     }   
                 }
                 // quest has a prerequisite quest
                 if($preReq != false){ 
                     // get the prerequisite quest and check if its completed by this user
-                    $preReQuest = $uQModel->where('questId', $preReq)->where('summonerName', $this->session->get('user')->summonerName)->find();
-                    if($preReQuest[0]->completed == 0) continue; 
+                    $preReQuest = $uQModel->where('questId', $questRequired)->where('summonerName', $this->session->get('user')->summonerName)->find();
+                    if($preReQuest[0]->completed == 0)
+                        continue; 
                 }
                 
                  
-                $dataQuest['attributes'];
+                // $dataQuest['attributes'];
                 array_push($data['quests'], $dataQuest);
             }
             return $data;
@@ -296,17 +300,21 @@ class LoggedUser extends BaseController
         echo view('template/footer');
     }
 
-    public function LiveGame($userName)
+    public function LiveGame()
     {
-        $apiKey="RGAPI-1721c44e-ea77-4425-9a3a-55d598c0a3a3";
-        
+        $apiKey="RGAPI-f6023851-6214-421d-bdf7-7747359cb368";
+        $userName = $this->session->get('user')->summonerName;
         $url = "https://eun1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" . $userName . "?api_key=". $apiKey;
         $user = json_decode($this->getHtml($url));
-        //var_dump($user);
+        var_dump($user);
         $userId = $user->id;
         $matchUrl = "https://eun1.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/" . $userId . "?api_key=". $apiKey;
         //var_dump($this->getHtml($matchUrl));
         $match = json_decode($this->getHtml($matchUrl));
+        if($match == null){
+            var_dump("NO LIVE GAME CURRENTLY");
+            return index();
+        }
         //var_dump($match->participants[0]->summonerName);
         //var_dump($match);
         
