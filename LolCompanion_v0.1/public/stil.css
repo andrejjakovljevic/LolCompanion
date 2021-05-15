@@ -84,6 +84,11 @@ h1
     font-weight: bold;
 }
 
+.runes img
+{
+    margin: 10px;
+}
+
 .champions
 {
     font-family: 'Syne Mono', monospace;
