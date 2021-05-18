@@ -588,7 +588,7 @@ class LoggedUser extends BaseController
                 if ($plays[(int) $match->champion] == NULL) {
                     $plays[(int) $match->champion] = (object) [
                         'summonername' => $summonerName,
-                        'idChamp' => (int) $match->champion,
+                        'idchamp' => (int) $match->champion,
                         'games_won' => 0,
                         'games_played' => 0
                     ];
@@ -633,7 +633,6 @@ class LoggedUser extends BaseController
             array_push($games, $count[$champ[$i]]);
             $count[$champ[$i]] = 0;
         }
-
         $wins = [];
         for ($i = 0; $i < 3; ++$i) {
             array_push($wins, 0);
