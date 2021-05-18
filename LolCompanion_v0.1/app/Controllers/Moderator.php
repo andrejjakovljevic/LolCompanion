@@ -105,6 +105,22 @@ class Moderator extends LoggedUser {
             $uQModel->insert($userQ);
         }
         
+        if($_POST['champion'] != null && $_POST != ""){
+            $attribute = [
+                'questId' => $lastid,
+                'attributeKey' => 'champion',
+                'attributeValue' => $_POST['champion']
+            ];
+            $qattrModel->insert($attribute);
+        }
+        if($_POST['role'] != null && $_POST != ""){
+            $attribute = [
+                'questId' => $lastid,
+                'attributeKey' => 'role',
+                'attributeValue' => $_POST['role']
+            ];
+            $qattrModel->insert($attribute);
+        }
         if($options != null){
             foreach ($options as $option){
             $attribute = [

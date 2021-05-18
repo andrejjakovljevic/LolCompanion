@@ -93,7 +93,6 @@ class LoggedUser extends BaseController
             $poroUser = count($uQModel->where('summonerName', $this->session->get('user')->summonerName)->where('completed', 1)->findAll());
             $poroTotal = count($qModel->findAll());
 
-            var_dump($uQ);
             $data = [
                 'poroUser' => $poroUser,
                 'poroTotal' => $poroTotal,
@@ -260,7 +259,7 @@ class LoggedUser extends BaseController
         else if ($div == 'GOLD')
             return '#ffff00';
         else if ($div == 'PLATINUM')
-            return '#808080';
+            return '#58C9B9';
         else if ($div == 'DIAMOND')
             return '#5050d0';
         return '#000000';
@@ -626,86 +625,69 @@ class LoggedUser extends BaseController
     }
 
     // 
-    public function questsProgress($matchlist, $quests, $summonerName = "GINDRA"){
+    public function questsProgress($api, $matchO, $quests, $summonerName){
+        
         $lastGamePlayedts = (new KorisnikModel())->find($summonerName)->lastGamePlayed;
         $qAttrModel = new QuestAttributeModel();
-        
+        $uqModel = new UserQuestModel();
         $currTime = time();
+       
+        $game_ts = $matchO->gameCreation;
         
-        DataDragonAPI::initByCDN();
-        $api = new LeagueAPI([
-            LeagueAPI::SET_KEY    =>  GlobalModel::getApiKey(),
-            LeagueAPI::SET_REGION => Region::EUROPE_EAST,
-        ]);
+        // Check quests only for these gamemodes
+        if ($matchO->queueId == 400)
+            $type = "DRAFT";
+        else if ($matchO->queueId == 420)
+            $type = "RANKED";
+        else if ($matchO->queueId == 430)
+            $type = "BLIND";
+        else if ($matchO->queueId == 440)
+            $type = "FLEX";
+        else return;
 
-        $summoner = $api->getSummonerByName($summonerName);
-        //$matchlist = $api->getMatchListByAccount($summoner->accountId)->matches;
-        $count = 0;
-        foreach ($matchlist as $match) {
-            if (++$count == 10)
-                break;
-            $matchO = $api->getMatch($match->gameId);
-            $game_ts = $matchO->gameCreation;
-            
-            // Check quests only for these gamemodes
-            if ($matchO->queueId == 400)
-                $type = "DRAFT";
-            else if ($matchO->queueId == 420)
-                $type = "RANKED";
-            else if ($matchO->queueId == 430)
-                $type = "BLIND";
-            else if ($matchO->queueId == 440)
-                $type = "FLEX";
-            else continue;
-            
-            // only check games with timestamp after lastGamePlayed
-            if($game_ts < $lastGamePlayedts) continue;
-            $gameDuration = $matchO->gameDuration;
-            
-            var_dump($game_ts);
-            for ($i = 0; $i < 10; ++$i) {
-                if($matchO->participantIdentities[$matchO->participants[$i]->participantId - 1]->player->summonerName != $summonerName)
-                    continue;
-                
-                $champion = $api->getStaticChampion($matchO->participants[$i]->championId)->name;
+        // only check games with timestamp after lastGamePlayed
+        if($game_ts < $lastGamePlayedts) return;
+        $gameDuration = $matchO->gameDuration;
+        
+        var_dump($game_ts);
+        for ($i = 0; $i < 10; ++$i) {
+            if($matchO->participantIdentities[$matchO->participants[$i]->participantId - 1]->player->summonerName != $summonerName)
+                continue;
 
-                $part = $matchO->participants[$i];
-                $stats = $part->stats;
-                
-                $stats->championName = $api->getStaticChampion($matchO->participants[$i]->championId)->name;
-                var_dump($stats);
-                $goldEarned = $stats->goldEarned;
-                $cs = $stats->totalMinionsKilled + $stats->neutralMinionsKilled;
-                $firstTower = $stats->firstTowerAssist;
-                $goldPerMin = $goldEarned / ($gameDuration / 60);
-                break;  
+            $champion = $api->getStaticChampion($matchO->participants[$i]->championId)->name;
+            $part = $matchO->participants[$i];
+            $stats = $part->stats;
+            
+            $stats->championName = $api->getStaticChampion($matchO->participants[$i]->championId)->name;
+            var_dump($stats);
+            $goldEarned = $stats->goldEarned;
+            $cs = $stats->totalMinionsKilled + $stats->neutralMinionsKilled;
+            $firstTower = $stats->firstTowerAssist;
+            $goldPerMin = $goldEarned / ($gameDuration / 60);
+            //var_dump($stats->getData());
+            break;  
+        }
+
+        foreach($quests as $quest){
+            $qAttributes = $qAttrModel->where("questId", $quest->questId).find();
+            $numOfNotCompleted = count($qAttributes);
+            foreach($qAttributes as $qattribute){
+                if($qattribute-key == "champion" && $qattribute->val == $champion)
+                    $numOfNotCompleted--;
+                if($qattribute->key == "role" && $qattribute->val == 0)
+                    $numOfNotCompleted--;
+                if($qattribute->key == "Kills" && $stats->kills > $qattribute->value)
+                    $numOfNotCompleted--;
+                if($qattribute->key == "Gold" && $stats->goldEarned > $qattribute->value)
+                    $numOfNotCompleted--;
+
             }
-            $type = "";
-            
-            foreach($quests as $quest){
-                $qAttributes = $qAttrModel->where("questId", $quest->questId).find();
-                $numOfNotCompleted = count($qAttributes);
-                foreach($qAttributes as $qattribute){
-                    if($qattribute->key == "Kills" && $stats->kills > $qattribute->value)
-                        $numOfNotCompleted--;
-                    if($qattribute->key == "Gold" && $stats->goldEarned > $qattribute->value)
-                        $numOfNotCompleted--;
-                    
-                }
-                
-                if($numOfNotCompleted == 0){
-                    
-                }
+
+            if($numOfNotCompleted == 0){
+                $userQuest = $uqModel->where("questId", $quest->questId)->where('summonerName', summonerName)->find()[0];
+                $userQuest->completed = 1;
+                $uqModel->save($userQuest);
             }
         }
-        
-        //var_dump($lastGamePlayedts . " ");
-        //var_dump($currTime);
-        echo view('template/header_loggedin', [
-            'role' => $this->session->get('user')->role,
-            'username' => $this->session->get('user')->summonerName
-        ]);
-        
-        echo view('template/footer');
     }
 }

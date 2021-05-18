@@ -162,3 +162,9 @@ td{
     float: right;
   }
 }
+
+
+.text-outline{
+	-webkit-text-stroke-width: 0.4px;
+	-webkit-text-stroke-color: black;
+}
