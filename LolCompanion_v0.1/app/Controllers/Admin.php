@@ -13,6 +13,7 @@ use RiotAPI\Base\Definitions\Region;
 use voku\helper\HtmlDomParser;
 use RiotAPI\DataDragonAPI\DataDragonAPI;
 use JonnyW\PhantomJs\Client;
+use App\Models\BuildModel;
 
 
 
@@ -63,7 +64,7 @@ class Admin extends Moderator {
                 'id' => $champ["key"],
                 'name' => $champ["name"]
             ]);
-            foreach($roles as $role) {
+           /* foreach($roles as $role) {
                 $newchamp = str_replace([' ', "'"], "", $champ["name"]);
                 if ($champ["name"] == "Nunu&Willump") {
                     $newchamp = "nunu";
@@ -74,9 +75,11 @@ class Admin extends Moderator {
                 $wt = (double) $tmp[1]->textContent;
                 $pt = (double) $tmp[0]->textContent;
                 // echo $champ["name"] . $role . $wt . " " . $pt . "<br>";
-            }
+            }*/
         }
-        // return $this->index('Successfully updated');
+        $buildModel = new BuildModel();
+        $buildModel->truncate();
+        return $this->index('Successfully updated');
     }
     
     public function RemoveAccount(){
