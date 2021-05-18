@@ -564,7 +564,6 @@ class LoggedUser extends BaseController
             $match = $matchlist[$i];
             if($match->timestamp / 1000 < $summoner->lastGamePlayed)
                 continue;
-            var_dump($match->timestamp);
             if($match->queue == 420) {
                 if (++$limit > 50) {
                     // break;
