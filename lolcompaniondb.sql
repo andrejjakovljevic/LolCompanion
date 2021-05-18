@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 18, 2021 at 03:10 PM
+-- Generation Time: May 18, 2021 at 03:58 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -295,9 +295,7 @@ CREATE TABLE IF NOT EXISTS `korisnik` (
 --
 
 INSERT INTO `korisnik` (`summonerName`, `password`, `email`, `lastGamePlayed`, `role`) VALUES
-('GINDRA', '123', 'gindra@gindra.ac.bg.rs', NULL, 0),
-('Sensei God', '123', 'andrej@andrej.ec.bf.rs', NULL, 0),
-('wdaw', '123', 'a@a.a', NULL, 2);
+('Sensei God', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'andrej.jakovljevic2000@gmail.com', NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -329,13 +327,6 @@ CREATE TABLE IF NOT EXISTS `quest` (
   `image` varchar(300) NOT NULL,
   PRIMARY KEY (`questId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `quest`
---
-
-INSERT INTO `quest` (`questId`, `description`, `title`, `image`) VALUES
-(1, 'The first quest is a very good quest. Play Xin top.', 'The First Questic', '../slike/dummyQuestPic.jpg');
 
 -- --------------------------------------------------------
 
