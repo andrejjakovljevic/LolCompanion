@@ -8,10 +8,9 @@ class KorisnikModel extends Model
 {
     protected $table      = 'korisnik';
     protected $primaryKey = 'summonerName';
-
     protected $useAutoIncrement = false;
 
     protected $returnType     = 'object';
 
-    protected $allowedFields = ['summonerName', 'password', 'email','role'];
+    protected $allowedFields = ['summonerName', 'password', 'email','role', 'lastGamePlayed'];
 }

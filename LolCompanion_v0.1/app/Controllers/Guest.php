@@ -27,12 +27,14 @@ class Guest extends BaseController
         $user=$korisnikModel->find($this->request->getVar('username'));
         if($user==null)
             return $this->login('User doesn\'t exist');
-        if($user->password!=$this->request->getVar('password'))
-            return $this->login('Wrong password');
-        
-        
+        $hes=hash("sha256",$this->request->getVar('password'),false);
+        $pas=$user->password;
+        $nes=strcmp($hes, $pas);
+        if ($hes!=$pas)
+        {
+            return $this->login("Wrong password");
+        }
         $this->session->set('user', $user);
-        
         
         return redirect()->to(site_url('LoggedUser'));
     }
@@ -60,11 +62,12 @@ class Guest extends BaseController
         if($this->request->getVar('password1') != $this->request->getVar('password2')) {
                 return $this->signUp('Passwords do not match');
         }
+        
         $user = [];
         $user['summonerName'] = $this->request->getVar('username');
         $user['email'] = $this->request->getVar('email');
         $user['role'] = 2;
-        $user['password'] = $this->request->getVar('password1');
+        $user['password'] = hash("sha256",$this->request->getVar('password1'),false);
         $korisnikModel->insert($user);
         return redirect()->to(site_url('Guest/login'));
     }

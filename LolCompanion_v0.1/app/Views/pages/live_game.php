@@ -39,11 +39,12 @@ $tier25 = explode(" ", $names['summoner25']['div'])[0];
                 </div>
             </div>
             <hr>
+            
             <div class="row fensi" style="padding-left: 6%;">
                 <div class="col-lg-1" style="text-align: center; font-size: 60%;">
                     <img src=" <?= base_url('iconsChampions/image'. $names['summoner11']['champ'] .'.png')?>" style="width: 50%;"><br>
-                    <img src="slike/Flash.webp" style="width: 20%; padding: 0px;">
-                    <img src="slike/Teleport.webp" style="width: 20%; padding: 0px;"><br>
+                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner11']['sp1'])?>" style="width: 20%; padding: 0px;">
+                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner11']['sp2'])?>" style="width: 20%; padding: 0px;"><br>
                     <?= $names['summoner11']['name'] ?>
                 </div>
                 <div class="col-lg-1">60%</div>
@@ -57,16 +58,16 @@ $tier25 = explode(" ", $names['summoner25']['div'])[0];
                 <div class="col-lg-1"> 33% </div>
                 <div class="col-lg-1" style="text-align: center; font-size: 60%;">
                     <img src=" <?= base_url('iconsChampions/image'. $names['summoner21']['champ'] .'.png')?>" style="width: 50%;"><br>
-                    <img src="slike/Flash.webp" style="width: 20%; padding: 0px;">
-                    <img src="slike/Teleport.webp" style="width: 20%; padding: 0px;"><br>
+                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner21']['sp1'])?>" style="width: 20%; padding: 0px;">
+                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner21']['sp2'])?>" style="width: 20%; padding: 0px;"><br>
                     <?= $names['summoner21']['name'] ?>
                 </div>
             </div>
             <div class="row fensi" style="padding-left: 6%;">
                 <div class="col-lg-1" style="text-align: center; font-size: 60%;">
                     <img src=" <?= base_url('iconsChampions/image'. $names['summoner12']['champ'] .'.png')?>" style="width: 50%;"><br>
-                    <img src="slike/Flash.webp" style="width: 20%; padding: 0px;">
-                    <img src="slike/Smite.webp" style="width: 20%; padding: 0px;"><br>
+                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner12']['sp1'])?>" style="width: 20%; padding: 0px;">
+                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner12']['sp2'])?>" style="width: 20%; padding: 0px;"><br>
                     <?= $names['summoner12']['name'] ?>
                 </div>
                 <div class="col-lg-1">60%</div>
@@ -80,16 +81,16 @@ $tier25 = explode(" ", $names['summoner25']['div'])[0];
                 <div class="col-lg-1"> 33% </div>
                 <div class="col-lg-1" style="text-align: center; font-size: 60%;">
                     <img src=" <?= base_url('iconsChampions/image'. $names['summoner22']['champ'] .'.png')?>" style="width: 50%;"><br>
-                    <img src="slike/Flash.webp" style="width: 20%; padding: 0px;">
-                    <img src="slike/Smite.webp" style="width: 20%; padding: 0px;"><br>
+                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner22']['sp1'])?>" style="width: 20%; padding: 0px;">
+                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner22']['sp2'])?>" style="width: 20%; padding: 0px;"><br>
                     <?= $names['summoner22']['name'] ?>
                 </div>
             </div>
             <div class="row fensi" style="padding-left: 6%;">
                 <div class="col-lg-1" style="text-align: center; font-size: 60%;">
                     <img src=" <?= base_url('iconsChampions/image'. $names['summoner13']['champ'] .'.png')?>" style="width: 50%;"><br>
-                    <img src="slike/Flash.webp" style="width: 20%; padding: 0px;">
-                    <img src="slike/Ignite.webp" style="width: 20%; padding: 0px;"><br>
+                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner13']['sp1'])?>" style="width: 20%; padding: 0px;">
+                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner13']['sp2'])?>" style="width: 20%; padding: 0px;"><br>
                     <?= $names['summoner13']['name'] ?>
                 </div>
                 <div class="col-lg-1">60%</div>
@@ -103,16 +104,16 @@ $tier25 = explode(" ", $names['summoner25']['div'])[0];
                 <div class="col-lg-1"> 33% </div>
                 <div class="col-lg-1" style="text-align: center; font-size: 60%;">
                     <img src=" <?= base_url('iconsChampions/image'. $names['summoner23']['champ'] .'.png')?>" style="width: 50%;"><br>
-                    <img src="slike/Flash.webp" style="width: 20%; padding: 0px;">
-                    <img src="slike/Smite.webp" style="width: 20%; padding: 0px;"><br>
+                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner23']['sp1'])?>" style="width: 20%; padding: 0px;">
+                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner23']['sp2'])?>" style="width: 20%; padding: 0px;"><br>
                     <?= $names['summoner23']['name'] ?>
                 </div>
             </div>
             <div class="row fensi" style="padding-left: 6%;">
                 <div class="col-lg-1" style="text-align: center; font-size: 60%;">
                     <img src=" <?= base_url('iconsChampions/image'. $names['summoner14']['champ'] .'.png')?>" style="width: 50%;"><br>
-                    <img src="slike/Flash.webp" style="width: 20%; padding: 0px;">
-                    <img src="slike/Ignite.webp" style="width: 20%; padding: 0px;"><br>
+                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner14']['sp1'])?>" style="width: 20%; padding: 0px;">
+                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner14']['sp2'])?>" style="width: 20%; padding: 0px;"><br>
                     <?= $names['summoner14']['name'] ?>
                 </div>
                 <div class="col-lg-1">60%</div>
@@ -126,16 +127,16 @@ $tier25 = explode(" ", $names['summoner25']['div'])[0];
                 <div class="col-lg-1"> 33% </div>
                 <div class="col-lg-1" style="text-align: center; font-size: 60%;">
                     <img src=" <?= base_url('iconsChampions/image'. $names['summoner24']['champ'] .'.png')?>" style="width: 50%;"><br>
-                    <img src="slike/Flash.webp" style="width: 20%; padding: 0px;">
-                    <img src="slike/Teleport.webp" style="width: 20%; padding: 0px;"><br>
+                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner24']['sp1'])?>" style="width: 20%; padding: 0px;">
+                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner24']['sp2'])?>" style="width: 20%; padding: 0px;"><br>
                     <?= $names['summoner24']['name'] ?>
                 </div>
             </div>
             <div class="row fensi" style="padding-left: 6%; padding-bottom: 6%;">
                 <div class="col-lg-1" style="text-align: center; font-size: 60%;">
                     <img src=" <?= base_url('iconsChampions/image'. $names['summoner15']['champ'] .'.png')?>" style="width: 50%;"><br>
-                    <img src="slike/Flash.webp" style="width: 20%; padding: 0px;">
-                    <img src="slike/Ignite.webp" style="width: 20%; padding: 0px;"><br>
+                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner15']['sp1'])?>" style="width: 20%; padding: 0px;">
+                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner15']['sp2'])?>" style="width: 20%; padding: 0px;"><br>
                     <?= $names['summoner15']['name'] ?>
                 </div>
                 <div class="col-lg-1">60%</div>
@@ -151,8 +152,8 @@ $tier25 = explode(" ", $names['summoner25']['div'])[0];
                 <div class="col-lg-1"> 33% </div>
                 <div class="col-lg-1" style="text-align: center; font-size: 60%;">
                     <img src=" <?= base_url('iconsChampions/image'. $names['summoner25']['champ'] .'.png')?>" style="width: 50%;"><br>
-                    <img src="slike/Flash.webp" style="width: 20%; padding: 0px;">
-                    <img src="slike/Ignite.webp" style="width: 20%; padding: 0px;"><br>
+                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner25']['sp1'])?>" style="width: 20%; padding: 0px;">
+                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner25']['sp2'])?>" style="width: 20%; padding: 0px;"><br>
                     <?= $names['summoner25']['name'] ?>
                 </div>
             </div>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 18, 2021 at 02:12 PM
+-- Generation Time: May 18, 2021 at 04:09 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -272,7 +272,7 @@ CREATE TABLE IF NOT EXISTS `global` (
 --
 
 INSERT INTO `global` (`name`, `value`) VALUES
-('api', 'RGAPI-807ec527-7ea9-4ba7-93b4-c4ae8f16ccc4');
+('api', 'RGAPI-15966e6c-4e1d-4880-827e-dffbacbe3836');
 
 -- --------------------------------------------------------
 
@@ -295,9 +295,8 @@ CREATE TABLE IF NOT EXISTS `korisnik` (
 --
 
 INSERT INTO `korisnik` (`summonerName`, `password`, `email`, `lastGamePlayed`, `role`) VALUES
-('GINDRA', '123', 'gindra@gindra.ac.bg.rs', NULL, 0),
-('Sensei God', '123', 'andrej@andrej.ec.bf.rs', NULL, 0),
-('wdaw', '123', 'a@a.a', NULL, 2);
+('GINDRA', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'gindroni@nudle.etf', NULL, 0),
+('Sensei God', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'andrej.jakovljevic2000@gmail.com', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -328,14 +327,16 @@ CREATE TABLE IF NOT EXISTS `quest` (
   `title` varchar(50) NOT NULL,
   `image` varchar(300) NOT NULL,
   PRIMARY KEY (`questId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `quest`
 --
 
 INSERT INTO `quest` (`questId`, `description`, `title`, `image`) VALUES
-(1, 'The first quest is a very good quest. Play Xin top.', 'The First Questic', '../slike/dummyQuestPic.jpg');
+(2, 'aj prvi', 'Prvi challenge', ''),
+(3, '123', 'Aj drugi', ''),
+(4, 'hm', 'Aj treci', '');
 
 -- --------------------------------------------------------
 
@@ -351,7 +352,16 @@ CREATE TABLE IF NOT EXISTS `questattributes` (
   `attributeValue` varchar(50) NOT NULL,
   PRIMARY KEY (`attributeId`),
   KEY `fk_quest_idx` (`questId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `questattributes`
+--
+
+INSERT INTO `questattributes` (`attributeId`, `questId`, `attributeKey`, `attributeValue`) VALUES
+(1, 2, 'Kills', '10'),
+(2, 3, 'Gold', '123'),
+(3, 4, 'Prerequisite Id', '2');
 
 -- --------------------------------------------------------
 
@@ -368,6 +378,15 @@ CREATE TABLE IF NOT EXISTS `userquest` (
   KEY `fk_summoner_idx` (`summonerName`),
   KEY `fk_quest_quest_idx` (`questId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `userquest`
+--
+
+INSERT INTO `userquest` (`summonerName`, `questId`, `completed`) VALUES
+('Sensei God', 2, 0),
+('Sensei God', 3, 0),
+('Sensei God', 4, 0);
 
 --
 -- Constraints for dumped tables
