@@ -8,7 +8,7 @@
         <title>LolCompanion</title>
     </head>
     <body>
-        <div class="container-fluid font">
+        <div class="container-fluid font text-center">
             <div class="row header" style="font-size: 16px;">
                 <div class="col-lg-3">
                     <img src="<?= base_url('slike/lolporo.png')?>" style="width: 20%;">
@@ -29,7 +29,7 @@
                 <div class="col-lg-1 align-self-center">
                     <a href="<?= site_url("LoggedUser/Champions")?>" class="basic">Champions</a>  
                 </div>
-                <div class="col-lg-2 align-self-center" >
+                <div class="col-lg-2 text-center align-self-center" >
                     <div class="btn-group">
                         <button type="button" style="background-color: #FF7070; border-color: #FF7070;" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><?php echo "$username" ?></button>
                         <ul class="dropdown-menu" x-placement="bottom-start" style="position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">

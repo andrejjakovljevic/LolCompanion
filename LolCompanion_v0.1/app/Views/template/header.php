@@ -8,7 +8,7 @@
         <title>LolCompanion</title>
     </head>
     <body>
-        <div class="container-fluid font">
+        <div class="container-fluid font text-center">
             <div class="row header">
                 <div class="col-lg-3">
                     <img src=" <?= base_url('slike/lolporo.png')?>" style="width: 20%;">
