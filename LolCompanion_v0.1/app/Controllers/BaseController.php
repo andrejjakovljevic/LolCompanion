@@ -339,7 +339,7 @@ class BaseController extends Controller
             }
             $htmltop = HtmlDomParser::file_get_html("https://rankedboost.com/lol-tier-list-solo-queue/");
             $tabela = $htmltop->find(".rankedBoost-lol-table");
-            $tabela = end($tabela);
+            $tabela = $tabela[count($tabela)-1];
             $niz = ['.top','.jungle','.middle','.adc','.support'];
             $podaci = [];
             foreach ($niz as $role)
