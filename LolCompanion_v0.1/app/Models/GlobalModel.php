@@ -14,4 +14,10 @@ class GlobalModel extends Model
     protected $returnType     = 'object';
 
     protected $allowedFields = ['name', 'value'];
+    
+    public static function getApiKey(){
+        $model = new GlobalModel();
+	$api = $model->find('api');
+        return $api->value;
+    }
 }
