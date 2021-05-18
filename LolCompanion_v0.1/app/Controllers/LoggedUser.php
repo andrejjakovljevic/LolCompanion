@@ -331,7 +331,13 @@ class LoggedUser extends BaseController
             ]);
         $apiKey = GlobalModel::getApiKey();
         //$userName = $this->session->get('user')->summonerName;
-        $userName = "Braun%20Grzegorz";
+        
+        
+        
+        $userName = "Braun%20Grzegorz"; //HARDCODED!!!!!!!!!!! PROMENI OVO
+        
+        
+        
         $url = "https://eun1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" . $userName . "?api_key=". $apiKey;
         $user = json_decode($this->getHtml($url));
         //var_dump($user);
