@@ -105,15 +105,17 @@ class Moderator extends LoggedUser {
             $uQModel->insert($userQ);
         }
         
-        
-        foreach ($options as $option){
+        if($options != null){
+            foreach ($options as $option){
             $attribute = [
                 'questId' => $lastid,
                 'attributeKey' => $option->key,
                 'attributeValue' => $option->val
             ];
             $qattrModel->insert($attribute);
+            }
         }
+        
         
         return $this->addQuest("Res: " . $_POST['title'] . $_POST['description']. $_POST['imgurl']. $_POST['champion']. $_POST['role'] . $_POST['hiddenOptions']);
              

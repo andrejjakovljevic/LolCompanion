@@ -45,14 +45,18 @@ class LoggedUser extends BaseController
         $korisnikModel=new KorisnikModel();
         $user=$this->session->get('user');
 
-        if($this->request->getVar('curpass') != $user->password) {
-            return $this->changePassword('Wrong password');
+        $hes=hash("sha256",$this->request->getVar('curpass'),false);
+        $pas=$user->password;
+        $nes=strcmp($hes, $pas);
+        if ($hes!=$pas)
+        {
+            return $this->changePassword("Wrong password");
         }
 
         if($this->request->getVar('newpass1') != $this->request->getVar('newpass2')) {
             return $this->changePassword('Passwords do not match');
         }   
-        $user->password = $this->request->getVar('newpass1');
+        $user->password = hash("sha256",$this->request->getVar('newpass1'),false);
         $korisnikModel->update($user->summonerName, $user);
         return $this->index();
     }
@@ -93,7 +97,7 @@ class LoggedUser extends BaseController
             $poroUser = count($uQModel->where('summonerName', $this->session->get('user')->summonerName)->where('completed', 1)->findAll());
             $poroTotal = count($qModel->findAll());
 
-
+            var_dump($uQ);
             $data = [
                 'poroUser' => $poroUser,
                 'poroTotal' => $poroTotal,
@@ -316,11 +320,11 @@ class LoggedUser extends BaseController
             LeagueAPI::SET_REGION => Region::EUROPE_EAST,
             ]);
         $apiKey = GlobalModel::getApiKey();
-        //$userName = $this->session->get('user')->summonerName;
+        $userName = $this->session->get('user')->summonerName;
+        $userName = str_replace(" ", "%20", $userName);
         
         
-        
-        $userName = "Braun%20Grzegorz"; //HARDCODED!!!!!!!!!!! PROMENI OVO
+        //$userName = "Sensei%20God"; //HARDCODED!!!!!!!!!!! PROMENI OVO
         
         
         
@@ -630,15 +634,12 @@ class LoggedUser extends BaseController
         ];
     }
 
-    public function questProgress($summonerName = "GINDRA"){
+    // 
+    public function questsProgress($matchlist, $quests, $summonerName = "GINDRA"){
         $lastGamePlayedts = (new KorisnikModel())->find($summonerName)->lastGamePlayed;
+        $qAttrModel = new QuestAttributeModel();
         
         $currTime = time();
-        
-        echo view('template/header_loggedin', [
-            'role' => $this->session->get('user')->role,
-            'username' => $this->session->get('user')->summonerName
-        ]);
         
         DataDragonAPI::initByCDN();
         $api = new LeagueAPI([
@@ -647,48 +648,15 @@ class LoggedUser extends BaseController
         ]);
 
         $summoner = $api->getSummonerByName($summonerName);
-        $matchlist = $api->getMatchListByAccount($summoner->accountId)->matches;
+        //$matchlist = $api->getMatchListByAccount($summoner->accountId)->matches;
         $count = 0;
         foreach ($matchlist as $match) {
             if (++$count == 10)
                 break;
             $matchO = $api->getMatch($match->gameId);
             $game_ts = $matchO->gameCreation;
-            $players = [];
-            var_dump($game_ts);
-            // var_dump($matchO);
-            // break;
-            for ($i = 0; $i < 10; ++$i) {
-                if($matchO->participantIdentities[$matchO->participants[$i]->participantId - 1]->player->summonerName != $summonerName)
-                    continue;
-                array_push($players, [
-                    'summonerName' => $matchO->participantIdentities[$matchO->participants[$i]->participantId - 1]->player->summonerName,
-                    'champion' => $api->getStaticChampion($matchO->participants[$i]->championId)->name,
-                ]);
-                if ($matchO->participantIdentities[$matchO->participants[$i]->participantId - 1]->player->summonerName == $summonerName) {
-                    $part = $matchO->participants[$i];
-                    $stats = $part->stats;
-                    
-                    $stats->championName = $api->getStaticChampion($matchO->participants[$i]->championId)->name;
-                    var_dump($stats);
-                    
-                    $summ1 = $api->getStaticSummonerSpell($part->spell1Id)->image->full;
-                    $summ2 = $api->getStaticSummonerSpell($part->spell2Id)->image->full;
-                    if ($stats->item0 == 0) $stats->item0 = base_url("/slike/empty.png");
-                    else $stats->item0 = DataDragonAPI::getItemIconUrl($stats->item0);
-                    if ($stats->item1 == 0) $stats->item1 = base_url("/slike/empty.png");
-                    else $stats->item1 = DataDragonAPI::getItemIconUrl($stats->item1);
-                    if ($stats->item2 == 0) $stats->item2 = base_url("/slike/empty.png");
-                    else $stats->item2 = DataDragonAPI::getItemIconUrl($stats->item2);
-                    if ($stats->item3 == 0) $stats->item3 = base_url("/slike/empty.png");
-                    else $stats->item3 = DataDragonAPI::getItemIconUrl($stats->item3);
-                    if ($stats->item4 == 0) $stats->item4 = base_url("/slike/empty.png");
-                    else $stats->item4 = DataDragonAPI::getItemIconUrl($stats->item4);
-                    if ($stats->item5 == 0) $stats->item5 = base_url("/slike/empty.png");
-                    else $stats->item5 = DataDragonAPI::getItemIconUrl($stats->item5);
-                }
-            }
-            $type = "";
+            
+            // Check quests only for these gamemodes
             if ($matchO->queueId == 400)
                 $type = "DRAFT";
             else if ($matchO->queueId == 420)
@@ -697,29 +665,56 @@ class LoggedUser extends BaseController
                 $type = "BLIND";
             else if ($matchO->queueId == 440)
                 $type = "FLEX";
-            else if ($matchO->queueId == 450)
-                $type = "ARAM";
-            else if ($matchO->queueId == 700)
-                $type = "CLASH";
-            else if ($matchO->queueId == 1020)
-                $type = "ONE FOR ALL";
-            else $type = (string) $matchO->queueId;
-            $info = json_decode('{ "gameMode":"'. $type . '"}');
-            $info = new \stdClass;
-            $info->gameMode = $type;
-            $info->gameDuration = $matchO->gameDuration * 1000;
-            array_push($data, [
-                'players' => $players,
-                'stats' => $stats,
-                'ago' => $ago_str,
-                'summ1' => $summ1,
-                'summ2' => $summ2,
-                'info' => $info
-            ]);
+            else continue;
+            
+            // only check games with timestamp after lastGamePlayed
+            if($game_ts < $lastGamePlayedts) continue;
+            $gameDuration = $matchO->gameDuration;
+            
+            var_dump($game_ts);
+            for ($i = 0; $i < 10; ++$i) {
+                if($matchO->participantIdentities[$matchO->participants[$i]->participantId - 1]->player->summonerName != $summonerName)
+                    continue;
+                
+                $champion = $api->getStaticChampion($matchO->participants[$i]->championId)->name;
+
+                $part = $matchO->participants[$i];
+                $stats = $part->stats;
+                
+                $stats->championName = $api->getStaticChampion($matchO->participants[$i]->championId)->name;
+                var_dump($stats);
+                $goldEarned = $stats->goldEarned;
+                $cs = $stats->totalMinionsKilled + $stats->neutralMinionsKilled;
+                $firstTower = $stats->firstTowerAssist;
+                $goldPerMin = $goldEarned / ($gameDuration / 60);
+                break;  
+            }
+            $type = "";
+            
+            foreach($quests as $quest){
+                $qAttributes = $qAttrModel->where("questId", $quest->questId).find();
+                $numOfNotCompleted = count($qAttributes);
+                foreach($qAttributes as $qattribute){
+                    if($qattribute->key == "Kills" && $stats->kills > $qattribute->value)
+                        $numOfNotCompleted--;
+                    if($qattribute->key == "Gold" && $stats->goldEarned > $qattribute->value)
+                        $numOfNotCompleted--;
+                    
+                }
+                
+                if($numOfNotCompleted == 0){
+                    
+                }
+            }
         }
         
         //var_dump($lastGamePlayedts . " ");
         //var_dump($currTime);
+        echo view('template/header_loggedin', [
+            'role' => $this->session->get('user')->role,
+            'username' => $this->session->get('user')->summonerName
+        ]);
+        
         echo view('template/footer');
     }
 }
