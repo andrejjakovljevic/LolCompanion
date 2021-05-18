@@ -35,7 +35,7 @@ if ($type=="domination") $pom=3;
                 <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><img src="<?php echo $item6 ?>" style="width: 100%;"></div>
             </div>
             <div class="row">
-                <div class="col-12" style="text-align: center; font-size: xx-large; font-weight: bold"><?php echo $winrate ?>%</div>
+                <div class="col-12" style="text-align: center; font-size: xx-large; font-weight: bold">Winrate: <?php echo $winrate ?>%</div>
             </div>
             <div class="container runes text-center">
                 <div class="row">
@@ -99,5 +99,10 @@ if ($type=="domination") $pom=3;
                     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><img src="<?php echo ($url_base . $niz[$typeSec][$br2] . ".png");?>" style="width: 100%; <?php if (in_array($niz[$typeSec][$br2],$perks)) echo "border: 3pt solid black;"; $br2++;?>"></div>
                     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><img src="<?php echo ($url_base . $niz[$typeSec][$br2] . ".png");?>" style="width: 100%; <?php if (in_array($niz[$typeSec][$br2],$perks)) echo "border: 3pt solid black;"; $br2++;?>"></div>
                     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><img src="<?php echo ($url_base . $niz[$typeSec][$br2] . ".png");?>" style="width: 100%; <?php if (in_array($niz[$typeSec][$br2],$perks)) echo "border: 3pt solid black;"; $br2++;?>"></div>
+                </div>
+            </div>
+            <div class="row" style="margin-bottom: 30px">
+                <div class="col-12" style="text-align: right">
+                    as per: <a href="https://app.mobalytics.gg/lol/champions/">Mobalytics</a>
                 </div>
             </div>
