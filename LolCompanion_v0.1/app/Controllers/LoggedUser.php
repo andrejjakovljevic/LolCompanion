@@ -522,15 +522,15 @@ class LoggedUser extends BaseController
         }
         return $data;
 	}
-
-    private function getMostPlayed($summonerName) {
+    
+    private function updateWrapper($summonerName) {
         DataDragonAPI::initByCDN();
         $api = new LeagueAPI([
             LeagueAPI::SET_KEY    => 'RGAPI-15966e6c-4e1d-4880-827e-dffbacbe3836',
             LeagueAPI::SET_REGION => Region::EUROPE_EAST,
         ]);
 
-        $model = new KorisnikModel();
+        $modelKorisnik = new KorisnikModel();
         $summoner = $model->find($summonerName);
         if ($summoner->lastGamePlayed == NULL) {
             $summoner->lastGamePlayed = 0;
@@ -539,6 +539,11 @@ class LoggedUser extends BaseController
 
         $modelChamp = new ChampionModel();
         $allChamps = $modelChamp->findAll();
+
+    }
+
+    private function updatePlayed($summonerName) {
+
         $modelPlays = new PlaysModel();
         $plays = [];
 
