@@ -324,12 +324,17 @@ class LoggedUser extends BaseController
 
     public function LiveGame()
     {
-        
+        DataDragonAPI::initByCDN();
+            $api = new LeagueAPI([
+            LeagueAPI::SET_KEY    => 'RGAPI-1721c44e-ea77-4425-9a3a-55d598c0a3a3',
+            LeagueAPI::SET_REGION => Region::EUROPE_EAST,
+            ]);
         $apiKey = GlobalModel::getApiKey();
         //$userName = $this->session->get('user')->summonerName;
-        $userName = "maksbi";
+        $userName = "Braun%20Grzegorz";
         $url = "https://eun1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" . $userName . "?api_key=". $apiKey;
         $user = json_decode($this->getHtml($url));
+        //var_dump($user);
         //var_dump($user);
         $userId = $user->id;
         $matchUrl = "https://eun1.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/" . $userId . "?api_key=". $apiKey;
@@ -368,6 +373,10 @@ class LoggedUser extends BaseController
         
         $dArray=[];
         $champArray=[];
+        $spell1=[];
+        $spell2=[];
+        
+        //$spellInfo= DataDragonAPI::getStaticSummonerSpellById();
         for ($i=0; $i<10; $i++)
         {
             $lUrl="https://eun1.api.riotgames.com/lol/league/v4/entries/by-summoner/" . $match->participants[$i]->summonerId . "?api_key=". $apiKey;
@@ -382,18 +391,17 @@ class LoggedUser extends BaseController
             }
             else{
                 $tier = $l[0]->tier;
-                $rank = $l[0]->rank;
+                $rank = $l[0]->rank; 
             }
             array_push($dArray, $tier . " ". $rank);
-             
+            
+            $magija1=$match->participants[$i]->spell1Id;
+            $magija2=$match->participants[$i]->spell2Id;
+            array_push($spell1, (DataDragonAPI::getStaticSummonerSpellById($magija1))["image"]["full"] );
+            array_push($spell2, (DataDragonAPI::getStaticSummonerSpellById($magija2))["image"]["full"] );
             
             $champId=$match->participants[$i]->championId;
-            
-            DataDragonAPI::initByCDN();
-            $api = new LeagueAPI([
-            LeagueAPI::SET_KEY    => 'RGAPI-1721c44e-ea77-4425-9a3a-55d598c0a3a3',
-            LeagueAPI::SET_REGION => Region::EUROPE_EAST,
-            ]);
+          
             
             $champion = $api->getStaticChampion($champId)->name;
             array_push($champArray, $champion);
@@ -403,19 +411,23 @@ class LoggedUser extends BaseController
             
             echo "\n";
         }
+        
+        
+        
         //echo dArray;
-        //var_dump($dArray);
+        //var_dump("\nOVDE\n");
+        //var_dump($spell1[0]);
         $players=[
-                'summoner11' => ['name' => $match->participants[0]->summonerName,  'div'=> $dArray[0],  'champ'=>$champArray[0]],
-                'summoner12' => ['name' => $match->participants[1]->summonerName,  'div'=> $dArray[1],  'champ'=>$champArray[1]],
-                'summoner13' => ['name' => $match->participants[2]->summonerName,  'div'=> $dArray[2],  'champ'=>$champArray[2]],
-                'summoner14' => ['name' => $match->participants[3]->summonerName,  'div'=> $dArray[3],  'champ'=>$champArray[3]],
-                'summoner15' => ['name' => $match->participants[4]->summonerName,  'div'=> $dArray[4],  'champ'=>$champArray[4]],
-                'summoner21' => ['name' => $match->participants[5]->summonerName,  'div'=> $dArray[5],  'champ'=>$champArray[5]],
-                'summoner22' => ['name' => $match->participants[6]->summonerName,  'div'=> $dArray[6],  'champ'=>$champArray[6]],
-                'summoner23' => ['name' => $match->participants[7]->summonerName,  'div'=> $dArray[7],  'champ'=>$champArray[7]],
-                'summoner24' => ['name' => $match->participants[8]->summonerName,  'div'=> $dArray[8],  'champ'=>$champArray[8]],
-                'summoner25' => ['name' => $match->participants[9]->summonerName,  'div'=> $dArray[9],  'champ'=>$champArray[9]],
+                'summoner11' => ['name' => $match->participants[0]->summonerName,  'div'=> $dArray[0],  'champ'=>$champArray[0], 'sp1'=>$spell1[0], 'sp2'=>$spell2[0]],
+                'summoner12' => ['name' => $match->participants[1]->summonerName,  'div'=> $dArray[1],  'champ'=>$champArray[1], 'sp1'=>$spell1[1], 'sp2'=>$spell2[1]],
+                'summoner13' => ['name' => $match->participants[2]->summonerName,  'div'=> $dArray[2],  'champ'=>$champArray[2], 'sp1'=>$spell1[2], 'sp2'=>$spell2[2]],
+                'summoner14' => ['name' => $match->participants[3]->summonerName,  'div'=> $dArray[3],  'champ'=>$champArray[3], 'sp1'=>$spell1[3], 'sp2'=>$spell2[3]],
+                'summoner15' => ['name' => $match->participants[4]->summonerName,  'div'=> $dArray[4],  'champ'=>$champArray[4], 'sp1'=>$spell1[4], 'sp2'=>$spell2[4]],
+                'summoner21' => ['name' => $match->participants[5]->summonerName,  'div'=> $dArray[5],  'champ'=>$champArray[5], 'sp1'=>$spell1[5], 'sp2'=>$spell2[5]],
+                'summoner22' => ['name' => $match->participants[6]->summonerName,  'div'=> $dArray[6],  'champ'=>$champArray[6], 'sp1'=>$spell1[6], 'sp2'=>$spell2[6]],
+                'summoner23' => ['name' => $match->participants[7]->summonerName,  'div'=> $dArray[7],  'champ'=>$champArray[7], 'sp1'=>$spell1[7], 'sp2'=>$spell2[7]],
+                'summoner24' => ['name' => $match->participants[8]->summonerName,  'div'=> $dArray[8],  'champ'=>$champArray[8], 'sp1'=>$spell1[8], 'sp2'=>$spell2[8]],
+                'summoner25' => ['name' => $match->participants[9]->summonerName,  'div'=> $dArray[9],  'champ'=>$champArray[9], 'sp1'=>$spell1[9], 'sp2'=>$spell2[9]]
                 ];
         
         echo view('template/header_loggedin', [

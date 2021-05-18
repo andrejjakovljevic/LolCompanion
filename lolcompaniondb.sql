@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 18, 2021 at 02:35 PM
+-- Generation Time: May 18, 2021 at 03:10 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -34,9 +34,8 @@ CREATE TABLE IF NOT EXISTS `builds` (
   `iditem1` int(11) DEFAULT NULL,
   `iditem2` int(11) DEFAULT NULL,
   `iditem3` int(11) DEFAULT NULL,
-  `idhchamp` int(11) NOT NULL,
+  `idchamp` int(11) NOT NULL,
   `winrate` double NOT NULL,
-  `pickrate` double NOT NULL,
   `lane` varchar(45) NOT NULL,
   `perk0` int(11) DEFAULT NULL,
   `perk1` int(11) DEFAULT NULL,
@@ -47,10 +46,39 @@ CREATE TABLE IF NOT EXISTS `builds` (
   `attrperk0` int(11) DEFAULT NULL,
   `attrperk1` int(11) DEFAULT NULL,
   `attrperk2` int(11) DEFAULT NULL,
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `iditem4` int(11) DEFAULT NULL,
+  `iditem5` int(11) DEFAULT NULL,
+  `iditem6` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_idchamps_idx` (`idhchamp`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  KEY `fk_idchamps_idx` (`idchamp`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `builds`
+--
+
+INSERT INTO `builds` (`iditem1`, `iditem2`, `iditem3`, `idchamp`, `winrate`, `lane`, `perk0`, `perk1`, `perk2`, `perk3`, `perk4`, `perk5`, `attrperk0`, `attrperk1`, `attrperk2`, `id`, `iditem4`, `iditem5`, `iditem6`) VALUES
+(1036, 2031, 3134, 246, 54.2, 'Mid', 8112, 8143, 8138, 8135, 8345, 8347, 5008, 5008, 5003, 1, 3158, 6695, 6694),
+(3850, 2003, 3802, 50, 48.3, 'Support', 8112, 8126, 8138, 8106, 8313, 8345, 5008, 5008, 5002, 2, 3853, 3020, 3157),
+(3070, 2003, 3802, 69, 49.2, 'Mid', 8010, 8009, 9105, 8014, 8139, 8135, 5008, 5008, 5003, 3, 3003, 3157, 3116),
+(1039, 2031, 6029, 141, 57.6, 'Jungle', 8010, 9111, 9105, 8299, 8143, 8135, 5008, 5008, 5002, 4, 3047, 3071, 3053),
+(3858, 2003, 3117, 12, 53.1, 'Support', 8439, 8446, 8429, 8451, 8345, 8347, 5007, 5002, 5001, 5, 3860, 3050, 3109),
+(1055, 2003, 6670, 523, 46.2, 'Bot', 8010, 8009, 9103, 8014, 8139, 8135, 5005, 5008, 5002, 6, 3006, 3085, 3031),
+(1054, 2003, 6660, 31, 54.7, 'Top', 8437, 8446, 8429, 8451, 9111, 9105, 5005, 5008, 5002, 7, 3047, 3075, 3193),
+(1056, 2003, 3145, 518, 53.9, 'Mid', 8112, 8139, 8138, 8135, 8226, 8237, 5005, 5008, 5003, 8, 3020, 3157, 3165),
+(1056, 2003, 3802, 268, 52.2, 'Mid', 8008, 8009, 9104, 8014, 8226, 8210, 5005, 5008, 5003, 9, 3020, 3115, 3157),
+(3850, 2003, 4642, 57, 54.2, 'Support', 8229, 8226, 8210, 8237, 8304, 8345, 5008, 5008, 5002, 10, 3853, 3020, 4637),
+(1055, 2003, 3134, 110, 49.9, 'Bot', 9923, 8139, 8138, 8135, 8345, 8347, 5005, 5008, 5002, 11, 3158, 3004, 6694),
+(3850, 2003, 4642, 350, 52.4, 'Support', 8214, 8226, 8210, 8237, 8009, 8017, 5008, 5008, 5002, 12, 3853, 6616, 3504),
+(1039, 2031, 6660, 72, 60.5, 'Jungle', 8230, 8275, 8234, 8232, 8304, 8347, 5005, 5008, 5002, 13, 3158, 3742, 4401),
+(1039, 2031, 3330, 9, 55.4, 'Jungle', 8112, 8126, 8138, 8106, 8313, 8347, 5008, 5008, 5002, 14, 3020, 3157, 3165),
+(1056, 2003, 3802, 34, 55.6, 'Mid', 8112, 8126, 8138, 8105, 8009, 8014, 5008, 5008, 5003, 15, 3020, 3157, 3003),
+(1055, 2003, 6670, 51, 52.1, 'Bot', 8021, 8009, 9103, 8014, 8139, 8135, 5005, 5008, 5002, 16, 3006, 3095, 3094),
+(1056, 2003, 3802, 1, 55.9, 'Mid', 8112, 8126, 8138, 8105, 8226, 8237, 5008, 5008, 5003, 17, 3020, 3157, 3165),
+(3850, 2003, 4642, 267, 54.6, 'Support', 8214, 8226, 8210, 8237, 8345, 8347, 5008, 5008, 5002, 18, 3853, 3158, 3011),
+(1055, 2003, 1037, 122, 57.6, 'Top', 8010, 9111, 9105, 8299, 8473, 8242, 5005, 5008, 5002, 19, 3047, 3053, 3742),
+(1039, 2031, 6660, 32, 57.7, 'Jungle', 8010, 9111, 9105, 8299, 8126, 8135, 5005, 5008, 5002, 20, 3047, 3075, 3001);
 
 -- --------------------------------------------------------
 
@@ -281,7 +309,7 @@ DROP TABLE IF EXISTS `plays`;
 CREATE TABLE IF NOT EXISTS `plays` (
   `summonername` varchar(40) NOT NULL,
   `idchamp` int(11) NOT NULL,
-  `winrate` double NOT NULL,
+  `games_won` int(11) NOT NULL,
   `games_played` int(11) NOT NULL,
   KEY `fk_korisnik_idx` (`summonername`),
   KEY `fk_champion_idx` (`idchamp`)
@@ -300,16 +328,14 @@ CREATE TABLE IF NOT EXISTS `quest` (
   `title` varchar(50) NOT NULL,
   `image` varchar(300) NOT NULL,
   PRIMARY KEY (`questId`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `quest`
 --
 
 INSERT INTO `quest` (`questId`, `description`, `title`, `image`) VALUES
-(2, 'Very cool.', 'The first quest', ''),
-(3, 'You need to finish first quest before this one', 'The second quest', ''),
-(4, 'You need to finish the second one for this', 'The third quest', '../slike/dummyQuestPic.jpg');
+(1, 'The first quest is a very good quest. Play Xin top.', 'The First Questic', '../slike/dummyQuestPic.jpg');
 
 -- --------------------------------------------------------
 
@@ -325,17 +351,7 @@ CREATE TABLE IF NOT EXISTS `questattributes` (
   `attributeValue` varchar(50) NOT NULL,
   PRIMARY KEY (`attributeId`),
   KEY `fk_quest_idx` (`questId`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `questattributes`
---
-
-INSERT INTO `questattributes` (`attributeId`, `questId`, `attributeKey`, `attributeValue`) VALUES
-(1, 2, 'Kills', '5'),
-(2, 3, 'Prerequisite Id', '2'),
-(3, 4, 'Prerequisite Id', '3'),
-(4, 4, 'Kills', '5');
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -354,17 +370,6 @@ CREATE TABLE IF NOT EXISTS `userquest` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `userquest`
---
-
-INSERT INTO `userquest` (`summonerName`, `questId`, `completed`) VALUES
-('GINDRA', 2, 1),
-('GINDRA', 3, 1),
-('GINDRA', 4, 0),
-('Sensei God', 4, 0),
-('wdaw', 4, 0);
-
---
 -- Constraints for dumped tables
 --
 
@@ -372,7 +377,7 @@ INSERT INTO `userquest` (`summonerName`, `questId`, `completed`) VALUES
 -- Constraints for table `builds`
 --
 ALTER TABLE `builds`
-  ADD CONSTRAINT `fk_champion` FOREIGN KEY (`idhchamp`) REFERENCES `champions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_champion` FOREIGN KEY (`idchamp`) REFERENCES `champions` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `plays`
