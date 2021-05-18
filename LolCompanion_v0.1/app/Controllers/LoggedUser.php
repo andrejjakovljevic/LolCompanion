@@ -497,7 +497,7 @@ class LoggedUser extends BaseController
 
         if ($summoner->lastGamePlayed == NULL)
             $summoner->lastGamePlayed = 0;
-        $matchlist = $api->getMatchListByAccount($summoner->accountId)->matches;
+        $matchlist = $api->getMatchListByAccount($api->getSummonerByName($summonerName)->accountId)->matches;
         $count = [];
         $matches = [];
         // $last = $matchlist[99]->timestamp;
