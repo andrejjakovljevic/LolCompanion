@@ -1,4 +1,15 @@
-
+<?php use App\Controllers\LoggedUser;
+$tier11 = explode(" ", $names['summoner11']['div'])[0];
+$tier12 = explode(" ", $names['summoner12']['div'])[0];
+$tier13 = explode(" ", $names['summoner13']['div'])[0];
+$tier14 = explode(" ", $names['summoner14']['div'])[0];
+$tier15 = explode(" ", $names['summoner15']['div'])[0];
+$tier21 = explode(" ", $names['summoner21']['div'])[0];
+$tier22 = explode(" ", $names['summoner22']['div'])[0];
+$tier23 = explode(" ", $names['summoner23']['div'])[0];
+$tier24 = explode(" ", $names['summoner24']['div'])[0];
+$tier25 = explode(" ", $names['summoner25']['div'])[0];
+?>
                 
        
             <div class="row fensi" style="padding-left: 6%;">
@@ -38,10 +49,10 @@
                 <div class="col-lg-1">60%</div>
                 <div class="col-lg-1">2/3/4</div>
                 <div class="col-lg-2" style="font-size: 95%;">
-                    <span style="color:goldenrod"> <?= $names['summoner11']['div'] ?> </span>
+                    <span style="color: <?php echo LoggedUser::StaticDivToColor($tier11) ?>" > <?= $names['summoner11']['div'] ?> </span>
                 </div>
                 <div class="col-lg-1">&nbsp;</div>
-                <div class="col-lg-2"><span style="color:#444444"> <?= $names['summoner21']['div'] ?> </span> </div>
+                <div class="col-lg-2"><span style="color:<?php echo LoggedUser::StaticDivToColor($tier21) ?>"> <?= $names['summoner21']['div'] ?> </span> </div>
                 <div class="col-lg-1"> 4/3/2 </div>      
                 <div class="col-lg-1"> 33% </div>
                 <div class="col-lg-1" style="text-align: center; font-size: 60%;">
@@ -61,10 +72,10 @@
                 <div class="col-lg-1">60%</div>
                 <div class="col-lg-1">2/3/4</div>
                 <div class="col-lg-2" style="font-size: 95%;">
-                    <span style="color:goldenrod"> <?= $names['summoner12']['div'] ?> </span>
+                    <span style="color: <?php echo LoggedUser::StaticDivToColor($tier12) ?>"> <?= $names['summoner12']['div'] ?> </span>
                 </div>
                 <div class="col-lg-1">&nbsp;</div>
-                <div class="col-lg-2"><span style="color:#444444"> <?= $names['summoner22']['div'] ?> </span> </div>
+                <div class="col-lg-2"><span style="color:<?php echo LoggedUser::StaticDivToColor($tier22) ?>"> <?= $names['summoner22']['div'] ?> </span> </div>
                 <div class="col-lg-1"> 4/3/2 </div>      
                 <div class="col-lg-1"> 33% </div>
                 <div class="col-lg-1" style="text-align: center; font-size: 60%;">
@@ -84,10 +95,10 @@
                 <div class="col-lg-1">60%</div>
                 <div class="col-lg-1">2/3/4</div>
                 <div class="col-lg-2" style="font-size: 95%;">
-                    <span style="color:goldenrod"> <?= $names['summoner13']['div'] ?> </span>
+                    <span style="color:<?php echo LoggedUser::StaticDivToColor($tier13) ?>"> <?= $names['summoner13']['div'] ?> </span>
                 </div>
                 <div class="col-lg-1">&nbsp;</div>
-                <div class="col-lg-2"><span style="color:#444444"> <?= $names['summoner23']['div'] ?> </span> </div>
+                <div class="col-lg-2"><span style="color:<?php echo LoggedUser::StaticDivToColor($tier23) ?>"> <?= $names['summoner23']['div'] ?> </span> </div>
                 <div class="col-lg-1"> 4/3/2 </div>      
                 <div class="col-lg-1"> 33% </div>
                 <div class="col-lg-1" style="text-align: center; font-size: 60%;">
@@ -107,10 +118,10 @@
                 <div class="col-lg-1">60%</div>
                 <div class="col-lg-1">2/3/4</div>
                 <div class="col-lg-2" style="font-size: 95%;">
-                    <span style="color:goldenrod"> <?= $names['summoner14']['div'] ?></span>
+                    <span style="color:<?php echo LoggedUser::StaticDivToColor($tier14) ?>"> <?= $names['summoner14']['div'] ?></span>
                 </div>
                 <div class="col-lg-1">&nbsp;</div>
-                <div class="col-lg-2"><span style="color:#444444"> <?= $names['summoner24']['div'] ?> </span> </div>
+                <div class="col-lg-2"><span style="color:<?php echo LoggedUser::StaticDivToColor($tier24) ?>"> <?= $names['summoner24']['div'] ?> </span> </div>
                 <div class="col-lg-1"> 4/3/2 </div>      
                 <div class="col-lg-1"> 33% </div>
                 <div class="col-lg-1" style="text-align: center; font-size: 60%;">
@@ -130,10 +141,12 @@
                 <div class="col-lg-1">60%</div>
                 <div class="col-lg-1">2/3/4</div>
                 <div class="col-lg-2" style="font-size: 95%;">
-                    <span style="color:goldenrod"> <?= $names['summoner15']['div'] ?> </span>
+                    <span style="color:<?php echo LoggedUser::StaticDivToColor($tier15) ?>"> <?= $names['summoner15']['div'] ?> </span>
                 </div>
                 <div class="col-lg-1">&nbsp;</div>
-                <div class="col-lg-2"><span style="color:#444444"> <?= $names['summoner25']['div'] ?> </span> </div>
+                <div class="col-lg-2">
+                    <span style="color:<?php echo LoggedUser::StaticDivToColor($tier25) ?>"> <?= $names['summoner25']['div'] ?> </span> 
+                </div>
                 <div class="col-lg-1"> 4/3/2 </div>      
                 <div class="col-lg-1"> 33% </div>
                 <div class="col-lg-1" style="text-align: center; font-size: 60%;">

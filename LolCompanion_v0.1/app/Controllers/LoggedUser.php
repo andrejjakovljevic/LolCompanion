@@ -263,7 +263,23 @@ class LoggedUser extends BaseController
             return '#5050d0';
         return '#000000';
     }
-
+    
+    public static function StaticDivToColor($div) {
+        if ($div == 'IRON')
+            return '#606060';
+        else if ($div == 'BRONZE')
+            return '#a06020';
+        else if ($div == 'SILVER')
+            return '#a0a0a0';
+        else if ($div == 'GOLD')
+            return '#ffff00';
+        else if ($div == 'PLATINUM')
+            return '#808080';
+        else if ($div == 'DIAMOND')
+            return '#5050d0';
+        return '#000000';
+    }
+    
     public function profile() {
         $summonerName = $this->session->get('user')->summonerName;
         $this->getMostPlayed($summonerName);
@@ -281,7 +297,7 @@ class LoggedUser extends BaseController
 
     private function getDivision($summonerName) {
         $api = new LeagueAPI([
-            LeagueAPI::SET_KEY    => 'RGAPI-15966e6c-4e1d-4880-827e-dffbacbe3836',
+            LeagueAPI::SET_KEY    => GlobalModel::getApiKey(),
             LeagueAPI::SET_REGION => Region::EUROPE_EAST,
         ]);
         $summoner = $api->getSummonerByName($summonerName);
@@ -308,9 +324,10 @@ class LoggedUser extends BaseController
 
     public function LiveGame()
     {
+        
         $apiKey = GlobalModel::getApiKey();
         //$userName = $this->session->get('user')->summonerName;
-        $userName = "Budziadao";
+        $userName = "maksbi";
         $url = "https://eun1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" . $userName . "?api_key=". $apiKey;
         $user = json_decode($this->getHtml($url));
         //var_dump($user);
@@ -318,13 +335,22 @@ class LoggedUser extends BaseController
         $matchUrl = "https://eun1.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/" . $userId . "?api_key=". $apiKey;
         //var_dump($this->getHtml($matchUrl));
         $match = json_decode($this->getHtml($matchUrl));
-        var_dump($match);
-        if(property_exists($match, 'status')) var_dump("ima property");
-        else var_dump("Nema property");
-//        if($match->status->status_code == 404){
-//            var_dump("NO LIVE GAME CURRENTLY");
-//            return index();
-//        }
+        //var_dump($match);
+        if(property_exists($match, 'status')) {
+            if($match->status->status_code == 404){
+                echo view('template/header_loggedin', [
+                'role' => $this->session->get('user')->role,
+                'username' => $this->session->get('user')->summonerName
+                ]);        
+                //array_push($niz1, [ 'name' =>  ] )
+                //echo view('pages/live_game', );
+                //echo view('pages/profile', $this->getMatchHistory($summonerName));
+                echo view('pages/no_live_game');
+                echo view('template/footer');
+                return ;
+                }
+        }
+       
         //var_dump($match->participants[0]->summonerName);
         //var_dump($match);
         
@@ -346,11 +372,20 @@ class LoggedUser extends BaseController
         {
             $lUrl="https://eun1.api.riotgames.com/lol/league/v4/entries/by-summoner/" . $match->participants[$i]->summonerId . "?api_key=". $apiKey;
             $l=json_decode($this->getHtml($lUrl));
+            
+            //var_dump($l);
             //var_dump($l[0]->tier." ".$l[0]->rank);
             
-            //var_dump($lUrl);
-            array_push($dArray, $l[0]->tier." ".$l[0]->rank);
-            
+            if($l==null || $l[0] == null || $l[0]->tier == ""){
+                $tier = "UNRANKED";
+                $rank = "";
+            }
+            else{
+                $tier = $l[0]->tier;
+                $rank = $l[0]->rank;
+            }
+            array_push($dArray, $tier . " ". $rank);
+             
             
             $champId=$match->participants[$i]->championId;
             
@@ -363,7 +398,7 @@ class LoggedUser extends BaseController
             $champion = $api->getStaticChampion($champId)->name;
             array_push($champArray, $champion);
             
-            var_dump($champion);
+            //var_dump($champion);
             
             
             echo "\n";
