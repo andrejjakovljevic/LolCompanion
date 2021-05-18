@@ -91,6 +91,9 @@ class LoggedUser extends BaseController
         }
         
        private function getChallenges(){
+           
+           $this->updateWrapper($this->session->get('user')->summonerName);
+           
             $uQModel = new UserQuestModel();
             $qModel = new QuestModel();
             $uQ = $uQModel->where('summonerName', $this->session->get('user')->summonerName)->findAll();
@@ -526,7 +529,17 @@ class LoggedUser extends BaseController
         return $data;
 	}
     
+    private function resetPlays($summonerName){
+        $playsM = new PlaysModel();
+        $playsM->truncate();
+        $korisnikM = new KorisnikModel();
+        $user = $korisnikM->where('summonerName', $summonerName)->first();
+        $user->lastGamePlayed = 0;
+        $korisnikM->save($user);
+    }
+        
     private function updateWrapper($summonerName) {
+        //$this->resetPlays($summonerName);
         DataDragonAPI::initByCDN();
         $api = new LeagueAPI([
             LeagueAPI::SET_KEY    => 'RGAPI-15966e6c-4e1d-4880-827e-dffbacbe3836',
@@ -541,7 +554,7 @@ class LoggedUser extends BaseController
         $matchlist = $api->getMatchListByAccount($api->getSummonerByName($summonerName)->accountId)->matches;
 
         $modelPlays = new PlaysModel();
-
+        $userQuests = (new UserQuestModel())->where('summonerName', $summonerName)->find();
         $limit = 0;
         for($i = 99; $i >= 0; --$i) {
             $match = $matchlist[$i];
@@ -555,6 +568,10 @@ class LoggedUser extends BaseController
             $matchO = $api->getMatch($match->gameId);
             if($match->queue == 420)
                 $this->updatePlayed($summonerName, $matchO, $api, $modelPlays, $match);
+            
+            
+            $this->questsProgress($api, $matchO, $userQuests, $summonerName);
+            
             $summoner->lastGamePlayed = $matchlist[$i]->timestamp / 1000;
             $modelKorisnik->save($summoner);
         }
@@ -624,7 +641,7 @@ class LoggedUser extends BaseController
     }
 
     // 
-    public function questsProgress($api, $matchO, $quests, $summonerName){
+    public function questsProgress($api, $matchO, $userQuests, $summonerName){
         
         $lastGamePlayedts = (new KorisnikModel())->find($summonerName)->lastGamePlayed;
         $qAttrModel = new QuestAttributeModel();
@@ -648,7 +665,7 @@ class LoggedUser extends BaseController
         if($game_ts < $lastGamePlayedts) return;
         $gameDuration = $matchO->gameDuration;
         
-        var_dump($game_ts);
+        //var_dump($game_ts);
         for ($i = 0; $i < 10; ++$i) {
             if($matchO->participantIdentities[$matchO->participants[$i]->participantId - 1]->player->summonerName != $summonerName)
                 continue;
@@ -658,7 +675,7 @@ class LoggedUser extends BaseController
             $stats = $part->stats;
             
             $stats->championName = $api->getStaticChampion($matchO->participants[$i]->championId)->name;
-            var_dump($stats);
+            //var_dump($stats);
             $goldEarned = $stats->goldEarned;
             $cs = $stats->totalMinionsKilled + $stats->neutralMinionsKilled;
             $firstTower = $stats->firstTowerAssist;
@@ -667,17 +684,18 @@ class LoggedUser extends BaseController
             break;  
         }
 
-        foreach($quests as $quest){
-            $qAttributes = $qAttrModel->where("questId", $quest->questId).find();
+        foreach($userQuests as $quest){
+            $qAttributes = $qAttrModel->where("questId", $quest->questId)->find();
             $numOfNotCompleted = count($qAttributes);
+            //var_dump($qAttributes);
             foreach($qAttributes as $qattribute){
-                if($qattribute-key == "champion" && $qattribute->val == $champion)
+                if($qattribute->attributeKey == "champion" && $qattribute->attributeValue == $champion)
                     $numOfNotCompleted--;
-                if($qattribute->key == "role" && $qattribute->val == 0)
+                if($qattribute->attributeKey == "role" && $qattribute->attributeValue == 0)
                     $numOfNotCompleted--;
-                if($qattribute->key == "Kills" && $stats->kills > $qattribute->value)
+                if($qattribute->attributeKey == "Kills" && $stats->kills > $qattribute->attributeValue)
                     $numOfNotCompleted--;
-                if($qattribute->key == "Gold" && $stats->goldEarned > $qattribute->value)
+                if($qattribute->attributeKey == "Gold" && $stats->goldEarned > $qattribute->attributeValue)
                     $numOfNotCompleted--;
 
             }
