@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 18, 2021 at 02:12 PM
+-- Generation Time: May 18, 2021 at 03:10 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -272,7 +272,7 @@ CREATE TABLE IF NOT EXISTS `global` (
 --
 
 INSERT INTO `global` (`name`, `value`) VALUES
-('api', 'RGAPI-807ec527-7ea9-4ba7-93b4-c4ae8f16ccc4');
+('api', 'RGAPI-15966e6c-4e1d-4880-827e-dffbacbe3836');
 
 -- --------------------------------------------------------
 
