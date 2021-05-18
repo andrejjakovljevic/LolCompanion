@@ -186,7 +186,7 @@ class BaseController extends Controller
         }
 		*/
 
-        echo view('template/footer');
+            echo view('template/footer');
         }
         
         private function get_info($curr_data,$champId)
@@ -324,5 +324,55 @@ class BaseController extends Controller
             {
                 return redirect()->to(site_url("LoggedUser/Champion/{$c->id}"));
             }
+        }
+        
+        public function OverallStatistics($role)
+        {   
+            if ($role == "Guest")
+			echo view('template/header.php');
+            else 
+            {
+                echo view('template/header_loggedin', [
+                        'role' => $this->session->get('user')->role,
+                        'username' => $this->session->get('user')->summonerName
+                ]);
+            }
+            $htmltop = HtmlDomParser::file_get_html("https://rankedboost.com/lol-tier-list-solo-queue/");
+            $tabela = $htmltop->find(".rankedBoost-lol-table");
+            $tabela = end($tabela);
+            $niz = ['.top','.jungle','.middle','.adc','.support'];
+            $podaci = [];
+            foreach ($niz as $role)
+            {
+                $red = $tabela->find($role,0);
+                $ime = $red->find(".champion_name-tl",0)->plainText;
+                $winrate = $red->find(".tl-win-perc",0)->plainText;
+                $pickrate = $red->find(".stat-tl-play-perc",0)->plainText;
+                $banrate = $red->find(".tl-ban-rate",0)->plainText;
+		DataDragonAPI::initByCDN();
+                $model = new ChampionModel();
+                $ime = trim($ime);         
+                $res = $model->where('name',$ime)->findAll();
+                //var_dump($res);
+                $res=$res[0];
+                $id = $res->id;
+                $icon = DataDragonAPI::getChampionIconUrl($ime);
+                $help = [
+                    "ikonica" => $icon,
+                    "ime" => $ime,
+                    "winrate" => $winrate,
+                    "pickrate" => $pickrate,
+                    "banrate" => $banrate,
+                    "id" => $id
+                     
+                ];
+                $podaci[count($podaci)]=$help;
+            }
+            $data = 
+            [
+                "podaci" => $podaci
+            ];      
+            echo view('pages/statistics', $data);
+            echo view('template/footer');
         }
 }

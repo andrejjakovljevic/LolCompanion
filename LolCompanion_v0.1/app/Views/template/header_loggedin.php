@@ -18,7 +18,7 @@
                     &nbsp;
                 </div>
                 <div class="col-lg-1 align-self-center">
-                    <a href="statistics.html" class="basic">Statistics</a>
+                    <a href="<?= site_url("LoggedUser/OverallStatistics/")?>" class="basic">Statistics</a>
                 </div>
                 <div class="col-lg-1 align-self-center">
                     <a href="<?= site_url("LoggedUser/LiveGame/")?>" class="basic">Live game</a> 
