@@ -135,7 +135,6 @@ class LoggedUser extends BaseController
             return $data;
         }
 
-
     protected function getAttributes($idQ) {
         $qAttrModel = new QuestAttributeModel();
         $attributes = $qAttrModel->where('questId', $idQ)->findAll();
@@ -560,17 +559,17 @@ class LoggedUser extends BaseController
                 $plays[$champ->id] = $plays[$champ->id][0];
         }
 
-        var_dump($plays);
-
         $limit = 0;
         for($i = 99; $i >= 0; --$i) {
             $match = $matchlist[$i];
-            if($match->timestamp < $summoner->lastGamePlayed)
+            if($match->timestamp / 1000 < $summoner->lastGamePlayed)
                 continue;
+            var_dump($match->timestamp);
             if($match->queue == 420) {
-                if (++$limit > 50)
-                    break;
-                if ($plays[(int) $match->champion] == NULL) {
+                if (++$limit > 50) {
+                    // break;
+                }
+                if ($plays[(int) $match->champion] == null) {
                     $plays[(int) $match->champion] = (object) [
                         'summonername' => $summonerName,
                         'idchamp' => (int) $match->champion,
@@ -593,43 +592,25 @@ class LoggedUser extends BaseController
                 if (($matchO->teams[0]->teamId == $team && $matchO->teams[0]->win == 'Win') || ($matchO->teams[1]->teamId == $team && $matchO->teams[1]->win == 'Win'))
                     ++$plays[(int) $match->champion]->games_won;
                 // var_dump($match);
-                $summoner->lastGamePlayed = $matchlist[$i]->timestamp;
+                $summoner->lastGamePlayed = $matchlist[$i]->timestamp / 1000;
                 $model->save($summoner);
-                $modelPlays->save($plays[(int) $match->champion]);
+                $modelPlays->where('summonername', $summonerName)->where('idchamp', $match->champion)->delete();
+                $modelPlays->insert($plays[(int) $match->champion]);
             }
         }
 
-        /*
-        $summoner->lastGamePlayed = $matchlist[0]->timestamp;
-        $korisnikModel.save($summoner);
-        var_dump($plays);
-        foreach ($plays as $play) {
-            if ($play != NULL)
-                $playsModel->save($play);
-        }
-        */
 
         $champ = [];
         $games = [];
-        for ($i = 0; $i < 3; ++$i) {
-            array_push($champ, array_search(max($count),$count));
-            if ($count[$champ[$i]] == 0)
-                return [];
-            array_push($games, $count[$champ[$i]]);
-            $count[$champ[$i]] = 0;
-        }
         $wins = [];
+
+        $plays = $modelPlays->where('summonername', $summonerName)->orderBy('games_played', 'desc')->findAll();
+        // var_dump($plays);
+
         for ($i = 0; $i < 3; ++$i) {
-            array_push($wins, 0);
-            foreach ($matches[$champ[$i]] as $match) {
-                $matchO = $api->getMatch($match);
-                for ($j = 0; $j < 10; ++$j) {
-                    if ($matchO->participantIdentities[$matchO->participants[$j]->participantId - 1]->player->summonerName == $summonerName)
-                        $team = $matchO->participants[$j]->teamId;
-                }
-                if (($matchO->teams[0]->teamId == $team && $matchO->teams[0]->win == 'Win') || ($matchO->teams[1]->teamId == $team && $matchO->teams[1]->win == 'Win'))
-                    $wins[$i]++;
-            }
+            array_push($champ, (int) $plays[$i]->idchamp);
+            array_push($games, $plays[$i]->games_played);
+            array_push($wins , $plays[$i]->games_won);
         }
 
         $splash = [];
