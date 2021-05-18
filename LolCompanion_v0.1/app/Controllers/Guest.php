@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 use App\Models\KorisnikModel;
+use App\Models\GlobalModel;
 
 class Guest extends BaseController
 {
@@ -63,6 +64,13 @@ class Guest extends BaseController
                 return $this->signUp('Passwords do not match');
         }
         
+        $lUrl="https://eun1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" .$this->request->getVar('username') . '?api_key=' . GlobalModel::getApiKey();
+        $sum=json_decode($this->getHtml($lUrl));
+        if (property_exists($sum, 'status'))
+        {
+            return $this->signUp('Username does not exists in the League of Legends Database');
+        }
+                
         $user = [];
         $user['summonerName'] = $this->request->getVar('username');
         $user['email'] = $this->request->getVar('email');
