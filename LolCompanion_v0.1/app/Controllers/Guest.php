@@ -63,8 +63,8 @@ class Guest extends BaseController
         if($this->request->getVar('password1') != $this->request->getVar('password2')) {
                 return $this->signUp('Passwords do not match');
         }
-        
-        $lUrl="https://eun1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" .$this->request->getVar('username') . '?api_key=' . GlobalModel::getApiKey();
+        $newName= str_replace(" ", "%20", $this->request->getVar('username'));
+        $lUrl="https://eun1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" . $newName  . '?api_key=' . GlobalModel::getApiKey();
         $sum=json_decode($this->getHtml($lUrl));
         if (property_exists($sum, 'status'))
         {

@@ -45,14 +45,18 @@ class LoggedUser extends BaseController
         $korisnikModel=new KorisnikModel();
         $user=$this->session->get('user');
 
-        if($this->request->getVar('curpass') != $user->password) {
-            return $this->changePassword('Wrong password');
+        $hes=hash("sha256",$this->request->getVar('curpass'),false);
+        $pas=$user->password;
+        $nes=strcmp($hes, $pas);
+        if ($hes!=$pas)
+        {
+            return $this->changePassword("Wrong password");
         }
 
         if($this->request->getVar('newpass1') != $this->request->getVar('newpass2')) {
             return $this->changePassword('Passwords do not match');
         }   
-        $user->password = $this->request->getVar('newpass1');
+        $user->password = hash("sha256",$this->request->getVar('newpass1'),false);
         $korisnikModel->update($user->summonerName, $user);
         return $this->index();
     }
@@ -316,11 +320,11 @@ class LoggedUser extends BaseController
             LeagueAPI::SET_REGION => Region::EUROPE_EAST,
             ]);
         $apiKey = GlobalModel::getApiKey();
-        //$userName = $this->session->get('user')->summonerName;
+        $userName = $this->session->get('user')->summonerName;
+        $userName = str_replace(" ", "%20", $userName);
         
         
-        
-        $userName = "Braun%20Grzegorz"; //HARDCODED!!!!!!!!!!! PROMENI OVO
+        //$userName = "Sensei%20God"; //HARDCODED!!!!!!!!!!! PROMENI OVO
         
         
         
