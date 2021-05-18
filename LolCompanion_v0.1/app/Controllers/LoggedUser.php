@@ -535,78 +535,67 @@ class LoggedUser extends BaseController
         ]);
 
         $modelKorisnik = new KorisnikModel();
-        $summoner = $model->find($summonerName);
+        $summoner = $modelKorisnik->find($summonerName);
         if ($summoner->lastGamePlayed == NULL) {
             $summoner->lastGamePlayed = 0;
         }
         $matchlist = $api->getMatchListByAccount($api->getSummonerByName($summonerName)->accountId)->matches;
 
-        $modelChamp = new ChampionModel();
-        $allChamps = $modelChamp->findAll();
-
-    }
-
-    private function updatePlayed($summonerName) {
-
         $modelPlays = new PlaysModel();
-        $plays = [];
-
-        /*
-        $modelPlays->insert([
-            'summonerName' => $summonerName,
-            'idChamp' => 123,
-            'games_won' => 0,
-            'games_played' => 0
-        ]);
-        */
-
-        foreach ($allChamps as $champ) {
-            $plays[$champ->id] = $modelPlays->where('summonername', $summonerName)->where('idchamp', $champ->id)->findAll();
-            if (sizeof($plays[$champ->id]) == 0)
-                $plays[$champ->id] = NULL;
-            else
-                $plays[$champ->id] = $plays[$champ->id][0];
-        }
 
         $limit = 0;
         for($i = 99; $i >= 0; --$i) {
             $match = $matchlist[$i];
             if($match->timestamp / 1000 < $summoner->lastGamePlayed)
                 continue;
-            if($match->queue == 420) {
-                if (++$limit > 50) {
-                    // break;
-                }
-                if ($plays[(int) $match->champion] == null) {
-                    $plays[(int) $match->champion] = (object) [
-                        'summonername' => $summonerName,
-                        'idchamp' => (int) $match->champion,
-                        'games_won' => 0,
-                        'games_played' => 0
-                    ];
-                    /*
-                    $plays[(int) $match->champion]->summonerName = $summonerName;
-                    $plays[(int) $match->champion]->idChamp = (int) $match->champion;
-                    $plays[(int) $match->champion]->games_won = 0;
-                    $plays[(int) $match->champion]->games_played = 0;
-                    */
-                }
-                $plays[(int) $match->champion]->games_played += 1;
-                $matchO = $api->getMatch($match->gameId);
-                for ($j = 0; $j < 10; ++$j) {
-                    if ($matchO->participantIdentities[$matchO->participants[$j]->participantId - 1]->player->summonerName == $summonerName)
-                        $team = $matchO->participants[$j]->teamId;
-                }
-                if (($matchO->teams[0]->teamId == $team && $matchO->teams[0]->win == 'Win') || ($matchO->teams[1]->teamId == $team && $matchO->teams[1]->win == 'Win'))
-                    ++$plays[(int) $match->champion]->games_won;
-                // var_dump($match);
-                $summoner->lastGamePlayed = $matchlist[$i]->timestamp / 1000;
-                $model->save($summoner);
-                $modelPlays->where('summonername', $summonerName)->where('idchamp', $match->champion)->delete();
-                $modelPlays->insert($plays[(int) $match->champion]);
+            if ($match->queue != 420 && $match->queue && 400 && $match->queue != 430 && $match->queue != 440)
+                continue;
+            if (++$limit > 50) {
+                // break;
             }
+            $matchO = $api->getMatch($match->gameId);
+            if($match->queue == 420)
+                $this->updatePlayed($summonerName, $matchO, $api, $modelPlays, $match);
+            $summoner->lastGamePlayed = $matchlist[$i]->timestamp / 1000;
+            $modelKorisnik->save($summoner);
         }
+    }
 
+    private function updatePlayed($summonerName, $matchO, $api, $modelPlays, $match) {
+
+        $play = $modelPlays->where('summonername', $summonerName)->where('idchamp', (int) $match->champion)->first();
+        if ($play == null) {
+            $play = (object) [
+                'summonername' => $summonerName,
+                'idchamp' => (int) $match->champion,
+                'games_won' => 0,
+                'games_played' => 0
+            ];
+        }
+        $play->games_played += 1;
+        for ($j = 0; $j < 10; ++$j) {
+            if ($matchO->participantIdentities[$matchO->participants[$j]->participantId - 1]->player->summonerName == $summonerName)
+                $team = $matchO->participants[$j]->teamId;
+        }
+        if (($matchO->teams[0]->teamId == $team && $matchO->teams[0]->win == 'Win') || ($matchO->teams[1]->teamId == $team && $matchO->teams[1]->win == 'Win'))
+            ++$play->games_won;
+
+        $modelPlays->where('summonername', $summonerName)->where('idchamp', $match->champion)->delete();
+        $modelPlays->insert($play);
+    }
+
+    private function getMostPlayed($summonerName) {
+
+
+        DataDragonAPI::initByCDN();
+        $api = new LeagueAPI([
+            LeagueAPI::SET_KEY    => 'RGAPI-15966e6c-4e1d-4880-827e-dffbacbe3836',
+            LeagueAPI::SET_REGION => Region::EUROPE_EAST,
+        ]);
+
+        $modelPlays = new PlaysModel();
+        
+        $this->updateWrapper($summonerName);
 
         $champ = [];
         $games = [];
@@ -632,6 +621,7 @@ class LoggedUser extends BaseController
                 'games'     =>  $games,
                 'wins'      =>  $wins
         ];
+
     }
 
     // 
