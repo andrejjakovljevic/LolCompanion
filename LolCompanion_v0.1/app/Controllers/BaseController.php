@@ -140,6 +140,13 @@ class BaseController extends Controller
                     "sorcery" => [8214,8229,8230,8224,8226,8275,8210,8234,8233,8237,8232,8236]
                 ];
                 
+                $attrPerk =
+                [
+                    "red1" => [5008,5005,5007],
+                    "red2" => [5008,5002,5003],
+                    "red3" => [5001,5002,5003]
+                ];
+                
                 $typePrimary = "inspiration";
                 if (in_array($rr->perk0, $runeUId["precision"])) $typePrimary="precision";
                 if (in_array($rr->perk0, $runeUId["resolve"])) $typePrimary="resolve";
@@ -157,6 +164,10 @@ class BaseController extends Controller
                 $perks[count($perks)]= $rr->perk3;
                 $perks[count($perks)]= $rr->perk4;
                 $perks[count($perks)]= $rr->perk5;
+                $attrperks = [];
+                $attrperks[count($attrperks)] = $rr->attrperk0;
+                $attrperks[count($attrperks)] = $rr->attrperk1;
+                $attrperks[count($attrperks)] = $rr->attrperk2; 
                 
                 $data = [
 			'name' => $champion->name,
@@ -172,7 +183,9 @@ class BaseController extends Controller
                         'perks' => $perks,
                         'type' => $typePrimary,
                         'typeSec' => $typeSecondary,
-                        'niz' => $runeUId
+                        'niz' => $runeUId,
+                        'attrperks' => $attrperks,
+                        'nizAttrPerk' => $attrPerk
 		];
 		echo view('pages/champion', $data);
 

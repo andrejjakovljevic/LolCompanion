@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 15, 2021 at 10:53 AM
+-- Generation Time: May 18, 2021 at 02:12 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `builds` (
   `iditem6` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_idchamps_idx` (`idchamp`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `builds`
@@ -74,7 +74,11 @@ INSERT INTO `builds` (`iditem1`, `iditem2`, `iditem3`, `idchamp`, `winrate`, `la
 (1039, 2031, 6660, 72, 60.5, 'Jungle', 8230, 8275, 8234, 8232, 8304, 8347, 5005, 5008, 5002, 13, 3158, 3742, 4401),
 (1039, 2031, 3330, 9, 55.4, 'Jungle', 8112, 8126, 8138, 8106, 8313, 8347, 5008, 5008, 5002, 14, 3020, 3157, 3165),
 (1056, 2003, 3802, 34, 55.6, 'Mid', 8112, 8126, 8138, 8105, 8009, 8014, 5008, 5008, 5003, 15, 3020, 3157, 3003),
-(1055, 2003, 6670, 51, 52.1, 'Bot', 8021, 8009, 9103, 8014, 8139, 8135, 5005, 5008, 5002, 16, 3006, 3095, 3094);
+(1055, 2003, 6670, 51, 52.1, 'Bot', 8021, 8009, 9103, 8014, 8139, 8135, 5005, 5008, 5002, 16, 3006, 3095, 3094),
+(1056, 2003, 3802, 1, 55.9, 'Mid', 8112, 8126, 8138, 8105, 8226, 8237, 5008, 5008, 5003, 17, 3020, 3157, 3165),
+(3850, 2003, 4642, 267, 54.6, 'Support', 8214, 8226, 8210, 8237, 8345, 8347, 5008, 5008, 5002, 18, 3853, 3158, 3011),
+(1055, 2003, 1037, 122, 57.6, 'Top', 8010, 9111, 9105, 8299, 8473, 8242, 5005, 5008, 5002, 19, 3047, 3053, 3742),
+(1039, 2031, 6660, 32, 57.7, 'Jungle', 8010, 9111, 9105, 8299, 8126, 8135, 5005, 5008, 5002, 20, 3047, 3075, 3001);
 
 -- --------------------------------------------------------
 
@@ -268,7 +272,7 @@ CREATE TABLE IF NOT EXISTS `global` (
 --
 
 INSERT INTO `global` (`name`, `value`) VALUES
-('api', 'RGAPI-f6023851-6214-421d-bdf7-7747359cb368');
+('api', 'RGAPI-807ec527-7ea9-4ba7-93b4-c4ae8f16ccc4');
 
 -- --------------------------------------------------------
 
@@ -305,7 +309,7 @@ DROP TABLE IF EXISTS `plays`;
 CREATE TABLE IF NOT EXISTS `plays` (
   `summonername` varchar(40) NOT NULL,
   `idchamp` int(11) NOT NULL,
-  `winrate` double NOT NULL,
+  `games_won` int(11) NOT NULL,
   `games_played` int(11) NOT NULL,
   KEY `fk_korisnik_idx` (`summonername`),
   KEY `fk_champion_idx` (`idchamp`)
