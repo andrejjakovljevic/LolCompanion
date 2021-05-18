@@ -61,9 +61,14 @@ class LoggedUser extends BaseController
 
 	public function champions($role = "")
 	{
-		return parent::champions("LoggedUser");
+            return parent::champions("LoggedUser");
 	}
 
+        public function OverallStatistics($role="")
+        {
+            return parent::OverallStatistics("LoggedUser");
+        }
+        
 	public function champion($id, $role = "")
 	{
 		return parent::champion($id, "LoggedUser");
