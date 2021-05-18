@@ -44,10 +44,10 @@ $br=0;
                   <tr>
                     <td>Top</td>
                     <td>
-                        <a href="jayce.html">
+                        <a href="<?= base_url('/LoggedUser/Champion'. $podaci[$br]["id"]);?>">
                         <img style="float: left; line-height: 10px; height: 50; padding-right: 10px; vertical-align: middle;"  src="<?php echo $podaci[$br]["ikonica"]?>">
                         </a>
-                        <a href="jayce.html"><?php echo $podaci[$br]["ime"] ?></a>
+                        <a href="<?= base_url('/LoggedUser/Champion/'. $podaci[$br]["id"]);?>" ><?php echo $podaci[$br]["ime"] ?></a>
                     </td>
                     <td style="color: <?php echo floatval(substr($podaci[$br]["winrate"],0, strlen($podaci[$br]["winrate"])-1))>=50?'green':'darkred'; ?>;"><?php echo $podaci[$br]["winrate"] ?></td>
                     <td><?php echo $podaci[$br]["pickrate"] ?></td>
@@ -56,10 +56,10 @@ $br=0;
                   <tr>
                     <td>Jungle</td>
                     <td>
-                        <a href="jayce.html">
+                        <a href="<?= base_url('/LoggedUser/Champion/'. $podaci[$br]["id"]);?>">
                         <img style="float: left; line-height: 10px; height: 50; padding-right: 10px; vertical-align: middle;"  src="<?php echo $podaci[$br]["ikonica"]?>">
                         </a>
-                        <a href="jayce.html"><?php echo $podaci[$br]["ime"] ?></a>
+                        <a href="<?= base_url('/LoggedUser/Champion/'. $podaci[$br]["id"]);?>"><?php echo $podaci[$br]["ime"] ?></a>
                     </td>
                     <td style="color: <?php echo floatval(substr($podaci[$br]["winrate"],0, strlen($podaci[$br]["winrate"])-1))>=50?'green':'darkred'; ?>;"><?php echo $podaci[$br]["winrate"] ?></td>
                     <td><?php echo $podaci[$br]["pickrate"] ?></td>
@@ -68,10 +68,10 @@ $br=0;
                   <tr>
                     <td>Middle</td>
                     <td>
-                        <a href="jayce.html">
+                        <a href="<?= base_url('/LoggedUser/Champion/'. $podaci[$br]["id"]);?>">
                         <img style="float: left; line-height: 10px; height: 50; padding-right: 10px; vertical-align: middle;"  src="<?php echo $podaci[$br]["ikonica"]?>">
                         </a>
-                        <a href="jayce.html"><?php echo $podaci[$br]["ime"] ?></a>
+                        <a href="<?= base_url('/LoggedUser/Champion/'. $podaci[$br]["id"]);?>"><?php echo $podaci[$br]["ime"] ?></a>
                     </td>
                     <td style="color: <?php echo floatval(substr($podaci[$br]["winrate"],0, strlen($podaci[$br]["winrate"])-1))>=50?'green':'darkred'; ?>;"><?php echo $podaci[$br]["winrate"] ?></td>
                     <td><?php echo $podaci[$br]["pickrate"] ?></td>
@@ -80,10 +80,10 @@ $br=0;
                   <tr>
                     <td>Adc</td>
                     <td>
-                        <a href="jayce.html">
+                        <a href="<?= base_url('/LoggedUser/Champion/'. $podaci[$br]["id"]);?>">
                         <img style="float: left; line-height: 10px; height: 50; padding-right: 10px; vertical-align: middle;"  src="<?php echo $podaci[$br]["ikonica"]?>">
                         </a>
-                        <a href="jayce.html"><?php echo $podaci[$br]["ime"] ?></a>
+                        <a href="<?= base_url('/LoggedUser/Champion/'. $podaci[$br]["id"]);?>"><?php echo $podaci[$br]["ime"] ?></a>
                     </td>
                     <td style="color: <?php echo floatval(substr($podaci[$br]["winrate"],0, strlen($podaci[$br]["winrate"])-1))>=50?'green':'darkred'; ?>;"><?php echo $podaci[$br]["winrate"] ?></td>
                     <td><?php echo $podaci[$br]["pickrate"] ?></td>
@@ -92,10 +92,10 @@ $br=0;
                   <tr>
                     <td>Support</td>
                     <td>
-                        <a href="jayce.html">
+                        <a href="<?= base_url('/LoggedUser/Champion/'. $podaci[$br]["id"]);?>">
                         <img style="float: left; line-height: 10px; height: 50; padding-right: 10px; vertical-align: middle;"  src="<?php echo $podaci[$br]["ikonica"]?>">
                         </a>
-                        <a href="jayce.html"><?php echo $podaci[$br]["ime"] ?></a>
+                        <a href="<?= base_url('/LoggedUser/Champion/'. $podaci[$br]["id"]);?>"><?php echo $podaci[$br]["ime"] ?></a>
                     </td>
                     <td style="color: <?php echo floatval(substr($podaci[$br]["winrate"],0, strlen($podaci[$br]["winrate"])-1))>=50?'green':'darkred'; ?>;"><?php echo $podaci[$br]["winrate"] ?></td>
                     <td><?php echo $podaci[$br]["pickrate"] ?></td>
@@ -103,3 +103,8 @@ $br=0;
                   </tr>
                 </tbody>
               </table>
+            <div class="row" style="margin-bottom: 30px">
+                <div class="col-12" style="text-align: right">
+                    as per: <a href="https://rankedboost.com/lol-tier-list-solo-queue/">RankedBoost</a>
+                </div>
+            </div>

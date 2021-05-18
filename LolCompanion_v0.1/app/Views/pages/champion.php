@@ -10,6 +10,7 @@ if ($typeSec=="domination" || $typeSec=="precision")
     $br2=4;
 }
 $pom=4;
+$brattr=0; 
 if ($type=="domination") $pom=3;
 ?>            
             <div class="row">
@@ -35,7 +36,7 @@ if ($type=="domination") $pom=3;
                 <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><img src="<?php echo $item6 ?>" style="width: 100%;"></div>
             </div>
             <div class="row">
-                <div class="col-12" style="text-align: center; font-size: xx-large; font-weight: bold"><?php echo $winrate ?>%</div>
+                <div class="col-12" style="text-align: center; font-size: xx-large; font-weight: bold">Winrate: <?php echo $winrate ?>%</div>
             </div>
             <div class="container runes text-center">
                 <div class="row">
@@ -99,5 +100,35 @@ if ($type=="domination") $pom=3;
                     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><img src="<?php echo ($url_base . $niz[$typeSec][$br2] . ".png");?>" style="width: 100%; <?php if (in_array($niz[$typeSec][$br2],$perks)) echo "border: 3pt solid black;"; $br2++;?>"></div>
                     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><img src="<?php echo ($url_base . $niz[$typeSec][$br2] . ".png");?>" style="width: 100%; <?php if (in_array($niz[$typeSec][$br2],$perks)) echo "border: 3pt solid black;"; $br2++;?>"></div>
                     <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><img src="<?php echo ($url_base . $niz[$typeSec][$br2] . ".png");?>" style="width: 100%; <?php if (in_array($niz[$typeSec][$br2],$perks)) echo "border: 3pt solid black;"; $br2++;?>"></div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        &nbsp;
+                    </div>
+                </div>
+                <div class="row attrperks">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">&nbsp;</div>
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><img src="<?php echo ($url_base . $nizAttrPerk["red1"][0] . ".png");?>" style="width: 100%; <?php if ($attrperks[0]==$nizAttrPerk["red1"][0]) echo "border: 3pt solid black;";?>"></div>
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><img src="<?php echo ($url_base . $nizAttrPerk["red1"][1] . ".png");?>" style="width: 100%; <?php if ($attrperks[0]==$nizAttrPerk["red1"][1]) echo "border: 3pt solid black;";?>"></div>
+                    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><img src="<?php echo ($url_base . $nizAttrPerk["red1"][2] . ".png");?>" style="width: 100%; <?php if ($attrperks[0]==$nizAttrPerk["red1"][2]) echo "border: 3pt solid black;";?>"></div>
+                </div>
+                
+                <div class="row attrperks">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">&nbsp;</div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><img src="<?php echo ($url_base . $nizAttrPerk["red2"][0] . ".png");?>" style="width: 100%; <?php if ($attrperks[1]==$nizAttrPerk["red2"][0]) echo "border: 3pt solid black;";?>"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><img src="<?php echo ($url_base . $nizAttrPerk["red2"][1] . ".png");?>" style="width: 100%; <?php if ($attrperks[1]==$nizAttrPerk["red2"][1]) echo "border: 3pt solid black;";?>"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><img src="<?php echo ($url_base . $nizAttrPerk["red2"][2] . ".png");?>" style="width: 100%; <?php if ($attrperks[1]==$nizAttrPerk["red2"][2]) echo "border: 3pt solid black;";?>"></div>
+                </div>
+                
+                <div class="row attrperks">
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">&nbsp;</div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><img src="<?php echo ($url_base . $nizAttrPerk["red3"][0] . ".png");?>" style="width: 100%; <?php if ($attrperks[2]==$nizAttrPerk["red2"][0]) echo "border: 3pt solid black;";?>"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><img src="<?php echo ($url_base . $nizAttrPerk["red3"][1] . ".png");?>" style="width: 100%; <?php if ($attrperks[2]==$nizAttrPerk["red2"][1]) echo "border: 3pt solid black;";?>"></div>
+                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1"><img src="<?php echo ($url_base . $nizAttrPerk["red3"][2] . ".png");?>" style="width: 100%; <?php if ($attrperks[2]==$nizAttrPerk["red2"][2]) echo "border: 3pt solid black;";?>"></div>
+                </div>
+                <div class="row" style="margin-bottom: 30px">
+                    <div class="col-12" style="text-align: right">
+                        as per: <a href="https://app.mobalytics.gg/lol/champions/">Mobalytics</a>
+                    </div>
                 </div>
             </div>

@@ -8,6 +8,7 @@ use App\Models\QuestModel;
 use RiotAPI\LeagueAPI\LeagueAPI;
 use RiotAPI\Base\Definitions\Region;
 use App\Models\QuestAttributeModel;
+use App\Models\GlobalModel;
 use RiotAPI\DataDragonAPI\DataDragonAPI;
 
 class LoggedUser extends BaseController
@@ -307,19 +308,23 @@ class LoggedUser extends BaseController
 
     public function LiveGame()
     {
-        $apiKey="RGAPI-f6023851-6214-421d-bdf7-7747359cb368";
-        $userName = $this->session->get('user')->summonerName;
+        $apiKey = GlobalModel::getApiKey();
+        //$userName = $this->session->get('user')->summonerName;
+        $userName = "Budziadao";
         $url = "https://eun1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" . $userName . "?api_key=". $apiKey;
         $user = json_decode($this->getHtml($url));
-        var_dump($user);
+        //var_dump($user);
         $userId = $user->id;
         $matchUrl = "https://eun1.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/" . $userId . "?api_key=". $apiKey;
         //var_dump($this->getHtml($matchUrl));
         $match = json_decode($this->getHtml($matchUrl));
-        if($match == null){
-            var_dump("NO LIVE GAME CURRENTLY");
-            return index();
-        }
+        var_dump($match);
+        if(property_exists($match, 'status')) var_dump("ima property");
+        else var_dump("Nema property");
+//        if($match->status->status_code == 404){
+//            var_dump("NO LIVE GAME CURRENTLY");
+//            return index();
+//        }
         //var_dump($match->participants[0]->summonerName);
         //var_dump($match);
         
