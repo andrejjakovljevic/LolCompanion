@@ -18,21 +18,16 @@
                 </div>
             </div>
             <div class="row text-center">
-                <div class="col-4">
-                    <h3>Xin Zhao</h3>
-                    <img src="<?= base_url('/slike/XinZhao_0.jpg')?>" style="width: 90%;"><br>
-                    50% in 18 games
-                </div>
-                <div class="col-4">
-                    <h3>Jinx</h3>
-                    <img src="<?= base_url('/slike/Jinx_0.jpg')?>" style="width: 90%;"><br>
-                    33% in 15 games
-                </div>
-                <div class="col-4">
-                    <h3>Jayce</h3>
-                    <img src="<?= base_url('/slike/Jayce_0.jpg')?>" style="width: 90%;"><br>
-                    40% in 12 games
-                </div>
+                <?php
+                for ($i = 0; $i < 3; ++$i) {
+                    echo '
+                        <div class="col-4">
+                            <h3>' . $champs['champ'][$i] . '</h3>
+                            <img src="' . $champs['splash'][$i] . '" style="width: 90%;"><br>
+                            ' . number_format(100 * $champs['wins'][$i] / $champs['games'][$i], 0) . '% in ' . $champs['games'][$i] . ' games
+                        </div>';
+                }
+                ?>
             </div>
             <div class="row naslov text-center">
                 <div class="col-12">
