@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 18, 2021 at 03:58 PM
+-- Generation Time: May 18, 2021 at 04:17 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -295,7 +295,8 @@ CREATE TABLE IF NOT EXISTS `korisnik` (
 --
 
 INSERT INTO `korisnik` (`summonerName`, `password`, `email`, `lastGamePlayed`, `role`) VALUES
-('Sensei God', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'andrej.jakovljevic2000@gmail.com', NULL, 2);
+('GINDRA', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'a@a.com', NULL, 0),
+('Sensei God', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'andrej.jakovljevic2000@gmail.com', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -309,6 +310,7 @@ CREATE TABLE IF NOT EXISTS `plays` (
   `idchamp` int(11) NOT NULL,
   `games_won` int(11) NOT NULL,
   `games_played` int(11) NOT NULL,
+  PRIMARY KEY (`summonername`,`idchamp`),
   KEY `fk_korisnik_idx` (`summonername`),
   KEY `fk_champion_idx` (`idchamp`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
