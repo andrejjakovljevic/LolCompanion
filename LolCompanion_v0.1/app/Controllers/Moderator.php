@@ -105,7 +105,7 @@ class Moderator extends LoggedUser {
             $uQModel->insert($userQ);
         }
         
-        if($_POST['champion'] != null && $_POST != ""){
+        if($_POST['champion'] != null || $_POST['champion'] != "" ||$_POST['champion'] != "Any"){
             $attribute = [
                 'questId' => $lastid,
                 'attributeKey' => 'champion',
@@ -113,7 +113,7 @@ class Moderator extends LoggedUser {
             ];
             $qattrModel->insert($attribute);
         }
-        if($_POST['role'] != null && $_POST != ""){
+        if($_POST['role'] != null || $_POST['role'] != "" || $_POST['role'] != "Any"){
             $attribute = [
                 'questId' => $lastid,
                 'attributeKey' => 'role',

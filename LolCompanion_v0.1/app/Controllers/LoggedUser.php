@@ -539,7 +539,7 @@ class LoggedUser extends BaseController
     }
         
     private function updateWrapper($summonerName) {
-        //$this->resetPlays($summonerName);
+        $this->resetPlays($summonerName);
         DataDragonAPI::initByCDN();
         $api = new LeagueAPI([
             LeagueAPI::SET_KEY    => 'RGAPI-15966e6c-4e1d-4880-827e-dffbacbe3836',
@@ -554,7 +554,7 @@ class LoggedUser extends BaseController
         $matchlist = $api->getMatchListByAccount($api->getSummonerByName($summonerName)->accountId)->matches;
 
         $modelPlays = new PlaysModel();
-        $userQuests = (new UserQuestModel())->where('summonerName', $summonerName)->find();
+        $userQuests = (new UserQuestModel())->where('summonerName', $summonerName)->where('completed', 0)->find();
         $limit = 0;
         for($i = 99; $i >= 0; --$i) {
             $match = $matchlist[$i];
@@ -562,8 +562,8 @@ class LoggedUser extends BaseController
                 continue;
             if ($match->queue != 420 && $match->queue && 400 && $match->queue != 430 && $match->queue != 440)
                 continue;
-            if (++$limit > 50) {
-                // break;
+            if (++$limit > 5) {
+                break;
             }
             $matchO = $api->getMatch($match->gameId);
             if($match->queue == 420)
@@ -646,7 +646,7 @@ class LoggedUser extends BaseController
         $lastGamePlayedts = (new KorisnikModel())->find($summonerName)->lastGamePlayed;
         $qAttrModel = new QuestAttributeModel();
         $uqModel = new UserQuestModel();
-        $currTime = time();
+        //$currTime = time() / 1000;
        
         $game_ts = $matchO->gameCreation;
         
@@ -662,9 +662,12 @@ class LoggedUser extends BaseController
         else return;
 
         // only check games with timestamp after lastGamePlayed
-        if($game_ts < $lastGamePlayedts) return;
+        //if($game_ts < $lastGamePlayedts) return;
         $gameDuration = $matchO->gameDuration;
-        
+        $goldEarned = 0;
+        $champion = "";
+        $goldPerMin = 0;
+        $firstTower = 0;
         //var_dump($game_ts);
         for ($i = 0; $i < 10; ++$i) {
             if($matchO->participantIdentities[$matchO->participants[$i]->participantId - 1]->player->summonerName != $summonerName)
@@ -680,18 +683,24 @@ class LoggedUser extends BaseController
             $cs = $stats->totalMinionsKilled + $stats->neutralMinionsKilled;
             $firstTower = $stats->firstTowerAssist;
             $goldPerMin = $goldEarned / ($gameDuration / 60);
-            //var_dump($stats->getData());
+            
             break;  
         }
-
+        //var_dump($goldEarned);
+        //var_dump($userQuests);
+        
         foreach($userQuests as $quest){
             $qAttributes = $qAttrModel->where("questId", $quest->questId)->find();
+            //var_dump($qAttributes);
             $numOfNotCompleted = count($qAttributes);
+            
             //var_dump($qAttributes);
             foreach($qAttributes as $qattribute){
-                if($qattribute->attributeKey == "champion" && $qattribute->attributeValue == $champion)
+                if($qattribute->attributeKey == "champion" && $qattribute->attributeValue == "Any")
                     $numOfNotCompleted--;
-                if($qattribute->attributeKey == "role" && $qattribute->attributeValue == 0)
+                if($qattribute->attributeKey == "champion" && strcmp($qattribute->attributeValue, $champion) == 0)
+                    $numOfNotCompleted--;
+                if($qattribute->attributeKey == "role" && $qattribute->attributeValue == "Any")
                     $numOfNotCompleted--;
                 if($qattribute->attributeKey == "Kills" && $stats->kills > $qattribute->attributeValue)
                     $numOfNotCompleted--;
@@ -699,10 +708,13 @@ class LoggedUser extends BaseController
                     $numOfNotCompleted--;
 
             }
-
+            var_dump($numOfNotCompleted);
             if($numOfNotCompleted == 0){
-                $userQuest = $uqModel->where("questId", $quest->questId)->where('summonerName', summonerName)->find()[0];
+                var_dump("COMPLETED A QUEST");
+                $userQuest = $uqModel->where("questId", $quest->questId)->where('summonerName', $summonerName)->find()[0];
                 $userQuest->completed = 1;
+        
+                $uqModel->where('summonerName', $summonerName)->where('questId', $quest->questId)->delete();
                 $uqModel->save($userQuest);
             }
         }

@@ -17,6 +17,9 @@
                 <div class="col-lg-3">
                     <label>Champion:</label>
                     <select name="champion" id="champion">
+                        <?php
+                            
+                        ?>
                         <option value="Any">Any</option>
                         <option value="Xin Zhao">Xin Zhao</option>
                         <option value="Aatrox">Aatrox</option>
