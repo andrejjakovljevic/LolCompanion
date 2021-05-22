@@ -4,6 +4,9 @@ namespace App\Controllers;
 
 require_once __DIR__  . "../../../vendor/autoload.php";
 
+/**
+ * Autor: Andrej Jakovljevic 18/0039,
+ */
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
@@ -19,16 +22,8 @@ use RiotAPI\DataDragonAPI\DataDragonAPI;
 use voku\helper\HtmlDomParser;
 
 /**
- * Class BaseController
- *
- * BaseController provides a convenient place for loading components
- * and performing functions that are needed by all your controllers.
- * Extend this class in any new controllers:
- *     class Home extends BaseController
- *
- * For security be sure to declare any new methods as protected or private.
+ * Kontroler koji sadrzi osnovni skup funckionalnosti koji je potreban svim korisnicima
  */
-
 class BaseController extends Controller
 {
 	/**
@@ -59,6 +54,10 @@ class BaseController extends Controller
                 $this->session = session();
 	}
 
+        /**
+         * Funckija koja prikazuje informacije o svim herojima, tj. poziva odgovarajuci view
+         * @param type $role - Tip koirniska koji je zatrazio prikaz heroja
+         */
 	public function champions($role) {
 		if ($role == "Guest")
 			echo view('template/header');
@@ -72,6 +71,11 @@ class BaseController extends Controller
 		echo view('template/footer');
 	}
 
+        /**
+         * Funkcija koja prima ime sa razmacima i velikim slvoima i pretvara ga u ime bez razmaka i samo sa malim slovima
+         * @param type $name
+         * @return type
+         */
 	public function champName($name) {
 		$newchamp = str_replace([' ', "'"], "", $name);
 		if ($name == "Nunu&Willump") {
@@ -80,6 +84,12 @@ class BaseController extends Controller
 		return strtolower($newchamp);
 	}
 
+        /**
+         * Funkcija koja vraca html za odredjeni zahtev
+         * @param type $url - url zahteva
+         * @param type $post - da li je post zahtev
+         * @return type - trazeni html
+         */
         public function getHtml($url, $post = null) {
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
@@ -95,6 +105,13 @@ class BaseController extends Controller
             curl_close($ch);
             return $result;
         }
+        
+        /**
+         * Prikaz statistike za championa - poziva odgovarajuci view php i funckiju za ubacivanje u bazu
+         * @param type $id - id heroja
+         * @param type $role - uloga heroja u igri (top,jungle,mid,adc,support)
+         * @return type - redirekt na potrebnu stranicu
+         */
 	public function champion($id, $role)
         {
 		if ($role == "Guest")
@@ -203,20 +220,14 @@ class BaseController extends Controller
                         'nizAttrPerk' => $attrPerk
 		];
 		echo view('pages/champion', $data);
-
-                   
-		/*
-        $summoner = $api->getSummonerByName("Gindra");
-        $matchlist = $api->getMatchlistByAccount($summoner->accountId);
-        foreach ($matchlist as $match) {
-            var_dump($match);
-            echo "\n";
-        }
-		*/
-
-            echo view('template/footer');
+                echo view('template/footer');
         }
         
+        /**
+         * Funkcija koja ubacuje podatke o najboljim strategijama za heroja u bazu
+         * @param type $curr_data - podaci o heroju
+         * @param type $champId - id heroja
+         */
         private function get_info($curr_data,$champId)
         {
             $h = $curr_data["name"];
@@ -313,6 +324,10 @@ class BaseController extends Controller
             $buildModel->insert($build);
         }
         
+        /**
+         * Funckija koja radi pretragu po heroju i ide na odredjenu stranicu u zavisnosti od pretrage
+         * @return type - redirkt na potrebu stranicu
+         */
         public function searchChampion()
         {
             $ses = session();
@@ -354,6 +369,10 @@ class BaseController extends Controller
             }
         }
         
+        /**
+         * Kontroler koji prikazuje statistike koje prikazuje odredjeni igrac
+         * @param string $role - Rola koju ima trenutni korisnik
+         */
         public function OverallStatistics($role)
         {   
             if ($role == "Guest")

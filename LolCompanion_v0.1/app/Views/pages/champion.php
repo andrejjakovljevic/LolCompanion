@@ -1,4 +1,7 @@
 <?php 
+/**
+ * Autori: Andrej Jakovljevic 18/0039
+ */
 use RiotAPI\LeagueAPI\LeagueAPI;
 use RiotAPI\Base\Definitions\Region;
 use RiotAPI\DataDragonAPI\DataDragonAPI;

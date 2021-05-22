@@ -1,5 +1,12 @@
 <?php
-
+/*
+ * Autori: 
+ * Veljko Rvovic 18/0132
+ * 
+ * Controllers\Admin - klasa za prikaz i obavljanje adminskih funkcionalnosti
+ * 
+ * @version 1.0
+ */
 namespace App\Controllers;
 
 require_once __DIR__  . "../../../vendor/autoload.php";
@@ -19,6 +26,11 @@ use App\Models\BuildModel;
 
 class Admin extends Moderator {
 
+    /**
+     * Prikaz admin panela sa opcionom porukom
+     * 
+     * @param String $msg
+     */
     public function index($msg = "") {
         echo view('template/header_loggedin', [
             'role' => $this->session->get('user')->role,
@@ -28,6 +40,12 @@ class Admin extends Moderator {
         echo view('template/footer');
     }
 
+    /**
+     * Azurira trenutni API key
+     * DEPRECATED
+     * 
+     * @return void
+     */
     public function updateAPI() {
         if(!$this->validate(['api' => 'required'])){
             return $this->index('Field must not be empty');
@@ -44,6 +62,11 @@ class Admin extends Moderator {
         return $this->index('API key successfully changed');
     }
 
+    /*
+     * Azurira stranicu 'Statistics'
+     * DEPRECATED
+     * 
+     */
     public function updateStatistics() {
 		DataDragonAPI::initByCDN();
 		$model = new GlobalModel();
@@ -82,6 +105,11 @@ class Admin extends Moderator {
         return $this->index('Successfully updated');
     }
     
+    /**
+     * Uklanja korisnicki nalog iz baze i ispisuje poruku
+     * 
+     * @return void
+     */
     public function RemoveAccount(){
         if(!$this->validate(['summonerName' => 'required'])){
             return $this->index('Field must not be empty');
@@ -99,6 +127,11 @@ class Admin extends Moderator {
         return $this->index('User'. $user->summonerName. ' removed');
     }
     
+    /**
+     * Dodaje korisniku status moderatora i ispisuje poruku
+     * 
+     * @return void
+     */
     public function AddModerator(){
         if(!$this->validate(['summonerName' => 'required'])){
             return $this->index('Field must not be empty');
@@ -120,6 +153,11 @@ class Admin extends Moderator {
         }
     }
     
+    /**
+     * Uklanja status moderatora korisnika i ispisuje poruku
+     * 
+     * @return void
+     */
     public function RemoveModerator(){
         if(!$this->validate(['summonerName' => 'required'])){
             return $this->index('Field must not be empty');

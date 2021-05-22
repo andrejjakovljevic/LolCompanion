@@ -1,3 +1,8 @@
+<?php
+/**
+ * Autori: Veljko Rvovic 18/0132
+ */
+?>
 <div class = "row">
                 <div class = "col-lg-12 text-center naslov" style="padding: 0; font-weight: normal;">
                     All Challenges

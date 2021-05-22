@@ -1,3 +1,6 @@
+<?php/**
+ * Autori: Aleksandar Maksimovic 18/0016
+ */?>
 <?php use App\Controllers\LoggedUser;
 $tier11 = explode(" ", $names['summoner11']['div'])[0];
 $tier12 = explode(" ", $names['summoner12']['div'])[0];

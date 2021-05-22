@@ -1,4 +1,9 @@
-            <div class="row" style="padding: 1%;">
+<?php
+/**
+ * Autori: Dragan Milovancevic 18/0153
+ */
+?>
+<div class="row" style="padding: 1%;">
                 <div class="col-12 text-center naslov" style="padding: 0px;">
                     <?= $name ?> <br>
                     <?php echo $division ?>

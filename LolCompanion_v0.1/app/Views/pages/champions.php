@@ -1,4 +1,7 @@
-                <div class="row">
+/**
+ * Autori: Andrej Jakovljevic 18/0039
+ */                
+<div class="row">
                     <div class="col-lg-12 col-xs-12 naslov">
                         Champions
                     </div>

@@ -429,7 +429,7 @@ class LoggedUser extends BaseController
     {
         DataDragonAPI::initByCDN();
             $api = new LeagueAPI([
-            LeagueAPI::SET_KEY    => 'RGAPI-1721c44e-ea77-4425-9a3a-55d598c0a3a3',
+            LeagueAPI::SET_KEY    => GlobalModel::getApiKey(),
             LeagueAPI::SET_REGION => Region::EUROPE_EAST,
             ]);
         $apiKey = GlobalModel::getApiKey();
@@ -443,13 +443,11 @@ class LoggedUser extends BaseController
         
         $url = "https://eun1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" . $userName . "?api_key=". $apiKey;
         $user = json_decode($this->getHtml($url));
-        //var_dump($user);
-        //var_dump($user);
         $userId = $user->id;
         $matchUrl = "https://eun1.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/" . $userId . "?api_key=". $apiKey;
-        //var_dump($this->getHtml($matchUrl));
+        
         $match = json_decode($this->getHtml($matchUrl));
-        //var_dump($match);
+        
         if(property_exists($match, 'status')) {
             if($match->status->status_code == 404){
                 echo view('template/header_loggedin', [
@@ -671,7 +669,7 @@ class LoggedUser extends BaseController
         $this->resetPlays($summonerName);
         DataDragonAPI::initByCDN();
         $api = new LeagueAPI([
-            LeagueAPI::SET_KEY    => 'RGAPI-15966e6c-4e1d-4880-827e-dffbacbe3836',
+            LeagueAPI::SET_KEY    => GlobalModel::getApiKey(),
             LeagueAPI::SET_REGION => Region::EUROPE_EAST,
         ]);
 

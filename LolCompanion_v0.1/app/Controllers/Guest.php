@@ -1,5 +1,12 @@
 <?php
-
+/*
+ * Autori:
+ * Andrej Jakovljevic 18/0039
+ * 
+ * Controllers\Guest
+ * 
+ * @version 1.0
+ */
 namespace App\Controllers;
 use App\Models\KorisnikModel;
 use App\Models\GlobalModel;
@@ -7,13 +14,23 @@ use App\Models\QuestModel;
 use App\Models\UserQuestModel;
 class Guest extends BaseController
 {
+        /**
+         * Prikaz index stranice sa opcionom porukom
+         * 
+         * @param String $poruka
+         */
 	public function index($poruka='')
 	{
 		echo view('template/header.php');
 		echo view('pages/index.php', ['poruka' => $poruka]);
                 echo view('template/footer.php');
 	}
-
+        
+        /**
+         * Prikaz stranice za logovanje sa opcionom porukom
+         * 
+         * @param String $poruka
+         */
 	public function login($poruka='')
 	{
 		echo view('template/header.php');
@@ -21,6 +38,13 @@ class Guest extends BaseController
 		echo view('template/footer.php');
 	}
 	
+        /**
+         * Funkcija za logovanje
+         * proverava obaveznih polja, hesiranje lozinke,
+         * provera postojanja korisnika i lozinke u bazi
+         * 
+         * @return void
+         */
     public function loginSubmit(){
         if(!$this->validate(['username'=>'required', 'password'=>'required'])){
             return $this->login('Please fill in all the required fields!');
@@ -41,12 +65,25 @@ class Guest extends BaseController
         return redirect()->to(site_url('LoggedUser'));
     }
 
-	public function signUp($poruka = '') {
-            echo view('template/header.php');
-            echo view('pages/signup.php', ['poruka' => $poruka]);
-            echo view('template/footer.php');
-        }
+    /**
+     * Prikaz stranice za registraciju
+     * 
+     * @param String $poruka
+     */
+    public function signUp($poruka = '') {
+        echo view('template/header.php');
+        echo view('pages/signup.php', ['poruka' => $poruka]);
+        echo view('template/footer.php');
+    }
 	
+        /**
+         * Funkcija za registraciju
+         * Proverava sva obavezna polja, da li korisnik sa istim imenom vec postoji
+         * i da li postoji nalog u LoL-u sa datim korisnickim imenom
+         * 
+         * 
+         * @return void
+         */
 	public function signUpSubmit() {
         if(!$this->validate(['username'=>'required', 'password1'=>'required', 'email'=>'required', 'password2'=>'required'])){
             return $this->signUp('Please fill in all the required fields!');
@@ -92,11 +129,24 @@ class Guest extends BaseController
         return redirect()->to(site_url('Guest/login'));
     }
 
+        /**
+         * Prikaz informacija o svim herojima
+         * 
+         * @param String $role - tip korisnika
+         * @return void
+         */
 	public function champions($role = "")
 	{
 		return parent::champions("Guest");
 	}
 
+        /**
+         * Prikaz informacija o pojedinom heroju
+         * 
+         * @param type $id - identifikator heroja
+         * @param type $role - tip korisnika
+         * @return void
+         */
 	public function champion($id, $role = "") {
 		return parent::champion($id, "Guest");
 	}

@@ -1,5 +1,7 @@
 <?php
-
+/*
+ * Autor: Aleksandar Maksimovic 18/0016
+ */
 namespace App\Models;
 
 use CodeIgniter\Model;
