@@ -29,28 +29,6 @@ p.lead {
 	margin: 0 auto;
 	padding: 1rem;
 }
-.header {
-	background: #85271f;
-	color: #fff;
-}
-.header h1 {
-	color: #fff;
-}
-.header p {
-	font-size: 1.2rem;
-	margin: 0;
-	line-height: 2.5;
-}
-.header a {
-	color: rgba(255,255,255,0.5);
-	margin-left: 2rem;
-	display: none;
-	text-decoration: none;
-}
-.header:hover a {
-	display: inline;
-}
-
 .footer .container {
 	border-top: 1px solid #e7e7e7;
 	margin-top: 1rem;
