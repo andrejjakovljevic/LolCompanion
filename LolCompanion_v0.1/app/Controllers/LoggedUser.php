@@ -13,8 +13,20 @@ use App\Models\QuestAttributeModel;
 use App\Models\GlobalModel;
 use RiotAPI\DataDragonAPI\DataDragonAPI;
 
+/**
+ * Autori:  Aleksandar Maksimovic   ma180016
+ *          Andrej Jakovljevic      ja180039
+ *          Dragan Milovancevic     md180153
+ *          Veljko Rvovic           rv180132
+ * Klasa LoggedUser sadrzi funkcije za prikaz i pomocne funkije koje one pozivaju
+ * vezane za registovanog korisnika
+ */
 class LoggedUser extends BaseController
 {
+    /**
+     * Autor: Dragan Milovancevic md180153
+     * Funkcija kreira stranicu sa funkcijom pretrage heroja
+     */
 	public function index()
 	{
         $data = [];
@@ -26,6 +38,11 @@ class LoggedUser extends BaseController
         echo view('template/footer');
 	}
 
+    /**
+     * Autor: Andrej Jakovljevic ja180039
+     * Funkcija kreira stranicu sa funkcijom promene sifre
+     * @param msg Poruka korisniku o uspesnosti promene sifre
+     */
     public function changePassword($msg = '')
     {
         $data = [];
@@ -38,6 +55,11 @@ class LoggedUser extends BaseController
         echo view('template/footer');
     }
 
+    /**
+     * Autor: Andrej Jakovljevic ja180039
+     * Funkcija obavlja promenu sifre i obavestavanje korisnika
+     * @return void
+     */
     public function changePasswordSubmit() {
         if(!$this->validate(['curpass'=>'required', 'newpass1'=>'required', 'newpass2'=>'required'])){
             return $this->changePassword('Please fill in all the required fields!');
@@ -61,92 +83,134 @@ class LoggedUser extends BaseController
         return $this->index();
     }
 
+    /**
+     * Autor: Dragan Milovancevic md180153
+     * Funkcija za izlogovanje korisnika
+     * @return void
+     */
     public function logout() {
         $this->session->remove('user');
         return redirect()->to(site_url('Guest'));
     }
 
+    /**
+     * Autor: Andrej Jakovljevic ja180039
+     * Funkcija poziva odgovarajucu funkciju iz BaseContorller-a
+     * @param string role Uloga trenutnog korisnika
+     */
 	public function champions($role = "")
 	{
             return parent::champions("LoggedUser");
 	}
 
-        public function OverallStatistics($role="")
-        {
-            return parent::OverallStatistics("LoggedUser");
-        }
+    /**
+     * Autor: Andrej Jakovljevic ja180039
+     * Funkcija poziva odgovarajucu funkciju iz BaseContorller-a
+     * @param string role Uloga trenutnog korisnika
+     */
+    public function OverallStatistics($role="")
+    {
+        return parent::OverallStatistics("LoggedUser");
+    }
         
+    /**
+     * Autor: Andrej Jakovljevic ja180039
+     * Funkcija poziva odgovarajucu funkciju iz BaseContorller-a
+     * @param int id id heroja 
+     * @param string role uloga trenutnog korisnika
+     * @return void
+     */
 	public function champion($id, $role = "")
 	{
 		return parent::champion($id, "LoggedUser");
 	}
         
-        public function challenges() {
-            echo view('template/header_loggedin', [
-				'role' => $this->session->get('user')->role,
-				'username' => $this->session->get('user')->summonerName
-			]);
-            echo view('pages/challenges', $this->getChallenges());
-            echo view('template/footer');
-        }
+    /**
+     * Autor: Veljko Rvovic rv180132
+     * Funckija kreira stranicu za prikazivanje izazova
+     */
+    public function challenges() {
+        echo view('template/header_loggedin', [
+            'role' => $this->session->get('user')->role,
+            'username' => $this->session->get('user')->summonerName
+        ]);
+        echo view('pages/challenges', $this->getChallenges());
+        echo view('template/footer');
+    }
+
+    /**
+     * Autor: Veljko Rvovic rv180132
+     * Funckija kreira i vraca objekat kori sadrzi sve izazove za trenutnog korisnika
+     * @return array
+     */
+    private function getChallenges() {
         
-       private function getChallenges(){
-           
-           $this->updateWrapper($this->session->get('user')->summonerName);
-           
-            $uQModel = new UserQuestModel();
-            $qModel = new QuestModel();
-            $uQ = $uQModel->where('summonerName', $this->session->get('user')->summonerName)->findAll();
-            $poroUser = count($uQModel->where('summonerName', $this->session->get('user')->summonerName)->where('completed', 1)->findAll());
-            $poroTotal = count($qModel->findAll());
+        $this->updateWrapper($this->session->get('user')->summonerName);
+        
+        $uQModel = new UserQuestModel();
+        $qModel = new QuestModel();
+        $uQ = $uQModel->where('summonerName', $this->session->get('user')->summonerName)->findAll();
+        $poroUser = count($uQModel->where('summonerName', $this->session->get('user')->summonerName)->where('completed', 1)->findAll());
+        $poroTotal = count($qModel->findAll());
 
-            $data = [
-                'poroUser' => $poroUser,
-                'poroTotal' => $poroTotal,
-                'quests' => []
+        $data = [
+            'poroUser' => $poroUser,
+            'poroTotal' => $poroTotal,
+            'quests' => []
+        ];
+        
+        foreach ($uQ as $userQuest) {
+            $quest = $qModel->find($userQuest->questId);
+            $dataQuest = [
+                'id' => $userQuest->questId,
+                'title' => $quest->title,
+                'description' => $quest->description,
+                'image' => $quest->image,
+                'completed' => $userQuest->completed,
+                'attributes' => $this->getAttributes($quest->questId)
             ];
-            
-            foreach ($uQ as $userQuest) {
-                $quest = $qModel->find($userQuest->questId);
-                $dataQuest = [
-                    'id' => $userQuest->questId,
-                    'title' => $quest->title,
-                    'description' => $quest->description,
-                    'image' => $quest->image,
-                    'completed' => $userQuest->completed,
-                    'attributes' => $this->getAttributes($quest->questId)
-                ];
-                //var_dump($dataQuest['attributes']);
-                $preReq = false;
-                $questRequired = null;
-                foreach($dataQuest['attributes'] as $atr){
-                    if($atr->attributeKey == 'Prerequisite Id'){
-                        $questRequired = $atr->attributeValue;
-                        $preReq = $atr->questId;
-                        break;
-                    }   
-                }
-                // quest has a prerequisite quest
-                if($preReq != false){ 
-                    // get the prerequisite quest and check if its completed by this user
-                    $preReQuest = $uQModel->where('questId', $questRequired)->where('summonerName', $this->session->get('user')->summonerName)->find();
-                    if($preReQuest[0]->completed == 0)
-                        continue; 
-                }
-                
-                 
-                // $dataQuest['attributes'];
-                array_push($data['quests'], $dataQuest);
+            //var_dump($dataQuest['attributes']);
+            $preReq = false;
+            $questRequired = null;
+            foreach($dataQuest['attributes'] as $atr){
+                if($atr->attributeKey == 'Prerequisite Id'){
+                    $questRequired = $atr->attributeValue;
+                    $preReq = $atr->questId;
+                    break;
+                }   
             }
-            return $data;
+            // quest has a prerequisite quest
+            if($preReq != false){ 
+                // get the prerequisite quest and check if its completed by this user
+                $preReQuest = $uQModel->where('questId', $questRequired)->where('summonerName', $this->session->get('user')->summonerName)->find();
+                if($preReQuest[0]->completed == 0)
+                    continue; 
+            }
+            
+                
+            // $dataQuest['attributes'];
+            array_push($data['quests'], $dataQuest);
         }
+        return $data;
+    }
 
+    /**
+     * Autor: Veljko Rvovic rv180132
+     * Pomocna funkcija za dohvatanje delova izazova
+     * @return object
+     */
     protected function getAttributes($idQ) {
         $qAttrModel = new QuestAttributeModel();
         $attributes = $qAttrModel->where('questId', $idQ)->findAll();
         return $attributes;
     }
 
+    /**
+     * Autor: Dragan Milovancevic
+     * Pomocna funkcija za dohvatanje broja osvojenih i maksimalnih poroa
+     * @param string summonerName Korisnicko ime
+     * @return object
+     */
     private function getPoros($summonerName) {
             $uQModel = new UserQuestModel();
             $qModel = new QuestModel();
@@ -156,7 +220,13 @@ class LoggedUser extends BaseController
             return (object) [ 'poroUser' => $poroUser, 'poroTotal' => $poroTotal ];
     }
 
-
+    /**
+     * Autor: Dragan Milovancevic md180153
+     * Funckija za dohvatanje istorije igara za zadatog korisnika koristeci v5 match api
+     * trenutno se ne koristi
+     * @param string summonerName Korisnicko ime
+     * @return array
+     */
     private function getMatchHistoryV5($summonerName) {
             DataDragonAPI::initByCDN();
 
@@ -249,6 +319,12 @@ class LoggedUser extends BaseController
         return ['matches' => $data];
 	}
 
+    /**
+     * Autor: Dragan Milovancevic md180153
+     * Pomocna funkcija za odredjivanje boje na osnovu divizije
+     * @param string div Divizija
+     * @return string
+     */
     private function divToColor($div) {
         if ($div == 'IRON')
             return '#606060';
@@ -265,6 +341,12 @@ class LoggedUser extends BaseController
         return '#000000';
     }
     
+    /**
+     * Autor: Veljko Rvovic rv180132
+     * Staticka pomocna funkcija za odredjivanje boje na osnovu divizije
+     * @param string div Divizija
+     * @return string
+     */
     public static function StaticDivToColor($div) {
         if ($div == 'IRON')
             return '#606060';
@@ -281,6 +363,10 @@ class LoggedUser extends BaseController
         return '#000000';
     }
     
+    /**
+     * Autor: Dragan Milovancevic md180153
+     * Funkija za prikaz profilne stranice korisnika
+     */
     public function profile() {
         $summonerName = $this->session->get('user')->summonerName;
         echo view('template/header_loggedin', [
@@ -297,6 +383,12 @@ class LoggedUser extends BaseController
         echo view('template/footer');
     }
 
+    /**
+     * Autor: Dragan Milovancevic md180153
+     * Funkija koja odredjuje diviziju zadatog korisnika
+     * @param string summonerName Korisnicko ime
+     * @return string dom element
+     */
     private function getDivision($summonerName) {
         $api = new LeagueAPI([
             LeagueAPI::SET_KEY    => GlobalModel::getApiKey(),
@@ -311,6 +403,11 @@ class LoggedUser extends BaseController
         return '<span style="color: #000000; font-size: 30px"> UNRANKED </span>';
     }
 
+    /**
+     * Autor: Dragan Milovancevic md180153
+     * Funkija za prikaz stranice neregistrovanog korisnika
+     * @param string summonerName Korisnicko ime
+     */
     public function summoner($summonerName) {
         echo view('template/header_loggedin', [
             'role' => $this->session->get('user')->role,
@@ -324,6 +421,10 @@ class LoggedUser extends BaseController
         echo view('template/footer');
     }
 
+    /**
+     * Autor: Aleksandar Maksimovic ma
+     * Funkija za prikaz stranice o trenutnoj igri korisnika
+     */
     public function LiveGame()
     {
         DataDragonAPI::initByCDN();
@@ -451,6 +552,13 @@ class LoggedUser extends BaseController
         echo view('template/footer');
     }
 
+    /**
+     * Autor: Dragan Milovancevic md180153
+     * Funckija za dohvatanje istorije igara za zadatog korisnika koristeci v4 match api
+     * trenutno se ne koristi
+     * @param string summonerName Korisnicko ime
+     * @return array
+     */
     private function getMatchHistory($summonerName) {
         DataDragonAPI::initByCDN();
         $api = new LeagueAPI([
@@ -540,6 +648,11 @@ class LoggedUser extends BaseController
         return $data;
 	}
     
+    /**
+     * Autor Veljko Rvovic rv180132
+     * Funkcija koja brise podatke u bazi o statistici korisnika na herojima
+     * @param string summonerName Korisnicko ime
+     */
     private function resetPlays($summonerName){
         $playsM = new PlaysModel();
         $playsM->truncate();
@@ -549,6 +662,11 @@ class LoggedUser extends BaseController
         $korisnikM->save($user);
     }
         
+    /**
+     * Autor Dragan Milovancevic md180153
+     * Funkcija poziva pomocne funkcije za obradu meceva i pamti obradjene meceve u bazi
+     * @param string summonerName Korisnicno ime
+     */
     private function updateWrapper($summonerName) {
         $this->resetPlays($summonerName);
         DataDragonAPI::initByCDN();
@@ -588,8 +706,16 @@ class LoggedUser extends BaseController
         }
     }
 
+    /**
+     * Autor Dragan Milovancevic md180153
+     * Funkcija obradjuje jedan mec i azurira podatke u bazi
+     * @param string summonerName Korisnicno ime
+     * @param MatchDto matchO mec za obradu
+     * @param RiotAPI api api
+     * @param PlaysModel modelPlays model
+     * @param object match match v4 object
+     */
     private function updatePlayed($summonerName, $matchO, $api, $modelPlays, $match) {
-
         $play = $modelPlays->where('summonername', $summonerName)->where('idchamp', (int) $match->champion)->first();
         if ($play == null) {
             $play = (object) [
@@ -611,8 +737,13 @@ class LoggedUser extends BaseController
         $modelPlays->insert($play);
     }
 
+    /**
+     * Autor Dragan Milovancevic md180153
+     * Funkcija dohvata najigranije heroje zadatog korisnika
+     * @param string summonerName Korisnicno ime
+     * @return array
+     */
     private function getMostPlayed($summonerName) {
-
 
         DataDragonAPI::initByCDN();
         $api = new LeagueAPI([
@@ -652,7 +783,14 @@ class LoggedUser extends BaseController
 
     }
 
-    // 
+    /**
+     * Autor Veljko Rvovic rv180132
+     * Funkcija obradjuje jedan mec i azurira podatke u bazi
+     * @param RiotAPI api api
+     * @param MatchDto matchO mec za obradu
+     * @param array userQuests lista izazova
+     * @param string summonerName Korisnicno ime
+     */
     public function questsProgress($api, $matchO, $userQuests, $summonerName){
         
         $lastGamePlayedts = (new KorisnikModel())->find($summonerName)->lastGamePlayed;
