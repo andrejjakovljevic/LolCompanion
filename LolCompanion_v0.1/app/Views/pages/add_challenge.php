@@ -1,3 +1,7 @@
+<?php/**
+* Autori: Veljko Rvovic 18/0132
+*/?>
+
 <?php echo '<script src="'. base_url() . '/Scripts/challenge_adding.js"></script>'; ?>
 <form action="<?= site_url("Moderator/addQuestSubmit") ?>" method="POST">
     <div class="row">

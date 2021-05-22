@@ -1,3 +1,8 @@
+<?php
+/**
+ * Autori: Dragan Milovancevic 18/0153
+ */
+?>
 <?php echo '<script src="'. base_url() . '/Scripts/champ_search.js"></script>'; ?>          
     <div class="row">
                 <div class="container">
