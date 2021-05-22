@@ -479,6 +479,7 @@ class LoggedUser extends BaseController
             else if ($ago < 60 * 24)
                 $ago_str = number_format($ago / 60, 0) . " h";
             else $ago_str = number_format($ago / 60 / 24, 0) . " d";
+            $ago_str = $match->timestamp / 1000;
             $players = [];
             // var_dump($matchO);
             // break;
@@ -549,7 +550,7 @@ class LoggedUser extends BaseController
     }
         
     private function updateWrapper($summonerName) {
-        //$this->resetPlays($summonerName);
+        $this->resetPlays($summonerName);
         DataDragonAPI::initByCDN();
         $api = new LeagueAPI([
             LeagueAPI::SET_KEY    => 'RGAPI-15966e6c-4e1d-4880-827e-dffbacbe3836',
@@ -566,9 +567,9 @@ class LoggedUser extends BaseController
         $modelPlays = new PlaysModel();
         $userQuests = (new UserQuestModel())->where('summonerName', $summonerName)->where('completed', 0)->find();
         $limit = 0;
-        for($i = 99; $i >= 0; --$i) {
+        for($i = count($matchlist) - 1; $i >= 0; --$i) {
             $match = $matchlist[$i];
-            if($match->timestamp / 1000 < $summoner->lastGamePlayed)
+            if(($match->timestamp / 1000 - 1) <= $summoner->lastGamePlayed)
                 continue;
             if ($match->queue != 420 && $match->queue != 400 && $match->queue != 430 && $match->queue != 440)
                 continue;
@@ -582,7 +583,7 @@ class LoggedUser extends BaseController
             
             $this->questsProgress($api, $matchO, $userQuests, $summonerName);
             
-            $summoner->lastGamePlayed = $matchlist[$i]->timestamp / 1000;
+            $summoner->lastGamePlayed = $match->timestamp / 1000;
             $modelKorisnik->save($summoner);
         }
     }
