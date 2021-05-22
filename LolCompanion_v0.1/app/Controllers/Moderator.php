@@ -1,5 +1,12 @@
 <?php
-
+/*
+ * Autori:
+ * Veljko Rvovic 18/0132
+ * 
+ * Controllers\Moderator - klasa za prikaz i obavljanje moderatorskih funkcionalnosti
+ * 
+ * @version 1.0
+ */
 namespace App\Controllers;
 
 require_once __DIR__  . "../../../vendor/autoload.php";
@@ -19,15 +26,24 @@ use App\Models\UserQuestModel;
 
 class Moderator extends LoggedUser {
 
+    /**
+     * Prikaz pocetne stranice za moderatora
+     * 
+     * @param String $msg
+     */
     public function index($msg = "") {
         echo view('template/header_loggedin', [
             'role' => $this->session->get('user')->role,
             'username' => $this->session->get('user')->summonerName
         ]);
-        echo view('pages/admin', ['msg' => $msg]);
+        echo view('pages/index', ['msg' => $msg]);
         echo view('template/footer');
     }
     
+    /**
+     * Prikaz stranice sa svim izazovima
+     * 
+     */
     public function allChallenges(){
         echo view('template/header_loggedin', [
 				'role' => $this->session->get('user')->role,
@@ -37,6 +53,11 @@ class Moderator extends LoggedUser {
         echo view('template/footer');
     }
     
+    /**
+     * Dohvatanje svih izazova
+     * 
+     * @return array
+     */
     private function getAllChallenges(){
         $qModel = new QuestModel();
         $Quests = $qModel->findAll();
@@ -58,6 +79,11 @@ class Moderator extends LoggedUser {
         return $data;
     }
     
+    /**
+     * Prikaz stranice za kreiranje izazova sa opcionom porukom
+     * 
+     * @param String $msg
+     */
     public function addQuest($msg=""){
         echo view('template/header_loggedin', [
 				'role' => $this->session->get('user')->role,
@@ -67,12 +93,22 @@ class Moderator extends LoggedUser {
         echo view('template/footer');
     }
     
+    /**
+     * Funkcija za testiranje
+     * 
+     * @return void
+     */
     public function addQuestAttribute(){
         var_dump($this->validate(['option' => 'required']));
         
-        return $this->addQuest("Ae mrs");
+        return $this->addQuest();
     }
     
+    /**
+     * Kreiranje izazova
+     * 
+     * @return void
+     */
     public function addQuestSubmit(){
         if(!$this->validate(['title' => 'required']) || !$this->validate(['description' => 'required']) ){
             return $this->addQuest('One or more empty fields');
@@ -137,6 +173,11 @@ class Moderator extends LoggedUser {
              
     }
     
+    /**
+     * Brisanje izazova
+     * 
+     * @return void
+     */
     public function deleteQuest(){
         var_dump($_POST['questId']);
         $qModel = new QuestModel();
