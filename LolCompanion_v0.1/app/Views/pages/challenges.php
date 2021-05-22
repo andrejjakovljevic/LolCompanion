@@ -28,7 +28,10 @@
                     $attrStr = $attrStr. ': '. $attr->attributeValue ."<br>";
                 }
                 echo '
-                <div class = "row" style="padding-bottom: 5px; ' . ($quest['completed'] == 1 ? 'background-color: #aaaaff; color: #666666; ' : '') . '">
+                <div class = "row" style="padding-bottom: 5px; ' . ($quest['completed'] == 1 ? 'background-color: rgba(55,255,125,0.6); color: #666666; ' : '') . '">
+                   <div class="text-center vertical-center" style="position: absolute; height: 100px; margin-top: 40px; width: 100%; margin-left: -180px; color: rgb(125,255,125); font-size:24pt;">
+                    ' . ( $quest['completed'] == 1 ? 'Completed' : '') . '
+                    </div>
                     <div class = "col-lg-9 col-md-6 col-xs-12" >
                         ' . $quest['title'] . '
                         <br>
@@ -41,7 +44,7 @@
                     .'
                     </div>
                 </div>
-                <hr style="margin-bottom: 5px; margin-top: 0;">';
+                <hr style="margin-bottom: 5px; margin-top: 0; margin-bottom:0">';
             }
             ?>
 <!--                <div class = "row">

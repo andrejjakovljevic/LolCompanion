@@ -3,7 +3,8 @@
 namespace App\Controllers;
 use App\Models\KorisnikModel;
 use App\Models\GlobalModel;
-
+use App\Models\QuestModel;
+use App\Models\UserQuestModel;
 class Guest extends BaseController
 {
 	public function index($poruka='')
@@ -51,6 +52,8 @@ class Guest extends BaseController
             return $this->signUp('Please fill in all the required fields!');
         }
         $korisnikModel=new KorisnikModel();
+        $quests = (new QuestModel())->findAll();
+        $uqModel = new UserQuestModel();
         $user=$korisnikModel->find($this->request->getVar('username'));
         if ($user!=null)
         {
@@ -77,6 +80,15 @@ class Guest extends BaseController
         $user['role'] = 2;
         $user['password'] = hash("sha256",$this->request->getVar('password1'),false);
         $korisnikModel->insert($user);
+        foreach($quests as $quest){
+            $userQuest = [
+                "summonerName" => $this->request->getVar('username'),
+                "questId" => $quest->questId,
+                "completed" => 0
+                ];
+            $uqModel->insert($userQuest);
+        }
+        
         return redirect()->to(site_url('Guest/login'));
     }
 

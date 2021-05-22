@@ -133,7 +133,7 @@ class Moderator extends LoggedUser {
         }
         
         
-        return $this->addQuest("Succesfully created quest");
+        return $this->addQuest("Succesfully created challenge");
              
     }
     

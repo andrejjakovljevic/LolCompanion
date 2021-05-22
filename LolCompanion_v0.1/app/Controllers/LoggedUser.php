@@ -549,7 +549,7 @@ class LoggedUser extends BaseController
     }
         
     private function updateWrapper($summonerName) {
-        $this->resetPlays($summonerName);
+        //$this->resetPlays($summonerName);
         DataDragonAPI::initByCDN();
         $api = new LeagueAPI([
             LeagueAPI::SET_KEY    => 'RGAPI-15966e6c-4e1d-4880-827e-dffbacbe3836',

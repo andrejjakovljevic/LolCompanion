@@ -96,7 +96,7 @@ class Admin extends Moderator {
             return $this->index('User is an Admin');
         }
         $model->delete($this->request->getVar('summonerName'));
-        return $this->index('User'. $user->summonerName. 'removed');
+        return $this->index('User'. $user->summonerName. ' removed');
     }
     
     public function AddModerator(){
