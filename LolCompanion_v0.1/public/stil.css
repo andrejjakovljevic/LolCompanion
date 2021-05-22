@@ -57,6 +57,7 @@ h1
     color: white;
     width: 110%;
     padding: 0px;
+    text-align: left;
 }
 
 .arrow-right {
@@ -167,4 +168,10 @@ td{
 .text-outline{
 	-webkit-text-stroke-width: 0.4px;
 	-webkit-text-stroke-color: black;
+}
+
+.skroluj
+{
+    width: 100%;
+    overflow: hidden;
 }
