@@ -1,4 +1,5 @@
-            <div class="row">
+<?php echo '<script src="'. base_url() . '/Scripts/champ_search.js"></script>'; ?>          
+    <div class="row">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-12 text-center">
@@ -24,7 +25,8 @@
                                   ?>
                                   ">
                                 <input type="image" src="../slike/glass.png" width="1.8%">
-                                <input type="text" size="30" placeholder="Input champion name" name="champName"> 
+                                <input type="text" size="30" placeholder="Input champion name" name="champName" id="champName" list="champs" oninput="searchChamp()" autocomplete="off">
+                                <datalist id="champs"></datalist>
                             </form>
                         </div>
                     </div> 
