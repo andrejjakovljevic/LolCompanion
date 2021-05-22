@@ -133,7 +133,7 @@ class Moderator extends LoggedUser {
         }
         
         
-        return $this->addQuest("Res: " . $_POST['title'] . $_POST['description']. $_POST['imgurl']. $_POST['champion']. $_POST['role'] . $_POST['hiddenOptions']);
+        return $this->addQuest("Succesfully created quest");
              
     }
     

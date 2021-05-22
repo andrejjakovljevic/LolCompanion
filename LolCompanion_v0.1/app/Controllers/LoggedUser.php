@@ -646,7 +646,6 @@ class LoggedUser extends BaseController
         $lastGamePlayedts = (new KorisnikModel())->find($summonerName)->lastGamePlayed;
         $qAttrModel = new QuestAttributeModel();
         $uqModel = new UserQuestModel();
-        //$currTime = time() / 1000;
        
         $game_ts = $matchO->gameCreation;
         
@@ -661,14 +660,17 @@ class LoggedUser extends BaseController
             $type = "FLEX";
         else return;
 
-        // only check games with timestamp after lastGamePlayed
-        //if($game_ts < $lastGamePlayedts) return;
         $gameDuration = $matchO->gameDuration;
         $goldEarned = 0;
         $champion = "";
         $goldPerMin = 0;
         $firstTower = 0;
-        //var_dump($game_ts);
+        $goldPerMin = 0;
+        $dmgDealt = 0;
+        $firstTower = false;
+        $firstBlood = false;
+        $dmgPerMin = 0;
+        $largestMultiKill = 0;
         for ($i = 0; $i < 10; ++$i) {
             if($matchO->participantIdentities[$matchO->participants[$i]->participantId - 1]->player->summonerName != $summonerName)
                 continue;
@@ -678,39 +680,51 @@ class LoggedUser extends BaseController
             $stats = $part->stats;
             
             $stats->championName = $api->getStaticChampion($matchO->participants[$i]->championId)->name;
-            //var_dump($stats);
+            
             $goldEarned = $stats->goldEarned;
             $cs = $stats->totalMinionsKilled + $stats->neutralMinionsKilled;
             $firstTower = $stats->firstTowerAssist;
             $goldPerMin = $goldEarned / ($gameDuration / 60);
-            
+            $dmgDealt = $stats->totalDamageDealtToChampions;
+            $dmgPerMin = $dmgDealt / ($gameDuration / 60.);
+            $firstBlood = $stats->firstBloodKill;
+            $firstTower = $stats->firstTowerAssist;
+            $largestMultiKill = $stats->largestMultiKill;
             break;  
         }
-        //var_dump($goldEarned);
-        //var_dump($userQuests);
         
         foreach($userQuests as $quest){
             $qAttributes = $qAttrModel->where("questId", $quest->questId)->find();
-            //var_dump($qAttributes);
+            
             $numOfNotCompleted = count($qAttributes);
             
-            //var_dump($qAttributes);
+            
+            // OVDE DODATI FIRST BLOOD, TURRET, MULTIKILL ITD
             foreach($qAttributes as $qattribute){
-                if($qattribute->attributeKey == "champion" && $qattribute->attributeValue == "Any")
+                if($qattribute->attributeKey == "champion" && $qattribute->attributeValue == "Any" || 
+                        $qattribute->attributeValue == "")
                     $numOfNotCompleted--;
                 if($qattribute->attributeKey == "champion" && strcmp($qattribute->attributeValue, $champion) == 0)
                     $numOfNotCompleted--;
                 if($qattribute->attributeKey == "role" && $qattribute->attributeValue == "Any")
                     $numOfNotCompleted--;
-                if($qattribute->attributeKey == "Kills" && $stats->kills > $qattribute->attributeValue)
+                if($qattribute->attributeKey == "Kills" && $stats->kills >= $qattribute->attributeValue)
                     $numOfNotCompleted--;
-                if($qattribute->attributeKey == "Gold" && $stats->goldEarned > $qattribute->attributeValue)
+                if($qattribute->attributeKey == "Gold" && $stats->goldEarned >= $qattribute->attributeValue)
+                    $numOfNotCompleted--;
+                if($qattribute->attributeKey == "Gold per minute" && $goldPerMin >= $qattribute->attributeValue)
+                    $numOfNotCompleted--;
+                if($qattribute->attributeKey == "Dmg per minute" && $dmgPerMin >= $qattribute->attributeValue)
+                    $numOfNotCompleted--;
+                if($qattribute->attributeKey == "First turret" && $firstTower)
+                    $numOfNotCompleted--;
+                if($qattribute->attributeKey == "First blood" && $firstBlood)
+                    $numOfNotCompleted--;
+                if($qattribute->attributeKey == "Multikill" && $largestMultiKill >= $qattribute->attributeValue)
                     $numOfNotCompleted--;
 
             }
-            var_dump($numOfNotCompleted);
             if($numOfNotCompleted == 0){
-                var_dump("COMPLETED A QUEST");
                 $userQuest = $uqModel->where("questId", $quest->questId)->where('summonerName', $summonerName)->find()[0];
                 $userQuest->completed = 1;
         
