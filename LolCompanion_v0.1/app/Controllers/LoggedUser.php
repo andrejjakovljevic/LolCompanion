@@ -91,6 +91,9 @@ class LoggedUser extends BaseController
         }
         
        private function getChallenges(){
+           
+           $this->updateWrapper($this->session->get('user')->summonerName);
+           
             $uQModel = new UserQuestModel();
             $qModel = new QuestModel();
             $uQ = $uQModel->where('summonerName', $this->session->get('user')->summonerName)->findAll();
@@ -526,7 +529,17 @@ class LoggedUser extends BaseController
         return $data;
 	}
     
+    private function resetPlays($summonerName){
+        $playsM = new PlaysModel();
+        $playsM->truncate();
+        $korisnikM = new KorisnikModel();
+        $user = $korisnikM->where('summonerName', $summonerName)->first();
+        $user->lastGamePlayed = 0;
+        $korisnikM->save($user);
+    }
+        
     private function updateWrapper($summonerName) {
+        $this->resetPlays($summonerName);
         DataDragonAPI::initByCDN();
         $api = new LeagueAPI([
             LeagueAPI::SET_KEY    => 'RGAPI-15966e6c-4e1d-4880-827e-dffbacbe3836',
@@ -541,7 +554,7 @@ class LoggedUser extends BaseController
         $matchlist = $api->getMatchListByAccount($api->getSummonerByName($summonerName)->accountId)->matches;
 
         $modelPlays = new PlaysModel();
-
+        $userQuests = (new UserQuestModel())->where('summonerName', $summonerName)->where('completed', 0)->find();
         $limit = 0;
         for($i = 99; $i >= 0; --$i) {
             $match = $matchlist[$i];
@@ -549,12 +562,16 @@ class LoggedUser extends BaseController
                 continue;
             if ($match->queue != 420 && $match->queue != 400 && $match->queue != 430 && $match->queue != 440)
                 continue;
-            if (++$limit > 50) {
-                // break;
+            if (++$limit > 5) {
+                break;
             }
             $matchO = $api->getMatch($match->gameId);
             if($match->queue == 420)
                 $this->updatePlayed($summonerName, $matchO, $api, $modelPlays, $match);
+            
+            
+            $this->questsProgress($api, $matchO, $userQuests, $summonerName);
+            
             $summoner->lastGamePlayed = $matchlist[$i]->timestamp / 1000;
             $modelKorisnik->save($summoner);
         }
@@ -625,12 +642,11 @@ class LoggedUser extends BaseController
     }
 
     // 
-    public function questsProgress($api, $matchO, $quests, $summonerName){
+    public function questsProgress($api, $matchO, $userQuests, $summonerName){
         
         $lastGamePlayedts = (new KorisnikModel())->find($summonerName)->lastGamePlayed;
         $qAttrModel = new QuestAttributeModel();
         $uqModel = new UserQuestModel();
-        $currTime = time();
        
         $game_ts = $matchO->gameCreation;
         
@@ -645,11 +661,17 @@ class LoggedUser extends BaseController
             $type = "FLEX";
         else return;
 
-        // only check games with timestamp after lastGamePlayed
-        if($game_ts < $lastGamePlayedts) return;
         $gameDuration = $matchO->gameDuration;
-        
-        var_dump($game_ts);
+        $goldEarned = 0;
+        $champion = "";
+        $goldPerMin = 0;
+        $firstTower = 0;
+        $goldPerMin = 0;
+        $dmgDealt = 0;
+        $firstTower = false;
+        $firstBlood = false;
+        $dmgPerMin = 0;
+        $largestMultiKill = 0;
         for ($i = 0; $i < 10; ++$i) {
             if($matchO->participantIdentities[$matchO->participants[$i]->participantId - 1]->player->summonerName != $summonerName)
                 continue;
@@ -659,33 +681,55 @@ class LoggedUser extends BaseController
             $stats = $part->stats;
             
             $stats->championName = $api->getStaticChampion($matchO->participants[$i]->championId)->name;
-            var_dump($stats);
+            
             $goldEarned = $stats->goldEarned;
             $cs = $stats->totalMinionsKilled + $stats->neutralMinionsKilled;
             $firstTower = $stats->firstTowerAssist;
             $goldPerMin = $goldEarned / ($gameDuration / 60);
-            //var_dump($stats->getData());
+            $dmgDealt = $stats->totalDamageDealtToChampions;
+            $dmgPerMin = $dmgDealt / ($gameDuration / 60.);
+            $firstBlood = $stats->firstBloodKill;
+            $firstTower = $stats->firstTowerAssist;
+            $largestMultiKill = $stats->largestMultiKill;
             break;  
         }
-
-        foreach($quests as $quest){
-            $qAttributes = $qAttrModel->where("questId", $quest->questId).find();
+        
+        foreach($userQuests as $quest){
+            $qAttributes = $qAttrModel->where("questId", $quest->questId)->find();
+            
             $numOfNotCompleted = count($qAttributes);
+            
+            
+            // OVDE DODATI FIRST BLOOD, TURRET, MULTIKILL ITD
             foreach($qAttributes as $qattribute){
-                if($qattribute-key == "champion" && $qattribute->val == $champion)
+                if($qattribute->attributeKey == "champion" && $qattribute->attributeValue == "Any" || 
+                        $qattribute->attributeValue == "")
                     $numOfNotCompleted--;
-                if($qattribute->key == "role" && $qattribute->val == 0)
+                if($qattribute->attributeKey == "champion" && strcmp($qattribute->attributeValue, $champion) == 0)
                     $numOfNotCompleted--;
-                if($qattribute->key == "Kills" && $stats->kills > $qattribute->value)
+                if($qattribute->attributeKey == "role" && $qattribute->attributeValue == "Any")
                     $numOfNotCompleted--;
-                if($qattribute->key == "Gold" && $stats->goldEarned > $qattribute->value)
+                if($qattribute->attributeKey == "Kills" && $stats->kills >= $qattribute->attributeValue)
+                    $numOfNotCompleted--;
+                if($qattribute->attributeKey == "Gold" && $stats->goldEarned >= $qattribute->attributeValue)
+                    $numOfNotCompleted--;
+                if($qattribute->attributeKey == "Gold per minute" && $goldPerMin >= $qattribute->attributeValue)
+                    $numOfNotCompleted--;
+                if($qattribute->attributeKey == "Dmg per minute" && $dmgPerMin >= $qattribute->attributeValue)
+                    $numOfNotCompleted--;
+                if($qattribute->attributeKey == "First turret" && $firstTower)
+                    $numOfNotCompleted--;
+                if($qattribute->attributeKey == "First blood" && $firstBlood)
+                    $numOfNotCompleted--;
+                if($qattribute->attributeKey == "Multikill" && $largestMultiKill >= $qattribute->attributeValue)
                     $numOfNotCompleted--;
 
             }
-
             if($numOfNotCompleted == 0){
-                $userQuest = $uqModel->where("questId", $quest->questId)->where('summonerName', summonerName)->find()[0];
+                $userQuest = $uqModel->where("questId", $quest->questId)->where('summonerName', $summonerName)->find()[0];
                 $userQuest->completed = 1;
+        
+                $uqModel->where('summonerName', $summonerName)->where('questId', $quest->questId)->delete();
                 $uqModel->save($userQuest);
             }
         }

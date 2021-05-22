@@ -15,15 +15,10 @@
                     <input type="text" size="30" name="title" >
                 </div>
                 <div class="col-lg-3">
-                    <label>Champion:</label>
-                    <select name="champion" id="champion">
-                        <option value="Any">Any</option>
-                        <option value="Xin Zhao">Xin Zhao</option>
-                        <option value="Aatrox">Aatrox</option>
-                        <option value="Olaf">Olaf</option>
-                        <option value="Gangplank">Gangplank</option>
-                        <option value="Jayce">Jayce</option>
-                    </select>
+                    <label for="champion">Champion:</label>
+                    <input placeholder="Any" size="15" type="text" list="champions" name="champion" id="champion" oninput="searchChamp()" autocomplete="off">
+                    <datalist id="champions">
+                    </datalist>
                 </div>
                 <div class="col-lg-3">
                     <label>Role:</label>
@@ -50,10 +45,9 @@
                         <select name="optionKey[]">
                             <option value="Prerequisite Id">Prerequisite Id</option>
                             <option value="Kills">Kills</option>
-                            <option value="Gold">Gold</option>
                             <option value="Gold per minute">Gold per minute</option>
-                            <option value="Cs">Cs</option>
                             <option value="Cs per minute">Cs per minute</option>
+                            <option value="Dmg per minute">Dmg per minute</option>
                             <option value="First turret">First turret</option>
                             <option value="First blood">First blood</option>
                             <option value="Multikill">Multikill</option>

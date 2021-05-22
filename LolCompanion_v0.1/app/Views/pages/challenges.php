@@ -22,7 +22,7 @@
             </div>
             <div class="container" style="background-color: rgba(100, 149, 237, 0.5); marging-bottom: 10px; border: 1pt solid darkred;">
             <?php foreach($quests as $quest) {
-                $attrStr = "id: " . $quest['id'] . '<br>';
+                $attrStr = "";
                 foreach($quest['attributes'] as $attr){
                     $attrStr = $attrStr . '' . $attr->attributeKey;
                     $attrStr = $attrStr. ': '. $attr->attributeValue ."<br>";
