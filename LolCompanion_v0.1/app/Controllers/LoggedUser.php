@@ -147,6 +147,15 @@ class LoggedUser extends BaseController
         return $attributes;
     }
 
+    private function getPoros($summonerName) {
+            $uQModel = new UserQuestModel();
+            $qModel = new QuestModel();
+            $poroUser = count($uQModel->where('summonerName', $this->session->get('user')->summonerName)->where('completed', 1)->findAll());
+            $poroTotal = count($qModel->findAll());
+
+            return (object) [ 'poroUser' => $poroUser, 'poroTotal' => $poroTotal ];
+    }
+
 
     private function getMatchHistoryV5($summonerName) {
             DataDragonAPI::initByCDN();
@@ -282,7 +291,8 @@ class LoggedUser extends BaseController
             'matches' => $this->getMatchHistory($summonerName),
             'name' => $summonerName,
             'division' => $this->getDivision($summonerName),
-            'champs' => $this->getMostPlayed($summonerName)
+            'champs' => $this->getMostPlayed($summonerName),
+            'poros' => $this->getPoros($summonerName)
         ]);
         echo view('template/footer');
     }
@@ -562,7 +572,7 @@ class LoggedUser extends BaseController
                 continue;
             if ($match->queue != 420 && $match->queue != 400 && $match->queue != 430 && $match->queue != 440)
                 continue;
-            if (++$limit > 5) {
+            if (++$limit > 50) {
                 break;
             }
             $matchO = $api->getMatch($match->gameId);
