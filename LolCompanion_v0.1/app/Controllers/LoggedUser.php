@@ -547,7 +547,7 @@ class LoggedUser extends BaseController
             $match = $matchlist[$i];
             if($match->timestamp / 1000 < $summoner->lastGamePlayed)
                 continue;
-            if ($match->queue != 420 && $match->queue && 400 && $match->queue != 430 && $match->queue != 440)
+            if ($match->queue != 420 && $match->queue != 400 && $match->queue != 430 && $match->queue != 440)
                 continue;
             if (++$limit > 50) {
                 // break;
@@ -603,14 +603,15 @@ class LoggedUser extends BaseController
         $plays = $modelPlays->where('summonername', $summonerName)->orderBy('games_played', 'desc')->findAll();
         // var_dump($plays);
 
-        for ($i = 0; $i < 3; ++$i) {
+        $n = min([3, count($plays)]);
+        for ($i = 0; $i < $n; ++$i) {
             array_push($champ, (int) $plays[$i]->idchamp);
             array_push($games, $plays[$i]->games_played);
             array_push($wins , $plays[$i]->games_won);
         }
 
         $splash = [];
-        for ($i = 0; $i < 3; ++$i) {
+        for ($i = 0; $i < $n; ++$i) {
             $champ[$i] = $api->getStaticChampion($champ[$i])->name;
             // echo DataDragonAPI::getChampionSplashUrl($champ[$i]);
             array_push($splash, DataDragonAPI::getChampionSplashUrl($champ[$i]));

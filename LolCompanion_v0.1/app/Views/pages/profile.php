@@ -19,7 +19,7 @@
             </div>
             <div class="row text-center">
                 <?php
-                for ($i = 0; $i < 3; ++$i) {
+                for ($i = 0; $i < count($champs['champ']); ++$i) {
                     echo '
                         <div class="col-4">
                             <h3>' . $champs['champ'][$i] . '</h3>
