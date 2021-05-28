@@ -585,7 +585,7 @@ class LoggedUser extends BaseController
             else if ($ago < 60 * 24)
                 $ago_str = number_format($ago / 60, 0) . " h";
             else $ago_str = number_format($ago / 60 / 24, 0) . " d";
-            $ago_str = $match->timestamp / 1000;
+            // $ago_str = $match->timestamp / 1000;
             $players = [];
             // var_dump($matchO);
             // break;
