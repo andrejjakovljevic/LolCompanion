@@ -1,6 +1,6 @@
 <?php
 /*
- * Autor: Aleksandar Maksimovic 18/0016
+ * Autor: Andrej Jakovljevic 18/0039
  */
 namespace App\Models;
 
