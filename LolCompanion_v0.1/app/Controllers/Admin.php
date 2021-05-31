@@ -67,10 +67,11 @@ class Admin extends Moderator {
      * DEPRECATED
      * 
      */
-    public function updateStatistics() {
-		DataDragonAPI::initByCDN();
-		$model = new GlobalModel();
-		$api = $model->find('api');
+    public function updateStatistics() 
+    {
+        DataDragonAPI::initByCDN();
+        $model = new GlobalModel();
+        $api = $model->find('api');
         $api = new LeagueAPI([
             LeagueAPI::SET_KEY    => $api->value,
             LeagueAPI::SET_REGION => Region::EUROPE_EAST,
@@ -87,18 +88,6 @@ class Admin extends Moderator {
                 'id' => $champ["key"],
                 'name' => $champ["name"]
             ]);
-           /* foreach($roles as $role) {
-                $newchamp = str_replace([' ', "'"], "", $champ["name"]);
-                if ($champ["name"] == "Nunu&Willump") {
-                    $newchamp = "nunu";
-                }
-                $html = HtmlDomParser::file_get_html("https://www.leagueofgraphs.com/champions/builds/" . strtolower($newchamp) . '/' . $role);
-                $tmp = $html->findMultiOrFalse('.pie-chart');
-                if (!$tmp) continue;
-                $wt = (double) $tmp[1]->textContent;
-                $pt = (double) $tmp[0]->textContent;
-                // echo $champ["name"] . $role . $wt . " " . $pt . "<br>";
-            }*/
         }
         $buildModel = new BuildModel();
         $buildModel->truncate();
