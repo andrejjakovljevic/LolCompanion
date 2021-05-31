@@ -20,6 +20,7 @@ use RiotAPI\DataDragonAPI\DataDragonAPI;
  *          Veljko Rvovic           rv180132
  * Klasa LoggedUser sadrzi funkcije za prikaz i pomocne funkije koje one pozivaju
  * vezane za registovanog korisnika
+ * @version 1.0
  */
 class LoggedUser extends BaseController
 {
@@ -134,65 +135,11 @@ class LoggedUser extends BaseController
             'role' => $this->session->get('user')->role,
             'username' => $this->session->get('user')->summonerName
         ]);
-        echo view('pages/challenges', $this->getChallenges());
+        echo view('pages/challenges', QuestModel::getChallenges($this->session));
         echo view('template/footer');
     }
 
-    /**
-     * Autor: Veljko Rvovic rv180132
-     * Funckija kreira i vraca objekat kori sadrzi sve izazove za trenutnog korisnika
-     * @return array
-     */
-    private function getChallenges() {
-        
-        $this->updateWrapper($this->session->get('user')->summonerName);
-        
-        $uQModel = new UserQuestModel();
-        $qModel = new QuestModel();
-        $uQ = $uQModel->where('summonerName', $this->session->get('user')->summonerName)->findAll();
-        $poroUser = count($uQModel->where('summonerName', $this->session->get('user')->summonerName)->where('completed', 1)->findAll());
-        $poroTotal = count($qModel->findAll());
-
-        $data = [
-            'poroUser' => $poroUser,
-            'poroTotal' => $poroTotal,
-            'quests' => []
-        ];
-        
-        foreach ($uQ as $userQuest) {
-            $quest = $qModel->find($userQuest->questId);
-            $dataQuest = [
-                'id' => $userQuest->questId,
-                'title' => $quest->title,
-                'description' => $quest->description,
-                'image' => $quest->image,
-                'completed' => $userQuest->completed,
-                'attributes' => $this->getAttributes($quest->questId)
-            ];
-            //var_dump($dataQuest['attributes']);
-            $preReq = false;
-            $questRequired = null;
-            foreach($dataQuest['attributes'] as $atr){
-                if($atr->attributeKey == 'Prerequisite Id'){
-                    $questRequired = $atr->attributeValue;
-                    $preReq = $atr->questId;
-                    break;
-                }   
-            }
-            // quest has a prerequisite quest
-            if($preReq != false){ 
-                // get the prerequisite quest and check if its completed by this user
-                $preReQuest = $uQModel->where('questId', $questRequired)->where('summonerName', $this->session->get('user')->summonerName)->find();
-                if($preReQuest[0]->completed == 0)
-                    continue; 
-            }
-            
-                
-            // $dataQuest['attributes'];
-            array_push($data['quests'], $dataQuest);
-        }
-        return $data;
-    }
+    
 
     /**
      * Autor: Veljko Rvovic rv180132
@@ -374,10 +321,10 @@ class LoggedUser extends BaseController
             'username' => $summonerName
         ]);
         echo view('pages/profile', [
-            'matches' => $this->getMatchHistory($summonerName),
+            'matches' => KorisnikModel::getMatchHistory($summonerName),
             'name' => $summonerName,
             'division' => $this->getDivision($summonerName),
-            'champs' => $this->getMostPlayed($summonerName),
+            'champs' => PlaysModel::getMostPlayed($summonerName),
             'poros' => $this->getPoros($summonerName)
         ]);
         echo view('template/footer');
@@ -422,7 +369,7 @@ class LoggedUser extends BaseController
     }
 
     /**
-     * Autor: Aleksandar Maksimovic ma
+     * Autor: Aleksandar Maksimovic ma180016
      * Funkija za prikaz stranice o trenutnoj igri korisnika
      */
     public function LiveGame()
@@ -435,11 +382,6 @@ class LoggedUser extends BaseController
         $apiKey = GlobalModel::getApiKey();
         $userName = $this->session->get('user')->summonerName;
         $userName = str_replace(" ", "%20", $userName);
-        
-        
-        //$userName = "Sensei%20God"; //HARDCODED!!!!!!!!!!! PROMENI OVO
-        
-        
         
         $url = "https://eun1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" . $userName . "?api_key=". $apiKey;
         $user = json_decode($this->getHtml($url));
@@ -462,21 +404,9 @@ class LoggedUser extends BaseController
                 return ;
                 }
         }
-       
-        //var_dump($match->participants[0]->summonerName);
-        //var_dump($match);
         
         $leagueUrl="https://eun1.api.riotgames.com/lol/league/v4/entries/by-summoner/" . $userId . "?api_key=". $apiKey;
         $league = json_decode($this->getHtml($leagueUrl));
-        
-        //var_dump($leagueUrl);
-        //var_dump($league->tier);
-        //echo $match->participants[0]->summonerName;
-        /*$players=[
-                'summoner11' => ['name'=> $match->participants[0]->summonerName ],
-                'summoner12' => ['name'=>'nest'],
-            
-                ];*/
         
         $dArray=[];
         $champArray=[];
@@ -549,336 +479,5 @@ class LoggedUser extends BaseController
         echo view('pages/live_game', ['names'=>$players]);
         echo view('template/footer');
     }
-
-    /**
-     * Autor: Dragan Milovancevic md180153
-     * Funckija za dohvatanje istorije igara za zadatog korisnika koristeci v4 match api
-     * trenutno se ne koristi
-     * @param string summonerName Korisnicko ime
-     * @return array
-     */
-    private function getMatchHistory($summonerName) {
-        DataDragonAPI::initByCDN();
-        $api = new LeagueAPI([
-            LeagueAPI::SET_KEY    => GlobalModel::getApiKey(),
-            LeagueAPI::SET_REGION => Region::EUROPE_EAST,
-        ]);
-
-        $summoner = $api->getSummonerByName($summonerName);
-        $matchlist = $api->getMatchListByAccount($summoner->accountId)->matches;
-        $data = [];
-        $count = 0;
-        $gameType = NULL;
-        $gameMode = NULL;
-        $ago = "";
-        $summ1 = "";
-        $summ2 = "";
-
-        $count = 0;
-        foreach ($matchlist as $match) {
-            if (++$count == 10)
-                break;
-            $matchO = $api->getMatch($match->gameId);
-            $ago = (time() - ($matchO->gameDuration + $matchO->gameCreation) / 1000) / 60;
-            if ($ago < 60)
-                $ago_str = number_format($ago, 0) . " min";
-            else if ($ago < 60 * 24)
-                $ago_str = number_format($ago / 60, 0) . " h";
-            else $ago_str = number_format($ago / 60 / 24, 0) . " d";
-            // $ago_str = $match->timestamp / 1000;
-            $players = [];
-            // var_dump($matchO);
-            // break;
-            for ($i = 0; $i < 10; ++$i) {
-                array_push($players, [
-                    'summonerName' => $matchO->participantIdentities[$matchO->participants[$i]->participantId - 1]->player->summonerName,
-                    'champion' => $api->getStaticChampion($matchO->participants[$i]->championId)->name,
-                ]);
-                if ($matchO->participantIdentities[$matchO->participants[$i]->participantId - 1]->player->summonerName == $summonerName) {
-                    $part = $matchO->participants[$i];
-                    $stats = $part->stats;
-                    $stats->championName = $api->getStaticChampion($matchO->participants[$i]->championId)->name;
-                    $summ1 = $api->getStaticSummonerSpell($part->spell1Id)->image->full;
-                    $summ2 = $api->getStaticSummonerSpell($part->spell2Id)->image->full;
-                    if ($stats->item0 == 0) $stats->item0 = base_url("/slike/empty.png");
-                    else $stats->item0 = DataDragonAPI::getItemIconUrl($stats->item0);
-                    if ($stats->item1 == 0) $stats->item1 = base_url("/slike/empty.png");
-                    else $stats->item1 = DataDragonAPI::getItemIconUrl($stats->item1);
-                    if ($stats->item2 == 0) $stats->item2 = base_url("/slike/empty.png");
-                    else $stats->item2 = DataDragonAPI::getItemIconUrl($stats->item2);
-                    if ($stats->item3 == 0) $stats->item3 = base_url("/slike/empty.png");
-                    else $stats->item3 = DataDragonAPI::getItemIconUrl($stats->item3);
-                    if ($stats->item4 == 0) $stats->item4 = base_url("/slike/empty.png");
-                    else $stats->item4 = DataDragonAPI::getItemIconUrl($stats->item4);
-                    if ($stats->item5 == 0) $stats->item5 = base_url("/slike/empty.png");
-                    else $stats->item5 = DataDragonAPI::getItemIconUrl($stats->item5);
-                }
-            }
-            $type = "";
-            if ($matchO->queueId == 400)
-                $type = "DRAFT";
-            else if ($matchO->queueId == 420)
-                $type = "RANKED";
-            else if ($matchO->queueId == 430)
-                $type = "BLIND";
-            else if ($matchO->queueId == 440)
-                $type = "FLEX";
-            else if ($matchO->queueId == 450)
-                $type = "ARAM";
-            else if ($matchO->queueId == 700)
-                $type = "CLASH";
-            else if ($matchO->queueId == 1020)
-                $type = "ONE FOR ALL";
-            else $type = (string) $matchO->queueId;
-            $info = json_decode('{ "gameMode":"'. $type . '"}');
-            $info = new \stdClass;
-            $info->gameMode = $type;
-            $info->gameDuration = $matchO->gameDuration * 1000;
-            array_push($data, [
-                'players' => $players,
-                'stats' => $stats,
-                'ago' => $ago_str,
-                'summ1' => $summ1,
-                'summ2' => $summ2,
-                'info' => $info
-            ]);
-        }
-        return $data;
-	}
     
-    /**
-     * Autor Veljko Rvovic rv180132
-     * Funkcija koja brise podatke u bazi o statistici korisnika na herojima
-     * @param string summonerName Korisnicko ime
-     */
-    private function resetPlays($summonerName){
-        $playsM = new PlaysModel();
-        $playsM->truncate();
-        $korisnikM = new KorisnikModel();
-        $user = $korisnikM->where('summonerName', $summonerName)->first();
-        $user->lastGamePlayed = 0;
-        $korisnikM->save($user);
-    }
-        
-    /**
-     * Autor Dragan Milovancevic md180153
-     * Funkcija poziva pomocne funkcije za obradu meceva i pamti obradjene meceve u bazi
-     * @param string summonerName Korisnicno ime
-     */
-    private function updateWrapper($summonerName) {
-        $this->resetPlays($summonerName);
-        DataDragonAPI::initByCDN();
-        $api = new LeagueAPI([
-            LeagueAPI::SET_KEY    => GlobalModel::getApiKey(),
-            LeagueAPI::SET_REGION => Region::EUROPE_EAST,
-        ]);
-
-        $modelKorisnik = new KorisnikModel();
-        $summoner = $modelKorisnik->find($summonerName);
-        if ($summoner->lastGamePlayed == NULL) {
-            $summoner->lastGamePlayed = 0;
-        }
-        $matchlist = $api->getMatchListByAccount($api->getSummonerByName($summonerName)->accountId)->matches;
-
-        $modelPlays = new PlaysModel();
-        $userQuests = (new UserQuestModel())->where('summonerName', $summonerName)->where('completed', 0)->find();
-        $limit = 0;
-        for($i = count($matchlist) - 1; $i >= 0; --$i) {
-            $match = $matchlist[$i];
-            if(($match->timestamp / 1000 - 1) <= $summoner->lastGamePlayed)
-                continue;
-            if ($match->queue != 420 && $match->queue != 400 && $match->queue != 430 && $match->queue != 440)
-                continue;
-            if (++$limit > 50) {
-                break;
-            }
-            $matchO = $api->getMatch($match->gameId);
-            if($match->queue == 420)
-                $this->updatePlayed($summonerName, $matchO, $api, $modelPlays, $match);
-            
-            
-            $this->questsProgress($api, $matchO, $userQuests, $summonerName);
-            
-            $summoner->lastGamePlayed = $match->timestamp / 1000;
-            $modelKorisnik->save($summoner);
-        }
-    }
-
-    /**
-     * Autor Dragan Milovancevic md180153
-     * Funkcija obradjuje jedan mec i azurira podatke u bazi
-     * @param string summonerName Korisnicno ime
-     * @param MatchDto matchO mec za obradu
-     * @param RiotAPI api api
-     * @param PlaysModel modelPlays model
-     * @param object match match v4 object
-     */
-    private function updatePlayed($summonerName, $matchO, $api, $modelPlays, $match) {
-        $play = $modelPlays->where('summonername', $summonerName)->where('idchamp', (int) $match->champion)->first();
-        if ($play == null) {
-            $play = (object) [
-                'summonername' => $summonerName,
-                'idchamp' => (int) $match->champion,
-                'games_won' => 0,
-                'games_played' => 0
-            ];
-        }
-        $play->games_played += 1;
-        for ($j = 0; $j < 10; ++$j) {
-            if ($matchO->participantIdentities[$matchO->participants[$j]->participantId - 1]->player->summonerName == $summonerName)
-                $team = $matchO->participants[$j]->teamId;
-        }
-        if (($matchO->teams[0]->teamId == $team && $matchO->teams[0]->win == 'Win') || ($matchO->teams[1]->teamId == $team && $matchO->teams[1]->win == 'Win'))
-            ++$play->games_won;
-
-        $modelPlays->where('summonername', $summonerName)->where('idchamp', $match->champion)->delete();
-        $modelPlays->insert($play);
-    }
-
-    /**
-     * Autor Dragan Milovancevic md180153
-     * Funkcija dohvata najigranije heroje zadatog korisnika
-     * @param string summonerName Korisnicno ime
-     * @return array
-     */
-    private function getMostPlayed($summonerName) {
-
-        DataDragonAPI::initByCDN();
-        $api = new LeagueAPI([
-            LeagueAPI::SET_KEY    => 'RGAPI-15966e6c-4e1d-4880-827e-dffbacbe3836',
-            LeagueAPI::SET_REGION => Region::EUROPE_EAST,
-        ]);
-
-        $modelPlays = new PlaysModel();
-        
-        $this->updateWrapper($summonerName);
-
-        $champ = [];
-        $games = [];
-        $wins = [];
-
-        $plays = $modelPlays->where('summonername', $summonerName)->orderBy('games_played', 'desc')->findAll();
-        // var_dump($plays);
-
-        $n = min([3, count($plays)]);
-        for ($i = 0; $i < $n; ++$i) {
-            array_push($champ, (int) $plays[$i]->idchamp);
-            array_push($games, $plays[$i]->games_played);
-            array_push($wins , $plays[$i]->games_won);
-        }
-
-        $splash = [];
-        for ($i = 0; $i < $n; ++$i) {
-            $champ[$i] = $api->getStaticChampion($champ[$i])->name;
-            // echo DataDragonAPI::getChampionSplashUrl($champ[$i]);
-            array_push($splash, DataDragonAPI::getChampionSplashUrl($champ[$i]));
-        }
-        return ['champ'     =>  $champ,
-                'splash'    =>  $splash,
-                'games'     =>  $games,
-                'wins'      =>  $wins
-        ];
-
-    }
-
-    /**
-     * Autor Veljko Rvovic rv180132
-     * Funkcija obradjuje jedan mec i azurira podatke u bazi
-     * @param RiotAPI api api
-     * @param MatchDto matchO mec za obradu
-     * @param array userQuests lista izazova
-     * @param string summonerName Korisnicno ime
-     */
-    public function questsProgress($api, $matchO, $userQuests, $summonerName){
-        
-        $lastGamePlayedts = (new KorisnikModel())->find($summonerName)->lastGamePlayed;
-        $qAttrModel = new QuestAttributeModel();
-        $uqModel = new UserQuestModel();
-       
-        $game_ts = $matchO->gameCreation;
-        
-        // Check quests only for these gamemodes
-        if ($matchO->queueId == 400)
-            $type = "DRAFT";
-        else if ($matchO->queueId == 420)
-            $type = "RANKED";
-        else if ($matchO->queueId == 430)
-            $type = "BLIND";
-        else if ($matchO->queueId == 440)
-            $type = "FLEX";
-        else return;
-
-        $gameDuration = $matchO->gameDuration;
-        $goldEarned = 0;
-        $champion = "";
-        $goldPerMin = 0;
-        $firstTower = 0;
-        $goldPerMin = 0;
-        $dmgDealt = 0;
-        $firstTower = false;
-        $firstBlood = false;
-        $dmgPerMin = 0;
-        $largestMultiKill = 0;
-        for ($i = 0; $i < 10; ++$i) {
-            if($matchO->participantIdentities[$matchO->participants[$i]->participantId - 1]->player->summonerName != $summonerName)
-                continue;
-
-            $champion = $api->getStaticChampion($matchO->participants[$i]->championId)->name;
-            $part = $matchO->participants[$i];
-            $stats = $part->stats;
-            
-            $stats->championName = $api->getStaticChampion($matchO->participants[$i]->championId)->name;
-            
-            $goldEarned = $stats->goldEarned;
-            $cs = $stats->totalMinionsKilled + $stats->neutralMinionsKilled;
-            $firstTower = $stats->firstTowerAssist;
-            $goldPerMin = $goldEarned / ($gameDuration / 60);
-            $dmgDealt = $stats->totalDamageDealtToChampions;
-            $dmgPerMin = $dmgDealt / ($gameDuration / 60.);
-            $firstBlood = $stats->firstBloodKill;
-            $firstTower = $stats->firstTowerAssist;
-            $largestMultiKill = $stats->largestMultiKill;
-            break;  
-        }
-        
-        foreach($userQuests as $quest){
-            $qAttributes = $qAttrModel->where("questId", $quest->questId)->find();
-            
-            $numOfNotCompleted = count($qAttributes);
-            
-            
-            // OVDE DODATI FIRST BLOOD, TURRET, MULTIKILL ITD
-            foreach($qAttributes as $qattribute){
-                if($qattribute->attributeKey == "champion" && $qattribute->attributeValue == "Any" || 
-                        $qattribute->attributeValue == "")
-                    $numOfNotCompleted--;
-                if($qattribute->attributeKey == "champion" && strcmp($qattribute->attributeValue, $champion) == 0)
-                    $numOfNotCompleted--;
-                if($qattribute->attributeKey == "role" && $qattribute->attributeValue == "Any")
-                    $numOfNotCompleted--;
-                if($qattribute->attributeKey == "Kills" && $stats->kills >= $qattribute->attributeValue)
-                    $numOfNotCompleted--;
-                if($qattribute->attributeKey == "Gold" && $stats->goldEarned >= $qattribute->attributeValue)
-                    $numOfNotCompleted--;
-                if($qattribute->attributeKey == "Gold per minute" && $goldPerMin >= $qattribute->attributeValue)
-                    $numOfNotCompleted--;
-                if($qattribute->attributeKey == "Dmg per minute" && $dmgPerMin >= $qattribute->attributeValue)
-                    $numOfNotCompleted--;
-                if($qattribute->attributeKey == "First turret" && $firstTower)
-                    $numOfNotCompleted--;
-                if($qattribute->attributeKey == "First blood" && $firstBlood)
-                    $numOfNotCompleted--;
-                if($qattribute->attributeKey == "Multikill" && $largestMultiKill >= $qattribute->attributeValue)
-                    $numOfNotCompleted--;
-
-            }
-            if($numOfNotCompleted == 0){
-                $userQuest = $uqModel->where("questId", $quest->questId)->where('summonerName', $summonerName)->find()[0];
-                $userQuest->completed = 1;
-        
-                $uqModel->where('summonerName', $summonerName)->where('questId', $quest->questId)->delete();
-                $uqModel->save($userQuest);
-            }
-        }
-    }
 }
