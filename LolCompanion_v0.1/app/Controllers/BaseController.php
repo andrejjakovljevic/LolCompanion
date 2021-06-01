@@ -67,7 +67,7 @@ class BaseController extends Controller
 				'username' => $this->session->get('user')->summonerName
 			]);
 		}
-		echo view('pages/champions', ['role' => $role]);
+            echo view('pages/champions', ['role' => $role]);
 		echo view('template/footer');
 	}
 

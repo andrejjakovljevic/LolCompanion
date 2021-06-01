@@ -312,7 +312,7 @@ class LoggedUser extends BaseController
     
     /**
      * Autor: Dragan Milovancevic md180153
-     * Funkija za prikaz profilne stranice korisnika
+     * Funkcija za prikaz profilne stranice korisnika
      */
     public function profile() {
         $summonerName = $this->session->get('user')->summonerName;
