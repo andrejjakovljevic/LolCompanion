@@ -72,7 +72,7 @@ class Moderator extends LoggedUser {
                 'title' => $quest->title,
                 'description' => $quest->description,
                 'image' => $quest->image,
-                'attributes' => $this->getAttributes($quest->questId)
+                'attributes' => QuestAttributeModel::getAttributes($quest->questId)
             ];
             array_push($data['quests'], $dataQuest);
         }

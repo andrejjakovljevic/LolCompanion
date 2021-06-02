@@ -62,7 +62,7 @@ class QuestModel extends Model
                 'description' => $quest->description,
                 'image' => $quest->image,
                 'completed' => $userQuest->completed,
-                'attributes' => $this->getAttributes($quest->questId)
+                'attributes' => QuestAttributeModel::getAttributes($quest->questId)
             ];
             //var_dump($dataQuest['attributes']);
             $preReq = false;
@@ -77,7 +77,7 @@ class QuestModel extends Model
             // quest has a prerequisite quest
             if($preReq != false){ 
                 // get the prerequisite quest and check if its completed by this user
-                $preReQuest = $uQModel->where('questId', $questRequired)->where('summonerName', $this->session->get('user')->summonerName)->find();
+                $preReQuest = $uQModel->where('questId', $questRequired)->where('summonerName',$session->get('user')->summonerName)->find();
                 if($preReQuest[0]->completed == 0)
                     continue; 
             }

@@ -139,19 +139,6 @@ class LoggedUser extends BaseController
         echo view('template/footer');
     }
 
-    
-
-    /**
-     * Autor: Veljko Rvovic rv180132
-     * Pomocna funkcija za dohvatanje delova izazova
-     * @return object
-     */
-    protected function getAttributes($idQ) {
-        $qAttrModel = new QuestAttributeModel();
-        $attributes = $qAttrModel->where('questId', $idQ)->findAll();
-        return $attributes;
-    }
-
     /**
      * Autor: Dragan Milovancevic
      * Pomocna funkcija za dohvatanje broja osvojenih i maksimalnih poroa
@@ -361,7 +348,7 @@ class LoggedUser extends BaseController
             'username' => $this->session->get('user')->summonerName
         ]);
         echo view('pages/summoner', [
-            'matches' => $this->getMatchHistory($summonerName),
+            'matches' => KorisnikModel::getMatchHistory($summonerName),
             'name' => $summonerName,
             'division' => $this->getDivision($summonerName),
         ]);
