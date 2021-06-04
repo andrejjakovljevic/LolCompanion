@@ -16,4 +16,16 @@ class QuestAttributeModel extends Model
     protected $returnType     = 'object';
 
     protected $allowedFields = ['attributeId', 'questId', 'attributeKey', 'attributeValue'];
+    
+    /**
+     * Autor: Veljko Rvovic rv180132
+     * Pomocna funkcija za dohvatanje delova izazova
+     * @return object
+     */
+    public static function getAttributes($idQ) {
+        $qAttrModel = new QuestAttributeModel();
+        $attributes = $qAttrModel->where('questId', $idQ)->findAll();
+        return $attributes;
+    }
+    
 }
