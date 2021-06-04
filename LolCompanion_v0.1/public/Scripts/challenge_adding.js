@@ -49,16 +49,15 @@ function test(){
 
     divOptionKey.innerHTML += "<label>Option: </label>"
     divOptionKey.innerHTML += `<select name="optionKey[]">
-    <option value="Prerequisite Id">Prerequisite Id</option>
-    <option value="Kills">Kills</option>
-    <option value="Gold">Gold</option>
-    <option value="Gold per minute">Gold per minute</option>
-    <option value="Cs">Cs</option>
-    <option value="Cs per minute">Cs per minute</option>
-    <option value="First turret">First turret</option>
-    <option value="First blood">First blood</option>
-    <option value="Multikill">Multikill</option>
-</select>`;
+                            <option value="Prerequisite Id">Prerequisite Id</option>
+                            <option value="Kills">Kills</option>
+                            <option value="Gold per minute">Gold per minute</option>
+                            <option value="Cs per minute">Cs per minute</option>
+                            <option value="Dmg per minute">Dmg per minute</option>
+                            <option value="First turret">First turret</option>
+                            <option value="First blood">First blood</option>
+                            <option value="Multikill">Multikill</option>
+                        </select>`;
     divOptionVal.innerHTML += '<label style="color: red" > ' + v.value + '</label><br>';
     divOptionVal.innerHTML += '<label>Value:</label><input type="text" size = 5 name="optionVal[]">';
 

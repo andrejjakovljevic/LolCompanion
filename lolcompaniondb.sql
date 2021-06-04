@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: May 18, 2021 at 04:17 PM
+-- Generation Time: Jun 04, 2021 at 12:52 PM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -52,33 +52,19 @@ CREATE TABLE IF NOT EXISTS `builds` (
   `iditem6` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_idchamps_idx` (`idchamp`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `builds`
 --
 
 INSERT INTO `builds` (`iditem1`, `iditem2`, `iditem3`, `idchamp`, `winrate`, `lane`, `perk0`, `perk1`, `perk2`, `perk3`, `perk4`, `perk5`, `attrperk0`, `attrperk1`, `attrperk2`, `id`, `iditem4`, `iditem5`, `iditem6`) VALUES
-(1036, 2031, 3134, 246, 54.2, 'Mid', 8112, 8143, 8138, 8135, 8345, 8347, 5008, 5008, 5003, 1, 3158, 6695, 6694),
-(3850, 2003, 3802, 50, 48.3, 'Support', 8112, 8126, 8138, 8106, 8313, 8345, 5008, 5008, 5002, 2, 3853, 3020, 3157),
-(3070, 2003, 3802, 69, 49.2, 'Mid', 8010, 8009, 9105, 8014, 8139, 8135, 5008, 5008, 5003, 3, 3003, 3157, 3116),
-(1039, 2031, 6029, 141, 57.6, 'Jungle', 8010, 9111, 9105, 8299, 8143, 8135, 5008, 5008, 5002, 4, 3047, 3071, 3053),
-(3858, 2003, 3117, 12, 53.1, 'Support', 8439, 8446, 8429, 8451, 8345, 8347, 5007, 5002, 5001, 5, 3860, 3050, 3109),
-(1055, 2003, 6670, 523, 46.2, 'Bot', 8010, 8009, 9103, 8014, 8139, 8135, 5005, 5008, 5002, 6, 3006, 3085, 3031),
-(1054, 2003, 6660, 31, 54.7, 'Top', 8437, 8446, 8429, 8451, 9111, 9105, 5005, 5008, 5002, 7, 3047, 3075, 3193),
-(1056, 2003, 3145, 518, 53.9, 'Mid', 8112, 8139, 8138, 8135, 8226, 8237, 5005, 5008, 5003, 8, 3020, 3157, 3165),
-(1056, 2003, 3802, 268, 52.2, 'Mid', 8008, 8009, 9104, 8014, 8226, 8210, 5005, 5008, 5003, 9, 3020, 3115, 3157),
-(3850, 2003, 4642, 57, 54.2, 'Support', 8229, 8226, 8210, 8237, 8304, 8345, 5008, 5008, 5002, 10, 3853, 3020, 4637),
-(1055, 2003, 3134, 110, 49.9, 'Bot', 9923, 8139, 8138, 8135, 8345, 8347, 5005, 5008, 5002, 11, 3158, 3004, 6694),
-(3850, 2003, 4642, 350, 52.4, 'Support', 8214, 8226, 8210, 8237, 8009, 8017, 5008, 5008, 5002, 12, 3853, 6616, 3504),
-(1039, 2031, 6660, 72, 60.5, 'Jungle', 8230, 8275, 8234, 8232, 8304, 8347, 5005, 5008, 5002, 13, 3158, 3742, 4401),
-(1039, 2031, 3330, 9, 55.4, 'Jungle', 8112, 8126, 8138, 8106, 8313, 8347, 5008, 5008, 5002, 14, 3020, 3157, 3165),
-(1056, 2003, 3802, 34, 55.6, 'Mid', 8112, 8126, 8138, 8105, 8009, 8014, 5008, 5008, 5003, 15, 3020, 3157, 3003),
-(1055, 2003, 6670, 51, 52.1, 'Bot', 8021, 8009, 9103, 8014, 8139, 8135, 5005, 5008, 5002, 16, 3006, 3095, 3094),
-(1056, 2003, 3802, 1, 55.9, 'Mid', 8112, 8126, 8138, 8105, 8226, 8237, 5008, 5008, 5003, 17, 3020, 3157, 3165),
-(3850, 2003, 4642, 267, 54.6, 'Support', 8214, 8226, 8210, 8237, 8345, 8347, 5008, 5008, 5002, 18, 3853, 3158, 3011),
-(1055, 2003, 1037, 122, 57.6, 'Top', 8010, 9111, 9105, 8299, 8473, 8242, 5005, 5008, 5002, 19, 3047, 3053, 3742),
-(1039, 2031, 6660, 32, 57.7, 'Jungle', 8010, 9111, 9105, 8299, 8126, 8135, 5005, 5008, 5002, 20, 3047, 3075, 3001);
+(3850, 2003, 4642, 267, 55.6, 'Support', 8214, 8226, 8210, 8237, 8345, 8347, 5008, 5008, 5002, 1, 3853, 3158, 3011),
+(1056, 2003, 3802, 61, 52.2, 'Mid', 8230, 8226, 8210, 8237, 8345, 8352, 5005, 5008, 5003, 2, 3020, 3003, 3157),
+(1039, 2031, 3802, 25, 55.7, 'Jungle', 8128, 8126, 8138, 8135, 8210, 8232, 5008, 5008, 5002, 3, 3020, 3157, 4637),
+(1039, 2031, 6660, 32, 55.1, 'Jungle', 8010, 9111, 9105, 8299, 8126, 8135, 5005, 5008, 5002, 4, 3047, 3075, 3001),
+(1056, 2003, 3802, 34, 54.9, 'Mid', 8112, 8126, 8138, 8105, 8009, 8014, 5008, 5008, 5003, 5, 3020, 3157, 3003),
+(3850, 2003, 3158, 432, 54.8, 'Support', 8465, 8463, 8473, 8453, 8136, 8105, 5008, 5008, 5002, 6, 3853, 4629, 3110);
 
 -- --------------------------------------------------------
 
@@ -295,8 +281,7 @@ CREATE TABLE IF NOT EXISTS `korisnik` (
 --
 
 INSERT INTO `korisnik` (`summonerName`, `password`, `email`, `lastGamePlayed`, `role`) VALUES
-('GINDRA', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'a@a.com', NULL, 0),
-('Sensei God', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'andrej.jakovljevic2000@gmail.com', NULL, 0);
+('GINDRA', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'gindroni@nudle.etf', 1618955535, 0);
 
 -- --------------------------------------------------------
 
@@ -310,10 +295,29 @@ CREATE TABLE IF NOT EXISTS `plays` (
   `idchamp` int(11) NOT NULL,
   `games_won` int(11) NOT NULL,
   `games_played` int(11) NOT NULL,
-  PRIMARY KEY (`summonername`,`idchamp`),
   KEY `fk_korisnik_idx` (`summonername`),
   KEY `fk_champion_idx` (`idchamp`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `plays`
+--
+
+INSERT INTO `plays` (`summonername`, `idchamp`, `games_won`, `games_played`) VALUES
+('GINDRA', 120, 1, 1),
+('GINDRA', 412, 3, 5),
+('GINDRA', 61, 1, 1),
+('GINDRA', 268, 1, 1),
+('GINDRA', 34, 0, 1),
+('GINDRA', 58, 1, 1),
+('GINDRA', 10, 1, 1),
+('GINDRA', 27, 1, 1),
+('GINDRA', 85, 0, 1),
+('GINDRA', 41, 2, 2),
+('GINDRA', 8, 3, 5),
+('GINDRA', 427, 0, 1),
+('GINDRA', 517, 1, 1),
+('GINDRA', 150, 11, 17);
 
 -- --------------------------------------------------------
 
@@ -328,7 +332,30 @@ CREATE TABLE IF NOT EXISTS `quest` (
   `title` varchar(50) NOT NULL,
   `image` varchar(300) NOT NULL,
   PRIMARY KEY (`questId`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `quest`
+--
+
+INSERT INTO `quest` (`questId`, `description`, `title`, `image`) VALUES
+(23, 'Welcome! It\'s time to get started. Get your first kill!', 'Newbie', 'https://i.pinimg.com/236x/ea/a6/68/eaa668ece7e463e23e42db4c9bab09b2.jpg'),
+(26, 'It\'s time to learn how to farm. Last hit those minions and clear that jungle as much as possible!', 'Learn to farm', 'https://i.pinimg.com/originals/85/bd/d1/85bdd1c465ac4422c217ca5456998c88.jpg'),
+(27, 'Time to get serious about that farm.', 'Farmville', 'https://i.pinimg.com/originals/85/bd/d1/85bdd1c465ac4422c217ca5456998c88.jpg'),
+(28, 'Deal some damage!', 'Damage dealer', 'https://static.wikia.nocookie.net/leagueoflegends/images/4/46/Blood_Moon_Twisted_Fate_profileicon.png/revision/latest?cb=20170505005916'),
+(29, 'Put those carry pants on and carry the team from the mid lane!', 'Midlane carry', 'https://static.wikia.nocookie.net/leagueoflegends/images/1/1c/Pengu_Featherknight_profileicon.png/revision/latest?cb=20190614211501'),
+(30, 'Become a midlane god.', 'Literally Chovy', 'https://i.redd.it/ztyw50b44hy51.jpg'),
+(31, 'Destroy the first tower of the game.', 'First tower', 'https://i.ytimg.com/vi/iFIp2UOvT9E/maxresdefault.jpg'),
+(33, 'The urge for killing rises. Ruthlessly slay your foes in battle.', 'Bloodthirster', 'https://cdnb.artstation.com/p/assets/images/images/026/072/753/large/hannah-hilton-bloodthirster.jpg?1587790038'),
+(34, 'Minions and monsters are no longer enough for you. Time to farm some champions.', 'Farming champions', 'https://pbs.twimg.com/media/Ea41dsqX0AA09__.jpg'),
+(35, 'Start earning some money for your items.', 'Start earning', 'https://static.wikia.nocookie.net/leagueoflegends/images/5/50/Essence_Poro_Tier_2_Emote.png/revision/latest/scale-to-width-down/250?cb=20181207222233'),
+(36, 'Time to start earning some serious money.', 'Money money', 'https://i.pinimg.com/originals/da/4b/77/da4b77747065bfe9ce629314c55df47c.jpg'),
+(37, 'Get a double kill!', 'Double kill!', 'https://static1-www.millenium.gg/articles/2/83/82/@/89706-1197099-em-rewards-ranked-tft-gold2019-inventory-full-1-article_m-1.png'),
+(38, 'Get a triple kill now!', 'Triple kill!', 'https://static1-www.millenium.gg/articles/2/83/82/@/89706-1197099-em-rewards-ranked-tft-gold2019-inventory-full-1-article_m-1.png'),
+(39, 'Wooow a quadra kill :O', 'Quadra kill!', 'https://static1-www.millenium.gg/articles/2/83/82/@/89706-1197099-em-rewards-ranked-tft-gold2019-inventory-full-1-article_m-1.png'),
+(40, 'Penta kill o m g :O :D', 'Penta kill!', 'https://static1-www.millenium.gg/articles/2/83/82/@/89706-1197099-em-rewards-ranked-tft-gold2019-inventory-full-1-article_m-1.png'),
+(41, 'Now that you have ascended and become a god it is time to play Xin Top.', 'Xin top supremacy', 'https://www.mobafire.com/images/avatars/xin-zhao-classic.png'),
+(42, 'Dodaj ga svima', 'TestQuest', '');
 
 -- --------------------------------------------------------
 
@@ -344,7 +371,90 @@ CREATE TABLE IF NOT EXISTS `questattributes` (
   `attributeValue` varchar(50) NOT NULL,
   PRIMARY KEY (`attributeId`),
   KEY `fk_quest_idx` (`questId`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=134 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `questattributes`
+--
+
+INSERT INTO `questattributes` (`attributeId`, `questId`, `attributeKey`, `attributeValue`) VALUES
+(44, 23, 'champion', ''),
+(45, 23, 'role', 'Any'),
+(46, 23, 'Kills', '1'),
+(53, 26, 'champion', ''),
+(54, 26, 'role', 'Any'),
+(55, 26, 'Prerequisite Id', '23'),
+(56, 26, 'Cs per minute', '6.5'),
+(57, 27, 'champion', ''),
+(58, 27, 'role', 'Any'),
+(59, 27, 'Prerequisite Id', '26'),
+(60, 27, 'Cs per minute', '8'),
+(61, 28, 'champion', ''),
+(62, 28, 'role', 'Any'),
+(63, 28, 'Dmg per minute', '400'),
+(64, 28, 'Prerequisite Id', '23'),
+(65, 29, 'champion', ''),
+(66, 29, 'role', 'Mid'),
+(67, 29, 'Prerequisite Id', '28'),
+(68, 29, 'Prerequisite Id', '26'),
+(69, 29, 'Dmg per minute', '500'),
+(70, 29, 'Kills', '6'),
+(71, 30, 'champion', ''),
+(72, 30, 'role', 'Mid'),
+(73, 30, 'Prerequisite Id', '27'),
+(74, 30, 'Prerequisite Id', '29'),
+(75, 30, 'Cs per minute', '10'),
+(76, 30, 'Dmg per minute', '500'),
+(77, 31, 'champion', ''),
+(78, 31, 'role', 'Any'),
+(79, 31, 'First turret', 'true'),
+(80, 31, 'Prerequisite Id', '23'),
+(85, 33, 'champion', ''),
+(86, 33, 'role', 'Any'),
+(87, 33, 'Prerequisite Id', '23'),
+(88, 33, 'First blood', 'true'),
+(89, 33, 'Kills', '6'),
+(90, 34, 'champion', ''),
+(91, 34, 'role', 'Any'),
+(92, 34, 'Prerequisite Id', '33'),
+(93, 34, 'Kills', '10'),
+(94, 34, 'Multikill', '3'),
+(95, 35, 'champion', ''),
+(96, 35, 'role', 'Any'),
+(97, 35, 'Prerequisite Id', '23'),
+(98, 35, 'Gold per minute', '350'),
+(99, 36, 'champion', ''),
+(100, 36, 'role', 'Any'),
+(101, 36, 'Prerequisite Id', '35'),
+(102, 36, 'Gold per minute', '400'),
+(103, 37, 'champion', ''),
+(104, 37, 'role', 'Any'),
+(105, 37, 'Prerequisite Id', '23'),
+(106, 37, 'Multikill', '2'),
+(107, 38, 'champion', ''),
+(108, 38, 'role', 'Any'),
+(109, 38, 'Prerequisite Id', '37'),
+(110, 38, 'Multikill', '3'),
+(111, 39, 'champion', ''),
+(112, 39, 'role', 'Any'),
+(113, 39, 'Prerequisite Id', '38'),
+(114, 39, 'Multikill', '4'),
+(115, 40, 'champion', ''),
+(116, 40, 'role', 'Any'),
+(117, 40, 'Prerequisite Id', '39'),
+(118, 40, 'Multikill', '5'),
+(119, 41, 'champion', 'Xin Zhao'),
+(120, 41, 'role', 'Top'),
+(121, 41, 'Prerequisite Id', '30'),
+(122, 41, 'Prerequisite Id', '34'),
+(123, 41, 'Prerequisite Id', '36'),
+(124, 41, 'Prerequisite Id', '40'),
+(125, 41, 'First blood', 'true'),
+(126, 41, 'First turret', 'true'),
+(127, 41, 'Kills', '12'),
+(128, 42, 'champion', ''),
+(129, 42, 'role', 'Any'),
+(130, 42, 'Kills', '2');
 
 -- --------------------------------------------------------
 
@@ -361,6 +471,29 @@ CREATE TABLE IF NOT EXISTS `userquest` (
   KEY `fk_summoner_idx` (`summonerName`),
   KEY `fk_quest_quest_idx` (`questId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `userquest`
+--
+
+INSERT INTO `userquest` (`summonerName`, `questId`, `completed`) VALUES
+('GINDRA', 23, 0),
+('GINDRA', 26, 0),
+('GINDRA', 27, 0),
+('GINDRA', 28, 0),
+('GINDRA', 29, 0),
+('GINDRA', 30, 0),
+('GINDRA', 31, 0),
+('GINDRA', 33, 0),
+('GINDRA', 34, 0),
+('GINDRA', 35, 0),
+('GINDRA', 36, 0),
+('GINDRA', 37, 0),
+('GINDRA', 38, 0),
+('GINDRA', 39, 0),
+('GINDRA', 40, 0),
+('GINDRA', 41, 0),
+('GINDRA', 42, 0);
 
 --
 -- Constraints for dumped tables

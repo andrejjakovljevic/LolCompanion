@@ -31,7 +31,7 @@
                         <option value="Top">Top</option>
                         <option value="Jungle">Jungle</option>
                         <option value="Mid">Mid</option>
-                        <option value="ADC">ADC</option>
+                        <option value="Adc">Adc</option>
                         <option value="Support">Support</option>
                     </select>
                 </div>
