@@ -142,7 +142,6 @@ class QuestModel extends Model
             $cs = $stats->totalMinionsKilled + $stats->neutralMinionsKilled;
             $firstTower = $stats->firstTowerAssist;
             $goldPerMin = $goldEarned / ($gameDuration / 60);
-            var_dump("Gold per min:" . $goldPerMin);
             $dmgDealt = $stats->totalDamageDealtToChampions;
             $dmgPerMin = $dmgDealt / ($gameDuration / 60.);
             $firstBlood = $stats->firstBloodKill;
@@ -176,13 +175,9 @@ class QuestModel extends Model
         
         foreach($userQuests as $quest){
             $qAttributes = $qAttrModel->where("questId", $quest->questId)->find();
-            //var_dump($qAttributes);
+            
             $numOfNotCompleted = count($qAttributes);
             
-            if($quest->questId == 21){
-                var_dump($qAttributes);
-                
-            }
             
             // OVDE DODATI FIRST BLOOD, TURRET, MULTIKILL ITD
             foreach($qAttributes as $qattribute){

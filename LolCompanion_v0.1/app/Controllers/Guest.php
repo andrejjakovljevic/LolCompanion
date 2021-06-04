@@ -12,6 +12,11 @@ use App\Models\KorisnikModel;
 use App\Models\GlobalModel;
 use App\Models\QuestModel;
 use App\Models\UserQuestModel;
+
+use RiotAPI\LeagueAPI\LeagueAPI;
+use RiotAPI\Base\Definitions\Region;
+
+use RiotAPI\DataDragonAPI\DataDragonAPI;
 class Guest extends BaseController
 {
         /**
@@ -125,7 +130,10 @@ class Guest extends BaseController
             LeagueAPI::SET_KEY    => GlobalModel::getApiKey(),
             LeagueAPI::SET_REGION => Region::EUROPE_EAST,
         ]);
-        $matchlist = $api->getMatchListByAccount($api->getSummonerByName($summonerName)->accountId)->matches;
+        
+        
+        DataDragonAPI::initByCDN();
+        $matchlist = $api->getMatchListByAccount($api->getSummonerByName($this->request->getVar('username'))->accountId)->matches;
         
         $lastGamePlayed = $matchlist[0]->timestamp / 1000;
         foreach($quests as $quest){
@@ -137,7 +145,6 @@ class Guest extends BaseController
                 ];
             $uqModel->insert($userQuest);
         }
-        DataDragonAPI::initByCDN();
         
 
         return redirect()->to(site_url('Guest/login'));

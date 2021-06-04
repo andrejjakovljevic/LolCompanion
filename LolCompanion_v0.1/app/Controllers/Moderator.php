@@ -94,17 +94,6 @@ class Moderator extends LoggedUser {
     }
     
     /**
-     * Funkcija za testiranje
-     * 
-     * @return void
-     */
-    public function addQuestAttribute(){
-        var_dump($this->validate(['option' => 'required']));
-        
-        return $this->addQuest();
-    }
-    
-    /**
      * Kreiranje izazova
      * 
      * @return void
@@ -179,7 +168,6 @@ class Moderator extends LoggedUser {
      * @return void
      */
     public function deleteQuest(){
-        var_dump($_POST['questId']);
         $qModel = new QuestModel();
         
         

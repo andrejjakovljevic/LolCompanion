@@ -87,7 +87,6 @@ class PlaysModel extends Model
         $wins = [];
 
         $plays = $modelPlays->where('summonername', $summonerName)->orderBy('games_played', 'desc')->findAll();
-        // var_dump($plays);
 
         $n = min([3, count($plays)]);
         for ($i = 0; $i < $n; ++$i) {
