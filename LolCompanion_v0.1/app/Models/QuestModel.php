@@ -65,21 +65,20 @@ class QuestModel extends Model
                 'attributes' => QuestAttributeModel::getAttributes($quest->questId)
             ];
             
-            $preReq = false;
+            $preReqSatisfied = true;
             $questRequired = null;
             foreach($dataQuest['attributes'] as $atr){
                 if($atr->attributeKey == 'Prerequisite Id'){
-                    $questRequired = $atr->attributeValue;
-                    $preReq = $atr->questId;
-                    break;
-                }   
+                    $questRequired = intval($atr->attributeValue);
+                    $preReQuest = $uQModel->where('questId', $questRequired)->where('summonerName',$session->get('user')->summonerName)->find();
+                    if($preReQuest[0]->completed == 0){
+                        $preReQuest = false;
+                        break;
+                    }                }   
             }
-            // quest has a prerequisite quest
-            if($preReq != false){ 
-                // get the prerequisite quest and check if its completed by this user
-                $preReQuest = $uQModel->where('questId', $questRequired)->where('summonerName',$session->get('user')->summonerName)->find();
-                if($preReQuest[0]->completed == 0)
-                    continue; 
+            // quest has a prerequisite quest that is not completed
+            if($preReqSatisfied == false){ 
+                continue;
             }
             
                 
