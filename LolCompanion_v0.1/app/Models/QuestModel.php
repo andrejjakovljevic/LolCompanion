@@ -179,8 +179,15 @@ class QuestModel extends Model
             $numOfNotCompleted = count($qAttributes);
             
             
-            // OVDE DODATI FIRST BLOOD, TURRET, MULTIKILL ITD
             foreach($qAttributes as $qattribute){
+                if($qattribute->attributeKey == "Prerequisite Id"){
+                    foreach($userQuests as $uqPre){
+                        if($uqPre->questId == intval($qattribute->attributeValue)){
+                            $numOfNotCompleted--;
+                            break;
+                        }
+                    }
+                }
                 if($qattribute->attributeKey == "champion" && 
                         ($qattribute->attributeValue == "Any" || $qattribute->attributeValue == "" || $qattribute->attributeValue == $champion))
                     $numOfNotCompleted--;
