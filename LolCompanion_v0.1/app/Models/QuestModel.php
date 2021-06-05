@@ -116,7 +116,7 @@ class QuestModel extends Model
             $type = "FLEX";
         else return;
 
-        $gameDuration = $matchO->gameDuration;
+        $gameDuration = $matchO->gameDuration / 1000.;
         $goldEarned = 0;
         $champion = "";
         $goldPerMin = 0.;
@@ -127,6 +127,8 @@ class QuestModel extends Model
         $firstBlood = false;
         $largestMultiKill = 0;
         $role = "";
+        $cs = 0;
+        $csPerMin = 0;
         for ($i = 0; $i < 10; ++$i) {
             if($matchO->participantIdentities[$matchO->participants[$i]->participantId - 1]->player->summonerName != $summonerName)
                 continue;
@@ -140,8 +142,9 @@ class QuestModel extends Model
             
             $goldEarned = $stats->goldEarned;
             $cs = $stats->totalMinionsKilled + $stats->neutralMinionsKilled;
+            $csPerMin = $cs / ($gameDuration / 60.);
             $firstTower = $stats->firstTowerAssist;
-            $goldPerMin = $goldEarned / ($gameDuration / 60);
+            $goldPerMin = $goldEarned / ($gameDuration / 60.);
             $dmgDealt = $stats->totalDamageDealtToChampions;
             $dmgPerMin = $dmgDealt / ($gameDuration / 60.);
             $firstBlood = $stats->firstBloodKill;
@@ -178,7 +181,6 @@ class QuestModel extends Model
             
             $numOfNotCompleted = count($qAttributes);
             
-            
             foreach($qAttributes as $qattribute){
                 if($qattribute->attributeKey == "Prerequisite Id"){
                     foreach($userQuests as $uqPre){
@@ -196,8 +198,6 @@ class QuestModel extends Model
                     $numOfNotCompleted--;
                 if($qattribute->attributeKey == "Kills" && $stats->kills >= $qattribute->attributeValue)
                     $numOfNotCompleted--;
-                if($qattribute->attributeKey == "Gold" && $stats->goldEarned >= $qattribute->attributeValue)
-                    $numOfNotCompleted--;
                 if($qattribute->attributeKey == "Gold per minute" && $goldPerMin >= floatval($qattribute->attributeValue))
                     $numOfNotCompleted--;
                 if($qattribute->attributeKey == "Dmg per minute" && $dmgPerMin >= floatval($qattribute->attributeValue))
@@ -208,7 +208,8 @@ class QuestModel extends Model
                     $numOfNotCompleted--;
                 if($qattribute->attributeKey == "Multikill" && $largestMultiKill >= $qattribute->attributeValue)
                     $numOfNotCompleted--;
-
+                if($qattribute->attributeKey == "Cs per minute" && $csPerMin >= floatval($qattribute->attributeValue))
+                    $numOfNotCompleted--;
             }
             if($numOfNotCompleted == 0){
                 $userQuest = $uqModel->where("questId", $quest->questId)->where('summonerName', $summonerName)->find()[0];
