@@ -182,7 +182,7 @@ class LoggedUser extends BaseController
         $ago = "";
         $summ1 = "";
         $summ2 = "";
-
+        var_dump("OVDE SAM");
         foreach ($matchlist as $match) {
             $url = "https://europe.api.riotgames.com/lol/match/v5/matches/" . $match . "?api_key=" . $key;
             $matchO = json_decode($this->getHtml($url));
@@ -354,12 +354,12 @@ class LoggedUser extends BaseController
         ]);
         echo view('template/footer');
     }
-
-    /**
-     * Autor: Aleksandar Maksimovic ma180016
-     * Funkija za prikaz stranice o trenutnoj igri korisnika
-     */
-    public function LiveGame()
+    
+    
+    
+    
+    
+    private function calculatingWinRates($match)
     {
         DataDragonAPI::initByCDN();
             $api = new LeagueAPI([
@@ -367,8 +367,180 @@ class LoggedUser extends BaseController
             LeagueAPI::SET_REGION => Region::EUROPE_EAST,
             ]);
         $apiKey = GlobalModel::getApiKey();
-        $userName = $this->session->get('user')->summonerName;
-        $userName = str_replace(" ", "%20", $userName);
+        
+        $winRateArray=[];
+        for ($i=0; $i<10; $i++)
+        {
+            $champId=$match->participants[$i]->championId;
+            $ime=$match->participants[$i]->summonerName;
+            $summoner = $api->getSummonerByName($ime);
+            $matchlist = $api->getMatchListByAccount($summoner->accountId)->matches;
+            
+            //var_dump($matchlist[0]);
+            $numTotal=0;
+            $numWon=0;
+            $it=0;
+            $idIgrac=$match->participants[$i]->summonerId;
+            foreach ($matchlist as $iMatch)
+            {
+                $it++;
+                if ($it==3) break;
+                $iChamp=$iMatch->champion;
+                
+                if ($iChamp==$champId)
+                {
+                   $numTotal++;
+                   $matchUrl = "https://eun1.api.riotgames.com/lol/match/v4/matches/" . $iMatch->gameId . "?api_key=". $apiKey;
+                   $mec = json_decode($this->getHtml($matchUrl));
+                   
+                   $tim1=$mec->teams[0];
+                   $tim2=$mec->teams[1];
+                   
+                   foreach ($mec->participants as $igrac)
+                   {
+                       if ($igrac->participantId!=$idIgrac) continue;
+                       $tim=$igrac->teamId;
+                       
+                       if ($tim==$tim1->teamId)
+                       {
+                           if ($tim1->win=="Win")
+                               $numWon++;
+                          
+                       }
+                       else
+                       {
+                           if ($tim2->win=="Win")
+                               $numWon++;
+                       }
+                   }
+                }
+                
+            }
+            //echo $ime." ".$numTotal.":".$numWon."\n";
+            if ($numTotal>0)
+            {
+                $wr=(int) (100*($numWon/$numTotal));
+                $wr="$wr%";
+            }
+            else 
+                $wr="None";
+            
+          
+            array_push($winRateArray, $wr);
+        }
+        return $winRateArray;
+           
+    }
+    
+    
+    
+    public function calculatingWinRatesV2($match)
+    {
+        DataDragonAPI::initByCDN();
+            $api = new LeagueAPI([
+            LeagueAPI::SET_KEY    => GlobalModel::getApiKey(),
+            LeagueAPI::SET_REGION => Region::EUROPE_EAST,
+            ]);
+        $apiKey = GlobalModel::getApiKey();
+        
+        $winRateArray=[];
+        for ($i=0; $i<10; $i++)
+        {
+            var_dump($i."BROJ");
+            $champId=$match->participants[$i]->championId;
+            $ime=$match->participants[$i]->summonerName;
+            $summoner = $api->getSummonerByName($ime);
+            $matchlist = $api->getMatchListByAccount($summoner->accountId, null, null, $champId, null, null, null, null)->matches;
+            
+            //var_dump(count($matchlist)." ". $ime);
+            $numTotal=0;
+            $numWon=0;
+            $it=0;
+            $par = $match->participants[$i];
+            $idIgrac=$match->participants[$i]->summonerId;
+            for($k=0; $k < count($matchlist);$k++)
+            {
+                $iMatch = $matchlist[$k];
+                //var_dump($iMatch->timestamp);
+                
+                $it++;
+                if ($it==6) break;
+                $iChamp=$iMatch->champion;
+                
+                if ($iChamp==$champId)
+                {
+                   $numTotal++;
+                   $matchUrl = "https://eun1.api.riotgames.com/lol/match/v4/matches/" . $iMatch->gameId . "?api_key=". $apiKey;
+                   $mec = json_decode($this->getHtml($matchUrl));
+                   
+                   $tim1=$mec->teams[0];
+                   $tim2=$mec->teams[1];
+                   
+                   foreach ($mec->participantIdentities as $ig)
+                   {
+                       if ($ig->player->summonerId!=$idIgrac) continue;
+                       //$igrac=$mec->participants[$ig->participantId];
+                       $igrac=null;
+                       for ($j=0; $j<10; $j++)
+                            if ($mec->participants[$j]->participantId==$ig->participantId)
+                            {
+                                $igrac=$mec->participants[$j];
+                                break;
+                            }
+                       $tim=$igrac->teamId;
+                       
+                       //$tim1->win == "Win" ? var_dump("Win:". $tim1->teamId) : var_dump("Win:". $tim2->teamId);
+                       //var_dump("Njegov tim: ". $tim);
+                       
+                       if ($tim==$tim1->teamId)
+                       {    
+                           //var_dump("Prvi tim");
+                           if ($tim1->win=="Win")
+                               $numWon++;
+                          
+                       }
+                       else
+                       {
+                           if ($tim2->win=="Win")
+                               $numWon++;
+                       }
+                   }
+                }
+                
+            }
+            //var_dump($numWon . " - " . $numTotal);
+            //echo $ime." ".$numTotal.":".$numWon."\n";
+            if ($numTotal>0)
+            {
+                $wr=(int) (100.*($numWon/$numTotal));
+                $wr="$wr%";
+            }
+            else 
+                $wr="None";
+            
+          
+            array_push($winRateArray, $wr);
+        }
+        var_dump($winRateArray);
+        return $winRateArray;
+        
+    }
+    
+
+    /**
+     * Autor: Aleksandar Maksimovic ma180016
+     * Funkija za prikaz stranice o trenutnoj igri korisnika
+     */
+    public function LiveGame($userName)
+    {
+        DataDragonAPI::initByCDN();
+            $api = new LeagueAPI([
+            LeagueAPI::SET_KEY    => GlobalModel::getApiKey(),
+            LeagueAPI::SET_REGION => Region::EUROPE_EAST,
+            ]);
+        $apiKey = GlobalModel::getApiKey();
+        //$userName = $this->session->get('user')->summonerName;
+        //$userName = str_replace(" ", "%20", $userName);
         
         $url = "https://eun1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" . $userName . "?api_key=". $apiKey;
         $user = json_decode($this->getHtml($url));
@@ -399,15 +571,32 @@ class LoggedUser extends BaseController
         $champArray=[];
         $spell1=[];
         $spell2=[];
+        $winRateArray=[];
+        //OVDE SAM
+        $summoner = $api->getSummonerByName($userName);
+        $matchlist = $api->getMatchListByAccount($summoner->accountId)->matches;
+        
+        //var_dump(count($matchlist)." neeesto");
+        //var_dump($matchlist[0]);
+        
+        
+        //var_dump($matchlist[0]->gameId."OOOXOOO");
+        //$matchUrl = "https://eun1.api.riotgames.com/lol/match/v4/matches/" . $matchlist[0]->gameId . "?api_key=". $apiKey;
+        //$mec = json_decode($this->getHtml($matchUrl));
+        //var_dump($mec->teams);
+          
         
         //$spellInfo= DataDragonAPI::getStaticSummonerSpellById();
+        
         for ($i=0; $i<10; $i++)
         {
+            
+            
+            
+            
             $lUrl="https://eun1.api.riotgames.com/lol/league/v4/entries/by-summoner/" . $match->participants[$i]->summonerId . "?api_key=". $apiKey;
             $l=json_decode($this->getHtml($lUrl));
             
-            //var_dump($l);
-            //var_dump($l[0]->tier." ".$l[0]->rank);
             
             if($l==null || $l[0] == null || $l[0]->tier == ""){
                 $tier = "UNRANKED";
@@ -431,27 +620,27 @@ class LoggedUser extends BaseController
             array_push($champArray, $champion);
             
             //var_dump($champion);
+            //echo "\n";
             
-            
-            echo "\n";
         }
         
-        
+        $winRateArray=$this->calculatingWinRatesV2($match);
+        var_dump($winRateArray);
         
         //echo dArray;
         //var_dump("\nOVDE\n");
         //var_dump($spell1[0]);
         $players=[
-                'summoner11' => ['name' => $match->participants[0]->summonerName,  'div'=> $dArray[0],  'champ'=>$champArray[0], 'sp1'=>$spell1[0], 'sp2'=>$spell2[0]],
-                'summoner12' => ['name' => $match->participants[1]->summonerName,  'div'=> $dArray[1],  'champ'=>$champArray[1], 'sp1'=>$spell1[1], 'sp2'=>$spell2[1]],
-                'summoner13' => ['name' => $match->participants[2]->summonerName,  'div'=> $dArray[2],  'champ'=>$champArray[2], 'sp1'=>$spell1[2], 'sp2'=>$spell2[2]],
-                'summoner14' => ['name' => $match->participants[3]->summonerName,  'div'=> $dArray[3],  'champ'=>$champArray[3], 'sp1'=>$spell1[3], 'sp2'=>$spell2[3]],
-                'summoner15' => ['name' => $match->participants[4]->summonerName,  'div'=> $dArray[4],  'champ'=>$champArray[4], 'sp1'=>$spell1[4], 'sp2'=>$spell2[4]],
-                'summoner21' => ['name' => $match->participants[5]->summonerName,  'div'=> $dArray[5],  'champ'=>$champArray[5], 'sp1'=>$spell1[5], 'sp2'=>$spell2[5]],
-                'summoner22' => ['name' => $match->participants[6]->summonerName,  'div'=> $dArray[6],  'champ'=>$champArray[6], 'sp1'=>$spell1[6], 'sp2'=>$spell2[6]],
-                'summoner23' => ['name' => $match->participants[7]->summonerName,  'div'=> $dArray[7],  'champ'=>$champArray[7], 'sp1'=>$spell1[7], 'sp2'=>$spell2[7]],
-                'summoner24' => ['name' => $match->participants[8]->summonerName,  'div'=> $dArray[8],  'champ'=>$champArray[8], 'sp1'=>$spell1[8], 'sp2'=>$spell2[8]],
-                'summoner25' => ['name' => $match->participants[9]->summonerName,  'div'=> $dArray[9],  'champ'=>$champArray[9], 'sp1'=>$spell1[9], 'sp2'=>$spell2[9]]
+                'summoner11' => ['name' => $match->participants[0]->summonerName,  'div'=> $dArray[0],  'champ'=>$champArray[0], 'sp1'=>$spell1[0], 'sp2'=>$spell2[0], 'winrate'=>$winRateArray[0]],
+                'summoner12' => ['name' => $match->participants[1]->summonerName,  'div'=> $dArray[1],  'champ'=>$champArray[1], 'sp1'=>$spell1[1], 'sp2'=>$spell2[1], 'winrate'=>$winRateArray[1]],
+                'summoner13' => ['name' => $match->participants[2]->summonerName,  'div'=> $dArray[2],  'champ'=>$champArray[2], 'sp1'=>$spell1[2], 'sp2'=>$spell2[2], 'winrate'=>$winRateArray[2]],
+                'summoner14' => ['name' => $match->participants[3]->summonerName,  'div'=> $dArray[3],  'champ'=>$champArray[3], 'sp1'=>$spell1[3], 'sp2'=>$spell2[3], 'winrate'=>$winRateArray[3]],
+                'summoner15' => ['name' => $match->participants[4]->summonerName,  'div'=> $dArray[4],  'champ'=>$champArray[4], 'sp1'=>$spell1[4], 'sp2'=>$spell2[4], 'winrate'=>$winRateArray[4]],
+                'summoner21' => ['name' => $match->participants[5]->summonerName,  'div'=> $dArray[5],  'champ'=>$champArray[5], 'sp1'=>$spell1[5], 'sp2'=>$spell2[5], 'winrate'=>$winRateArray[5]],
+                'summoner22' => ['name' => $match->participants[6]->summonerName,  'div'=> $dArray[6],  'champ'=>$champArray[6], 'sp1'=>$spell1[6], 'sp2'=>$spell2[6], 'winrate'=>$winRateArray[6]],
+                'summoner23' => ['name' => $match->participants[7]->summonerName,  'div'=> $dArray[7],  'champ'=>$champArray[7], 'sp1'=>$spell1[7], 'sp2'=>$spell2[7], 'winrate'=>$winRateArray[7]],
+                'summoner24' => ['name' => $match->participants[8]->summonerName,  'div'=> $dArray[8],  'champ'=>$champArray[8], 'sp1'=>$spell1[8], 'sp2'=>$spell2[8], 'winrate'=>$winRateArray[8]],
+                'summoner25' => ['name' => $match->participants[9]->summonerName,  'div'=> $dArray[9],  'champ'=>$champArray[9], 'sp1'=>$spell1[9], 'sp2'=>$spell2[9], 'winrate'=>$winRateArray[9]]
                 ];
         
         echo view('template/header_loggedin', [
@@ -468,3 +657,6 @@ class LoggedUser extends BaseController
     }
     
 }
+
+
+

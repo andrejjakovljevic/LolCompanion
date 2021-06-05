@@ -50,7 +50,7 @@ $tier25 = explode(" ", $names['summoner25']['div'])[0];
                     <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner11']['sp2'])?>" style="width: 20%; padding: 0px;"><br>
                     <?= $names['summoner11']['name'] ?>
                 </div>
-                <div class="col-lg-1">60%</div>
+                <div class="col-lg-1"><?= $names['summoner11']['winrate'] ?></div>
                 <div class="col-lg-1">2/3/4</div>
                 <div class="col-lg-2 text-outline" style="font-size: 95%;">
                     <span style="color: <?php echo LoggedUser::StaticDivToColor($tier11) ?>" > <?= $names['summoner11']['div'] ?> </span>
@@ -58,7 +58,7 @@ $tier25 = explode(" ", $names['summoner25']['div'])[0];
                 <div class="col-lg-1">&nbsp;</div>
                 <div class="col-lg-2 text-outline"><span style="color:<?php echo LoggedUser::StaticDivToColor($tier21) ?>"> <?= $names['summoner21']['div'] ?> </span> </div>
                 <div class="col-lg-1"> 4/3/2 </div>      
-                <div class="col-lg-1"> 33% </div>
+                <div class="col-lg-1"> <?= $names['summoner21']['winrate'] ?> </div>
                 <div class="col-lg-1" style="text-align: center; font-size: 60%;">
                     <img src=" <?= base_url('iconsChampions/image'. $names['summoner21']['champ'] .'.png')?>" style="width: 50%;"><br>
                     <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner21']['sp1'])?>" style="width: 20%; padding: 0px;">
@@ -73,7 +73,7 @@ $tier25 = explode(" ", $names['summoner25']['div'])[0];
                     <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner12']['sp2'])?>" style="width: 20%; padding: 0px;"><br>
                     <?= $names['summoner12']['name'] ?>
                 </div>
-                <div class="col-lg-1">60%</div>
+                <div class="col-lg-1"><?= $names['summoner12']['winrate'] ?></div>
                 <div class="col-lg-1">2/3/4</div>
                 <div class="col-lg-2 text-outline" style="font-size: 95%;">
                     <span style="color: <?php echo LoggedUser::StaticDivToColor($tier12) ?>"> <?= $names['summoner12']['div'] ?> </span>
@@ -81,7 +81,7 @@ $tier25 = explode(" ", $names['summoner25']['div'])[0];
                 <div class="col-lg-1">&nbsp;</div>
                 <div class="col-lg-2 text-outline"><span style="color:<?php echo LoggedUser::StaticDivToColor($tier22) ?>"> <?= $names['summoner22']['div'] ?> </span> </div>
                 <div class="col-lg-1"> 4/3/2 </div>      
-                <div class="col-lg-1"> 33% </div>
+                <div class="col-lg-1"> <?= $names['summoner22']['winrate'] ?> </div>
                 <div class="col-lg-1" style="text-align: center; font-size: 60%;">
                     <img src=" <?= base_url('iconsChampions/image'. $names['summoner22']['champ'] .'.png')?>" style="width: 50%;"><br>
                     <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner22']['sp1'])?>" style="width: 20%; padding: 0px;">
@@ -96,7 +96,7 @@ $tier25 = explode(" ", $names['summoner25']['div'])[0];
                     <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner13']['sp2'])?>" style="width: 20%; padding: 0px;"><br>
                     <?= $names['summoner13']['name'] ?>
                 </div>
-                <div class="col-lg-1">60%</div>
+                <div class="col-lg-1"><?= $names['summoner13']['winrate'] ?></div>
                 <div class="col-lg-1">2/3/4</div>
                 <div class="col-lg-2 text-outline" style="font-size: 95%;">
                     <span style="color:<?php echo LoggedUser::StaticDivToColor($tier13) ?>"> <?= $names['summoner13']['div'] ?> </span>
@@ -104,7 +104,7 @@ $tier25 = explode(" ", $names['summoner25']['div'])[0];
                 <div class="col-lg-1">&nbsp;</div>
                 <div class="col-lg-2 text-outline"><span style="color:<?php echo LoggedUser::StaticDivToColor($tier23) ?>"> <?= $names['summoner23']['div'] ?> </span> </div>
                 <div class="col-lg-1"> 4/3/2 </div>      
-                <div class="col-lg-1"> 33% </div>
+                <div class="col-lg-1"> <?= $names['summoner23']['winrate'] ?> </div>
                 <div class="col-lg-1" style="text-align: center; font-size: 60%;">
                     <img src=" <?= base_url('iconsChampions/image'. $names['summoner23']['champ'] .'.png')?>" style="width: 50%;"><br>
                     <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner23']['sp1'])?>" style="width: 20%; padding: 0px;">
@@ -119,7 +119,7 @@ $tier25 = explode(" ", $names['summoner25']['div'])[0];
                     <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner14']['sp2'])?>" style="width: 20%; padding: 0px;"><br>
                     <?= $names['summoner14']['name'] ?>
                 </div>
-                <div class="col-lg-1">60%</div>
+                <div class="col-lg-1"><?= $names['summoner14']['winrate'] ?></div>
                 <div class="col-lg-1">2/3/4</div>
                 <div class="col-lg-2 text-outline" style="font-size: 95%;">
                     <span style="color:<?php echo LoggedUser::StaticDivToColor($tier14) ?>"> <?= $names['summoner14']['div'] ?></span>
@@ -127,7 +127,7 @@ $tier25 = explode(" ", $names['summoner25']['div'])[0];
                 <div class="col-lg-1">&nbsp;</div>
                 <div class="col-lg-2 text-outline"><span style="color:<?php echo LoggedUser::StaticDivToColor($tier24) ?>"> <?= $names['summoner24']['div'] ?> </span> </div>
                 <div class="col-lg-1"> 4/3/2 </div>      
-                <div class="col-lg-1"> 33% </div>
+                <div class="col-lg-1"> <?= $names['summoner24']['winrate'] ?> </div>
                 <div class="col-lg-1" style="text-align: center; font-size: 60%;">
                     <img src=" <?= base_url('iconsChampions/image'. $names['summoner24']['champ'] .'.png')?>" style="width: 50%;"><br>
                     <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner24']['sp1'])?>" style="width: 20%; padding: 0px;">
@@ -142,7 +142,7 @@ $tier25 = explode(" ", $names['summoner25']['div'])[0];
                     <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner15']['sp2'])?>" style="width: 20%; padding: 0px;"><br>
                     <?= $names['summoner15']['name'] ?>
                 </div>
-                <div class="col-lg-1">60%</div>
+                <div class="col-lg-1"><?= $names['summoner15']['winrate'] ?></div>
                 <div class="col-lg-1">2/3/4</div>
                 <div class="col-lg-2 text-outline" style="font-size: 95%;">
                     <span style="color:<?php echo LoggedUser::StaticDivToColor($tier15) ?>"> <?= $names['summoner15']['div'] ?> </span>
@@ -152,7 +152,7 @@ $tier25 = explode(" ", $names['summoner25']['div'])[0];
                     <span style="color:<?php echo LoggedUser::StaticDivToColor($tier25) ?>"> <?= $names['summoner25']['div'] ?> </span> 
                 </div>
                 <div class="col-lg-1"> 4/3/2 </div>      
-                <div class="col-lg-1"> 33% </div>
+                <div class="col-lg-1"> <?= $names['summoner25']['winrate'] ?> </div>
                 <div class="col-lg-1" style="text-align: center; font-size: 60%;">
                     <img src=" <?= base_url('iconsChampions/image'. $names['summoner25']['champ'] .'.png')?>" style="width: 50%;"><br>
                     <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner25']['sp1'])?>" style="width: 20%; padding: 0px;">
