@@ -115,7 +115,7 @@ class QuestModel extends Model
             $type = "FLEX";
         else return;
 
-        $gameDuration = $matchO->gameDuration / 1000.;
+        $gameDuration = $matchO->gameDuration;
         $goldEarned = 0;
         $champion = "";
         $goldPerMin = 0.;
