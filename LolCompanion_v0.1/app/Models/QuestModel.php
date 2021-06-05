@@ -178,6 +178,8 @@ class QuestModel extends Model
             break;  
         }
         
+        var_dump("CS per min: " . $csPerMin);
+        var_dump("Dmg per min:" . $dmgPerMin);
         foreach($userQuests as $quest){
             $qAttributes = $qAttrModel->where("questId", $quest->questId)->find();
             
@@ -198,7 +200,7 @@ class QuestModel extends Model
                 if($qattribute->attributeKey == "role" && 
                         ($qattribute->attributeValue == "Any" || $qattribute->attributeValue == $role))
                     $numOfNotCompleted--;
-                if($qattribute->attributeKey == "Kills" && $stats->kills >= $qattribute->attributeValue)
+                if($qattribute->attributeKey == "Kills" && $stats->kills >= intval($qattribute->attributeValue))
                     $numOfNotCompleted--;
                 if($qattribute->attributeKey == "Gold per minute" && $goldPerMin >= floatval($qattribute->attributeValue))
                     $numOfNotCompleted--;
@@ -208,7 +210,7 @@ class QuestModel extends Model
                     $numOfNotCompleted--;
                 if($qattribute->attributeKey == "First blood" && $firstBlood)
                     $numOfNotCompleted--;
-                if($qattribute->attributeKey == "Multikill" && $largestMultiKill >= $qattribute->attributeValue)
+                if($qattribute->attributeKey == "Multikill" && $largestMultiKill >= intval($qattribute->attributeValue))
                     $numOfNotCompleted--;
                 if($qattribute->attributeKey == "Cs per minute" && $csPerMin >= floatval($qattribute->attributeValue))
                     $numOfNotCompleted--;
