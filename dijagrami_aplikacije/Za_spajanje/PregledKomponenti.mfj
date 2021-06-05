@@ -1,0 +1,18 @@
+{
+	"_type": "UMLModel",
+	"_id": "AAAAAAFFxl6vKz9YEJg=",
+	"_parent": {
+		"$ref": "AAAAAAFFxl2a6D9NCaE="
+	},
+	"name": "Component View",
+	"ownedElements": [
+		{
+			"_type": "UMLComponentDiagram",
+			"_id": "AAAAAAFFxl+07j9sxXU=",
+			"_parent": {
+				"$ref": "AAAAAAFFxl6vKz9YEJg="
+			},
+			"name": "Component View"
+		}
+	]
+}

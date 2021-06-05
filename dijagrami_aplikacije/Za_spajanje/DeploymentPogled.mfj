@@ -1,0 +1,18 @@
+{
+	"_type": "UMLModel",
+	"_id": "AAAAAAFFxl8NcT9gE1g=",
+	"_parent": {
+		"$ref": "AAAAAAFFxl2a6D9NCaE="
+	},
+	"name": "Deployment View",
+	"ownedElements": [
+		{
+			"_type": "UMLDeploymentDiagram",
+			"_id": "AAAAAAFFxmALQz90KAY=",
+			"_parent": {
+				"$ref": "AAAAAAFFxl8NcT9gE1g="
+			},
+			"name": "Deployment View"
+		}
+	]
+}
