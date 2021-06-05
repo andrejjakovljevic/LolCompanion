@@ -73,7 +73,7 @@ class QuestModel extends Model
                     $questRequired = intval($atr->attributeValue);
                     $preReQuest = $uQModel->where('questId', $questRequired)->where('summonerName',$session->get('user')->summonerName)->find();
                     if($preReQuest[0]->completed == 0){
-                        $preReQuest = false;
+                        $preReqSatisfied = false;
                         break;
                     }  
                 }   
