@@ -52,7 +52,7 @@ class KorisnikModel extends Model
         $matchlist = $api->getMatchListByAccount($api->getSummonerByName($summonerName)->accountId)->matches;
 
         $modelPlays = new PlaysModel();
-        $userQuests = (new UserQuestModel())->where('summonerName', $summonerName)->where('completed', 0)->find();
+        $userQuests = (new UserQuestModel())->where('summonerName', $summonerName)->where('completed', 0)->order_by("questId", "desc")->find();
         $limit = 0;
         for($i = count($matchlist) - 1; $i >= 0; --$i) {
             $match = $matchlist[$i];
