@@ -2386,6 +2386,247 @@
       ],
       "value": ""
     }]
+  }, {
+    "id": "81818db4-fb1f-4a15-a442-bbf7f71b2dc9",
+    "name": "SSU___Pregled_tekuceg_meca - NEUSPEH",
+    "commands": [{
+      "id": "35b309b2-4ec1-452e-b6fd-d583fd2eb2a9",
+      "comment": "",
+      "command": "open",
+      "target": "/LoggedUser",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "5a06658e-1cad-4b41-8915-3c6d7c41e8df",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "805x612",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "9cef705e-6976-4202-9d1b-2f9e6cd0a59b",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Live game",
+      "targets": [
+        ["linkText=Live game", "linkText"],
+        ["css=.col-lg-1:nth-child(4) > .basic", "css:finder"],
+        ["xpath=//a[contains(text(),'Live game')]", "xpath:link"],
+        ["xpath=//a[@href='http://localhost:8080/LoggedUser/LiveGame/']", "xpath:href"],
+        ["xpath=//div[4]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Live game')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "480444fe-3d4a-4e1d-9a14-3844d24a01f8",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.col:nth-child(2)",
+      "targets": [
+        ["css=.col:nth-child(2)", "css:finder"],
+        ["xpath=//div[2]/div[2]", "xpath:position"]
+      ],
+      "value": "THERE IS NO LIVE GAME CURRENTLY"
+    }]
+  }, {
+    "id": "dcb70f94-343b-4e84-8dde-6ce374e13215",
+    "name": "SSU___Azuriranje_sajta - NEUSPEH",
+    "commands": [{
+      "id": "33f9a107-5b1c-486e-b8e4-30449c5e0e38",
+      "comment": "",
+      "command": "open",
+      "target": "/LoggedUser",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d57a4af2-08b8-48e8-97e3-5672b59e1838",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "805x612",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "454aaca8-001c-41a9-8261-d1b4a9b36ab7",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'GINDRA')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "637cba14-ec6f-4ea5-a818-ccdcb587a7d4",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Admin Panel",
+      "targets": [
+        ["linkText=Admin Panel", "linkText"],
+        ["css=li:nth-child(4) > .dropdown-item", "css:finder"],
+        ["xpath=//a[contains(text(),'Admin Panel')]", "xpath:link"],
+        ["xpath=//a[@href='http://localhost:8080/Admin']", "xpath:href"],
+        ["xpath=//li[4]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Admin Panel')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "464bd219-7acf-4e01-852f-1aaaecdcb18a",
+      "comment": "",
+      "command": "click",
+      "target": "name=api",
+      "targets": [
+        ["name=api", "name"],
+        ["css=.row:nth-child(2) > .col-lg-6:nth-child(2) input:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='api']", "xpath:attributes"],
+        ["xpath=//div[2]/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "aee3d00a-14b9-4436-9d56-f080890c0406",
+      "comment": "",
+      "command": "type",
+      "target": "name=api",
+      "targets": [
+        ["name=api", "name"],
+        ["css=.row:nth-child(2) > .col-lg-6:nth-child(2) input:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='api']", "xpath:attributes"],
+        ["xpath=//div[2]/form/input", "xpath:position"]
+      ],
+      "value": "dawdwadwa"
+    }, {
+      "id": "854e5128-3ae5-4cef-8107-caf1dcf7cd59",
+      "comment": "",
+      "command": "click",
+      "target": "css=.row:nth-child(2) > .col-lg-6:nth-child(2) input:nth-child(3)",
+      "targets": [
+        ["css=.row:nth-child(2) > .col-lg-6:nth-child(2) input:nth-child(3)", "css:finder"],
+        ["xpath=//input[@value='Submit']", "xpath:attributes"],
+        ["xpath=//div[2]/form/input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "eda465c1-40ff-419b-9225-98e381a03bc5",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.container > div:nth-child(6)",
+      "targets": [
+        ["css=.container > div:nth-child(6)", "css:finder"],
+        ["xpath=//div[2]/div/div[4]", "xpath:position"]
+      ],
+      "value": "API key is not valid"
+    }]
+  }, {
+    "id": "41c4bf39-37ff-42f6-bc15-27ab53d5c090",
+    "name": "SSU___Azuriranje_sajta - USPESNO",
+    "commands": [{
+      "id": "a406c7df-4261-4509-a785-36d8b6c68500",
+      "comment": "",
+      "command": "open",
+      "target": "/LoggedUser",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f72acb16-bc06-4a04-a9e8-6d9a27cba928",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "805x612",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1e1560c6-2cd4-4e96-8548-172989a64b2e",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//button[@type='button']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'GINDRA')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8c95b6b8-e0b4-43b1-bb1b-ab5c699b6b90",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Admin Panel",
+      "targets": [
+        ["linkText=Admin Panel", "linkText"],
+        ["css=li:nth-child(4) > .dropdown-item", "css:finder"],
+        ["xpath=//a[contains(text(),'Admin Panel')]", "xpath:link"],
+        ["xpath=//a[@href='http://localhost:8080/Admin']", "xpath:href"],
+        ["xpath=//li[4]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Admin Panel')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b6c87384-3636-4af5-8728-8634619ea4c0",
+      "comment": "",
+      "command": "click",
+      "target": "name=api",
+      "targets": [
+        ["name=api", "name"],
+        ["css=.row:nth-child(2) > .col-lg-6:nth-child(2) input:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='api']", "xpath:attributes"],
+        ["xpath=//div[2]/form/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d9f6c6f3-3a4a-449d-96b4-9ffda734930f",
+      "comment": "",
+      "command": "type",
+      "target": "name=api",
+      "targets": [
+        ["name=api", "name"],
+        ["css=.row:nth-child(2) > .col-lg-6:nth-child(2) input:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='api']", "xpath:attributes"],
+        ["xpath=//div[2]/form/input", "xpath:position"]
+      ],
+      "value": "RGAPI-15966e6c-4e1d-4880-827e-dffbacbe3836"
+    }, {
+      "id": "33c9c779-9704-433d-84c7-311c525e3e3e",
+      "comment": "",
+      "command": "click",
+      "target": "css=.row:nth-child(2) > .col-lg-6:nth-child(2) input:nth-child(3)",
+      "targets": [
+        ["css=.row:nth-child(2) > .col-lg-6:nth-child(2) input:nth-child(3)", "css:finder"],
+        ["xpath=//input[@value='Submit']", "xpath:attributes"],
+        ["xpath=//div[2]/form/input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "61a8a586-8391-4c09-88c7-ea303915b00e",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.container > div:nth-child(6)",
+      "targets": [
+        ["css=.container > div:nth-child(6)", "css:finder"],
+        ["xpath=//div[2]/div/div[4]", "xpath:position"]
+      ],
+      "value": "API key successfully changed"
+    }, {
+      "id": "55133b24-e954-44da-8bbe-0d42a6cda007",
+      "comment": "",
+      "command": "click",
+      "target": "css=.center > span",
+      "targets": [
+        ["css=.center > span", "css:finder"],
+        ["xpath=//span", "xpath:position"],
+        ["xpath=//span[contains(.,'Update Statistics')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "1f8ff3a3-5057-42db-9ff6-e0e0395f7b9f",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.container > div:nth-child(6)",
+      "targets": [
+        ["css=.container > div:nth-child(6)", "css:finder"],
+        ["xpath=//div[2]/div/div[4]", "xpath:position"]
+      ],
+      "value": "Successfully updated"
+    }]
   }],
   "suites": [{
     "id": "638ecaaf-d2da-44b3-aaa6-849bf67f9ae2",
