@@ -99,7 +99,7 @@ class PlaysModel extends Model
         for ($i = 0; $i < $n; ++$i) {
             $champ[$i] = $api->getStaticChampion($champ[$i])->name;
             // echo DataDragonAPI::getChampionSplashUrl($champ[$i]);
-            array_push($splash, DataDragonAPI::getChampionSplashUrl($champ[$i]));
+            array_push($splash, str_replace("'","",DataDragonAPI::getChampionSplashUrl($champ[$i])));
         }
         return ['champ'     =>  $champ,
                 'splash'    =>  $splash,
