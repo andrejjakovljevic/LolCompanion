@@ -182,7 +182,7 @@ class QuestModel extends Model
             // OVDE DODATI FIRST BLOOD, TURRET, MULTIKILL ITD
             foreach($qAttributes as $qattribute){
                 if($qattribute->attributeKey == "champion" && 
-                        ($qattribute->attributeValue == "Any" || $qattribute->attributeValue == $champion))
+                        ($qattribute->attributeValue == "Any" || $qattribute->attributeValue == "" || $qattribute->attributeValue == $champion))
                     $numOfNotCompleted--;
                 if($qattribute->attributeKey == "role" && 
                         ($qattribute->attributeValue == "Any" || $qattribute->attributeValue == $role))

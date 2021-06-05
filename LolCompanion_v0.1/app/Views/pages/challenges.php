@@ -30,7 +30,7 @@
                 $attrStr = "";
                 foreach($quest['attributes'] as $attr){
                     $attrStr = $attrStr . '' . $attr->attributeKey;
-                    $attrStr = $attrStr. ': '. $attr->attributeValue ."<br>";
+                    $attr->attributeValue == "" ? $attrStr = $attrStr . ": Any<br>" : $attrStr = $attrStr. ': '. $attr->attributeValue ."<br>";
                 }
                 echo '
                 <div class = "row" style="padding-bottom: 5px; ' . ($quest['completed'] == 1 ? 'background-color: rgba(55,255,125,0.6); color: #666666; ' : '') . '">
