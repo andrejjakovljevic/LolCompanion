@@ -74,12 +74,15 @@ class QuestModel extends Model
                     if($preReQuest[0]->completed == 0){
                         $preReQuest = false;
                         break;
-                    }                }   
+                    }  
+                }   
+                
+                // quest has a prerequisite quest that is not completed
+                if($preReqSatisfied == false){ 
+                    continue;
+                }
             }
-            // quest has a prerequisite quest that is not completed
-            if($preReqSatisfied == false){ 
-                continue;
-            }
+            
             
                 
             // $dataQuest['attributes'];
