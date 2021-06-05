@@ -65,9 +65,10 @@ class QuestModel extends Model
                 'attributes' => QuestAttributeModel::getAttributes($quest->questId)
             ];
             
-            $preReqSatisfied = true;
+            
             $questRequired = null;
             foreach($dataQuest['attributes'] as $atr){
+                $preReqSatisfied = true;
                 if($atr->attributeKey == 'Prerequisite Id'){
                     $questRequired = intval($atr->attributeValue);
                     $preReQuest = $uQModel->where('questId', $questRequired)->where('summonerName',$session->get('user')->summonerName)->find();
