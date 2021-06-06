@@ -126,7 +126,8 @@ class Guest extends BaseController
         ]);
         $matchlist = $api->getMatchListByAccount($api->getSummonerByName($this->request->getVar('username'))->accountId)->matches;
         
-        $lastGamePlayed = $matchlist[0]->timestamp / 1000;
+        $lastGamePlayed=0;
+        //$lastGamePlayed = $matchlist[0]->timestamp / 1000;
         
         
         $user = [];
