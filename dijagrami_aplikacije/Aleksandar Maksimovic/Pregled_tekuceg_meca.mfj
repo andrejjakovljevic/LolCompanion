@@ -562,10 +562,12 @@
 													"_parent": {
 														"$ref": "AAAAAAF5xLuwS8pDXmU="
 													},
-													"visible": false,
 													"font": "Arial;13;0",
-													"left": -48,
-													"height": 13
+													"left": 805,
+													"top": 45,
+													"width": 99.578125,
+													"height": 13,
+													"text": "«view»"
 												},
 												{
 													"_type": "LabelView",
@@ -575,7 +577,7 @@
 													},
 													"font": "Arial;13;1",
 													"left": 805,
-													"top": 47,
+													"top": 60,
 													"width": 99.578125,
 													"height": 13,
 													"text": "LiveGame.php"
@@ -2734,6 +2736,7 @@
 								"$ref": "AAAAAAF5xLqqO8mxabg="
 							},
 							"name": "LiveGame.php",
+							"stereotype": "view",
 							"represent": {
 								"$ref": "AAAAAAF5xLuwSspAdnQ="
 							},
@@ -4134,9 +4137,12 @@
 													"_parent": {
 														"$ref": "AAAAAAF54DIrQRCooQo="
 													},
-													"visible": false,
 													"font": "Arial;13;0",
-													"height": 13
+													"left": 693,
+													"top": 45,
+													"width": 124.8671875,
+													"height": 13,
+													"text": "«view»"
 												},
 												{
 													"_type": "LabelView",
@@ -4146,7 +4152,7 @@
 													},
 													"font": "Arial;13;1",
 													"left": 693,
-													"top": 47,
+													"top": 60,
 													"width": 124.8671875,
 													"height": 13,
 													"text": "No_live_game.php"
@@ -4765,6 +4771,7 @@
 								"$ref": "AAAAAAF53i/HMoDBq2M="
 							},
 							"name": "No_live_game.php",
+							"stereotype": "view",
 							"represent": {
 								"$ref": "AAAAAAF54DIrQBClySg="
 							},
@@ -4835,7 +4842,8 @@
 					"_parent": {
 						"$ref": "AAAAAAF53i/HMYDAj8k="
 					},
-					"name": "Role6"
+					"name": "Role6",
+					"type": ""
 				}
 			]
 		}

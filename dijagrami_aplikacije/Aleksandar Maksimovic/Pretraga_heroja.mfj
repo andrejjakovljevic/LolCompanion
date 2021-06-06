@@ -3512,9 +3512,9 @@
 												"$ref": "AAAAAAF5xRj8ydDGrG4="
 											},
 											"font": "Arial;13;0",
-											"left": 22.55908203125,
+											"left": 24.72998046875,
 											"top": 21,
-											"width": 102.791015625,
+											"width": 115.9052734375,
 											"height": 13,
 											"text": "SequenceDiagram1"
 										},
@@ -3527,7 +3527,7 @@
 											"font": "Arial;13;1",
 											"left": 5,
 											"top": 21,
-											"width": 12.55908203125,
+											"width": 14.72998046875,
 											"height": 13,
 											"text": "sd"
 										}
@@ -4362,9 +4362,12 @@
 													"_parent": {
 														"$ref": "AAAAAAF5xR3dBdPf0m8="
 													},
-													"visible": false,
 													"font": "Arial;13;0",
-													"height": 13
+													"left": 549,
+													"top": 45,
+													"width": 71.38818359375,
+													"height": 13,
+													"text": "«view»"
 												},
 												{
 													"_type": "LabelView",
@@ -4374,7 +4377,7 @@
 													},
 													"font": "Arial;13;1",
 													"left": 549,
-													"top": 47,
+													"top": 60,
 													"width": 71.38818359375,
 													"height": 13,
 													"text": "index.php"
@@ -4936,6 +4939,7 @@
 								"$ref": "AAAAAAF5xRj8ydDE5vQ="
 							},
 							"name": "index.php",
+							"stereotype": "view",
 							"represent": {
 								"$ref": "AAAAAAF5xR3dBdPcgyM="
 							},
