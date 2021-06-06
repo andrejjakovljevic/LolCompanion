@@ -175,8 +175,6 @@ class QuestModel extends Model
             break;  
         }
         
-        var_dump("CS per min: " . $csPerMin);
-        var_dump("Dmg per min:" . $dmgPerMin);
         foreach($userQuests as $quest){
             $qAttributes = $qAttrModel->where("questId", $quest->questId)->find();
             
