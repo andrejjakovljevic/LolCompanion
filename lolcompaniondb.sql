@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jun 04, 2021 at 12:52 PM
+-- Generation Time: Jun 06, 2021 at 12:00 AM
 -- Server version: 5.7.31
 -- PHP Version: 7.3.21
 
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `builds` (
   `iditem6` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_idchamps_idx` (`idchamp`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `builds`
@@ -64,7 +64,9 @@ INSERT INTO `builds` (`iditem1`, `iditem2`, `iditem3`, `idchamp`, `winrate`, `la
 (1039, 2031, 3802, 25, 55.7, 'Jungle', 8128, 8126, 8138, 8135, 8210, 8232, 5008, 5008, 5002, 3, 3020, 3157, 4637),
 (1039, 2031, 6660, 32, 55.1, 'Jungle', 8010, 9111, 9105, 8299, 8126, 8135, 5005, 5008, 5002, 4, 3047, 3075, 3001),
 (1056, 2003, 3802, 34, 54.9, 'Mid', 8112, 8126, 8138, 8105, 8009, 8014, 5008, 5008, 5003, 5, 3020, 3157, 3003),
-(3850, 2003, 3158, 432, 54.8, 'Support', 8465, 8463, 8473, 8453, 8136, 8105, 5008, 5008, 5002, 6, 3853, 4629, 3110);
+(3850, 2003, 3158, 432, 54.8, 'Support', 8465, 8463, 8473, 8453, 8136, 8105, 5008, 5008, 5002, 6, 3853, 4629, 3110),
+(1054, 2003, 1037, 266, 57.3, 'Top', 8010, 9111, 9105, 8299, 8473, 8453, 5008, 5008, 5002, 7, 3047, 3053, 6333),
+(2033, 3116, 3020, 136, 58.5, 'Mid', 8112, 8139, 8138, 8105, 8345, 8352, 5005, 5008, 5003, 8, 3157, 3165, 3041);
 
 -- --------------------------------------------------------
 
@@ -281,7 +283,7 @@ CREATE TABLE IF NOT EXISTS `korisnik` (
 --
 
 INSERT INTO `korisnik` (`summonerName`, `password`, `email`, `lastGamePlayed`, `role`) VALUES
-('GINDRA', 'a665a45920422f9d417e4867efdc4fb8a04a1f3fff1fa07e998e86f7f7a27ae3', 'gindroni@nudle.etf', 1618955535, 0);
+('GINDRA', '8d23cf6c86e834a7aa6eded54c26ce2bb2e74903538c61bdd5d2197997ab2f72', 'gindroni@nudle.etf', 1622757428, 0);
 
 -- --------------------------------------------------------
 
@@ -304,20 +306,26 @@ CREATE TABLE IF NOT EXISTS `plays` (
 --
 
 INSERT INTO `plays` (`summonername`, `idchamp`, `games_won`, `games_played`) VALUES
-('GINDRA', 120, 1, 1),
-('GINDRA', 412, 3, 5),
 ('GINDRA', 61, 1, 1),
 ('GINDRA', 268, 1, 1),
 ('GINDRA', 34, 0, 1),
 ('GINDRA', 58, 1, 1),
-('GINDRA', 10, 1, 1),
-('GINDRA', 27, 1, 1),
 ('GINDRA', 85, 0, 1),
-('GINDRA', 41, 2, 2),
 ('GINDRA', 8, 3, 5),
 ('GINDRA', 427, 0, 1),
 ('GINDRA', 517, 1, 1),
-('GINDRA', 150, 11, 17);
+('GINDRA', 127, 0, 1),
+('GINDRA', 25, 0, 1),
+('GINDRA', 10, 1, 3),
+('GINDRA', 33, 0, 1),
+('GINDRA', 2, 0, 2),
+('GINDRA', 15, 0, 1),
+('GINDRA', 412, 6, 11),
+('GINDRA', 41, 5, 8),
+('GINDRA', 150, 15, 26),
+('GINDRA', 120, 2, 2),
+('GINDRA', 126, 0, 1),
+('GINDRA', 27, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -354,8 +362,7 @@ INSERT INTO `quest` (`questId`, `description`, `title`, `image`) VALUES
 (38, 'Get a triple kill now!', 'Triple kill!', 'https://static1-www.millenium.gg/articles/2/83/82/@/89706-1197099-em-rewards-ranked-tft-gold2019-inventory-full-1-article_m-1.png'),
 (39, 'Wooow a quadra kill :O', 'Quadra kill!', 'https://static1-www.millenium.gg/articles/2/83/82/@/89706-1197099-em-rewards-ranked-tft-gold2019-inventory-full-1-article_m-1.png'),
 (40, 'Penta kill o m g :O :D', 'Penta kill!', 'https://static1-www.millenium.gg/articles/2/83/82/@/89706-1197099-em-rewards-ranked-tft-gold2019-inventory-full-1-article_m-1.png'),
-(41, 'Now that you have ascended and become a god it is time to play Xin Top.', 'Xin top supremacy', 'https://www.mobafire.com/images/avatars/xin-zhao-classic.png'),
-(42, 'Dodaj ga svima', 'TestQuest', '');
+(41, 'Now that you have ascended and become a god it is time to play Xin Top.', 'Xin top supremacy', 'https://www.mobafire.com/images/avatars/xin-zhao-classic.png');
 
 -- --------------------------------------------------------
 
@@ -371,7 +378,7 @@ CREATE TABLE IF NOT EXISTS `questattributes` (
   `attributeValue` varchar(50) NOT NULL,
   PRIMARY KEY (`attributeId`),
   KEY `fk_quest_idx` (`questId`)
-) ENGINE=InnoDB AUTO_INCREMENT=134 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=137 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `questattributes`
@@ -451,10 +458,7 @@ INSERT INTO `questattributes` (`attributeId`, `questId`, `attributeKey`, `attrib
 (124, 41, 'Prerequisite Id', '40'),
 (125, 41, 'First blood', 'true'),
 (126, 41, 'First turret', 'true'),
-(127, 41, 'Kills', '12'),
-(128, 42, 'champion', ''),
-(129, 42, 'role', 'Any'),
-(130, 42, 'Kills', '2');
+(127, 41, 'Kills', '12');
 
 -- --------------------------------------------------------
 
@@ -492,8 +496,7 @@ INSERT INTO `userquest` (`summonerName`, `questId`, `completed`) VALUES
 ('GINDRA', 38, 0),
 ('GINDRA', 39, 0),
 ('GINDRA', 40, 0),
-('GINDRA', 41, 0),
-('GINDRA', 42, 0);
+('GINDRA', 41, 0);
 
 --
 -- Constraints for dumped tables

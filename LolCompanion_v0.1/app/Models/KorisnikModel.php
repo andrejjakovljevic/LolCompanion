@@ -52,7 +52,7 @@ class KorisnikModel extends Model
         $matchlist = $api->getMatchListByAccount($api->getSummonerByName($summonerName)->accountId)->matches;
 
         $modelPlays = new PlaysModel();
-        $userQuests = (new UserQuestModel())->where('summonerName', $summonerName)->where('completed', 0)->find();
+        $userQuests = (new UserQuestModel())->where('summonerName', $summonerName)->where('completed', 0)->orderBy("questId", "DESC")->find();
         $limit = 0;
         for($i = count($matchlist) - 1; $i >= 0; --$i) {
             $match = $matchlist[$i];
@@ -126,7 +126,6 @@ class KorisnikModel extends Model
             else $ago_str = number_format($ago / 60 / 24, 0) . " d";
             // $ago_str = $match->timestamp / 1000;
             $players = [];
-            // var_dump($matchO);
             // break;
             for ($i = 0; $i < 10; ++$i) {
                 array_push($players, [

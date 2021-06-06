@@ -479,7 +479,7 @@ class LoggedUser extends BaseController
      * Autor: Aleksandar Maksimovic ma180016
      * Funkija za prikaz stranice o trenutnoj igri korisnika
      */
-    public function LiveGame($userName)
+    public function LiveGame()
     {
         DataDragonAPI::initByCDN();
             $api = new LeagueAPI([
@@ -487,8 +487,8 @@ class LoggedUser extends BaseController
             LeagueAPI::SET_REGION => Region::EUROPE_EAST,
             ]);
         $apiKey = GlobalModel::getApiKey();
-        //$userName = $this->session->get('user')->summonerName;
-        //$userName = str_replace(" ", "%20", $userName);
+        $userName = $this->session->get('user')->summonerName;
+        $userName = str_replace(" ", "%20", $userName);
         
         $url = "https://eun1.api.riotgames.com/lol/summoner/v4/summoners/by-name/" . $userName . "?api_key=". $apiKey;
         $user = json_decode($this->getHtml($url));
