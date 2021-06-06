@@ -120,22 +120,24 @@ class Guest extends BaseController
             }
         }
         
+        $api = new LeagueAPI([
+            LeagueAPI::SET_KEY    => GlobalModel::getApiKey(),
+            LeagueAPI::SET_REGION => Region::EUROPE_EAST,
+        ]);
+        $matchlist = $api->getMatchListByAccount($api->getSummonerByName($this->request->getVar('username'))->accountId)->matches;
+        
+        $lastGamePlayed = $matchlist[0]->timestamp / 1000;
+        
+        
         $user = [];
         $user['summonerName'] = $this->request->getVar('username');
         $user['email'] = $this->request->getVar('email');
         $user['role'] = 2;
         $user['password'] = hash("sha256",$this->request->getVar('password1'),false);
+        $user['lastGamePlayed'] = $lastGamePlayed;
         $korisnikModel->insert($user);
-        $api = new LeagueAPI([
-            LeagueAPI::SET_KEY    => GlobalModel::getApiKey(),
-            LeagueAPI::SET_REGION => Region::EUROPE_EAST,
-        ]);
         
         
-        DataDragonAPI::initByCDN();
-        $matchlist = $api->getMatchListByAccount($api->getSummonerByName($this->request->getVar('username'))->accountId)->matches;
-        
-        $lastGamePlayed = $matchlist[0]->timestamp / 1000;
         foreach($quests as $quest){
             $userQuest = [
                 "summonerName" => $this->request->getVar('username'),

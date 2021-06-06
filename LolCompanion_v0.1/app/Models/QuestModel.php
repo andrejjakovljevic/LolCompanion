@@ -142,14 +142,12 @@ class QuestModel extends Model
             $goldEarned = $stats->goldEarned;
             $cs = $stats->totalMinionsKilled + $stats->neutralMinionsKilled;
             $csPerMin = $cs / ($gameDuration / 60.);
-            $firstTower = $stats->firstTowerAssist;
+            $firstTower = $stats->firstTowerAssist || $stats->firstTowerKill;
             $goldPerMin = $goldEarned / ($gameDuration / 60.);
             $dmgDealt = $stats->totalDamageDealtToChampions;
             $dmgPerMin = $dmgDealt / ($gameDuration / 60.);
             $firstBlood = $stats->firstBloodKill;
-            $firstTower = $stats->firstTowerAssist;
             $largestMultiKill = $stats->largestMultiKill;
-            
             if($timeline->lane == "JUNGLE"){
                 $role = "Jungle";
             }
@@ -175,23 +173,33 @@ class QuestModel extends Model
             break;  
         }
         
+        
         foreach($userQuests as $quest){
             $qAttributes = $qAttrModel->where("questId", $quest->questId)->find();
             
             $numOfNotCompleted = count($qAttributes);
             
+            
             foreach($qAttributes as $qattribute){
+                //var_dump($qattribute);
                 if($qattribute->attributeKey == "Prerequisite Id"){
-                    foreach($userQuests as $uqPre){
-                        if($uqPre->questId == intval($qattribute->attributeValue)){
-                            $numOfNotCompleted--;
+                    $uQModel = new UserQuestModel();
+                    $AlluQ = $uQModel->where('summonerName', $summonerName)->findAll();
+                    foreach($AlluQ as $uq){
+                        if($uq->questId == $qattribute->attributeValue ){
+                            if($uq->completed == 1){
+                                $numOfNotCompleted--;
+                            }
                             break;
-                        }
+                        }  
                     }
                 }
-                if($qattribute->attributeKey == "champion" && 
-                        ($qattribute->attributeValue == "Any" || $qattribute->attributeValue == "" || $qattribute->attributeValue == $champion))
+                if($qattribute->attributeKey == "champion" && (
+                        $qattribute->attributeValue == "Any" || $qattribute->attributeValue == "" 
+                    || $qattribute->attributeValue == null || $qattribute->attributeValue == $champion)){
                     $numOfNotCompleted--;
+                }
+                   
                 if($qattribute->attributeKey == "role" && 
                         ($qattribute->attributeValue == "Any" || $qattribute->attributeValue == $role))
                     $numOfNotCompleted--;
@@ -208,9 +216,12 @@ class QuestModel extends Model
                 if($qattribute->attributeKey == "Multikill" && $largestMultiKill >= intval($qattribute->attributeValue))
                     $numOfNotCompleted--;
                 if($qattribute->attributeKey == "Cs per minute" && $csPerMin >= floatval($qattribute->attributeValue))
-                    $numOfNotCompleted--;
+                        $numOfNotCompleted--;  
+                  
+                //var_dump("NumNotCompleted = " . $numOfNotCompleted);
             }
             if($numOfNotCompleted == 0){
+                
                 $userQuest = $uqModel->where("questId", $quest->questId)->where('summonerName', $summonerName)->find()[0];
                 $userQuest->completed = 1;
         

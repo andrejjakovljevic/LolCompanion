@@ -29,6 +29,8 @@
             <?php foreach($quests as $quest) {
                 $attrStr = "";
                 foreach($quest['attributes'] as $attr){
+                    if($attr->attributeKey == "Prerequisite Id")
+                        continue;
                     $attrStr = $attrStr . '' . $attr->attributeKey;
                     $attr->attributeValue == "" ? $attrStr = $attrStr . ": Any<br>" : $attrStr = $attrStr. ': '. $attr->attributeValue ."<br>";
                 }
