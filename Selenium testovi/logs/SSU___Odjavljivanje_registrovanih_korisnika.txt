@@ -1,0 +1,17 @@
+Running 'SSU___Odjavljivanje_registrovanih_korisnika'
+22:37:12
+1.open on /LoggedUser OK
+22:37:13
+2.setWindowSize on 1333x693 OK
+22:37:13
+3.assertElementPresent on css=.btn OK
+22:37:13
+4.click on css=.row:nth-child(1) > .col-lg-12 OK
+22:37:13
+5.click on css=.btn OK
+22:37:14
+6.click on linkText=LogOut OK
+22:37:14
+7.assertText on linkText=Login with value Login OK
+22:37:14
+'SSU___Odjavljivanje_registrovanih_korisnika' completed successfully

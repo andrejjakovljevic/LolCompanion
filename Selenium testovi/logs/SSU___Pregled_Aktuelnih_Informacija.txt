@@ -1,0 +1,13 @@
+Running 'SSU___Pregled_Aktuelnih_Informacija'
+22:38:07
+1.open on /LoggedUser OK
+22:38:07
+2.setWindowSize on 1550x838 OK
+22:38:08
+3.verifyText on linkText=Statistics with value Statistics OK
+22:38:08
+4.click on linkText=Statistics OK
+22:38:08
+5.verifyText on css=.naslov with value Top champions OK
+22:38:08
+'SSU___Pregled_Aktuelnih_Informacija' completed successfully

@@ -1,0 +1,45 @@
+Running 'SSU___Zahtev_za_promenu_lozinke'
+22:18:12
+1.open on /LoggedUser OK
+22:18:12
+2.setWindowSize on 1550x838 OK
+22:18:13
+3.click on css=.btn OK
+22:18:13
+4.assertText on css=li:nth-child(2) > .dropdown-item with value Change\npassword OK
+22:18:16
+5.click on css=li:nth-child(2) > .dropdown-item OK
+22:18:16
+6.click on name=curpass OK
+22:18:16
+7.type on name=curpass with value 123 OK
+22:18:17
+8.click on name=newpass1 OK
+22:18:17
+9.type on name=newpass1 with value 321 OK
+22:18:18
+10.click on name=newpass2 OK
+22:18:18
+11.type on name=newpass2 with value 321 OK
+22:18:18
+12.click on css=input:nth-child(10) OK
+22:18:18
+13.click on css=.btn OK
+22:18:18
+14.click on linkText=LogOut OK
+22:18:19
+15.click on linkText=Login OK
+22:18:19
+16.click on id=username OK
+22:18:21
+17.type on id=username with value GINDRA OK
+22:18:22
+18.click on css=.naslov OK
+22:18:22
+19.click on id=password OK
+22:18:22
+20.type on id=password with value 321 OK
+22:18:22
+21.click on css=input:nth-child(7) OK
+22:18:22
+'SSU___Zahtev_za_promenu_lozinke' completed successfully

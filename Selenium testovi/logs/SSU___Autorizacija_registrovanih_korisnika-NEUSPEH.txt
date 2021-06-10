@@ -1,0 +1,25 @@
+Running 'SSU___Autorizacija_registrovanih_korisnika-NEUSPEH'
+22:32:48
+1.open on / OK
+22:32:49
+2.setWindowSize on 1219x692 OK
+22:32:49
+3.click on linkText=Login OK
+22:32:49
+4.mouseOver on linkText=Login OK
+22:32:50
+5.mouseOut on linkText=Login OK
+22:32:50
+6.click on id=username OK
+22:32:50
+7.type on id=username with value PERADETLIC OK
+22:32:51
+8.click on id=password OK
+22:32:51
+9.type on id=password with value 12321 OK
+22:32:51
+10.click on css=input:nth-child(7) OK
+22:32:51
+11.assertText on css=.col-lg-12 > div:nth-child(2) with value User doesn't exist OK
+22:32:51
+'SSU___Autorizacija_registrovanih_korisnika-NEUSPEH' completed successfully 

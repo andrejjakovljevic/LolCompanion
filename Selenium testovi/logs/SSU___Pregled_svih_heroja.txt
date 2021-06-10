@@ -1,0 +1,14 @@
+Running 'SSU___Pregled_svih_heroja'
+22:40:57
+1.open on /LoggedUser OK
+22:40:58
+2.setWindowSize on 1550x838 OK
+22:40:58
+3.verifyText on linkText=Champions with value Champions OK
+22:40:58
+4.click on linkText=Champions OK
+22:40:59
+5.assertText on css=.col-xs-12 with value Champions OK
+22:40:59
+'SSU___Pregled_svih_heroja' completed successfully
+22:41:01

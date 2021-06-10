@@ -1,0 +1,23 @@
+Running 'SSU___Azuriranje_sajta - USPESNO'
+22:34:40
+1.open on /LoggedUser OK
+22:34:41
+2.setWindowSize on 805x612 OK
+22:34:41
+3.click on css=.btn OK
+22:34:41
+4.click on linkText=Admin Panel OK
+22:34:42
+5.click on name=api OK
+22:34:42
+6.type on name=api with value RGAPI-15966e6c-4e1d-4880-827e-dffbacbe3836 OK
+22:34:42
+7.click on css=.row:nth-child(2) > .col-lg-6:nth-child(2) input:nth-child(3) OK
+22:34:43
+8.assertText on css=.container > div:nth-child(6) with value API key successfully changed OK
+22:34:43
+9.click on css=.center > span OK
+22:34:43
+10.assertText on css=.container > div:nth-child(6) with value Successfully updated OK
+22:34:44
+'SSU___Azuriranje_sajta - USPESNO' completed successfully

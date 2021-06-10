@@ -1,0 +1,13 @@
+Running 'SSU___Pregled_izazova'
+22:40:21
+1.open on /LoggedUser OK
+22:40:22
+2.setWindowSize on 1550x838 OK
+22:40:22
+3.assertText on linkText=Challenges with value Challenges OK
+22:40:22
+4.click on linkText=Challenges OK
+22:40:22
+5.assertText on css=.naslov:nth-child(1) with value Challenges OK
+22:40:23
+'SSU___Pregled_izazova' completed successfully

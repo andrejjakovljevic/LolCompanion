@@ -1,0 +1,19 @@
+Running 'SSU___Pretraga_heroja'
+22:45:26
+1.open on /LoggedUser OK
+22:45:26
+2.setWindowSize on 1550x838 OK
+22:45:26
+3.click on id=champName OK
+22:45:27
+4.type on id=champName with value Aur OK
+22:45:27
+5.sendKeys on id=champName with value ${KEY_DOWN} OK
+22:45:28
+6.type on id=champName with value Aurelion Sol OK
+22:45:28
+7.sendKeys on id=champName with value ${KEY_ENTER} OK
+22:45:28
+8.assertText on css=.naslov with value Aurelion Sol OK
+22:45:28
+'SSU___Pretraga_heroja' completed successfully

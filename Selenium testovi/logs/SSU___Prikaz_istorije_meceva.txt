@@ -1,0 +1,17 @@
+Running 'SSU___Prikaz_istorije_meceva'
+22:46:06
+1.open on /LoggedUser OK
+22:46:06
+2.setWindowSize on 1550x838 OK
+22:46:07
+3.assertElementPresent on css=.btn OK
+22:46:07
+4.click on css=.btn OK
+22:46:07
+5.assertText on linkText=Profile with value Profile OK
+22:46:07
+6.click on linkText=Profile OK
+22:46:08
+7.assertText on css=.naslov > .col-12 with value Match History OK
+22:46:08
+'SSU___Prikaz_istorije_meceva' completed successfully

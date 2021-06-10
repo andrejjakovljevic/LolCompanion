@@ -1,0 +1,12 @@
+Running 'SSU___Pregled_tekuceg_meca - NEUSPEH'
+22:44:51
+1.open on /LoggedUser OK
+22:44:51
+2.setWindowSize on 805x612 OK
+22:44:51
+3.click on linkText=Live game OK
+22:44:52
+4.assertText on css=.col:nth-child(2) with value THERE IS NO LIVE GAME CURRENTLY OK
+22:44:53
+'SSU___Pregled_tekuceg_meca - NEUSPEH' completed successfully
+22:44:55

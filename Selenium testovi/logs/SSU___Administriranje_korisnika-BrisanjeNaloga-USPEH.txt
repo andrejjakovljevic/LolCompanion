@@ -1,0 +1,39 @@
+Running 'SSU___Administriranje_korisnika-BrisanjeNaloga-USPEH'
+22:22:20
+1.open on /LoggedUser OK
+22:22:22
+2.setWindowSize on 1550x838 OK
+22:22:22
+3.assertElementPresent on css=.btn OK
+22:22:23
+4.click on css=.btn OK
+22:22:23
+5.click on linkText=Admin Panel OK
+22:22:24
+6.click on name=summonerName OK
+22:22:24
+7.type on name=summonerName with value Sensei God OK
+22:22:25
+8.click on css=.row:nth-child(2) > .col-lg-6:nth-child(1) input:nth-child(3) OK
+22:22:25
+9.assertText on css=.container > div:nth-child(6) with value UserSensei God removed OK
+22:22:25
+10.click on css=.btn OK
+22:22:26
+11.click on linkText=LogOut OK
+22:22:26
+12.click on linkText=Login OK
+22:22:26
+13.click on id=username OK
+22:22:27
+14.type on id=username with value Sensei God OK
+22:22:28
+15.click on id=password OK
+22:22:28
+16.type on id=password with value 123 OK
+22:22:28
+17.click on css=input:nth-child(7) OK
+22:22:28
+18.assertText on css=.col-lg-12 > div:nth-child(2) with value User doesn't exist OK
+22:22:29
+'SSU___Administriranje_korisnika-BrisanjeNaloga-USPEH' completed successfully

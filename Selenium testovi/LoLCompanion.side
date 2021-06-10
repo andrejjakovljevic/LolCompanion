@@ -1963,6 +1963,28 @@
         ["xpath=//div[2]/div", "xpath:position"]
       ],
       "value": "Champions"
+    }, {
+      "id": "6be8a256-f9c5-4d00-9400-b67b550565c2",
+      "comment": "",
+      "command": "click",
+      "target": "css=.row:nth-child(2) > .col-lg-1:nth-child(5) img",
+      "targets": [
+        ["css=.row:nth-child(2) > .col-lg-1:nth-child(5) img", "css:finder"],
+        ["xpath=//img[contains(@src,'http://localhost:8080/iconsChampions/imageCamille.png')]", "xpath:img"],
+        ["xpath=//div[2]/div[5]/a/img", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e6bc3fe8-0c03-4468-9992-54468dab9436",
+      "comment": "",
+      "command": "assertText",
+      "target": "css=.naslov",
+      "targets": [
+        ["css=.naslov", "css:finder"],
+        ["xpath=//h1", "xpath:position"],
+        ["xpath=//h1[contains(.,'Camille')]", "xpath:innerText"]
+      ],
+      "value": "Camille"
     }]
   }, {
     "id": "867da199-33e9-4f7d-b051-51628c76b5b9",

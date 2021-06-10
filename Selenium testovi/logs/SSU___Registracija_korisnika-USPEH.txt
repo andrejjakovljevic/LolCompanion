@@ -1,0 +1,43 @@
+Running 'SSU___Registracija_korisnika-USPEH'
+22:23:44
+1.open on / OK
+22:23:45
+2.setWindowSize on 1550x838 OK
+22:23:45
+3.click on linkText=Login OK
+22:23:45
+4.click on linkText=...or Signup OK
+22:23:45
+5.click on name=email OK
+22:23:46
+6.type on name=email with value blabla@truc.com OK
+22:23:47
+7.click on name=username OK
+22:23:47
+8.type on name=username with value Sensei God OK
+22:23:47
+9.click on css=.form OK
+22:23:47
+10.click on name=password1 OK
+22:23:47
+11.type on name=password1 with value 123 OK
+22:23:48
+12.click on name=password2 OK
+22:23:48
+13.type on name=password2 with value 123 OK
+22:23:48
+14.click on css=input:nth-child(13) OK
+22:23:48
+15.click on id=username OK
+22:23:48
+16.type on id=password with value 123 OK
+22:23:50
+17.type on id=username with value Sensei God OK
+22:23:51
+18.click on id=password OK
+22:23:51
+19.click on css=input:nth-child(7) OK
+22:23:51
+20.assertElementPresent on css=.btn OK
+22:23:51
+'SSU___Registracija_korisnika-USPEH' completed successfully

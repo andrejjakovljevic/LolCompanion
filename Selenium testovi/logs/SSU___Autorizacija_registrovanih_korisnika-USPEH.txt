@@ -1,0 +1,27 @@
+Running 'SSU___Autorizacija_registrovanih_korisnika-USPEH'
+22:28:45
+1.open on / OK
+22:28:45
+2.setWindowSize on 1219x692 OK
+22:28:45
+3.click on linkText=Login OK
+22:28:46
+4.mouseOver on linkText=Login OK
+22:28:46
+5.mouseOut on linkText=Login OK
+22:28:47
+6.click on id=username OK
+22:28:47
+7.type on id=username with value GINDRA OK
+22:28:47
+8.click on name=loginForm OK
+22:28:47
+9.click on id=password OK
+22:28:48
+10.type on id=password with value 123 OK
+22:28:48
+11.click on css=input:nth-child(7) OK
+22:28:48
+12.assertElementPresent on css=.btn OK
+22:28:48
+'SSU___Autorizacija_registrovanih_korisnika-USPEH' completed successfully

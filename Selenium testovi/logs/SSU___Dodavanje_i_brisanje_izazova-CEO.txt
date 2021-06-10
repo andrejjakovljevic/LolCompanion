@@ -1,0 +1,75 @@
+Running 'SSU___Dodavanje_i_brisanje_izazova-CEO'
+22:35:41
+1.open on /LoggedUser OK
+22:35:42
+2.setWindowSize on 1550x838 OK
+22:35:42
+3.assertElementPresent on css=.btn OK
+22:35:42
+4.click on css=.btn OK
+22:35:43
+5.assertText on linkText=All challenges with value All challenges OK
+22:35:43
+6.click on linkText=All challenges OK
+22:35:43
+7.click on css=.center > span OK
+22:35:43
+8.click on css=.col-lg-12 > input OK
+22:35:45
+9.mouseOver on css=.col-lg-12 > input OK
+22:35:45
+10.mouseOut on css=.col-lg-12 > input OK
+22:35:46
+11.assertText on css=.container-fluid > div:nth-child(4) with value One or more empty fields OK
+22:35:46
+12.click on name=title OK
+22:35:46
+13.type on name=title with value SDADAS OK
+22:35:47
+14.click on css=.col-lg-12 > input OK
+22:35:47
+15.assertText on css=.container-fluid > div:nth-child(4) with value One or more empty fields OK
+22:35:47
+16.click on name=description OK
+22:35:48
+17.type on name=description with value DSADASDA OK
+22:35:48
+18.click on css=.col-lg-12 > input OK
+22:35:48
+19.assertText on css=.container-fluid > div:nth-child(4) with value One or more empty fields OK
+22:35:48
+20.click on name=title OK
+22:35:49
+21.type on name=title with value test challenge OK
+22:35:49
+22.click on name=description OK
+22:35:49
+23.type on name=description with value Test challenge description example OK
+22:35:49
+24.click on name=optionKey[] OK
+22:35:50
+25.select on name=optionKey[] with value label=Kills OK
+22:35:50
+26.click on css=#divOptionKey option:nth-child(2) OK
+22:35:50
+27.click on name=optionVal[] OK
+22:35:50
+28.type on name=optionVal[] with value 5 OK
+22:35:51
+29.click on name=addOption OK
+22:35:51
+30.click on css=.col-lg-12 > input OK
+22:35:51
+31.verifyText on css=.container-fluid > div:nth-child(4) with value Succesfully created challenge OK
+22:35:51
+32.click on css=.btn OK
+22:35:52
+33.click on linkText=All challenges OK
+22:35:52
+34.assertText on css=.row:nth-child(33) > .col-lg-8 with value test challenge\nTest challenge description example OK
+22:35:52
+35.click on css=.row:nth-child(33) input:nth-child(2) OK
+22:35:53
+36.assertElementNotPresent on css=.row:nth-child(33) > .col-lg-8 OK
+22:35:53
+'SSU___Dodavanje_i_brisanje_izazova-CEO' completed successfully
