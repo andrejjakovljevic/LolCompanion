@@ -566,8 +566,8 @@ class LoggedUser extends BaseController
         $rez=$this->calculatingWinRatesV2($match);
         $winRateArray=$rez["wr"];
         $arK=$rez["k"];
-        $arD=$rez["a"];
-        $arA=$rez["d"];
+        $arD=$rez["d"];
+        $arA=$rez["a"];
         //var_dump($arK);
         
        

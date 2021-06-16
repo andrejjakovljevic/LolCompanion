@@ -45,10 +45,10 @@ $tier25 = explode(" ", $names['summoner25']['div'])[0];
             
             <div class="row fensi" style="padding-left: 6%;">
                 <div class="col-lg-1" style="text-align: center; font-size: 60%;">
-                    <img src=" <?= base_url('iconsChampions/image'. $names['summoner11']['champ'] .'.png')?>" style="width: 50%;"><br>
+                    <img src="<?= base_url('iconsChampions/image'. $names['summoner11']['champ'] .'.png')?>" style="width: 50%;"><br>
                     <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner11']['sp1'])?>" style="width: 20%; padding: 0px;">
                     <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner11']['sp2'])?>" style="width: 20%; padding: 0px;"><br>
-                    <?= $names['summoner11']['name'] ?>
+                    <a href = <?= base_url('LoggedUser/summoner/' . $names['summoner11']['name'])?>> <?=$names['summoner11']['name'] ?></a>
                 </div>
                 <div class="col-lg-1"><?= $names['summoner11']['winrate'] ?></div>
                 <div class="col-lg-1" style="padding-left: 0px;"><?= $names['summoner11']['k']?>/<?= $names['summoner11']['d']?>/<?= $names['summoner11']['a']?></div>
@@ -63,7 +63,7 @@ $tier25 = explode(" ", $names['summoner25']['div'])[0];
                     <img src=" <?= base_url('iconsChampions/image'. $names['summoner21']['champ'] .'.png')?>" style="width: 50%;"><br>
                     <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner21']['sp1'])?>" style="width: 20%; padding: 0px;">
                     <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner21']['sp2'])?>" style="width: 20%; padding: 0px;"><br>
-                    <?= $names['summoner21']['name'] ?>
+                    <a href = <?= base_url('LoggedUser/summoner/' . $names['summoner21']['name'])?>> <?=$names['summoner21']['name'] ?></a>
                 </div>
             </div>
             <div class="row fensi" style="padding-left: 6%;">
@@ -71,7 +71,7 @@ $tier25 = explode(" ", $names['summoner25']['div'])[0];
                     <img src=" <?= base_url('iconsChampions/image'. $names['summoner12']['champ'] .'.png')?>" style="width: 50%;"><br>
                     <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner12']['sp1'])?>" style="width: 20%; padding: 0px;">
                     <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner12']['sp2'])?>" style="width: 20%; padding: 0px;"><br>
-                    <?= $names['summoner12']['name'] ?>
+                    <a href = <?= base_url('LoggedUser/summoner/' . $names['summoner12']['name'])?>> <?=$names['summoner12']['name'] ?></a>
                 </div>
                 <div class="col-lg-1"><?= $names['summoner12']['winrate'] ?></div>
                 <div class="col-lg-1" style="padding-left: 0px;"><?= $names['summoner12']['k']?>/<?= $names['summoner12']['d']?>/<?= $names['summoner12']['a']?></div>
@@ -86,7 +86,7 @@ $tier25 = explode(" ", $names['summoner25']['div'])[0];
                     <img src=" <?= base_url('iconsChampions/image'. $names['summoner22']['champ'] .'.png')?>" style="width: 50%;"><br>
                     <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner22']['sp1'])?>" style="width: 20%; padding: 0px;">
                     <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner22']['sp2'])?>" style="width: 20%; padding: 0px;"><br>
-                    <?= $names['summoner22']['name'] ?>
+                    <a href = <?= base_url('LoggedUser/summoner/' . $names['summoner22']['name'])?>> <?=$names['summoner22']['name'] ?></a>
                 </div>
             </div>
             <div class="row fensi" style="padding-left: 6%;">
@@ -94,7 +94,7 @@ $tier25 = explode(" ", $names['summoner25']['div'])[0];
                     <img src=" <?= base_url('iconsChampions/image'. $names['summoner13']['champ'] .'.png')?>" style="width: 50%;"><br>
                     <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner13']['sp1'])?>" style="width: 20%; padding: 0px;">
                     <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner13']['sp2'])?>" style="width: 20%; padding: 0px;"><br>
-                    <?= $names['summoner13']['name'] ?>
+                    <a href = <?= base_url('LoggedUser/summoner/' . $names['summoner13']['name'])?>> <?=$names['summoner13']['name'] ?></a>
                 </div>
                 <div class="col-lg-1"><?= $names['summoner13']['winrate'] ?></div>
                 <div class="col-lg-1" style="padding-left: 0px;"><?= $names['summoner13']['k']?>/<?= $names['summoner13']['d']?>/<?= $names['summoner13']['a']?></div>
@@ -109,7 +109,7 @@ $tier25 = explode(" ", $names['summoner25']['div'])[0];
                     <img src=" <?= base_url('iconsChampions/image'. $names['summoner23']['champ'] .'.png')?>" style="width: 50%;"><br>
                     <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner23']['sp1'])?>" style="width: 20%; padding: 0px;">
                     <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner23']['sp2'])?>" style="width: 20%; padding: 0px;"><br>
-                    <?= $names['summoner23']['name'] ?>
+                    <a href = <?= base_url('LoggedUser/summoner/' . $names['summoner23']['name'])?>> <?=$names['summoner23']['name'] ?></a>
                 </div>
             </div>
             <div class="row fensi" style="padding-left: 6%;">
@@ -117,7 +117,7 @@ $tier25 = explode(" ", $names['summoner25']['div'])[0];
                     <img src=" <?= base_url('iconsChampions/image'. $names['summoner14']['champ'] .'.png')?>" style="width: 50%;"><br>
                     <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner14']['sp1'])?>" style="width: 20%; padding: 0px;">
                     <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner14']['sp2'])?>" style="width: 20%; padding: 0px;"><br>
-                    <?= $names['summoner14']['name'] ?>
+                    <a href = <?= base_url('LoggedUser/summoner/' . $names['summoner14']['name'])?>> <?=$names['summoner14']['name'] ?></a>
                 </div>
                 <div class="col-lg-1"><?= $names['summoner14']['winrate'] ?></div>
                 <div class="col-lg-1" style="padding-left: 0px;"><?= $names['summoner14']['k']?>/<?= $names['summoner14']['d']?>/<?= $names['summoner14']['a']?></div>
@@ -132,7 +132,7 @@ $tier25 = explode(" ", $names['summoner25']['div'])[0];
                     <img src=" <?= base_url('iconsChampions/image'. $names['summoner24']['champ'] .'.png')?>" style="width: 50%;"><br>
                     <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner24']['sp1'])?>" style="width: 20%; padding: 0px;">
                     <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner24']['sp2'])?>" style="width: 20%; padding: 0px;"><br>
-                    <?= $names['summoner24']['name'] ?>
+                    <a href = <?= base_url('LoggedUser/summoner/' . $names['summoner24']['name'])?>> <?=$names['summoner24']['name'] ?></a>
                 </div>
             </div>
             <div class="row fensi" style="padding-left: 6%; padding-bottom: 6%;">
@@ -140,7 +140,7 @@ $tier25 = explode(" ", $names['summoner25']['div'])[0];
                     <img src=" <?= base_url('iconsChampions/image'. $names['summoner15']['champ'] .'.png')?>" style="width: 50%;"><br>
                     <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner15']['sp1'])?>" style="width: 20%; padding: 0px;">
                     <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner15']['sp2'])?>" style="width: 20%; padding: 0px;"><br>
-                    <?= $names['summoner15']['name'] ?>
+                    <a href = <?= base_url('LoggedUser/summoner/' . $names['summoner15']['name'])?>> <?=$names['summoner15']['name'] ?></a>
                 </div>
                 <div class="col-lg-1"><?= $names['summoner15']['winrate'] ?></div>
                 <div class="col-lg-1" style="padding-left: 0px;"><?= $names['summoner15']['k']?>/<?= $names['summoner15']['d']?>/<?= $names['summoner15']['a']?></div>
@@ -157,7 +157,7 @@ $tier25 = explode(" ", $names['summoner25']['div'])[0];
                     <img src=" <?= base_url('iconsChampions/image'. $names['summoner25']['champ'] .'.png')?>" style="width: 50%;"><br>
                     <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner25']['sp1'])?>" style="width: 20%; padding: 0px;">
                     <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner25']['sp2'])?>" style="width: 20%; padding: 0px;"><br>
-                    <?= $names['summoner25']['name'] ?>
+                    <a href = <?= base_url('LoggedUser/summoner/' . $names['summoner25']['name'])?>> <?=$names['summoner25']['name'] ?></a>
                 </div>
             </div>
             
