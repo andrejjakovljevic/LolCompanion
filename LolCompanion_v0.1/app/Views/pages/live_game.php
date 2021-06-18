@@ -1,20 +1,8 @@
 <?php/**
  * Autori: Aleksandar Maksimovic 18/0016
  */?>
-<?php use App\Controllers\LoggedUser;
-$tier11 = explode(" ", $names['summoner11']['div'])[0];
-$tier12 = explode(" ", $names['summoner12']['div'])[0];
-$tier13 = explode(" ", $names['summoner13']['div'])[0];
-$tier14 = explode(" ", $names['summoner14']['div'])[0];
-$tier15 = explode(" ", $names['summoner15']['div'])[0];
-$tier21 = explode(" ", $names['summoner21']['div'])[0];
-$tier22 = explode(" ", $names['summoner22']['div'])[0];
-$tier23 = explode(" ", $names['summoner23']['div'])[0];
-$tier24 = explode(" ", $names['summoner24']['div'])[0];
-$tier25 = explode(" ", $names['summoner25']['div'])[0];
-?>
+<?php use App\Controllers\LoggedUser;?>
                 
-       
             <div class="row fensi" style="padding-left: 6%;">
                 <div class="col-lg-1">
                     &nbsp;
@@ -43,122 +31,31 @@ $tier25 = explode(" ", $names['summoner25']['div'])[0];
             </div>
             <hr>
             
+            <?php
+            for ($i = 1; $i < 6; ++$i) {
+                echo '
             <div class="row fensi" style="padding-left: 6%;">
                 <div class="col-lg-1" style="text-align: center; font-size: 60%;">
-                    <img src="<?= base_url('iconsChampions/image'. $names['summoner11']['champ'] .'.png')?>" style="width: 50%;"><br>
-                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner11']['sp1'])?>" style="width: 20%; padding: 0px;">
-                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner11']['sp2'])?>" style="width: 20%; padding: 0px;"><br>
-                    <a href = <?= base_url('LoggedUser/summoner/' . $names['summoner11']['name'])?>> <?=$names['summoner11']['name'] ?></a>
+                    <img src="' . base_url('iconsChampions/image'. $names['summoner1'.$i]['champ'] . '.png') . '" style="width: 50%;"><br>
+                    <img src="' . base_url('iconsSummonerSpells/'. $names['summoner1'.$i]['sp1']). '" style="width: 20%; padding: 0px;">
+                    <img src="' . base_url('iconsSummonerSpells/'. $names['summoner1'.$i]['sp2']). '" style="width: 20%; padding: 0px;"><br>
+                    <a href ="' . base_url('LoggedUser/summoner/'. $names['summoner1'.$i]['name']) . '">' . $names['summoner1'.$i]['name'] . '</a>
                 </div>
-                <div class="col-lg-1"><?= $names['summoner11']['winrate'] ?></div>
-                <div class="col-lg-1" style="padding-left: 0px;"><?= $names['summoner11']['k']?>/<?= $names['summoner11']['d']?>/<?= $names['summoner11']['a']?></div>
-                <div class="col-lg-2 text-outline" style="font-size: 95%;  padding-left: 30px;">
-                    <span style="color: <?php echo LoggedUser::StaticDivToColor($tier11) ?>;" > <?= $names['summoner11']['div'] ?> </span>
-                </div>
+                <div class="col-lg-1">'. $names['summoner11']['winrate'] . '</div>
+                <div class="col-lg-1" style="padding-left: 0px;">'. (($names['summoner1'.$i]['d'] == 0) ? 0 : number_format(($names['summoner1'.$i]['k'] + $names['summoner1'.$i]['a']) / $names['summoner1'.$i]['a'], 2)) . '</div>
+                <div class="col-lg-2 text-outline" style="font-size: 95%; padding-left: 10px;">
+                    <span style="color: ' . LoggedUser::StaticDivToColor(explode(" ", $names['summoner1'.$i]['div'])[0]) .'" > '.$names['summoner1'.$i]['div']. '</span>
+                </div>';
+                echo '
                 <div class="col-lg-1">&nbsp;</div>
-                <div class="col-lg-2 text-outline"><span style="color:<?php echo LoggedUser::StaticDivToColor($tier21) ?>"> <?= $names['summoner21']['div'] ?> </span> </div>
-                <div class="col-lg-1" style="padding-left: 0px;"> <?= $names['summoner21']['k']?>/<?= $names['summoner21']['d']?>/<?= $names['summoner21']['a']?> </div>      
-                <div class="col-lg-1" style="padding-left: 30px;"> <?= $names['summoner21']['winrate'] ?> </div>
+                <div class="col-lg-2 text-outline"><span style="color:' .LoggedUser::StaticDivToColor(explode(" ", $names['summoner2'.$i]['div'])[0]) .'"> '.$names['summoner2'.$i]['div'].'</span> </div>
+                <div class="col-lg-1" style="padding-left: 0px;">'. (($names['summoner2'.$i]['d'] == 0) ? 0 : number_format(($names['summoner2'.$i]['k'] + $names['summoner2'.$i]['a']) / $names['summoner2'.$i]['a'], 2)) . '</div>
+                <div class="col-lg-1" style="padding-left: 30px;">'. $names['summoner2'.$i]['winrate'].' </div>
                 <div class="col-lg-1" style="text-align: center; font-size: 60%;">
-                    <img src=" <?= base_url('iconsChampions/image'. $names['summoner21']['champ'] .'.png')?>" style="width: 50%;"><br>
-                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner21']['sp1'])?>" style="width: 20%; padding: 0px;">
-                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner21']['sp2'])?>" style="width: 20%; padding: 0px;"><br>
-                    <a href = <?= base_url('LoggedUser/summoner/' . $names['summoner21']['name'])?>> <?=$names['summoner21']['name'] ?></a>
+                    <img src="'. base_url('iconsChampions/image'. $names['summoner2'.$i]['champ'] .'.png'). '" style="width: 50%;"><br>
+                    <img src="'. base_url('iconsSummonerSpells/'. $names['summoner2'.$i]['sp1']).'" style="width: 20%; padding: 0px;">
+                    <img src="'. base_url('iconsSummonerSpells/'. $names['summoner2'.$i]['sp2']).'" style="width: 20%; padding: 0px;"><br>
+                    <a href ="'. base_url('LoggedUser/summoner/' . $names['summoner2'.$i]['name']).'">' . $names['summoner2'.$i]['name'] . '</a>
                 </div>
-            </div>
-            <div class="row fensi" style="padding-left: 6%;">
-                <div class="col-lg-1" style="text-align: center; font-size: 60%;">
-                    <img src=" <?= base_url('iconsChampions/image'. $names['summoner12']['champ'] .'.png')?>" style="width: 50%;"><br>
-                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner12']['sp1'])?>" style="width: 20%; padding: 0px;">
-                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner12']['sp2'])?>" style="width: 20%; padding: 0px;"><br>
-                    <a href = <?= base_url('LoggedUser/summoner/' . $names['summoner12']['name'])?>> <?=$names['summoner12']['name'] ?></a>
-                </div>
-                <div class="col-lg-1"><?= $names['summoner12']['winrate'] ?></div>
-                <div class="col-lg-1" style="padding-left: 0px;"><?= $names['summoner12']['k']?>/<?= $names['summoner12']['d']?>/<?= $names['summoner12']['a']?></div>
-                <div class="col-lg-2 text-outline nova" style="font-size: 95%;">
-                    <span style="color: <?php echo LoggedUser::StaticDivToColor($tier12) ?>"> <?= $names['summoner12']['div'] ?> </span>
-                </div>
-                <div class="col-lg-1">&nbsp;</div>
-                <div class="col-lg-2 text-outline"><span style="color:<?php echo LoggedUser::StaticDivToColor($tier22) ?>"> <?= $names['summoner22']['div'] ?> </span> </div>
-                <div class="col-lg-1" style="padding-left: 0px;"> <?= $names['summoner22']['k']?>/<?= $names['summoner22']['d']?>/<?= $names['summoner22']['a']?> </div>      
-                <div class="col-lg-1 nova"> <?= $names['summoner22']['winrate'] ?> </div>
-                <div class="col-lg-1" style="text-align: center; font-size: 60%;">
-                    <img src=" <?= base_url('iconsChampions/image'. $names['summoner22']['champ'] .'.png')?>" style="width: 50%;"><br>
-                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner22']['sp1'])?>" style="width: 20%; padding: 0px;">
-                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner22']['sp2'])?>" style="width: 20%; padding: 0px;"><br>
-                    <a href = <?= base_url('LoggedUser/summoner/' . $names['summoner22']['name'])?>> <?=$names['summoner22']['name'] ?></a>
-                </div>
-            </div>
-            <div class="row fensi" style="padding-left: 6%;">
-                <div class="col-lg-1" style="text-align: center; font-size: 60%;">
-                    <img src=" <?= base_url('iconsChampions/image'. $names['summoner13']['champ'] .'.png')?>" style="width: 50%;"><br>
-                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner13']['sp1'])?>" style="width: 20%; padding: 0px;">
-                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner13']['sp2'])?>" style="width: 20%; padding: 0px;"><br>
-                    <a href = <?= base_url('LoggedUser/summoner/' . $names['summoner13']['name'])?>> <?=$names['summoner13']['name'] ?></a>
-                </div>
-                <div class="col-lg-1"><?= $names['summoner13']['winrate'] ?></div>
-                <div class="col-lg-1" style="padding-left: 0px;"><?= $names['summoner13']['k']?>/<?= $names['summoner13']['d']?>/<?= $names['summoner13']['a']?></div>
-                <div class="col-lg-2 text-outline nova" style="font-size: 95%;">
-                    <span style="color:<?php echo LoggedUser::StaticDivToColor($tier13) ?>"> <?= $names['summoner13']['div'] ?> </span>
-                </div>
-                <div class="col-lg-1">&nbsp;</div>
-                <div class="col-lg-2 text-outline"><span style="color:<?php echo LoggedUser::StaticDivToColor($tier23) ?>"> <?= $names['summoner23']['div'] ?> </span> </div>
-                <div class="col-lg-1" style="padding-left: 0px;"> <?= $names['summoner23']['k']?>/<?= $names['summoner23']['d']?>/<?= $names['summoner23']['a']?></div>      
-                <div class="col-lg-1 nova"> <?= $names['summoner23']['winrate'] ?> </div>
-                <div class="col-lg-1" style="text-align: center; font-size: 60%;">
-                    <img src=" <?= base_url('iconsChampions/image'. $names['summoner23']['champ'] .'.png')?>" style="width: 50%;"><br>
-                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner23']['sp1'])?>" style="width: 20%; padding: 0px;">
-                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner23']['sp2'])?>" style="width: 20%; padding: 0px;"><br>
-                    <a href = <?= base_url('LoggedUser/summoner/' . $names['summoner23']['name'])?>> <?=$names['summoner23']['name'] ?></a>
-                </div>
-            </div>
-            <div class="row fensi" style="padding-left: 6%;">
-                <div class="col-lg-1" style="text-align: center; font-size: 60%;">
-                    <img src=" <?= base_url('iconsChampions/image'. $names['summoner14']['champ'] .'.png')?>" style="width: 50%;"><br>
-                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner14']['sp1'])?>" style="width: 20%; padding: 0px;">
-                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner14']['sp2'])?>" style="width: 20%; padding: 0px;"><br>
-                    <a href = <?= base_url('LoggedUser/summoner/' . $names['summoner14']['name'])?>> <?=$names['summoner14']['name'] ?></a>
-                </div>
-                <div class="col-lg-1"><?= $names['summoner14']['winrate'] ?></div>
-                <div class="col-lg-1" style="padding-left: 0px;"><?= $names['summoner14']['k']?>/<?= $names['summoner14']['d']?>/<?= $names['summoner14']['a']?></div>
-                <div class="col-lg-2 text-outline nova" style="font-size: 95%;">
-                    <span style="color:<?php echo LoggedUser::StaticDivToColor($tier14) ?>"> <?= $names['summoner14']['div'] ?></span>
-                </div>
-                <div class="col-lg-1">&nbsp;</div>
-                <div class="col-lg-2 text-outline"><span style="color:<?php echo LoggedUser::StaticDivToColor($tier24) ?>"> <?= $names['summoner24']['div'] ?> </span> </div>
-                <div class="col-lg-1" style="padding-left: 0px;"> <?= $names['summoner24']['k']?>/<?= $names['summoner24']['d']?>/<?= $names['summoner24']['a']?> </div>      
-                <div class="col-lg-1 nova"> <?= $names['summoner24']['winrate'] ?> </div>
-                <div class="col-lg-1" style="text-align: center; font-size: 60%;">
-                    <img src=" <?= base_url('iconsChampions/image'. $names['summoner24']['champ'] .'.png')?>" style="width: 50%;"><br>
-                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner24']['sp1'])?>" style="width: 20%; padding: 0px;">
-                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner24']['sp2'])?>" style="width: 20%; padding: 0px;"><br>
-                    <a href = <?= base_url('LoggedUser/summoner/' . $names['summoner24']['name'])?>> <?=$names['summoner24']['name'] ?></a>
-                </div>
-            </div>
-            <div class="row fensi" style="padding-left: 6%; padding-bottom: 6%;">
-                <div class="col-lg-1" style="text-align: center; font-size: 60%;">
-                    <img src=" <?= base_url('iconsChampions/image'. $names['summoner15']['champ'] .'.png')?>" style="width: 50%;"><br>
-                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner15']['sp1'])?>" style="width: 20%; padding: 0px;">
-                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner15']['sp2'])?>" style="width: 20%; padding: 0px;"><br>
-                    <a href = <?= base_url('LoggedUser/summoner/' . $names['summoner15']['name'])?>> <?=$names['summoner15']['name'] ?></a>
-                </div>
-                <div class="col-lg-1"><?= $names['summoner15']['winrate'] ?></div>
-                <div class="col-lg-1" style="padding-left: 0px;"><?= $names['summoner15']['k']?>/<?= $names['summoner15']['d']?>/<?= $names['summoner15']['a']?></div>
-                <div class="col-lg-2 text-outline nova" style="font-size: 95%;">
-                    <span style="color:<?php echo LoggedUser::StaticDivToColor($tier15) ?>"> <?= $names['summoner15']['div'] ?> </span>
-                </div>
-                <div class="col-lg-1">&nbsp;</div>
-                <div class="col-lg-2 text-outline">
-                    <span style="color:<?php echo LoggedUser::StaticDivToColor($tier25) ?>"> <?= $names['summoner25']['div'] ?> </span> 
-                </div>
-                <div class="col-lg-1" style="padding-left: 0px;"> <?= $names['summoner25']['k']?>/<?= $names['summoner25']['d']?>/<?= $names['summoner25']['a']?> </div>      
-                <div class="col-lg-1 nova"> <?= $names['summoner25']['winrate'] ?> </div>
-                <div class="col-lg-1" style="text-align: center; font-size: 60%;">
-                    <img src=" <?= base_url('iconsChampions/image'. $names['summoner25']['champ'] .'.png')?>" style="width: 50%;"><br>
-                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner25']['sp1'])?>" style="width: 20%; padding: 0px;">
-                    <img src="<?= base_url('iconsSummonerSpells/'. $names['summoner25']['sp2'])?>" style="width: 20%; padding: 0px;"><br>
-                    <a href = <?= base_url('LoggedUser/summoner/' . $names['summoner25']['name'])?>> <?=$names['summoner25']['name'] ?></a>
-                </div>
-            </div>
-            
-
+            </div>';
+            }?>

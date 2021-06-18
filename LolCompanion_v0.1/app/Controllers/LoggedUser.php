@@ -545,7 +545,7 @@ class LoggedUser extends BaseController
                 $tier = $l[0]->tier;
                 $rank = $l[0]->rank; 
             }
-            array_push($dArray, $tier . "&nbsp;". $rank);
+            array_push($dArray, $tier . " ". $rank);
             
             $magija1=$match->participants[$i]->spell1Id;
             $magija2=$match->participants[$i]->spell2Id;
