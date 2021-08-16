@@ -8,7 +8,7 @@ Users register on the site using their in-game nicknames.
 |:--:|
 | *index page after logging in* |
 
-Features of the web application:
+## Features of the web application:
 - ## Summoner profile:
 	![](readme_img/profile_demonstration.gif)
 	- In-game rank
