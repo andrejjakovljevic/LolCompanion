@@ -10,14 +10,25 @@ Users register on the site using their in-game nicknames
 
 Features of the web application:
 - User's profile:
-![](readme_img/profile_demonstration.gif)
-- - In-game rank
-- - Poro bar
-- - Win rate of most played champs
-- - Match history
+	![](readme_img/profile_demonstration.gif)
+	- In-game rank
+	- Poro bar
+	- Win rate of most played champs
+	- Match history
 - Challenges
+
 	Site moderators create and add challenges that registered users can complete and earn poros!
 	Challenges are completed by fulfilling a specific given task in a recent game of LoL.
 	As users complete challenges they unlock new ones.
 	![](readme_img/challenges.png)
+- Live game
 	
+	Users can see information about the game they are in right now: other players, their ranks, win rates...
+	
+- Champions
+	
+	All users can go into the 'Champions' tab and look for a champion or search them by name and look at a recommended build for that champion
+
+- Statistics 
+	
+	Users can see the top champions for every role
