@@ -1,32 +1,21 @@
 # LolCompanion
 
-TODO:
-
-html prototip:
-- ~~porobar u profile~~ -> u misije dodat ipak
-- ~~misije~~
-- ~~dodavanje misija~~
-- ~~live game~~
-- ~~responsive~~
-- ~~admin panel~~
-- ~~match history~~
-
-php i baza:
-- ~~baza osnovno~~
-- ~~login/logout~~
-- ~~signUp~~
-- ~~admin panel funkcije sa bazom~~
-- ~~misije u bazu~~
-- ~~poslednji mec u bazu~~
-- ~~datadragon podaci u bazu ili uvek da se dovlaci~~ pola pola
-- sve ostale stranice sa podacima iz baze:
-    ~~live game~~
-    ~~match history~~
-
-
-plan za winrateove:
-- ~~razdvaja se summoner i profile stranica~~
-- ~~summoner nema najigranije heroje, samo match history od ~10-20 gejmova~~
-- ~~za igraca se traze najigraniji heroji jednim spec pozivom match-v4~~ -> zapravo ide u bazu
-- ~~onda za svakog heroja opet v4 za ranked za njega do 30 posledjih gejmova~~ -> takodje iz baze
-- za live game za svakoga se trazi njegovih 10 posledjih gejmova na rankedu na heroju koga igra
+Multi-purpose web application serving as a kind of hub for League of Legends players.
+Written mostly in PHP using the Codeigniter 4 framework. 
+Data is gathered using Riot API(Riot Games, Inc) and a [PHP wrapper by dolejska-daniel](https://github.com/dolejska-daniel/riot-api-datadragon)
+Users register on the site using their in-game nicknames
+![](readme_img/logged_in_index.png)
+*the site after login*
+Features of the web application:
+- User's profile:
+![](readme_img/profile_demonstration.gif)
+-- In-game rank
+-- Poro bar
+-- Win rate of most played champs
+-- Match history
+- Challenges
+	Site moderators create and add challenges that registered users can complete and earn poros!
+	Challenges are completed by fulfilling a specific given task in a recent game of LoL.
+	As users complete challenges they unlock new ones.
+	![](readme_img/challenges.png)
+	
